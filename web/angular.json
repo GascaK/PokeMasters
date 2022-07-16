@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "PokeMasters": {
+    "web": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/poke-masters",
+            "outputPath": "dist/web",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "PokeMasters:build:production"
+              "browserTarget": "web:build:production"
             },
             "development": {
-              "browserTarget": "PokeMasters:build:development"
+              "browserTarget": "web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "PokeMasters:build"
+            "browserTarget": "web:build"
           }
         },
         "test": {
@@ -99,6 +99,6 @@
     }
   },
   "cli": {
-    "analytics": "d8371d62-9272-4c27-bbf7-e71fb2b1616f"
+    "analytics": false
   }
 }
