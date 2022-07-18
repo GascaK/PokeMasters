@@ -3,6 +3,7 @@
         "Brock's Zubat": [
             {
                 "hp": 10,
+                "speed": 0,
                 "type": ["flying", "poison"],
                 "move": [
                     {
@@ -29,6 +30,7 @@
         "Brock's Geodude": [
             {
                 "hp": 11,
+                "speed": 0,
                 "type": ["ground", "rock"],
                 "move": [
                     {
@@ -56,6 +58,7 @@
         "Brock's Vulpix": [
             {
                 "hp": 12,
+                "speed": 1,
                 "type": ["fire"],
                 "move": [
                     {
@@ -82,6 +85,7 @@
         "Brock's Onix": [
             {
                 "hp": 13,
+                "speed": 0,
                 "type": ["ground", "rock"],
                 "move": [
                     {
@@ -112,6 +116,7 @@
         "Misty's Horsea": [
             {
                 "hp": 12,
+                "speed": 0,
                 "type": ["water"],
                 "move": [
                     {
@@ -138,6 +143,7 @@
         "Misty's Goldeen": [
             {
                 "hp": 13,
+                "speed": 1,
                 "type": ["water"],
                 "move": [
                     {
@@ -164,6 +170,7 @@
         "Misty's Staryu": [
             {
                 "hp": 14,
+                "speed": 1,
                 "type": ["water"],
                 "move": [
                     {
@@ -190,6 +197,7 @@
         "Misty's Starmie": [
             {
                 "hp": 15,
+                "speed": 1,
                 "type": ["water"],
                 "move": [
                     {
@@ -221,6 +229,7 @@
         "Lt. Surge's Magnemite": [
             {
                 "hp": 14,
+                "speed": 1,
                 "type": ["electric"],
                 "move": [
                     {
@@ -247,6 +256,7 @@
         "Lt. Surge's Voltorb": [
             {
                 "hp": 15,
+                "speed": 0,
                 "type": ["electric"],
                 "move": [
                     {
@@ -274,6 +284,7 @@
         "Lt. Surge's Pikachu": [
             {
                 "hp": 16,
+                "speed": 2,
                 "type": ["electric"],
                 "move": [
                     {
@@ -300,18 +311,19 @@
         "Lt. Surge's Raichu": [
             {
                 "hp": 17,
+                "speed": 2,
                 "type": ["electric"],
                 "move": [
-                    {
-                        "name": "thunder bolt",
-                        "hit": 10,
-                        "special": "paralyzed",
-                        "type": "electric"
-                    },
                     {
                         "name": "volt tackle",
                         "hit": 8,
                         "special": "none",
+                        "type": "electric"
+                    },
+                    {
+                        "name": "thunder bolt",
+                        "hit": 10,
+                        "special": "paralyzed",
                         "type": "electric"
                     },
                     {
@@ -323,20 +335,15 @@
                 ]
             }
         ]
-        
     },
+
     "Erika": {
         "Erika's Victreebell": [
             {
                 "hp": 16,
+                "speed": 0,
                 "type": ["grass"],
                 "move": [
-                    {
-                        "name": "vine whip",
-                        "hit": 6,
-                        "special": "none",
-                        "type": "grass"
-                    },
                     {
                         "name": "razor leaf",
                         "hit": 6,
@@ -344,10 +351,539 @@
                         "type": "grass"
                     },
                     {
-                        "name": "leech seed",
-                        "hit": 6,
+                        "name": "vine whip",
+                        "hit": 8,
                         "special": "none",
                         "type": "grass"
+                    },
+                    {
+                        "name": "leech seed",
+                        "hit": 8,
+                        "special": "none",
+                        "type": "grass"
+                    }
+                ]
+            }
+        ],
+        "Erika's Vileplume": [
+            {
+                "hp": 17,
+                "speed": 0,
+                "type": ["grass", "poison"],
+                "move": [
+                    {
+                        "name": "stun spore",
+                        "hit": 6,
+                        "special": "paralyzed",
+                        "type": "grass"
+                    },
+                    {
+                        "name": "leaf blade",
+                        "hit": 8,
+                        "special": "none",
+                        "type": "grass"
+                    },
+                    {
+                        "name": "solar beam",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "grass"
+                    }
+                ]
+            }
+        ],
+        "Erika's Tangela": [
+            {
+                "hp": 18,
+                "speed": 1,
+                "type": ["grass"],
+                "move": [
+                    {
+                        "name": "stun spore",
+                        "hit": 6,
+                        "special": "paralyzed",
+                        "type": "grass"
+                    },
+                    {
+                        "name": "vine whip",
+                        "hit": 8,
+                        "special": "none",
+                        "type": "grass"
+                    },
+                    {
+                        "name": "power whip",
+                        "hit": 8,
+                        "special": "none",
+                        "type": "grass"
+                    }
+                ]
+            }
+        ],
+        "Erika's Gloom": [
+            {
+                "hp": 19,
+                "speed": 0,
+                "type": ["grass", "poison"],
+                "move": [
+                    {
+                        "name": "vine whip",
+                        "hit": 8,
+                        "special": "none",
+                        "type": "grass"
+                    },
+                    {
+                        "name": "stun spore",
+                        "hit": 10,
+                        "special": "paralyzed",
+                        "type": "grass"
+                    },
+                    {
+                        "name": "solar beam",
+                        "hit": 12,
+                        "special": "none",
+                        "type": "grass"
+                    }
+                ]
+            }
+        ]
+    },
+
+    "Koga": {
+        "Koga's Koffing": [
+            {
+                "hp": 18,
+                "speed": 0,
+                "type": ["poison"],
+                "move": [
+                    {
+                        "name": "acid",
+                        "hit": 8,
+                        "special": "poison",
+                        "type": "poison"
+                    },
+                    {
+                        "name": "poison gas",
+                        "hit": 8,
+                        "special": "poison",
+                        "type": "poison"
+                    },
+                    {
+                        "name": "sludge bomb",
+                        "hit": 8,
+                        "special": "poison",
+                        "type": "poison"
+                    }
+                ]
+            }
+        ],
+        "Koga's Venonat": [
+            {
+                "hp": 19,
+                "speed": 1,
+                "type": ["bug", "poison"],
+                "move": [
+                    {
+                        "name": "toxic",
+                        "hit": 8,
+                        "special": "poison",
+                        "type": "poison"
+                    },
+                    {
+                        "name": "acid",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "poison"
+                    },
+                    {
+                        "name": "infestation",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "bug"
+                    }
+                ]
+            }
+        ],
+        "Koga's Weezing": [
+            {
+                "hp": 20,
+                "speed": 0,
+                "type": ["poison"],
+                "move": [
+                    {
+                        "name": "poison gas",
+                        "hit": 8,
+                        "special": "poison",
+                        "type": "poison"
+                    },
+                    {
+                        "name": "toxic spikes",
+                        "hit": 8,
+                        "special": "poison",
+                        "type": "poison"
+                    },
+                    {
+                        "name": "poison fang",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "poison"
+                    }
+                ]
+            }
+        ],
+        "Koga's Muk": [
+            {
+                "hp": 21,
+                "speed": -1,
+                "type": ["poison"],
+                "move": [
+                    {
+                        "name": "corrosive gas",
+                        "hit": 10,
+                        "special": "poison",
+                        "type": "poison"
+                    },
+                    {
+                        "name": "sludge bomb",
+                        "hit": 10,
+                        "special": "paralyzed",
+                        "type": "poison"
+                    },
+                    {
+                        "name": "venoshock",
+                        "hit": 12,
+                        "special": "none",
+                        "type": "poison"
+                    }
+                ]
+            }
+        ]
+    },
+    "Sabrina": {
+        "Sabrina's Mr. Mime": [
+            {
+                "hp": 20,
+                "speed": 1,
+                "type": ["psychic"],
+                "move": [
+                    {
+                        "name": "hypnosis",
+                        "hit": 10,
+                        "special": "paralyzed",
+                        "type": "psychic"
+                    },
+                    {
+                        "name": "psywave",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "psychic"
+                    },
+                    {
+                        "name": "stomp",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "normal"
+                    }
+                ]
+            }
+        ],
+        "Sabrina's Venomoth": [
+            {
+                "hp": 21,
+                "speed": 1,
+                "type": ["bug", "poison"],
+                "move": [
+                    {
+                        "name": "stun spore",
+                        "hit": 8,
+                        "special": "paralyzed",
+                        "type": "grass"
+                    },
+                    {
+                        "name": "hypnosis",
+                        "hit": 8,
+                        "special": "paralyzed",
+                        "type": "psychic"
+                    },
+                    {
+                        "name": "psywave",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "psychic"
+                    }  
+                ]
+            }
+        ],
+        "Sabrina's Kadabra": [
+            {
+                "hp": 22,
+                "speed": 1,
+                "type": ["pyschic"],
+                "move": [
+                    {
+                        "name": "psychic",
+                        "hit": 10,
+                        "special": "paralyzed",
+                        "type": "psychic"
+                    },
+                    {
+                        "name": "psyshock",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "psychic"
+                    },
+                    {
+                        "name": "telekinesis",
+                        "hit": 12,
+                        "special": "none",
+                        "type": "psychic"
+                    }
+                ]
+            }
+        ],
+        "Sabrina's Alakazam": [
+            {
+                "hp": 23,
+                "speed": 1,
+                "type": ["psychic"],
+                "move": [
+                    {
+                        "name": "psyshock",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "psychic"
+                    },
+                    {
+                        "name": "psybeam",
+                        "hit": 10,
+                        "special": "paralyzed",
+                        "type": "psychic"
+                    },
+                    {
+                        "name": "telekinesis",
+                        "hit": 12,
+                        "special": "none",
+                        "type": "psychic"
+                    }
+                ]
+            }
+        ]
+    },
+    "Blaine": {
+        "Blaine's Growlithe": [
+            {
+                "hp": 22,
+                "speed": 0,
+                "type": ["fire"],
+                "move": [
+                    {
+                        "name": "fire spine",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "fire"
+                    },
+                    {
+                        "name": "fire fang",
+                        "hit": 10,
+                        "special": "burned",
+                        "type": "fire"
+                    },
+                    {
+                        "name": "heat wave",
+                        "hit": 12,
+                        "special": "burned",
+                        "type": "fire"
+                    }
+                ]
+            }
+        ],
+        "Blaine's Rapidash": [
+            {
+                "hp": 23,
+                "speed": 1,
+                "type": ["fire"],
+                "move": [
+                    {
+                        "name": "flame charge",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "fire"
+                    },
+                    {
+                        "name": "fire blast",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "fire"
+                    },
+                    {
+                        "name": "flare blitz",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "fire"
+                    }  
+                ]
+            }
+        ],
+        "Blaine's Ninetales": [
+            {
+                "hp": 24,
+                "speed": 1,
+                "type": ["fire"],
+                "move": [
+                    {
+                        "name": "fire blast",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "fire"
+                    },
+                    {
+                        "name": "overheat",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "fire"
+                    },
+                    {
+                        "name": "flame charge",
+                        "hit": 12,
+                        "special": "burned",
+                        "type": "fire"
+                    }
+                ]
+            }
+        ],
+        "Blaine's Arcanine": [
+            {
+                "hp": 25,
+                "speed": 1,
+                "type": ["fire"],
+                "move": [
+                    {
+                        "name": "fusion flare",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "fire"
+                    },
+                    {
+                        "name": "incinerate",
+                        "hit": 12,
+                        "special": "burned",
+                        "type": "fire"
+                    },
+                    {
+                        "name": "flamethrower",
+                        "hit": 12,
+                        "special": "burned",
+                        "type": "fire"
+                    }
+                ]
+            }
+        ]
+    },
+    "Giovanni": {
+        "Giovanni's Persian": [
+            {
+                "hp": 25,
+                "speed": 1,
+                "type": ["normal"],
+                "move": [
+                    {
+                        "name": "hyper fang",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "normal"
+                    },
+                    {
+                        "name": "fury swipes",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "normal"
+                    },
+                    {
+                        "name": "crush grip",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "normal"
+                    }  
+                ]
+            }
+        ],
+        "Giovanni's Rhydon": [
+            {
+                "hp": 24,
+                "speed": 1,
+                "type": ["ground", "rock"],
+                "move": [
+                    {
+                        "name": "drill run",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "ground"
+                    },
+                    {
+                        "name": "earth power",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "ground"
+                    },
+                    {
+                        "name": "earthquake",
+                        "hit": 12,
+                        "special": "none",
+                        "type": "ground"
+                    }
+                ]
+            }
+        ],
+        "Giovanni's Nidoqueen": [
+            {
+                "hp": 26,
+                "speed": 0,
+                "type": ["poison", "ground"],
+                "move": [
+                    {
+                        "name": "bulldoze",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "ground"
+                    },
+                    {
+                        "name": "fissure",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "ground"
+                    },
+                    {
+                        "name": "venoshock",
+                        "hit": 12,
+                        "special": "poison",
+                        "type": "poison"
+                    }
+                ]
+            }
+        ],
+        "Giovanni's Nidoking": [
+            {
+                "hp": 27,
+                "speed": 0,
+                "type": ["poison", "ground"],
+                "move": [
+                    {
+                        "name": "poison jab",
+                        "hit": 10,
+                        "special": "poison",
+                        "type": "poison"
+                    },
+                    {
+                        "name": "earthquake",
+                        "hit": 12,
+                        "special": "none",
+                        "type": "ground"
+                    },
+
+                    {
+                        "name": "venoshock",
+                        "hit": 12,
+                        "special": "poison",
+                        "type": "poison"
                     }
                 ]
             }
