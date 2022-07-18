@@ -1,0 +1,356 @@
+{
+    "Brock": {
+        "Brock's Zubat": [
+            {
+                "hp": 10,
+                "type": ["flying", "poison"],
+                "move": [
+                    {
+                        "name": "screech",
+                        "hit": 4,
+                        "special": "confused",
+                        "type": "confused"
+                    },
+                    {
+                        "name": "tackle",
+                        "hit": 4,
+                        "special": "none",
+                        "type": "normal"
+                    },
+                    {
+                        "name": "wing attack",
+                        "hit": 4,
+                        "special": "none",
+                        "type": "flying"
+                    }
+                ]
+            }
+        ],
+        "Brock's Geodude": [
+            {
+                "hp": 11,
+                "type": ["ground", "rock"],
+                "move": [
+                    {
+                        "name": "rock smash",
+                        "hit": 4,
+                        "special": "paralyzed",
+                        "type": "rock"
+                    },
+                    {
+                        "name": "rock throw",
+                        "hit": 4,
+                        "special": "none",
+                        "type": "rock"
+                    },
+                    {
+                        "name": "rock slide",
+                        "hit": 6,
+                        "special": "none",
+                        "type": "rock"
+                    }
+                ]
+            }
+            
+        ],
+        "Brock's Vulpix": [
+            {
+                "hp": 12,
+                "type": ["fire"],
+                "move": [
+                    {
+                        "name": "scratch",
+                        "hit": 4,
+                        "special": "none",
+                        "type": "normal"
+                    },
+                    {
+                        "name": "tackle",
+                        "hit": 4,
+                        "special": "none",
+                        "type": "normal"
+                    },
+                    {
+                        "name": "ember",
+                        "hit": 6,
+                        "special": "burned",
+                        "type": "fire"
+                    }
+                ]
+            }
+        ],
+        "Brock's Onix": [
+            {
+                "hp": 13,
+                "type": ["ground", "rock"],
+                "move": [
+                    {
+                        "name": "bind",
+                        "hit": 4,
+                        "special": "paralyzed",
+                        "type": "normal"
+                    },
+                    {
+                        "name": "tackle",
+                        "hit": 4,
+                        "special": "none",
+                        "type": "normal"
+                    },
+                    {
+                        "name": "rock slide",
+                        "hit": 6,
+                        "special": "none",
+                        "type": "rock"
+                    }
+                ]
+            }
+        ]
+        
+    },
+    
+    "Misty": {
+        "Misty's Horsea": [
+            {
+                "hp": 12,
+                "type": ["water"],
+                "move": [
+                    {
+                        "name": "bubble",
+                        "hit": 4,
+                        "special": "none",
+                        "type": "water"
+                    },
+                    {
+                        "name": "water gun",
+                        "hit": 4,
+                        "special": "none",
+                        "type": "water"
+                    },
+                    {
+                        "name": "aqua jet",
+                        "hit": 6,
+                        "special": "none",
+                        "type": "water"
+                    }
+                ]
+            }
+        ],
+        "Misty's Goldeen": [
+            {
+                "hp": 13,
+                "type": ["water"],
+                "move": [
+                    {
+                        "name": "water gun",
+                        "hit": 4,
+                        "special": "none",
+                        "type": "water"
+                    },
+                    {
+                        "name": "tackle",
+                        "hit": 4,
+                        "special": "none",
+                        "type": "normal"
+                    },
+                    {
+                        "name": "bite",
+                        "hit": 6,
+                        "special": "none",
+                        "type": "normal"
+                    }
+                ]
+            }
+        ],
+        "Misty's Staryu": [
+            {
+                "hp": 14,
+                "type": ["water"],
+                "move": [
+                    {
+                        "name": "water gun",
+                        "hit": 4,
+                        "special": "none",
+                        "type": "water"
+                    },
+                    {
+                        "name": "bubble beam",
+                        "hit": 6,
+                        "special": "confused",
+                        "type": "water"
+                    },
+                    {
+                        "name": "surf",
+                        "hit": 8,
+                        "special": "none",
+                        "type": "water"
+                    }
+                ]
+            }
+        ],
+        "Misty's Starmie": [
+            {
+                "hp": 15,
+                "type": ["water"],
+                "move": [
+                    {
+                        "name": "aqua jet",
+                        "hit": 6,
+                        "special": "none",
+                        "type": "water"
+                    },
+                    {
+                        "name": "surf",
+                        "hit": 8,
+                        "special": "none",
+                        "type": "water"
+                    },
+                    {
+                        "name": "hydro pump",
+                        "hit": 8,
+                        "special": "none",
+                        "type": "water"
+                    }
+                ]
+
+            }
+        ]
+        
+    },
+
+    "Lt. Surge": {
+        "Lt. Surge's Magnemite": [
+            {
+                "hp": 14,
+                "type": ["electric"],
+                "move": [
+                    {
+                        "name": "tunder wave",
+                        "hit": 4,
+                        "special": "paralyzed",
+                        "type": "electric"
+                    },
+                    {
+                        "name": "thunder shock",
+                        "hit": 6,
+                        "special": "none",
+                        "type": "electric"
+                    },
+                    {
+                        "name": "thunder bolt",
+                        "hit": 8,
+                        "special": "paralyzed",
+                        "type": "electric"
+                    }
+                ]
+            }
+        ],
+        "Lt. Surge's Voltorb": [
+            {
+                "hp": 15,
+                "type": ["electric"],
+                "move": [
+                    {
+                        "name": "tackle",
+                        "hit": 4,
+                        "special": "none",
+                        "type": "normal"
+                    },
+                    {
+                        "name": "thunder shock",
+                        "hit": 6,
+                        "special": "none",
+                        "type": "electric"
+                    },
+                    {
+                        "name": "roll out",
+                        "hit": 8,
+                        "special": "none",
+                        "type": "normal"
+                    }
+                ]
+
+            }
+        ],
+        "Lt. Surge's Pikachu": [
+            {
+                "hp": 16,
+                "type": ["electric"],
+                "move": [
+                    {
+                        "name": "quick attack",
+                        "hit": 6,
+                        "special": "none",
+                        "type": "normal"
+                    },
+                    {
+                        "name": "swift",
+                        "hit": 6,
+                        "special": "none",
+                        "type": "normal"
+                    },
+                    {
+                        "name": "thunder bolt",
+                        "hit": 8,
+                        "special": "paralyzed",
+                        "type": "electric"
+                    }
+                ]
+            }
+        ],
+        "Lt. Surge's Raichu": [
+            {
+                "hp": 17,
+                "type": ["electric"],
+                "move": [
+                    {
+                        "name": "thunder bolt",
+                        "hit": 10,
+                        "special": "paralyzed",
+                        "type": "electric"
+                    },
+                    {
+                        "name": "volt tackle",
+                        "hit": 8,
+                        "special": "none",
+                        "type": "electric"
+                    },
+                    {
+                        "name": "thunder",
+                        "hit": 10,
+                        "special": "none",
+                        "type": "electric"
+                    }
+                ]
+            }
+        ]
+        
+    },
+    "Erika": {
+        "Erika's Victreebell": [
+            {
+                "hp": 16,
+                "type": ["grass"],
+                "move": [
+                    {
+                        "name": "vine whip",
+                        "hit": 6,
+                        "special": "none",
+                        "type": "grass"
+                    },
+                    {
+                        "name": "razor leaf",
+                        "hit": 6,
+                        "special": "none",
+                        "type": "grass"
+                    },
+                    {
+                        "name": "leech seed",
+                        "hit": 6,
+                        "special": "none",
+                        "type": "grass"
+                    }
+                ]
+            }
+        ]
+    }
+}
