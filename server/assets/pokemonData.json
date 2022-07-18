@@ -25,56 +25,56 @@
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "fire"
+        "type": ["fire"]
     },
     "005":{
         "name": "Charmeleon",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "fire"
+        "type": ["fire"]
     },
     "006": {
         "name": "Charizard",
         "hp": 20,
         "speed": 1,
         "tier": 3,
-        "type": "fire"
+        "type": ["fire"]
     },
     "007": {
         "name": "Squirtle",
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "water"
+        "type": ["water"]
     },
     "008": {
         "name": "Wartortle",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "water"
+        "type": ["water"]
     },
     "009": {
         "name": "Blastoise",
         "hp": 20,
         "speed": 1,
         "tier": 3,
-        "type": "water"
+        "type": ["water"]
     },
     "010": {
         "name": "Caterpie",
         "hp": 5,
         "speed": 0,
         "tier": 1,
-        "type": "bug"
+        "type": ["bug"]
     },
     "011": {
         "name": "Metapod",
         "hp": 10,
         "speed": -1,
         "tier": 2,
-        "type": "bug"
+        "type": ["bug"]
     },
     "012": {
         "name": "Butterfree",
@@ -130,14 +130,14 @@
         "hp": 10,
         "speed": 0,
         "tier": 1,
-        "type": "normal"
+        "type": ["normal"]
     },
     "020": {
         "name": "Raticate",
         "hp": 15,
         "speed": 1,
         "tier": 2,
-        "type": "normal"
+        "type": ["normal"]
     },
     "021": {
         "name": "Spearow",
@@ -158,56 +158,56 @@
         "hp": 10,
         "speed": 0,
         "tier": 1,
-        "type": "poison"
+        "type": ["poison"]
     },
     "024": {
         "name": "Arbork",
         "hp": 15,
         "speed": 1,
         "tier": 3,
-        "type": "water"
+        "type": ["water"]
     },
     "025": {
         "name": "Pikachu",
         "hp": 10,
         "speed": 1,
         "tier": 1,
-        "type": "electric"
+        "type": ["electric"]
     },
     "026": {
         "name": "Raichu",
         "hp": 15,
         "speed": 2,
         "tier": 2,
-        "type": "electric"
+        "type": ["electric"]
     },
     "027": {
         "name": "Sandshrew",
         "hp": 10,
         "speed": 0,
         "tier": 1,
-        "type": "Ground"
+        "type": ["ground"]
     },
     "028": {
         "name": "Sandslash",
         "hp": 15,
         "speed": 1,
         "tier": 2,
-        "type": "Ground"
+        "type": ["ground"]
     },
     "029": {
         "name": "Female Nidoran",
         "hp": 10,
         "speed": 0,
         "tier": 1,
-        "type": "poison"
+        "type": ["poison"]
     },
     "030": {
         "name": "Nidorina",
         "hp": 15,
         "speed": 1,
         "tier": 2,
-        "type": "poison"
+        "type": ["poison"]
     },
     "031": {
         "name": "Nidoqueen",
@@ -221,14 +221,14 @@
         "hp": 10,
         "speed": 0,
         "tier": 1,
-        "type": "poison"
+        "type": ["poison"]
     },
     "033": {
         "name": "Nidorno",
         "hp": 15,
         "speed": 1,
         "tier": 2,
-        "type": "poison"
+        "type": ["poison"]
     },
     "034": {
         "name": "Nidoking",
@@ -242,42 +242,42 @@
         "hp": 10,
         "speed": 0,
         "tier": 1,
-        "type": "normal"
+        "type": ["normal"]
     },
     "036": {
         "name": "Clefable",
         "hp": 15,
         "speed": 1,
         "tier": 2,
-        "type": "normal"
+        "type": ["normal"]
     },
     "037": {
         "name": "Vulpix",
         "hp": 10,
         "speed": 1,
         "tier": 1,
-        "type": "fire"
+        "type": ["fire"]
     },
     "038": {
         "name": "Ninetales",
         "hp": 15,
         "speed": 2,
         "tier": 2,
-        "type": "fire"
+        "type": ["fire"]
     },
     "039": {
         "name": "jigglypuff",
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "normal"
+        "type": ["normal"]
     },
     "040": {
         "name": "Wigglytuff",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "normal"
+        "type": ["normal"]
     },
     "041": {
         "name": "Zubat",
@@ -347,84 +347,84 @@
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "ground"
+        "type": ["ground"]
     },
     "051": {
         "name": "Dugtrio",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "ground"
+        "type": ["ground"]
     },
     "052": {
         "name": "Meowth",
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "normal"
+        "type": ["normal"]
     },
     "053": {
         "name": "Persian",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "normal"
+        "type": ["normal"]
     },
     "054": {
         "name": "Psyduck",
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "water"
+        "type": ["water"]
     },
     "055": {
         "name": "Golduck",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "water"
+        "type": ["water"]
     },
     "056": {
         "name": "Mankey",
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "fighting"
+        "type": ["fighting"]
     },
     "057": {
         "name": "Primeape",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "fighting"
+        "type": ["fighting"]
     },
     "058": {
         "name": "Growlith",
         "hp": 10,
         "speed": 0,
         "tier": 1,
-        "type": "fire"
+        "type": ["fire"]
     },
     "059": {
         "name": "Arcanine",
         "hp": 15,
         "speed": 1,
         "tier": 2,
-        "type": "fire"
+        "type": ["fire"]
     },
     "060": {
         "name": "Poliwag",
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "water"
+        "type": ["water"]
     },
     "061": {
         "name": "Poliwhirl",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "water"
+        "type": ["water"]
     },
     "062": {
         "name": "Poliwrath",
@@ -438,42 +438,42 @@
         "hp": 10,
         "speed": 0,
         "tier": 1,
-        "type": "psychic"
+        "type": ["psychic"]
     },
     "064": {
         "name": "Kadabra",
         "hp": 15,
         "speed": 1,
         "tier": 2,
-        "type": "psychic"
+        "type": ["psychic"]
     },
     "065": {
         "name": "Alakazam",
         "hp": 20,
         "speed": 2,
         "tier": 3,
-        "type": "psychic"
+        "type": ["psychic"]
     },
     "066": {
         "name": "Machop",
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "fighting"
+        "type": ["fighting"]
     },
     "067": {
         "name": "Machoke",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "fighting"
+        "type": ["fighting"]
     },
     "068": {
         "name": "Machamp",
         "hp": 20,
         "speed": 1,
         "tier": 3,
-        "type": "fighting"
+        "type": ["fighting"]
     },
     "069": {
         "name": "Bellsprout",
@@ -536,14 +536,14 @@
         "hp": 10,
         "speed": 1,
         "tier": 1,
-        "type": "fire"
+        "type": ["fire"]
     },
     "078": {
         "name": "Rapidash",
         "hp": 15,
         "speed": 2,
         "tier": 2,
-        "type": "fire"
+        "type": ["fire"]
     },
     "079": {
         "name": "Slowpoke",
@@ -564,14 +564,14 @@
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "electric"
+        "type": ["electric"]
     },
     "082": {
         "name": "Magneton",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "electric"
+        "type": ["electric"]
     },
     "083": {
         "name": "Farfetch'd",
@@ -599,7 +599,7 @@
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "water"
+        "type": ["water"]
     },
     "087": {
         "name": "Dewgong",
@@ -613,21 +613,21 @@
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "poison"
+        "type": ["poison"]
     },
     "089": {
         "name": "Muk",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "poison"
+        "type": ["poison"]
     },
     "090": {
         "name": "Shellder",
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "water"
+        "type": ["water"]
     },
     "091": {
         "name": "Cloyster",
@@ -669,42 +669,42 @@
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "psychic"
+        "type": ["psychic"]
     },
     "097": {
         "name": "Hypno",
         "hp": 10,
         "speed": -1,
-        "tier": 1,
-        "type": "psychic"
+        "tier": 2,
+        "type": ["psychic"]
     },
     "098": {
         "name": "Krabby",
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "water"
+        "type": ["water"]
     },
     "099": {
         "name": "Kingler",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "water"
+        "type": ["water"]
     },
     "100": {
         "name": "Voltorb",
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "electric"
+        "type": ["electric"]
     },
     "101": {
         "name": "Electrode",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "electric"
+        "type": ["electric"]
     },
     "102": {
         "name": "Execute",
@@ -725,62 +725,62 @@
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "ground"
+        "type": ["ground"]
     },
     "105": {
         "name": "Marowak",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "ground"
+        "type": ["ground"]
     },
     "106": {
         "name": "Hitmolee",
         "hp": 15,
         "speed": 0,
-        "tier": 1,
-        "type": "fighting"
+        "tier": 2,
+        "type": ["fighting"]
     },
     "107": {
         "name": "Hitmochan",
         "hp": 15,
         "speed": 0,
-        "tier": 1,
-        "type": "fighting"
+        "tier": 2,
+        "type": ["fighting"]
     },
     "108": {
         "name": "Lickitung",
         "hp": 15,
         "speed": 0,
         "tier": 1,
-        "type": "normal"
+        "type": ["normal"]
     },
     "109": {
         "name": "Koffing",
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "poison"
+        "type": ["poison"]
     },
     "110": {
         "name": "Weezing",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "poison"
+        "type": ["poison"]
     },
     "111": {
         "name": "Rhyhorn",
         "hp": 15,
         "speed": 0,
-        "tier": 1,
+        "tier": 2,
         "type": ["ground", "rock"]
     },
     "112": {
         "name": "Rhydon",
         "hp": 20,
         "speed": 1,
-        "tier": 2,
+        "tier": 3,
         "type": ["ground", "rock"]
     },
     "113": {
@@ -788,76 +788,76 @@
         "hp": 15,
         "speed": 0,
         "tier": 1,
-        "type": "normal"
+        "type": ["normal"]
     },
     "114": {
         "name": "Tangela",
         "hp": 10,
         "speed": 0,
         "tier": 1,
-        "type": "grass"
+        "type": ["grass"]
     },
     "115": {
         "name": "Kangaskhan",
         "hp": 15,
         "speed": 0,
-        "tier": 1,
-        "type": "normal"
+        "tier": 2,
+        "type": ["normal"]
     },
     "116": {
         "name": "Horsea",
         "hp": 5,
         "speed": -1,
         "tier": 1,
-        "type": "water"
+        "type": ["water"]
     },
     "117": {
         "name": "Seadra",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "water"
+        "type": ["water"]
     },
     "118": {
         "name": "Goldeen",
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "water"
+        "type": ["water"]
     },
     "119": {
         "name": "Seaking",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "water"
+        "type": ["water"]
     },
     "120": {
         "name": "Staryu",
         "hp": 10,
         "speed": 0,
         "tier": 1,
-        "type": "water"
+        "type": ["water"]
     },
     "121": {
         "name": "Starmie",
         "hp": 15,
         "speed": 1,
         "tier": 2,
-        "type": "water"
+        "type": ["water"]
     },
     "122": {
         "name": "Mr. Mime",
         "hp": 15,
         "speed": 1,
-        "tier": 1,
-        "type": "psychic"
+        "tier": 2,
+        "type": ["psychic"]
     },
     "123": {
         "name": "Scyther",
         "hp": 15,
         "speed": 0,
-        "tier": 1,
+        "tier": 2,
         "type": ["grass", "bug"]
     },
     "124": {
@@ -871,49 +871,49 @@
         "name": "Electabuzz",
         "hp": 15,
         "speed": 0,
-        "tier": 1,
-        "type": "electric"
+        "tier": 2,
+        "type": ["electric"]
     },
     "126": {
         "name": "Magmar",
         "hp": 15,
         "speed": 0,
-        "tier": 1,
-        "type": "fire"
+        "tier": 2,
+        "type": ["fire"]
     },
     "127": {
         "name": "Pinsir",
         "hp": 15,
         "speed": 0,
-        "tier": 1,
-        "type": "bug"
+        "tier": 2,
+        "type": ["bug"]
     },
     "128": {
         "name": "Tauros",
         "hp": 15,
         "speed": 0,
-        "tier": 1,
-        "type": "normal"
+        "tier": 2,
+        "type": ["normal"]
     },
     "129": {
         "name": "Magikarp",
         "hp": 5,
         "speed": -1,
         "tier": 1,
-        "type": "water"
+        "type": ["water"]
     },
     "130": {
         "name": "Gyarados",
         "hp": 20,
         "speed": 1,
-        "tier": 2,
+        "tier": 3,
         "type": ["water", "flying"]
     },
     "131": {
         "name": "Lapras",
         "hp": 15,
         "speed": 0,
-        "tier": 1,
+        "tier": 3,
         "type": ["water", "ice"]
     },
     "132": {
@@ -921,42 +921,42 @@
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "normal"
+        "type": ["normal"]
     },
     "133": {
         "name": "Eevee",
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "normal"
+        "type": ["normal"]
     },
     "134": {
         "name": "Vaporeon",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "water"
+        "type": ["water"]
     },
     "135": {
         "name": "Jolteon",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "electric"
+        "type": ["electric"]
     },
     "136": {
         "name": "Flareon",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "fire"
+        "type": ["fire"]
     },
     "137": {
         "name": "Porygon",
         "hp": 15,
         "speed": 0,
-        "tier": 1,
-        "type": "normal"
+        "tier": 2,
+        "type": ["normal"]
     },
     "138": {
         "name": "Omanyte",
@@ -990,35 +990,35 @@
         "name": "Aerodactyl",
         "hp": 15,
         "speed": 1,
-        "tier": 1,
+        "tier": 3,
         "type": ["rock", "flying"]
     },
     "143": {
         "name": "Snorlax",
         "hp": 20,
         "speed": 0,
-        "tier": 1,
-        "type": "normal"
+        "tier": 3,
+        "type": ["normal"]
     },
     "144": {
         "name": "Articuno",
         "hp": 25,
         "speed": 2,
-        "tier": 1,
+        "tier": 4,
         "type": ["ice", "flying"]
     },
     "145": {
         "name": "Zapdos",
         "hp": 25,
         "speed": 2,
-        "tier": 1,
+        "tier": 4,
         "type": ["electric", "flying"]
     },
     "146": {
         "name": "Moltres",
         "hp": 25,
         "speed": 2,
-        "tier": 1,
+        "tier": 4,
         "type": ["fire", "flying"]
     },
     "147": {
@@ -1026,35 +1026,35 @@
         "hp": 10,
         "speed": -1,
         "tier": 1,
-        "type": "dragon"
+        "type": ["dragon"]
     },
     "148": {
         "name": "Dragonair",
         "hp": 15,
         "speed": 0,
         "tier": 2,
-        "type": "dragon"
+        "type": ["dragon"]
     },
     "149": {
         "name": "Dragonite",
         "hp": 20,
         "speed": 1,
         "tier": 3,
-        "type": "dragon"
+        "type": ["dragon"]
     },
     "150": {
         "name": "Mewtwo",
         "hp": 25,
         "speed": 2,
-        "tier": 1,
-        "type": "psychic"
+        "tier": 4,
+        "type": ["psychic"]
     },
     "151": {
         "name": "Mew",
         "hp": 15,
         "speed": 2,
-        "tier": 1,
-        "type": "psychic"
+        "tier": 4,
+        "type": ["psychic"]
     }
 }
 
