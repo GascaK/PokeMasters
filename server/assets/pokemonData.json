@@ -1,25 +1,4 @@
 {
-    "catch rate":[
-        
-    {
-        "tier": 1, 
-        "minimum": 5,
-        "maximum": 20
-    },
-    {
-        "tier": 2,
-        "minimum": 10,
-        "maximum": 20
-
-    },
-    {
-        "tier": 3,
-        "minimum": 15,
-        "maximum": 20
-    }
-    ],
-
-
     "001":{
         "name": "Bulbasaur",
         "hp": 10,
