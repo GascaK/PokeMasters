@@ -1,6 +1,7 @@
 {
-    "Brock": {
-        "Brock's Zubat": [
+    "Brock": [
+        {
+        "Brock's Zubat":
             {
                 "hp": 10,
                 "speed": 0,
@@ -25,9 +26,8 @@
                         "type": "flying"
                     }
                 ]
-            }
-        ],
-        "Brock's Geodude": [
+            },
+        "Brock's Geodude":
             {
                 "hp": 11,
                 "speed": 0,
@@ -52,10 +52,8 @@
                         "type": "rock"
                     }
                 ]
-            }
-            
-        ],
-        "Brock's Vulpix": [
+            },
+        "Brock's Vulpix":
             {
                 "hp": 12,
                 "speed": 1,
@@ -80,9 +78,8 @@
                         "type": "fire"
                     }
                 ]
-            }
-        ],
-        "Brock's Onix": [
+            },
+        "Brock's Onix":
             {
                 "hp": 13,
                 "speed": 0,
@@ -108,12 +105,12 @@
                     }
                 ]
             }
-        ]
-        
-    },
+        }
+    ],
     
-    "Misty": {
-        "Misty's Horsea": [
+    "Misty": [
+        {
+        "Misty's Horsea":
             {
                 "hp": 12,
                 "speed": 0,
@@ -138,9 +135,8 @@
                         "type": "water"
                     }
                 ]
-            }
-        ],
-        "Misty's Goldeen": [
+            },
+        "Misty's Goldeen":
             {
                 "hp": 13,
                 "speed": 1,
@@ -165,9 +161,8 @@
                         "type": "normal"
                     }
                 ]
-            }
-        ],
-        "Misty's Staryu": [
+            },
+        "Misty's Staryu":
             {
                 "hp": 14,
                 "speed": 1,
@@ -192,9 +187,8 @@
                         "type": "water"
                     }
                 ]
-            }
-        ],
-        "Misty's Starmie": [
+            },
+        "Misty's Starmie":
             {
                 "hp": 15,
                 "speed": 1,
@@ -221,12 +215,12 @@
                 ]
 
             }
-        ]
-        
-    },
+        }
+    ],
 
-    "Lt. Surge": {
-        "Lt. Surge's Magnemite": [
+    "Lt. Surge": [
+    {
+        "Lt. Surge's Magnemite":
             {
                 "hp": 14,
                 "speed": 1,
@@ -251,9 +245,8 @@
                         "type": "electric"
                     }
                 ]
-            }
-        ],
-        "Lt. Surge's Voltorb": [
+            },
+        "Lt. Surge's Voltorb":
             {
                 "hp": 15,
                 "speed": 0,
@@ -279,9 +272,8 @@
                     }
                 ]
 
-            }
-        ],
-        "Lt. Surge's Pikachu": [
+            },
+        "Lt. Surge's Pikachu":
             {
                 "hp": 16,
                 "speed": 2,
@@ -306,9 +298,8 @@
                         "type": "electric"
                     }
                 ]
-            }
-        ],
-        "Lt. Surge's Raichu": [
+            },
+        "Lt. Surge's Raichu":
             {
                 "hp": 17,
                 "speed": 2,
@@ -334,11 +325,12 @@
                     }
                 ]
             }
-        ]
-    },
+     }
+    ],
 
-    "Erika": {
-        "Erika's Victreebell": [
+    "Erika": [
+        {
+        "Erika's Victreebell":
             {
                 "hp": 16,
                 "speed": 0,
@@ -363,9 +355,8 @@
                         "type": "grass"
                     }
                 ]
-            }
-        ],
-        "Erika's Vileplume": [
+            },
+        "Erika's Vileplume":
             {
                 "hp": 17,
                 "speed": 0,
@@ -390,9 +381,8 @@
                         "type": "grass"
                     }
                 ]
-            }
-        ],
-        "Erika's Tangela": [
+            },
+        "Erika's Tangela":
             {
                 "hp": 18,
                 "speed": 1,
@@ -417,9 +407,8 @@
                         "type": "grass"
                     }
                 ]
-            }
-        ],
-        "Erika's Gloom": [
+            },
+        "Erika's Gloom":
             {
                 "hp": 19,
                 "speed": 0,
@@ -445,11 +434,12 @@
                     }
                 ]
             }
-        ]
-    },
+        }
+    ],
 
-    "Koga": {
-        "Koga's Koffing": [
+    "Koga": [
+    {
+        "Koga's Koffing":
             {
                 "hp": 18,
                 "speed": 0,
@@ -474,9 +464,8 @@
                         "type": "poison"
                     }
                 ]
-            }
-        ],
-        "Koga's Venonat": [
+            },
+        "Koga's Venonat":
             {
                 "hp": 19,
                 "speed": 1,
@@ -501,9 +490,8 @@
                         "type": "bug"
                     }
                 ]
-            }
-        ],
-        "Koga's Weezing": [
+            },
+        "Koga's Weezing":
             {
                 "hp": 20,
                 "speed": 0,
@@ -528,9 +516,8 @@
                         "type": "poison"
                     }
                 ]
-            }
-        ],
-        "Koga's Muk": [
+            },
+        "Koga's Muk":
             {
                 "hp": 21,
                 "speed": -1,
@@ -556,10 +543,11 @@
                     }
                 ]
             }
-        ]
-    },
-    "Sabrina": {
-        "Sabrina's Mr. Mime": [
+        }
+    ],
+    "Sabrina": [
+    {
+        "Sabrina's Mr. Mime":
             {
                 "hp": 20,
                 "speed": 1,
@@ -584,9 +572,8 @@
                         "type": "normal"
                     }
                 ]
-            }
-        ],
-        "Sabrina's Venomoth": [
+            },
+        "Sabrina's Venomoth":
             {
                 "hp": 21,
                 "speed": 1,
@@ -611,9 +598,8 @@
                         "type": "psychic"
                     }  
                 ]
-            }
-        ],
-        "Sabrina's Kadabra": [
+            },
+        "Sabrina's Kadabra":
             {
                 "hp": 22,
                 "speed": 1,
@@ -638,9 +624,8 @@
                         "type": "psychic"
                     }
                 ]
-            }
-        ],
-        "Sabrina's Alakazam": [
+            },
+        "Sabrina's Alakazam":
             {
                 "hp": 23,
                 "speed": 1,
@@ -666,10 +651,11 @@
                     }
                 ]
             }
-        ]
-    },
-    "Blaine": {
-        "Blaine's Growlithe": [
+        }
+    ],
+    "Blaine": [
+    {
+        "Blaine's Growlithe":
             {
                 "hp": 22,
                 "speed": 0,
@@ -694,9 +680,8 @@
                         "type": "fire"
                     }
                 ]
-            }
-        ],
-        "Blaine's Rapidash": [
+            },
+        "Blaine's Rapidash":
             {
                 "hp": 23,
                 "speed": 1,
@@ -721,9 +706,8 @@
                         "type": "fire"
                     }  
                 ]
-            }
-        ],
-        "Blaine's Ninetales": [
+            },
+        "Blaine's Ninetales":
             {
                 "hp": 24,
                 "speed": 1,
@@ -748,9 +732,8 @@
                         "type": "fire"
                     }
                 ]
-            }
-        ],
-        "Blaine's Arcanine": [
+            },
+        "Blaine's Arcanine":
             {
                 "hp": 25,
                 "speed": 1,
@@ -776,10 +759,12 @@
                     }
                 ]
             }
-        ]
-    },
-    "Giovanni": {
-        "Giovanni's Persian": [
+        }
+    ],
+    
+    "Giovanni": [
+    {
+        "Giovanni's Persian":
             {
                 "hp": 25,
                 "speed": 1,
@@ -804,9 +789,8 @@
                         "type": "normal"
                     }  
                 ]
-            }
-        ],
-        "Giovanni's Rhydon": [
+            },
+        "Giovanni's Rhydon":
             {
                 "hp": 24,
                 "speed": 1,
@@ -831,9 +815,8 @@
                         "type": "ground"
                     }
                 ]
-            }
-        ],
-        "Giovanni's Nidoqueen": [
+            },
+        "Giovanni's Nidoqueen":
             {
                 "hp": 26,
                 "speed": 0,
@@ -858,9 +841,8 @@
                         "type": "poison"
                     }
                 ]
-            }
-        ],
-        "Giovanni's Nidoking": [
+            },
+        "Giovanni's Nidoking":
             {
                 "hp": 27,
                 "speed": 0,
@@ -887,6 +869,6 @@
                     }
                 ]
             }
-        ]
-    }
+        }
+    ]
 }
