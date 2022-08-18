@@ -1,0 +1,89 @@
+{
+    "items": [
+        {
+            "name": "Master Ball",
+            "cost": 1000,
+            "text": "Automatically catch the next Pokemon encountered."
+        },
+        {
+            "name": "Great Ball",
+            "cost": 500,
+            "text": "Add +3 to your next attempt at catching a wild Pokemon."
+        },
+        {
+            "name": "Poke Ball",
+            "cost": 200,
+            "text": "Add +1 to your next attempt at catching a wild Pokemon."
+        },
+        {
+            "name": "Red Card",
+            "cost": 300,
+            "text": "Subtract -1 from any opponents next attempt at catching a wild Pokemon."
+        },
+        {
+            "name": "Red Flute",
+            "cost": 700,
+            "text": "Subtract -3 from any opponents next attempt at catching a wild Pokemon."
+        },
+        {
+            "name": "Potion",
+            "cost": 200,
+            "text": "Heal +3 HP from your active Pokemon."
+        },
+        {
+            "name": "Max Potion",
+            "cost": 500,
+            "text": "Heal +10 HP from your active Pokemon."
+        },
+        {
+            "name": "Soda Water",
+            "cost": 300,
+            "text": "Heal +5 HP from your active Pokemon."
+        },
+        {
+            "name": "Revive",
+            "cost": 500,
+            "text": "Revive one KO'ed Pokemon to half HP (Rounded Up)."
+        },
+        {
+            "name": "Max Revive",
+            "cost": 700,
+            "text": "Revive one KO'ed Pokemon to full HP."
+        },
+        {
+            "name": "Gold Nugget",
+            "cost": -1,
+            "text": "Sell for $300."
+        },
+        {
+            "name": "Star Piece",
+            "cost": -1,
+            "text": "Sell for $500"
+        },
+        {
+            "name": "Scarf Band",
+            "cost": 400,
+            "text": "Increase the Max HP of your active Pokemon by 3."
+        },
+        {
+            "name": "Leftovers",
+            "cost": 400,
+            "text": "At the end of your turn, heal your active Pokemon by 1 HP."
+        },
+        {
+            "name": "Boxing Gloves",
+            "cost": 400,
+            "text": "Increase the damage of your active Pokemon attacks by +1."
+        },
+        {
+            "name": "Winners Debt",
+            "cost": 300,
+            "text": "The next trainer battle you win, your opponent must give you an extra $100."
+        },
+        {
+            "name": "Looker Ticket",
+            "cost": 500,
+            "text": "Challenge any trainer to a battle."
+        }
+    ]
+}

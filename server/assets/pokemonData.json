@@ -1047,14 +1047,14 @@
         "hp": 25,
         "speed": 2,
         "tier": 4,
-        "type": ["psychic"]
+        "type": ["psychic", "psychic"]
     },
     "151": {
         "name": "Mew",
         "hp": 15,
         "speed": 2,
         "tier": 4,
-        "type": ["psychic"]
+        "type": ["psychic", "psychic"]
     }
 }
 

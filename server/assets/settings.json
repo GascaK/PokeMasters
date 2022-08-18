@@ -1,25 +1,21 @@
 {
     "catch rate":{
+        "tier_1":{
+            "minimum": 5,
+            "maximum": 20
+        },
+        "tier_2":{
+            "minimum": 8,
+            "maximum": 20
+        },
+        "tier_3":{
 
-    "tier_1":{
-
-        "minimum": 5,
-        "maximum": 20
-    },
-    "tier_2":{
-
-        "minimum": 10,
-        "maximum": 20
-    },
-    "tier_3":{
-        
-        "minimum": 15,
-        "maximum": 20
-    },
-    "tier_4":{
-
-        "minimum": 18,
-        "maximum": 20
-    }
+            "minimum": 13,
+            "maximum": 20
+        },
+        "tier_4":{
+            "minimum": 15,
+            "maximum": 20
+        }
     }
 }

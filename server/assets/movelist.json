@@ -1000,6 +1000,28 @@
     },
 
     "tier_4": {
+        "flying": [
+            {
+                "name": "roost",
+                "hit": 0,
+                "special": "revive"
+            },
+            {
+                "name": "x-wing",
+                "hit": 10,
+                "special": "none"
+            },
+            {
+                "name": "fly",
+                "hit": 8,
+                "special": "none"
+            },
+            {
+                "name": "brave bird",
+                "hit": 12,
+                "special": "none"
+            }
+        ],
         "ice": [
             {
                 "name": "subzero slammer",
