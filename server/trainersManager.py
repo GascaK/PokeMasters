@@ -10,6 +10,9 @@ trainer_resource = {
     'name': fields.String,
     'dollars': fields.Integer,
     'badges': fields.Integer,
+    'poke1': fields.Integer,
+    'poke2': fields.Integer,
+    'poke3': fields.Integer,
 }
 class TrainerController(Resource):
     def __init__(self):
@@ -21,13 +24,21 @@ class TrainerController(Resource):
         self.reqparse.add_argument('poke2', type=int, default=0, required=False, location='args')
         self.reqparse.add_argument('poke3', type=int, default=0, required=False, location='args')
 
-    @marshal_with(trainer_resource)
     def get(self, trainerID: int):
         player = trainers.query.filter_by(_id=trainerID).first()
-        if player:
-            print(player)
-            return player
-        abort(401, message=f"No trainer found for trainer id: {trainerID}")
+        if not player:
+            abort(401, message=f"No trainer found for trainer id: {trainerID}")
+        player_items = player.items.all()
+        return json.dumps({
+            '_id': player._id,
+            'name': player.name,
+            'dollars': player.dollars,
+            'badges': player.badges,
+            'poke1': player.poke1,
+            'poke2': player.poke2,
+            'poke3': player.poke3,
+            'items': [x._id for x in player_items]
+        })
 
     def post(self, trainerID: int):
         args = self.reqparse.parse_args()

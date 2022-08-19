@@ -1,5 +1,5 @@
 from server.base import db
-from server.models import PokeMoves, PokeItems, PokemonBase, trainers, pokemon
+from server.models import PokeMoves, PokeItems, PokemonBase, trainers, trainerItems, pokemon
 from server.base import create_app
 
 import os
@@ -81,4 +81,11 @@ if __name__ == "__main__":
             print(new_trainer)
             db.session.add(new_trainer)
 
+        db.session.commit()
+
+        # Starter items.
+        for trainer in trainers.query.all():
+            for _ in range(3):
+                pokeballs = trainerItems("Pokeball", 0, "Add +1 to your next attempt at catching a pokemon.", trainer._id)
+                db.session.add(pokeballs)
         db.session.commit()

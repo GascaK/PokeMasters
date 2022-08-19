@@ -4,13 +4,15 @@ from .database import db
 
 
 from server.trainersManager import TrainerController
+from server.itemManager import ItemController
 from server.pokemonManager import PokemonCreator, PokemonLocator
 
 api = Api()
 
 api.add_resource(TrainerController, "/trainers/<int:trainerID>")
-api.add_resource(PokemonCreator, "/pokemon/<int:trainerID>")
-api.add_resource(PokemonLocator, "/trainers/pokemon/<int:pokeID>")
+api.add_resource(ItemController, "/trainers/<int:trainerID>/items")
+api.add_resource(PokemonCreator, "/trainers/<int:trainerID>/pokemon")
+api.add_resource(PokemonLocator, "/pokemon/<int:pokeID>")
 
 def create_app():
     app = Flask(__name__, instance_relative_config=False)

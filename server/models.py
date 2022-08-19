@@ -69,7 +69,22 @@ class trainers(db.Model):
 
     def __repr__(self):
         return f'{self._id}: {self.name} ${self.dollars} and {self.badges} badges. \
-            Their pokemon are: {self.poke1}, {self.poke2}, {self.poke3}'
+    Their pokemon are: {self.poke1}, {self.poke2}, {self.poke3}'
+
+class trainerItems(db.Model):
+    _id = db.Column("id", db.Integer, primary_key = True)
+    name = db.Column("name", db.String(100))
+    cost = db.Column("cost", db.Integer)
+    text = db.Column("text", db.String(200))
+    owner = db.Column("owner", db.Integer, db.ForeignKey("trainers.id"))
+
+    trainer = db.relationship("trainers", backref=db.backref('items', lazy='dynamic'))
+
+    def __init__(self, name, cost, text, owner):
+        self.name = name
+        self.cost = cost
+        self.text = text
+        self.owner = owner
 
 class PokeMoves(db.Model):
     __tablename__ = "PokeMoves"
