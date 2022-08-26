@@ -10,7 +10,7 @@ from server.pokemonManager import PokemonCreator, PokemonLocator
 api = Api()
 
 api.add_resource(TrainerController, "/trainers/<int:trainerID>")
-api.add_resource(ItemController, "/trainers/<int:trainerID>/items")
+api.add_resource(ItemController, "/items/<int:trainerID>")
 api.add_resource(PokemonCreator, "/trainers/<int:trainerID>/pokemon")
 api.add_resource(PokemonLocator, "/pokemon/<int:pokeID>")
 

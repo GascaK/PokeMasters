@@ -1,3 +1,4 @@
+from xmlrpc.client import boolean
 from flask_restful import Resource, reqparse, fields, marshal_with, abort
 import json
 import os
@@ -16,16 +17,38 @@ class ItemController(Resource):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('_id', type=str, default='', required=False, location='args')
         self.reqparse.add_argument('item_id', type=int, default='', required=False, location='args')
+        self.reqparse.add_argument('store', type=boolean, default='', required=False, location='args')
 
-    @marshal_with(item_resource)
     def get(self, trainerID):
         args = self.reqparse.parse_args()
 
         if args['_id']:
             item = self.get_item_by_id(args['_id'])
-        else:
+            items = {
+                '_id': item._id,
+                'name': item.name,
+                'cost': item.cost,
+                'text': item.text
+                }
+        elif args['store']:
             item = self.get_random_item()
-        return item
+            items = {
+                '_id': item._id,
+                'name': item.name,
+                'cost': item.cost,
+                'text': item.text
+            }
+        else:
+            item = self.get_trainer_items(trainerID)
+            items = []
+            for each in item:
+                items.append({
+                    '_id': each._id,
+                    'name': each.name,
+                    'cost': each.cost,
+                    'text': each.text
+                })
+        return items
 
     def post(self, trainerID):
         args = self.reqparse.parse_args()
@@ -59,3 +82,7 @@ class ItemController(Resource):
     def get_item_by_id(self, id):
         item = PokeItems.query.filter_by(_id=id).first()
         return item if item else None
+
+    def get_trainer_items(self, trainerID):
+        items = trainerItems.query.filter(trainerItems.owner == trainerID).all()
+        return items
