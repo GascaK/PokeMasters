@@ -12,7 +12,7 @@ const MenuButton = (props) => {
 const Menu = () => {
     return (
         <>
-            <div className="type dark"><MenuButton text={MenuList[0]} clicky={() => {}}/></div>
+            <div><MenuButton text={MenuList[0]} clicky={() => {}}/></div>
             <div><MenuButton text={MenuList[1]} clicky={() => {}} /></div>
             <div><MenuButton text={MenuList[2]} clicky={() => {}} /></div>
             <div><MenuButton text={MenuList[3]} clicky={() => {}} /></div>

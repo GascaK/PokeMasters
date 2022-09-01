@@ -30,5 +30,6 @@ class MoveGenerator():
     def get_move(self, _id):
         move = PokeMoves.query.filter_by(_id=_id).first()
         if move:
+            move.name = move.name.title()
             return move
         return {"404": f"Move with id: {_id} not found."}

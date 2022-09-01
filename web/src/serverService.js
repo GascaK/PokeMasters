@@ -1,19 +1,13 @@
+import axios from 'axios';
 
-class AxiosInstance {
-    getInstance() {
-        const axios = require('axios').default;
-        const instance = axios.create({
-            baseURL: 'http://localhost:5000/',
-            timeout: 1000,
-            withCredentials: false,
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json'
-            }
-        });
-
-        return instance;
+const instance = axios.create({
+    baseURL: 'http://192.168.1.28:5000/',
+    timeout: 1000,
+    withCredentials: false,
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
     }
-}
+});
 
-export default AxiosInstance
+export default instance
