@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container'
 
 const images = require.context('../../public/imgs', true);
 
-const Type = (props) => {
+export const Type = (props) => {
     const type = "type " + props.type;
     return (<>
         <div className={type}>
@@ -14,7 +14,7 @@ const Type = (props) => {
     </>)
 }
 
-const Move = (props) => {
+export const Move = (props) => {
     const atkUrl = '/moves/' + props.atk;
     const [loaded, setLoaded] = useState(<h4>Loading Moves..</h4>);
 
@@ -27,7 +27,7 @@ const Move = (props) => {
             setLoaded(<>
             <div className='row'>
                 <div className={type}>
-                    {data.name}
+                    <h2>{data.name}</h2>
                 </div>
                 <div className='col'>
                     <div><h1>1xd{data.hit} S: {data.special}</h1></div>
@@ -66,7 +66,7 @@ const Card = (props) => {
     return (<>
     <Container className='border border-4 left'>
         <div className='row'>
-            <div className='col'><h3 className='center'>{name}</h3></div>
+            <div className='col'><h1 className='center'>{name}</h1></div>
             <div className='col text-right'><h4>sp {speedText}</h4></div>
         </div>
         <div className='row'>
@@ -74,7 +74,7 @@ const Card = (props) => {
             <div className='col-4'><Type type={type2} /></div>
         </div>
         <div className='row'>
-            <img src={imgLoc} alt={name} className='img-rounded'/>
+            <img src={imgLoc} alt={name} className='img-rounded pokeimage'/>
         </div>
         <div className='row'>
             <Button onClick={() => setHealth((lastHP) => lastHP - 1)} className='col'>-</Button>

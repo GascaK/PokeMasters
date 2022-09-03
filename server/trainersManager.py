@@ -10,6 +10,7 @@ trainer_resource = {
     'name': fields.String,
     'dollars': fields.Integer,
     'badges': fields.Integer,
+    'tier': fields.Integer,
     'poke1': fields.Integer,
     'poke2': fields.Integer,
     'poke3': fields.Integer,
@@ -20,6 +21,7 @@ class TrainerController(Resource):
         self.reqparse.add_argument('name', type=str, default='', required=False, location='args')
         self.reqparse.add_argument('dollars', type=int, default=0, required=False, location='args')
         self.reqparse.add_argument('badges', type=int, default=0, required=False, location='args')
+        self.reqparse.add_argument('tier', type=int, default=0, required=False, location='args')
         self.reqparse.add_argument('poke1', type=int, default=0, required=False, location='args')
         self.reqparse.add_argument('poke2', type=int, default=0, required=False, location='args')
         self.reqparse.add_argument('poke3', type=int, default=0, required=False, location='args')
@@ -34,6 +36,7 @@ class TrainerController(Resource):
             'name': player.name,
             'dollars': player.dollars,
             'badges': player.badges,
+            'tier': player.tier,
             'poke1': player.poke1,
             'poke2': player.poke2,
             'poke3': player.poke3,
@@ -46,6 +49,7 @@ class TrainerController(Resource):
         if player:
             player.badges = args['badges'] or player.badges
             player.dollars = args['dollars'] or player.dollars
+            player.tier = args['tier'] or player.tier
             player.poke1 = args['poke1'] or player.poke1
             player.poke2 = args['poke2'] or player.poke2
             player.poke3 = args['poke3'] or player.poke3

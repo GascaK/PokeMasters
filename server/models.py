@@ -57,12 +57,14 @@ class trainers(db.Model):
     name = db.Column("name", db.String(100))
     dollars = db.Column("dollars", db.Integer)
     badges = db.Column("badges", db.Integer)
+    tier = db.Column("tier", db.Integer)
     poke1 = db.Column("poke1", db.Integer)
     poke2 = db.Column("poke2", db.Integer)
     poke3 = db.Column("poke3", db.Integer)
 
     def __init__(self, name):
         self.name = name
+        self.tier = 1
         self.poke1 = 0
         self.poke2 = 0
         self.poke3 = 0
@@ -70,7 +72,7 @@ class trainers(db.Model):
         self.badges  = 0
 
     def __repr__(self):
-        return f'{self._id}: {self.name} ${self.dollars} and {self.badges} badges. \
+        return f'{self._id} t{self.tier}: {self.name} ${self.dollars} and {self.badges} badges. \
     Their pokemon are: {self.poke1}, {self.poke2}, {self.poke3}'
 
 class trainerItems(db.Model):

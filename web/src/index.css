@@ -13,6 +13,11 @@
 	border: 1px solid #44685E;
 }
 
+.pokeimage.resize {
+	height: auto;
+	width: 540px;
+}
+
 .normal {
 	background-color: #A8A878;
 	border: 1px solid #6D6D4E;

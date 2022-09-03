@@ -32,19 +32,27 @@ class PokemonCreator(Resource):
 
     def generate_random_mon(self, trainerID, tier):
         def v(pl: int):
-            return random.randint(-abs(pl), abs(pl))
+            val = random.randint(-abs(pl), abs(pl))
+            return val if val >= 2 else 2
+
+        if not tier:
+            print(f'tier is {tier}')
 
         base = random.choice(PokemonBase.query.filter_by(tier=tier).all())
         mg = MoveGenerator()
 
         move1 = mg.get_random_move(tier, base.type1)._id
         move2 = mg.get_random_move(tier, base.type2)._id
-        new_mon = pokemon(trainerID, base.pokedex, base.name, base.type1, base.type2, base.hp+v(5), base.tier, move1, move2, base.speed+v(2))
+        new_mon = pokemon(trainerID, base._id, base.name, base.type1, base.type2, base.hp+v(5), base.tier, move1, move2, base.speed+v(2))
         db.session.add(new_mon)
         db.session.commit()
         return new_mon
 
 class PokemonLocator(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('trainerID', type=int, required=True, location='args')
+
     @marshal_with(pokemon_resource)
     def get(self, pokeID):
         chosen = pokemon.query.filter_by(_id=pokeID).first()
@@ -53,8 +61,10 @@ class PokemonLocator(Resource):
         abort(404, message=f"Unable to locate pokemon with ID: {pokeID}")
 
     def put(self, pokeID):
+        args = self.reqparse.parse_args()
         chosen = pokemon.query.filter_by(_id=pokeID).first()
         if chosen:
-            chosen.trainerID = -99
+            chosen.trainerID = args['trainerID']
             db.session.commit()
             return({"message": "Successs"})
+        abort(404, message=f"No pokemon with id {pokeID} found.")
