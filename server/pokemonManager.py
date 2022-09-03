@@ -7,6 +7,7 @@ import random
 
 pokemon_resource = {
     '_id': fields.Integer,
+    'pokedex': fields.Integer,
     'trainerID': fields.Integer,
     'name': fields.String,
     'type1': fields.String,
@@ -38,7 +39,7 @@ class PokemonCreator(Resource):
 
         move1 = mg.get_random_move(tier, base.type1)._id
         move2 = mg.get_random_move(tier, base.type2)._id
-        new_mon = pokemon(trainerID, base.name, base.type1, base.type2, base.hp+v(5), base.tier, move1, move2, base.speed+v(2))
+        new_mon = pokemon(trainerID, base.pokedex, base.name, base.type1, base.type2, base.hp+v(5), base.tier, move1, move2, base.speed+v(2))
         db.session.add(new_mon)
         db.session.commit()
         return new_mon
@@ -50,3 +51,10 @@ class PokemonLocator(Resource):
         if chosen:
             return chosen
         abort(404, message=f"Unable to locate pokemon with ID: {pokeID}")
+
+    def put(self, pokeID):
+        chosen = pokemon.query.filter_by(_id=pokeID).first()
+        if chosen:
+            chosen.trainerID = -99
+            db.session.commit()
+            return({"message": "Successs"})

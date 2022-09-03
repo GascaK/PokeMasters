@@ -54,6 +54,7 @@ if __name__ == "__main__":
         for id, start in starters.items():
             starter = pokemon(
                 99,
+                start['pid'],
                 start['name'],
                 start['type'][0],
                 start['type'][1],

@@ -25,6 +25,7 @@ class PokemonBase(db.Model):
 class pokemon(db.Model):
     __tablename__ = "pokemon"
     _id = db.Column("id", db.Integer, primary_key = True)
+    pokedex = db.Column("pokedex", db.Integer)
     trainerID = db.Column("trainerID", db.Integer)
     name  = db.Column("name", db.String(100))
     type1 = db.Column("type1", db.String(30))
@@ -35,8 +36,9 @@ class pokemon(db.Model):
     move2 = db.Column("move2", db.Integer)
     speed = db.Column("speed", db.Integer)
 
-    def __init__(self, trainerID, name, type1, type2, hp, tier, move1, move2, speed):
+    def __init__(self, trainerID, pokedex, name, type1, type2, hp, tier, move1, move2, speed):
         self.trainerID = trainerID
+        self.pokedex = pokedex
         self.name = name
         self.type1 = type1
         self.type2 = type2

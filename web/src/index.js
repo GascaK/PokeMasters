@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-import Menu from './components/Menu';
-import Pokemon from './components/Pokemon';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+import App from './components/App';
 
 ReactDOM.render(
     <React.StrictMode>
-        <Pokemon />
-        <Menu />
+        <App />
     </React.StrictMode>,
     document.getElementById('root')
 )

@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import instance from '../serverService'
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container'
 
+const images = require.context('../../public/imgs', true);
 
 const Type = (props) => {
     const type = "type " + props.type;
@@ -13,30 +16,29 @@ const Type = (props) => {
 
 const Move = (props) => {
     const atkUrl = '/moves/' + props.atk;
-    let data = {};
     const [loaded, setLoaded] = useState(<h4>Loading Moves..</h4>);
 
     useEffect(() => {
         instance.get(atkUrl)
         .then( (res) => {
-            data = res.data;
+            let data = res.data;
             console.log(data);
-            const type = "type " + data.mType;
+            const type = "type " + data.mType + ' col';
             setLoaded(<>
-            <div>
-                <div className={type} style={{padding: 8 + 'px', display: "inline-block"}}>
+            <div className='row'>
+                <div className={type}>
                     {data.name}
                 </div>
-                <span>
-                    <div>1xd{data.hit} S: {data.special}</div>
-                </span>
+                <div className='col'>
+                    <div><h1>1xd{data.hit} S: {data.special}</h1></div>
+                </div>
             </div>
             </>);
         })
         .catch((err) => {
             console.log(err);
         });
-    }, [props.atk]);
+    }, [atkUrl]);
 
 
     return (<>
@@ -46,6 +48,7 @@ const Move = (props) => {
 }
 
 const Card = (props) => {
+    const imgLoc = `${process.env.PUBLIC_URL}/imgs/00${props.data.pokedex}.png`;
     let name = props.data.name;
     let type1 = props.data.type1;
     let type2 = props.data.type2;
@@ -61,28 +64,36 @@ const Card = (props) => {
     const [health, setHealth] = useState(maxHP);
 
     return (<>
-        <div className="center">
-            <h2>{name} sp {speedText}</h2>
+    <Container className='border border-4 left'>
+        <div className='row'>
+            <div className='col'><h3 className='center'>{name}</h3></div>
+            <div className='col text-right'><h4>sp {speedText}</h4></div>
         </div>
-        <div>
-            <Type type={type1} />
-            <Type type={type2} />
+        <div className='row'>
+            <div className='col-4'><Type type={type1} /></div>
+            <div className='col-4'><Type type={type2} /></div>
         </div>
-        <div>
-            <button onClick={() => setHealth((lastHP) => lastHP - 1)} >-</button>
-            <span> {health} / {maxHP} </span>
-            <button onClick={() => setHealth((lastHP) => lastHP + 1)}>+</button>
-            <button onClick={() => setHealth(maxHP)}>HEAL</button>
+        <div className='row'>
+            <img src={imgLoc} alt={name} className='img-rounded'/>
         </div>
-        <div>
-            <Move atk={move1} />
-            <Move atk={move2} />
+        <div className='row'>
+            <Button onClick={() => setHealth((lastHP) => lastHP - 1)} className='col'>-</Button>
+            <div className='col text-center'> <h3>{health} / {maxHP}</h3> </div>
+            <Button onClick={() => setHealth((lastHP) => lastHP + 1)} className='col'>+</Button>
+            <Button onClick={() => setHealth(maxHP)} className='col'>HEAL</Button>
         </div>
+        <div className='row'>
+            <div className='col'><Move atk={move1} /></div>
+        </div>
+        <div className='col'>
+            <div className='col'><Move atk={move2} /></div>
+        </div>
+    </Container>
     </>)
 }
 
-const Pokemon = () => {
-    const pokeUrl = "pokemon/6";
+const Pokemon = (props) => {
+    const pokeUrl = "pokemon/" + props.active;
 
     const [loaded, setLoaded] = useState(<h1>Loading..</h1>);
     useEffect(() => {
@@ -95,7 +106,7 @@ const Pokemon = () => {
         .catch( (error) => {
             console.log(error);
         });
-    }, []);
+    }, [pokeUrl]);
     
 
     return (<>
