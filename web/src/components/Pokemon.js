@@ -48,7 +48,11 @@ export const Move = (props) => {
 }
 
 const Card = (props) => {
-    const imgLoc = `${process.env.PUBLIC_URL}/imgs/00${props.data.pokedex}.png`;
+    const pokedex = props.data.pokedex;
+
+    const imgFile = pokedex < 10 ? '00' + pokedex : pokedex < 100 ? '0' + pokedex : pokedex;
+    const imgLoc = `${process.env.PUBLIC_URL}/imgs/${imgFile}.png`;
+
     let name = props.data.name;
     let type1 = props.data.type1;
     let type2 = props.data.type2;
@@ -101,7 +105,7 @@ const Pokemon = (props) => {
         .then( (response) => {
             let data = response.data;
             console.log(data);
-            setLoaded(<Card data={data}/>)
+            setLoaded(<Card data={data} />)
         })
         .catch( (error) => {
             console.log(error);

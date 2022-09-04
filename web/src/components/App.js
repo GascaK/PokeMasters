@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import instance from '../serverService';
+import Button from 'react-bootstrap/Button';
 
 import Menu from './Menu';
 import Pokemon from './Pokemon';
@@ -9,25 +10,30 @@ const App = () => {
     const [load, setLoad] = useState(<><h1>Loading..</h1></>);
 
     useEffect(() => {
-        console.log(trainer);
         if (trainer === -1) {
         setLoad(<>
-            <button onClick={() => setTrainer(0)}>Kevin</button>
-            <button onClick={() => setTrainer(2)}>Chris</button>
-            <button onClick={() => setTrainer(3)}>Erik</button>
-            <button onClick={() => setTrainer(1)}>Kenneth</button>
+            <Button onClick={() => setTrainer(1)}>Kevin</Button>
+            <Button onClick={() => setTrainer(3)}>Chris</Button>
+            <Button onClick={() => setTrainer(4)}>Erik</Button>
+            <Button onClick={() => setTrainer(2)}>Kenneth</Button>
         </>);
         } else {
         instance.get(`trainers/${trainer}`)
         .then((res) => {
             const data = JSON.parse(res.data);
-            console.log('TrainerData', data.tier);
             setLoad(<>
-                <Menu trainer={trainer} tier={data.tier} />
-                <Pokemon trainer={trainer} active={data.poke1}/>
-            </>)``
+            <div className='row'>
+                <div className='col'><h2 className='text-center'>{data.name}</h2></div>
+            </div>
+            <div className='row'>
+                <div className='col'><Pokemon trainer={trainer} active={data.poke1}/></div>
+            </div>
+            <div className='row'>
+                <div className='col'><Menu trainer={trainer} tier={data.tier} /></div>
+            </div>
+            </>);
         })
-        .catch(() => {});
+        .catch((err) => console.log(err));
         }
     }, [trainer]);
 

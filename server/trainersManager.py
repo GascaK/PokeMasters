@@ -1,7 +1,7 @@
 
 from flask_restful import abort, Resource, fields, marshal_with, reqparse
 
-from .models import db, trainers
+from .models import db, trainers, pokemon
 
 import json
 
@@ -57,3 +57,26 @@ class TrainerController(Resource):
             return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
         else:
             abort(400, message="Unable to save trainer data.")
+
+class TrainerPokedex(Resource):
+    def get(self, trainerID: int):
+        pokedex = pokemon.query.filter_by(trainerID=trainerID).all()
+
+        poke_list = {}
+        for pkmns in pokedex:
+            if pkmns.pokedex in poke_list:
+                poke_list[pkmns.pokedex]['count'] += 1
+                poke_list[pkmns.pokedex]['ids'].append(pkmns._id)
+            else:
+                poke_list[pkmns.pokedex] = {
+                    'ids': [pkmns._id],
+                    'pokedex': pkmns.pokedex,
+                    'name': pkmns.name,
+                    'count': 1,
+                    'trainerID': pkmns.trainerID
+                }
+        dex = []
+        for key in poke_list:
+            dex.append(poke_list[key])
+
+        return json.dumps(dex)

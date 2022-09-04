@@ -51,6 +51,7 @@ class ItemController(Resource):
         return items
 
     def post(self, trainerID):
+        # Purchase an item.
         args = self.reqparse.parse_args()
         if not args['item_id']:
             abort(404, message="Item ID required on POST.")
@@ -65,6 +66,7 @@ class ItemController(Resource):
         return json.dumps({"message": "Success!", "Status": 200})
 
     def put(self, trainerID):
+        # Use an item through _id
         args = self.reqparse.parse_args()
         if not args['item_id']:
             abort(404, message="item_id required in PUT.")

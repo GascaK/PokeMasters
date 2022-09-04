@@ -33,7 +33,7 @@ class PokemonCreator(Resource):
     def generate_random_mon(self, trainerID, tier):
         def v(pl: int):
             val = random.randint(-abs(pl), abs(pl))
-            return val if val >= 2 else 2
+            return val
 
         if not tier:
             print(f'tier is {tier}')
@@ -43,7 +43,8 @@ class PokemonCreator(Resource):
 
         move1 = mg.get_random_move(tier, base.type1)._id
         move2 = mg.get_random_move(tier, base.type2)._id
-        new_mon = pokemon(trainerID, base._id, base.name, base.type1, base.type2, base.hp+v(5), base.tier, move1, move2, base.speed+v(2))
+        hp = base.hp+v(5) # hp is always atleast 2.
+        new_mon = pokemon(trainerID, base._id, base.name, base.type1, base.type2, hp if hp>=2 else 2, base.tier, move1, move2, base.speed+v(2))
         db.session.add(new_mon)
         db.session.commit()
         return new_mon
