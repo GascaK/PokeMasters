@@ -21,12 +21,14 @@ const VisitCity = (props) => {
         let res = await instance.get(`trainers/${props.trainer}/pokedex`);
         const data = JSON.parse(res.data);
         for (var i=0; i<data.length; i++) {
-            console.log(data[i]);
             rows.push(<>
             <div className='row'>
                 <div className='col'>{data[i].pokedex})</div>
                 <div className='col'>{data[i].name}:</div>
                 <div className='col'>{data[i].count}</div>
+                <Button className='col' onClick={(active) => {
+                    console.log(active);
+                }}>Choose</Button>
             </div>
             </>)
         }

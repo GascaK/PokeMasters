@@ -3,8 +3,9 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 import instance from '../serverService';
-
 import { Move, Type } from './Pokemon';
+
+const images = require.context('../../public/imgs', true);
 
 const WildEncounter = (props) => {
     const [show, setShow] = useState(false);
@@ -28,6 +29,11 @@ const WildEncounter = (props) => {
 
     const getData = async () => {
         const { data } = await instance.get(`/trainers/${props.trainer}/pokemon?tier=${props.tier}`);
+        const pokedex = data.pokedex;
+
+        const imgFile = pokedex < 10 ? '00' + pokedex : pokedex < 100 ? '0' + pokedex : pokedex;
+        const imgLoc = `${process.env.PUBLIC_URL}/imgs/${imgFile}.png`;
+
         setPokeID(data._id);
         setData(
             <>
@@ -39,6 +45,9 @@ const WildEncounter = (props) => {
                 <div className='col'><h3>{data.name}</h3></div>
                 <div className='col'><h4>HP: {data.hp}</h4></div>
                 <div className='col'><h4>S:{data.speed}</h4></div>
+            </div>
+            <div className='row'>
+                <img src={imgLoc} alt={data.name} className='img-rounded pokeimage'/>
             </div>
             <div className='row'>
                 <div className='col'><Move atk={data.move1} /></div>

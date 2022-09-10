@@ -1,43 +1,39 @@
 import { useEffect, useState } from 'react';
 import instance from '../serverService';
-import Button from 'react-bootstrap/Button';
 
-import Menu from './Menu';
-import Pokemon from './Pokemon';
+import Login from './Login';
+import Main from './Main';
+
 
 const App = () => {
-    const [trainer, setTrainer] = useState(-1)
-    const [load, setLoad] = useState(<><h1>Loading..</h1></>);
+    const [user, setUser] = useState(0);
+    const [data, setData] = useState();
 
-    useEffect(() => {
-        if (trainer === -1) {
-        setLoad(<>
-            <Button onClick={() => setTrainer(1)}>Kevin</Button>
-            <Button onClick={() => setTrainer(3)}>Chris</Button>
-            <Button onClick={() => setTrainer(4)}>Erik</Button>
-            <Button onClick={() => setTrainer(2)}>Kenneth</Button>
-        </>);
-        } else {
+    const getData = (trainer) => {
         instance.get(`trainers/${trainer}`)
-        .then((res) => {
-            const data = JSON.parse(res.data);
-            setLoad(<>
-            <div className='row'>
-                <div className='col'><h2 className='text-center'>{data.name}</h2></div>
-            </div>
-            <div className='row'>
-                <div className='col'><Pokemon trainer={trainer} active={data.poke1}/></div>
-            </div>
-            <div className='row'>
-                <div className='col'><Menu trainer={trainer} tier={data.tier} /></div>
-            </div>
-            </>);
+        .then( (res) => {
+            const info = JSON.parse(res.data);
+            setData(info);
         })
         .catch((err) => console.log(err));
-        }
-    }, [trainer]);
+    }
 
-    return (load)
+    const changeUser = (newUser) => {
+        getData(newUser);
+        setUser(newUser);
+    }
+
+    if (!user) {
+        return (<>
+            <Login callBack={ changeUser } />
+        </>)
+    } else {
+        if (data){
+            return (<>
+                <Main trainer={user} data={data} />
+            </>)
+        }
+    }
 }
 
 export default App

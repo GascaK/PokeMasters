@@ -100,6 +100,7 @@ const Pokemon = (props) => {
     const pokeUrl = "pokemon/" + props.active;
 
     const [loaded, setLoaded] = useState(<h1>Loading..</h1>);
+
     useEffect(() => {
         instance.get(pokeUrl)
         .then( (response) => {
