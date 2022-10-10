@@ -46,7 +46,7 @@ class ItemController(Resource):
                     '_id': each._id,
                     'name': each.name,
                     'cost': each.cost,
-                    'text': each.text
+                    'text': each.text,
                 })
         return items
 
