@@ -2,6 +2,7 @@ import axios, { Axios } from 'axios';
 
 import { PokemonTemplate, PokeMoveTemplate } from './interfaces/pokemon';
 import { PokeItemsTemplate } from './interfaces/items';
+import PokemonMaster  from './interfaces/master';
 
 class ServerService {
     instance = axios.create({
@@ -14,15 +15,19 @@ class ServerService {
         }
     });
 
+    async getPokemonMaster(trainerID: number): Promise<PokemonMaster>{
+        const res = await this.instance.get(`/trainers/${trainerID}`);
+        const PokemonTrainer = new PokemonMaster(trainerID);
+
+        PokemonTrainer.setItems(await this.getTrainerItems(trainerID));
+        PokemonTrainer.setPokemon(await this.getTrainerPokemon(trainerID));
+
+        return PokemonTrainer;
+    }
+
     async getTrainerItems(trainerID: number): Promise<Array<PokeItemsTemplate>>{
         const res = await this.instance.get<Array<PokeItemsTemplate>>(`/items/${trainerID}`);
-        const items = res.data;
-        const counter = new Map<string, number>;
-        const trainerItems: Array<PokeItemsTemplate> = [];
-
-        items.forEach( (item: PokeItemsTemplate) => {
-            counter.has(item.name) ? counter.get(item.name) : 0; // FIX..
-        });
+        const trainerItems: Array<PokeItemsTemplate> = res.data;
 
         return trainerItems;
     }
