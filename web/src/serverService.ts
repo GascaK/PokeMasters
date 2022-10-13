@@ -6,8 +6,8 @@ import PokemonMaster  from './interfaces/master';
 
 class ServerService {
     instance = axios.create({
-        baseURL: 'http://192.168.1.28:5000/',
-        timeout: 1000,
+        baseURL: 'http://192.168.1.4:5000/',
+        timeout: 10000,
         withCredentials: false,
         headers: {
         'Access-Control-Allow-Origin': '*',
@@ -16,11 +16,17 @@ class ServerService {
     });
 
     async getPokemonMaster(trainerID: number): Promise<PokemonMaster>{
-        const res = await this.instance.get(`/trainers/${trainerID}`);
         const PokemonTrainer = new PokemonMaster(trainerID);
+        await this.instance.get(`/trainers/${trainerID}`)
+        .then(async (res) => {
+            const data = JSON.parse(res.data);
+            PokemonTrainer.setItems(await this.getTrainerItems(trainerID));
+            PokemonTrainer.setPokemon(await this.getTrainerPokemon(trainerID));
 
-        PokemonTrainer.setItems(await this.getTrainerItems(trainerID));
-        PokemonTrainer.setPokemon(await this.getTrainerPokemon(trainerID));
+            PokemonTrainer.currentTier = data.tier;
+            PokemonTrainer.dollars = data.dollars;
+            PokemonTrainer.name = data.name;
+        });
 
         return PokemonTrainer;
     }
@@ -34,7 +40,7 @@ class ServerService {
 
     async getTrainerPokemon(trainerID: number): Promise<Array<PokemonTemplate>>{
         const res = await this.instance.get(`/trainers/${trainerID}/pokedex`);
-        const fullDex = res.data;
+        const fullDex = JSON.parse(res.data);
         const pokeIDs: Array<number> = [];
         const trainerDex: Array<PokemonTemplate> = [];
 
@@ -43,15 +49,20 @@ class ServerService {
         });
 
         pokeIDs.forEach( async (pokeID) => {
-            const res = await this.instance.get<PokemonTemplate>(`/pokemon/${pokeID}`);
-            const pokemon = res.data;
-            [pokemon.move1, pokemon.move2].forEach( async (move) => {
-                const res = await this.instance.get<PokeMoveTemplate>(`/moves/${move}`);
-                pokemon.moves?.push(res.data);
+            await this.instance.get<PokemonTemplate>(`/pokemon/${pokeID}`)
+            .then( (res) => {
+                const pokemon = res.data;
+                // [pokemon.move1, pokemon.move2].forEach( async (move) => {
+                //     const res = await this.instance.get<PokeMoveTemplate>(`/moves/${move}`);
+                //     if (pokemon.moves){
+                //         pokemon.moves.push(res.data);
+                //     } else {
+                //         pokemon.moves = [res.data];
+                //     }
+                // });
+                pokemon.currentHP = pokemon.hp;
+                trainerDex.push(pokemon);
             });
-            pokemon.currentHP = pokemon.hp;
-
-            trainerDex.push(pokemon);
         });
 
         return trainerDex;

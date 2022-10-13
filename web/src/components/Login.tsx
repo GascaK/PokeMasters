@@ -1,8 +1,13 @@
 import Button from 'react-bootstrap/Button';
 
-const Login = (props) => {
-    const handleClick = (newUser) => {
-        props.callBack(newUser);
+export interface Props {
+    callback: Function;
+}
+
+const Login = (props: Props) => {
+
+    const handleClick = (newUser: number) => {
+        props.callback(newUser);
     }
 
     return (<>
@@ -13,4 +18,4 @@ const Login = (props) => {
     </>)
 }
 
-export default Login
+export default Login;
