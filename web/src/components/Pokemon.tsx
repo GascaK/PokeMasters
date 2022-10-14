@@ -39,12 +39,11 @@ const Pokemon = (props: Props) => {
     const [render, setRender] = useState(<><h3>Loading Pokemon Card</h3></>);
     const [health, setHealth] = useState(0);
 
-    useEffect( () => {
+    const renderCard = () => {
         if (pokemon == undefined){
             setRender(<><h3>Please choose an active Pokemon!</h3></>);
             return;
         }
-        setHealth(pokemon.currentHP ? pokemon.currentHP : pokemon.hp);
         const imgFile = pokemon.pokedex < 10 ? '00' + pokemon.pokedex : pokemon.pokedex < 100 ? '0' + pokemon.pokedex : pokemon.pokedex;
         const imgLoc = `${process.env.PUBLIC_URL}/imgs/${imgFile}.png`;
         setRender(<>
@@ -61,7 +60,7 @@ const Pokemon = (props: Props) => {
                 <img src={imgLoc} alt={pokemon.name} className='img-rounded pokeimage'/>
             </div>
             <div className='row'>
-                <Button onClick={() => setHealth((lastHP) => lastHP - 1)} className='col'>-</Button>
+                <Button onClick={() => setHealth((health): number => health - 1)} className='col'>-</Button>
                 <div className='col text-center'> <h3>{health} / {pokemon.hp}</h3> </div>
                 <Button onClick={() => setHealth((lastHP) => lastHP + 1)} className='col'>+</Button>
                 <Button onClick={() => setHealth(pokemon.hp)} className='col'>HEAL</Button>
@@ -74,7 +73,18 @@ const Pokemon = (props: Props) => {
             </div>
             </Container>
         </>);
-    }, [pokemon]);
+    }
+
+    useEffect( () => {
+        renderCard();
+    }, [health]);
+
+    useEffect( () => {
+        if (pokemon) {
+            setHealth(pokemon.hp);
+        }
+        renderCard();
+    }, [pokemon])
 
     return (<>{render}</>)
 }

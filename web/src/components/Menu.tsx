@@ -15,7 +15,7 @@ const Menu = (props: Props) => {
     }
 
     return (<>
-        <div className='row'><Pokedex pokedex={pokedex} callBack={setActive}/></div>
+        <div className='row'><Pokedex pokedex={pokedex} trainerID={props.trainer.trainerID} callBack={setActive}/></div>
         {/* <div className='row'><Backpack trainer={trainer} text={'Backpack'} /></div> */}
         {/* <div className='row'><VisitCity trainer={trainer} text={'Enter the City'} /></div> */}
         {/* <div className='row'><WildEncounter trainer={trainer} tier={tier} text={'Encounter'} /></div> */}

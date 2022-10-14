@@ -6,7 +6,7 @@ from .database import db
 
 from server.trainersManager import TrainerController, TrainerPokedex
 from server.itemManager import ItemController
-from server.pokemonManager import PokemonCreator, PokemonLocator
+from server.pokemonManager import PokemonCreator, PokemonLocator, PokemonEvolver
 from server.moveManager import MoveLocator
 
 api = Api()
@@ -16,6 +16,7 @@ api.add_resource(TrainerPokedex, "/trainers/<int:trainerID>/pokedex")
 api.add_resource(ItemController, "/items/<int:trainerID>")
 api.add_resource(PokemonCreator, "/trainers/<int:trainerID>/pokemon")
 api.add_resource(PokemonLocator, "/pokemon/<int:pokeID>")
+api.add_resource(PokemonEvolver, "/pokemon/<int:trainerID>/<int:pokedex>")
 api.add_resource(MoveLocator, "/moves/<int:moveID>")
 
 def create_app():

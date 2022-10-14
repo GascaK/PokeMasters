@@ -12,7 +12,7 @@ class PokemonMaster {
     public benchOne: PokemonTemplate;
     public benchTwo: PokemonTemplate;
 
-    constructor(trainerID: number) {
+    constructor(public trainerID: number) {
     }
 
     increaseTier() { this.currentTier = this.currentTier < 3 ? this.currentTier + 1 : 3;}

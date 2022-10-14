@@ -80,6 +80,17 @@ class ServerService {
         });
         return moveData[0];
     }
+
+    async getNewPokemonByID(trainerID: number, pokedex: number): Promise<PokemonTemplate>{
+        let pokemon: PokemonTemplate;
+
+        const res = await this.instance.get<PokemonTemplate>(`/pokemon/${trainerID}/${pokedex}`)
+        .then( (res) => {
+            pokemon = res.data;
+        });
+
+        return pokemon!;
+    }
 }
 
 export default ServerService

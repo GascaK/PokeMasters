@@ -69,3 +69,35 @@ class PokemonLocator(Resource):
             db.session.commit()
             return({"message": "Successs"})
         abort(404, message=f"No pokemon with id {pokeID} found.")
+
+class PokemonEvolver(Resource):
+    def __init(self):
+        pass
+
+    @marshal_with(pokemon_resource)
+    def get(self, trainerID, pokedex):
+        new_mon = self.generate_pokemon_by_id(trainerID, pokedex)
+        print(new_mon)
+        return new_mon
+
+    def generate_pokemon_by_id(self, trainerID: int, pokedex: int):
+        def v(pl: int):
+            return random.randint(-abs(pl), abs(pl))
+
+        base = PokemonBase.query.filter_by(_id=pokedex).first()
+        mg = MoveGenerator()
+
+        move1 = mg.get_random_move(base.tier, base.type1)._id
+        move2 = mg.get_random_move(base.tier, base.type2)._id
+        hp = base.hp+v(5) # hp is always atleast 2.
+        new_mon = pokemon(trainerID,
+                          base._id,
+                          base.name,
+                          base.type1,
+                          base.type2,
+                          hp if hp>=2 else 2, base.tier,
+                          move1, move2,
+                          base.speed+v(2))
+        db.session.add(new_mon)
+        db.session.commit()
+        return new_mon
