@@ -19,6 +19,6 @@ export interface PokemonTemplate {
     tier: number;
     move1: number;
     move2: number;
-    moves?: [PokeMoveTemplate];
+    moves?: Array<PokeMoveTemplate>;
     speed: number;
 }

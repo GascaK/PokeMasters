@@ -7,7 +7,7 @@ import PokemonMaster  from './interfaces/master';
 class ServerService {
     instance = axios.create({
         baseURL: 'http://192.168.1.4:5000/',
-        timeout: 10000,
+        timeout: 12000,
         withCredentials: false,
         headers: {
         'Access-Control-Allow-Origin': '*',
@@ -28,6 +28,7 @@ class ServerService {
             PokemonTrainer.name = data.name;
         });
 
+        console.log('trainer: ', PokemonTrainer);
         return PokemonTrainer;
     }
 
@@ -50,7 +51,7 @@ class ServerService {
 
         pokeIDs.forEach( async (pokeID) => {
             await this.instance.get<PokemonTemplate>(`/pokemon/${pokeID}`)
-            .then( (res) => {
+            .then( async (res) => {
                 const pokemon = res.data;
                 // [pokemon.move1, pokemon.move2].forEach( async (move) => {
                 //     const res = await this.instance.get<PokeMoveTemplate>(`/moves/${move}`);
@@ -60,12 +61,24 @@ class ServerService {
                 //         pokemon.moves = [res.data];
                 //     }
                 // });
+                pokemon.moves = [];
+                pokemon.moves?.push(await this.getPokemonMove(pokemon.move1));
+                pokemon.moves?.push(await this.getPokemonMove(pokemon.move2));
                 pokemon.currentHP = pokemon.hp;
                 trainerDex.push(pokemon);
             });
         });
 
         return trainerDex;
+    }
+
+    async getPokemonMove(moveID: number): Promise<PokeMoveTemplate>{
+        const moveData: Array<PokeMoveTemplate> = [];
+        const res = await this.instance.get<PokeMoveTemplate>(`/moves/${moveID}`)
+        .then( (res) => {
+            moveData.push(res.data);
+        });
+        return moveData[0];
     }
 }
 
