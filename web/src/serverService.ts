@@ -6,7 +6,7 @@ import PokemonMaster  from './interfaces/master';
 
 class ServerService {
     instance = axios.create({
-        baseURL: 'http://192.168.1.4:5000/',
+        baseURL: 'http://192.168.1.28:5000/',
         timeout: 12000,
         withCredentials: false,
         headers: {
@@ -84,12 +84,23 @@ class ServerService {
     async getNewPokemonByID(trainerID: number, pokedex: number): Promise<PokemonTemplate>{
         let pokemon: PokemonTemplate;
 
-        const res = await this.instance.get<PokemonTemplate>(`/pokemon/${trainerID}/${pokedex}`)
-        .then( (res) => {
+        await this.instance.get<PokemonTemplate>(`/pokemon/${trainerID}/${pokedex}`)
+        .then( async (res) => {
             pokemon = res.data;
+            pokemon.moves = [];
+            pokemon.moves.push(await this.getPokemonMove(pokemon.move1));
+            pokemon.moves.push(await this.getPokemonMove(pokemon.move2));
         });
 
         return pokemon!;
+    }
+
+    async changeTrainerPokemonByID(trainerID: number, pokeID: number): Promise<void>{
+        await this.instance.put(`pokemon/${pokeID}`, {trainerID: `${trainerID}`})
+        .then((res) => {
+            console.log(`Pokemon: ${pokeID} set to trainer: ${trainerID}`);
+        });
+
     }
 }
 

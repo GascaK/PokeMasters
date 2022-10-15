@@ -4,24 +4,29 @@ import PokemonMaster from '../interfaces/master';
 import Pokemon from './Pokemon';
 import Menu from './Menu';
 import { PokemonTemplate } from '../interfaces/pokemon';
+import ServerService from '../serverService';
 
 export interface Props {
     trainer: PokemonMaster;
+    instance: ServerService;
 }
-
 const Main = (props: Props) => {
     const [render, setRender] = useState(<><h4>Loading..</h4></>)
     const [refresh, setRefresh] = useState(false);
-    const trainer = props.trainer;
-    console.log(trainer);
+    let trainer = props.trainer;
 
-    const setActive = (newActive: PokemonTemplate) => {
-        console.log('new', newActive);
-        trainer.activePokemon = newActive;
-        setRefresh(true);
+    const setActive = async (newActive: PokemonTemplate) => {
+        console.log(newActive);
+        const trainerID = trainer.trainerID;
+        await props.instance.getPokemonMaster(trainerID)
+        .then( (res) => {
+            trainer = res;
+            trainer.activePokemon = newActive;
+            getRender();
+        });
     }
 
-    useEffect( () => {
+    const getRender = () => {
         setRender(<>
             <div className='row'>
                 <div className='col'><h2 className='text-center'>{trainer.name}</h2></div>
@@ -33,8 +38,16 @@ const Main = (props: Props) => {
                 <div className='col'><Menu trainer={trainer} callBack={setActive}></Menu></div>
             </div>
             </>);
+    }
+
+    useEffect( () => {
+        getRender();
         setRefresh(false);
     }, [refresh]);
+
+    useEffect( () => {
+        getRender();
+    }, [trainer]);
 
     return (render);
 }

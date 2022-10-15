@@ -13,7 +13,7 @@ const App = () => {
         console.log("User", newUser);
         await instance.getPokemonMaster(newUser)
         .then( (trainer) => {
-            setRenderData(<><Main trainer={trainer}></Main></>)
+            setRenderData(<><Main trainer={trainer} instance={instance}></Main></>)
         });
         
     }

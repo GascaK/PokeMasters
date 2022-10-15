@@ -96,22 +96,25 @@ const Pokedex = (props: Props) => {
 
     const evolutionTime = async (): Promise<void> => {
         const chosenOnes: Array<PokemonTemplate> = [];
-        console.log('atEvolve', pokeTracker);
-
         props.pokedex.forEach( (pokemon) => {
             if(pokeTracker.includes(pokemon._id.toString())){
                 chosenOnes.push(pokemon);
             }
         });
-
-        console.log("chosen", chosenOnes);
-        if(chosenOnes.length >= 3){
-            const res = instance.getNewPokemonByID(props.trainerID, chosenOnes[0].pokedex + 1)
+        if(chosenOnes.length >= EVOLVE_MIN){
+            await instance.getNewPokemonByID(props.trainerID, chosenOnes[0].pokedex + 1)
             .then( (res) => {
-                console.log('id', res._id);
+                chosenOnes.forEach( async (pokemon) => {
+                    await instance.changeTrainerPokemonByID(-1, pokemon._id)
+                    .then(() => {
+                        console.log('Deleted: ', pokemon._id);
+                    })
+                });
+                setNewActive(JSON.stringify(res));
             });
+
         } else {
-            alert("Atleast 3 pokemon need to be selected.");
+            alert(`Atleast ${EVOLVE_MIN} pokemon need to be selected.`);
         }
 
         setShowPokedex(false);
