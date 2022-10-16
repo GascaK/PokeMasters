@@ -27,11 +27,12 @@ const Pokedex = (props: Props) => {
     let sortedList: Array<PokemonTemplate>;
 
     const setNewActive = (activeSlot: string): void => {
+        setPokeTracker([]);
         props.callBack(activeSlot);
     }
 
     const updateTracker = (pokeID: string): void => {
-        const tempTracker = pokeTracker;
+        const tempTracker: Array<string> = pokeTracker;
         if(tempTracker.includes(pokeID)){
             tempTracker.splice(tempTracker.indexOf(pokeID, 0), 1);
         } else {
@@ -109,6 +110,9 @@ const Pokedex = (props: Props) => {
                     .then(() => {
                         console.log('Deleted: ', pokemon._id);
                     })
+                    .catch( (err) => {
+                        console.log('error:', err);
+                    });
                 });
                 setNewActive(JSON.stringify(res));
             });

@@ -6,7 +6,7 @@ import PokemonMaster  from './interfaces/master';
 
 class ServerService {
     instance = axios.create({
-        baseURL: 'http://192.168.1.28:5000/',
+        baseURL: 'http://192.168.1.4:5000/',
         timeout: 12000,
         withCredentials: false,
         headers: {
@@ -16,7 +16,7 @@ class ServerService {
     });
 
     async getPokemonMaster(trainerID: number): Promise<PokemonMaster>{
-        const PokemonTrainer = new PokemonMaster(trainerID);
+        const PokemonTrainer = new PokemonMaster(trainerID, this);
         await this.instance.get(`/trainers/${trainerID}`)
         .then(async (res) => {
             const data = JSON.parse(res.data);
@@ -96,11 +96,19 @@ class ServerService {
     }
 
     async changeTrainerPokemonByID(trainerID: number, pokeID: number): Promise<void>{
-        await this.instance.put(`pokemon/${pokeID}`, {trainerID: `${trainerID}`})
+        await this.instance.put(`pokemon/${pokeID}?trainerID=${trainerID}`)
         .then((res) => {
             console.log(`Pokemon: ${pokeID} set to trainer: ${trainerID}`);
+        })
+        .catch( (err) => {
+            console.log('error', err);
         });
-
+    }
+    async deleteTrainerItemByID(trainerID: number, itemID: number): Promise<void>{
+        await this.instance.put(`/items/${trainerID}?item_id=${itemID}`)
+        .then( (res) => {
+            console.log(`Item: ${itemID} deleted.`);
+        });
     }
 }
 

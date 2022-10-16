@@ -1,3 +1,4 @@
+import ServerService from '../serverService';
 import { PokeItemsTemplate } from './items';
 import { PokemonTemplate } from './pokemon';
 
@@ -12,7 +13,7 @@ class PokemonMaster {
     public benchOne: PokemonTemplate;
     public benchTwo: PokemonTemplate;
 
-    constructor(public trainerID: number) {
+    constructor(public trainerID: number, public instance: ServerService) {
     }
 
     increaseTier() { this.currentTier = this.currentTier < 3 ? this.currentTier + 1 : 3;}
@@ -47,6 +48,8 @@ class PokemonMaster {
         if (IndexOfObject !== -1) {
             this.items.splice(IndexOfObject, 1);
         }
+
+        this.instance.deleteTrainerItemByID(this.trainerID, itemID);
     }
 
     setBench(one: PokemonTemplate, two: PokemonTemplate) {

@@ -9,6 +9,7 @@ import ServerService from '../serverService';
 export interface Props {
     trainer: PokemonMaster;
     instance: ServerService;
+    refreshMaster: any;
 }
 const Main = (props: Props) => {
     const [render, setRender] = useState(<><h4>Loading..</h4></>)
@@ -26,6 +27,11 @@ const Main = (props: Props) => {
         });
     }
 
+    const refreshCallBack = () => {
+        props.refreshMaster(trainer.trainerID);
+        setRefresh(true);
+    }
+
     const getRender = () => {
         setRender(<>
             <div className='row'>
@@ -35,7 +41,7 @@ const Main = (props: Props) => {
                 <div className='col'><Pokemon pokemon={trainer.activePokemon}></Pokemon></div>
             </div>
             <div className='row'>
-                <div className='col'><Menu trainer={trainer} callBack={setActive}></Menu></div>
+                <div className='col'><Menu trainer={trainer} callBack={setActive} refresh={refreshCallBack}></Menu></div>
             </div>
             </>);
     }

@@ -8,16 +8,19 @@ import Main from './Main';
 
 const App = () => {
     const instance = new ServerService();
-
     const changeUser = async (newUser: number) => {
-        console.log("User", newUser);
-        await instance.getPokemonMaster(newUser)
-        .then( (trainer) => {
-            setRenderData(<><Main trainer={trainer} instance={instance}></Main></>)
-        });
-        
+        refreshMaster(newUser);
     }
+
     const [renderData, setRenderData] = useState(<><Login callback={changeUser}></Login></>);
+
+    const refreshMaster = async (trainerID: number) => {
+        await instance.getPokemonMaster(trainerID)
+        .then( (trainer) => {
+            setRenderData(<><Main trainer={trainer} instance={instance} refreshMaster={refreshMaster}></Main></>)
+        });
+    }
+
 
     return (<>
         <div>{renderData}</div>
