@@ -25,10 +25,14 @@ class PokemonCreator(Resource):
     
     @marshal_with(pokemon_resource)
     def get(self, trainerID):
+        new_mons = []
         args = self.reqparse.parse_args()
-        new_mon = self.generate_random_mon(trainerID, args["tier"])
-        print(new_mon)
-        return new_mon
+        max_tier = int(args["tier"])
+
+        while(max_tier > 0):
+            new_mons.append(self.generate_random_mon(trainerID, max_tier))
+            max_tier -= 1
+        return random.choice(new_mons)
 
     def generate_random_mon(self, trainerID, tier):
         def v(pl: int):

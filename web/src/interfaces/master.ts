@@ -2,6 +2,7 @@ import ServerService from '../serverService';
 import { PokeItemsTemplate } from './items';
 import { PokemonTemplate } from './pokemon';
 
+
 class PokemonMaster {
     public name: string = "";
     public currentTier: number = 1;
@@ -24,7 +25,30 @@ class PokemonMaster {
 
     setPokemon(newPokemon: Array<PokemonTemplate>) { this.pokemon = newPokemon; }
 
-    addPokemon(newPokemon: PokemonTemplate) { this.pokemon.push(newPokemon); }
+    async encounterPokemon(tier: number): Promise<PokemonTemplate> {
+        let pokemon: PokemonTemplate | undefined = undefined;
+
+        await this.instance.encounterRandomPokemon(this.trainerID, tier)
+        .then( async (res) => {
+            pokemon = res;
+            pokemon.trainerID = -1;
+            pokemon.moves = [];
+            pokemon.moves.push(await this.instance.getPokemonMove(pokemon.move1));
+            pokemon.moves.push(await this.instance.getPokemonMove(pokemon.move2));
+            pokemon.currentHP = pokemon.hp;
+        });
+        return pokemon!;
+    }
+
+    catchPokemon(pokeID: number) {
+        const indexOfObject = this.pokemon.findIndex( (poke: PokemonTemplate) => {
+            return poke._id === pokeID;
+        })
+        if (indexOfObject !== -1) {
+            this.pokemon.splice(indexOfObject, 1);
+            this.instance.changeTrainerPokemonByID(this.trainerID, pokeID);
+        }
+    }
 
     removePokemon(pokeID: number) {
         const indexOfObject = this.pokemon.findIndex( (poke: PokemonTemplate) => {
@@ -55,6 +79,17 @@ class PokemonMaster {
     setBench(one: PokemonTemplate, two: PokemonTemplate) {
         this.benchOne = one;
         this.benchTwo = two;
+    }
+
+    async getShop(numberOfItems: number): Promise<Array<PokeItemsTemplate>>{
+        const shop: Array<PokeItemsTemplate> = [];
+        for(var i=0; i<numberOfItems; i++){
+            const item = await this.instance.getShopItem(this.trainerID)
+            .then( (shopItem) => {
+                shop.push(shopItem);
+            })
+        }
+        return shop;
     }
 }
 

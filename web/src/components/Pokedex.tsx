@@ -38,12 +38,10 @@ const Pokedex = (props: Props) => {
         } else {
             tempTracker.push(pokeID);
         }
-        console.log('tracker', tempTracker);
         setPokeTracker(tempTracker);
     }
 
     const checkEvolvable = (pokedex: string): void => {
-        console.log('dex', pokedex);
         const dex = parseInt(pokedex);
         const evolvable: Array<PokemonTemplate> = [];
         if (!dex){
@@ -54,55 +52,63 @@ const Pokedex = (props: Props) => {
                 evolvable.push(pokemon);
             }
         });
-        if(evolvable.length >= EVOLVE_MIN){
-            console.log(evolvable);
-            const rows: any = [];
-            setShowEvolved(true);
-            rows.push(<>
-                <h3>{evolvable[0].name}</h3>
-            </>)
+
+        const rows: any = [];
+        setShowEvolved(true);
+        rows.push(<>
+            <h3>{evolvable[0].name}</h3>
+        </>)
+        rows.push(<>
+            <div className='row'>
+                <div className='col col-sm'>HP</div>
+                <div className='col col-sm'>Speed</div>
+                <div className='col col-sm'>Moves</div>
+            </div>
+        </>)
+        evolvable.forEach( (pokemon) => {
+            const moveText1 = `${pokemon.moves![0].name}: d${pokemon.moves![0].hit} ${pokemon.moves![0].mType}, ${pokemon.moves![0].special}`;
+            const moveText2 = `${pokemon.moves![1].name}: d${pokemon.moves![1].hit} ${pokemon.moves![1].mType}, ${pokemon.moves![1].special}`;
             rows.push(<>
                 <div className='row'>
-                    <div className='col col-sm'>HP</div>
-                    <div className='col col-sm'>Speed</div>
-                    <div className='col col-sm'>Moves</div>
+                    <div className='col col-sm'>{pokemon.hp}</div>
+                    <div className='col col-sm'>{pokemon.speed}</div>
+                    <div className='col col-sm'>{moveText1}</div>
+                    <div className='col col-sm'>{moveText2}</div>
                 </div>
+                <div className='row justify-content-end'>
+                    <div className='col col-4'>
+                        <label>
+                            Select to Evolve
+                        </label>
+                    </div>
+                    <div className='col col-4'>
+                        <input type="checkbox" value={JSON.stringify(pokemon._id)} onChange={(e) => updateTracker((e.target as HTMLInputElement).value)} />
+                    </div>
+                </div>
+                <hr/>
             </>)
-            evolvable.forEach( (pokemon) => {
-                const moveText1 = `${pokemon.moves![0].name}: d${pokemon.moves![0].hit} ${pokemon.moves![0].mType}, ${pokemon.moves![0].special}`;
-                const moveText2 = `${pokemon.moves![1].name}: d${pokemon.moves![1].hit} ${pokemon.moves![1].mType}, ${pokemon.moves![1].special}`;
-                rows.push(<>
-                    <div className='row'>
-                        <div className='col col-sm'>{pokemon.hp}</div>
-                        <div className='col col-sm'>{pokemon.speed}</div>
-                        <div className='col col-sm'>{moveText1}</div>
-                        <div className='col col-sm'>{moveText2}</div>
-                    </div>
-                    <div className='row justify-content-end'>
-                        <div className='col col-4'>
-                            <label>
-                                Select to Evolve
-                            </label>
-                        </div>
-                        <div className='col col-4'>
-                            <input type="checkbox" value={JSON.stringify(pokemon._id)} onChange={(e) => updateTracker((e.target as HTMLInputElement).value)} />
-                        </div>
-                    </div>
-                    <hr/>
-                </>)
-            })
-            setEvolveData(rows);
-        }
+        })
+        setEvolveData(rows);
     }
 
     const evolutionTime = async (): Promise<void> => {
         const chosenOnes: Array<PokemonTemplate> = [];
+        let valid = true;
+
         props.pokedex.forEach( (pokemon) => {
             if(pokeTracker.includes(pokemon._id.toString())){
                 chosenOnes.push(pokemon);
             }
         });
-        if(chosenOnes.length >= EVOLVE_MIN){
+        
+        // Checking all id's match.
+        chosenOnes.forEach((mon) => {
+            if (mon.pokedex !== chosenOnes[0].pokedex){
+                valid = false;
+            }
+        });
+
+        if(chosenOnes.length >= EVOLVE_MIN && valid){
             await instance.getNewPokemonByID(props.trainerID, chosenOnes[0].pokedex + 1)
             .then( (res) => {
                 chosenOnes.forEach( async (pokemon) => {
@@ -124,6 +130,10 @@ const Pokedex = (props: Props) => {
         setShowPokedex(false);
         setShowEvolved(false);
     }
+
+    useEffect( () => {
+        setPokeTracker([]);
+    }, [showEvolved]);
 
     useEffect( () => {
         setPokeTracker([]);

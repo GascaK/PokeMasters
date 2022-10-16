@@ -6,7 +6,7 @@ import PokemonMaster  from './interfaces/master';
 
 class ServerService {
     instance = axios.create({
-        baseURL: 'http://192.168.1.4:5000/',
+        baseURL: 'http://192.168.1.28:5000/',
         timeout: 12000,
         withCredentials: false,
         headers: {
@@ -23,12 +23,18 @@ class ServerService {
             PokemonTrainer.setItems(await this.getTrainerItems(trainerID));
             PokemonTrainer.setPokemon(await this.getTrainerPokemon(trainerID));
 
-            PokemonTrainer.currentTier = data.tier;
             PokemonTrainer.dollars = data.dollars;
             PokemonTrainer.name = data.name;
+            PokemonTrainer.badges = data.badges;
+            if(data.bades < 3){
+                PokemonTrainer.currentTier = 1;
+            }
+            else if(data.badges >= 3 && data.badges < 6){
+                PokemonTrainer.currentTier = 2;
+            } else {
+                PokemonTrainer.currentTier = 3;
+            }
         });
-
-        console.log('trainer: ', PokemonTrainer);
         return PokemonTrainer;
     }
 
@@ -53,17 +59,9 @@ class ServerService {
             await this.instance.get<PokemonTemplate>(`/pokemon/${pokeID}`)
             .then( async (res) => {
                 const pokemon = res.data;
-                // [pokemon.move1, pokemon.move2].forEach( async (move) => {
-                //     const res = await this.instance.get<PokeMoveTemplate>(`/moves/${move}`);
-                //     if (pokemon.moves){
-                //         pokemon.moves.push(res.data);
-                //     } else {
-                //         pokemon.moves = [res.data];
-                //     }
-                // });
                 pokemon.moves = [];
-                pokemon.moves?.push(await this.getPokemonMove(pokemon.move1));
-                pokemon.moves?.push(await this.getPokemonMove(pokemon.move2));
+                pokemon.moves.push(await this.getPokemonMove(pokemon.move1));
+                pokemon.moves.push(await this.getPokemonMove(pokemon.move2));
                 pokemon.currentHP = pokemon.hp;
                 trainerDex.push(pokemon);
             });
@@ -95,6 +93,16 @@ class ServerService {
         return pokemon!;
     }
 
+    async encounterRandomPokemon(trainerID: number, tier: number): Promise<PokemonTemplate>{
+        console.log("Encountering wild pokemon");
+        const pokemon: Array<PokemonTemplate> = [];
+        await this.instance.get<PokemonTemplate>(`/trainers/${trainerID}/pokemon?tier=${tier}`)
+        .then((res) => {
+            pokemon.push(res.data);
+        });
+        return pokemon[0];
+    }
+
     async changeTrainerPokemonByID(trainerID: number, pokeID: number): Promise<void>{
         await this.instance.put(`pokemon/${pokeID}?trainerID=${trainerID}`)
         .then((res) => {
@@ -104,11 +112,21 @@ class ServerService {
             console.log('error', err);
         });
     }
+
     async deleteTrainerItemByID(trainerID: number, itemID: number): Promise<void>{
         await this.instance.put(`/items/${trainerID}?item_id=${itemID}`)
         .then( (res) => {
             console.log(`Item: ${itemID} deleted.`);
         });
+    }
+
+    async getShopItem(trainerID: number): Promise<PokeItemsTemplate>{
+        const item: Array<PokeItemsTemplate> = [];
+        await this.instance.get<PokeItemsTemplate>(`/items/${trainerID}?store=true`)
+        .then( (res) => {
+            item.push(res.data);
+        });
+        return item[0];
     }
 }
 

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import PokemonMaster from '../interfaces/master';
 import Pokemon from './Pokemon';
 import Menu from './Menu';
+import Stats from './Stats';
 import { PokemonTemplate } from '../interfaces/pokemon';
 import ServerService from '../serverService';
 
@@ -17,7 +18,6 @@ const Main = (props: Props) => {
     let trainer = props.trainer;
 
     const setActive = async (newActive: PokemonTemplate) => {
-        console.log(newActive);
         const trainerID = trainer.trainerID;
         await props.instance.getPokemonMaster(trainerID)
         .then( (res) => {
@@ -42,6 +42,9 @@ const Main = (props: Props) => {
             </div>
             <div className='row'>
                 <div className='col'><Menu trainer={trainer} callBack={setActive} refresh={refreshCallBack}></Menu></div>
+            </div>
+            <div className='row'>
+                <div className='col'><Stats trainer={trainer} /></div>
             </div>
             </>);
     }
