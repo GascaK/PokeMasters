@@ -20,16 +20,24 @@ const Main = (props: Props) => {
     const setActive = async (newActive: PokemonTemplate) => {
         const trainerID = trainer.trainerID;
         await props.instance.getPokemonMaster(trainerID)
-        .then( (res) => {
+        .then( async (res) => {
             trainer = res;
             trainer.activePokemon = newActive;
-            getRender();
+            props.trainer.activePokemon = newActive;
+            await props.trainer.saveState()
+            .then( () => {
+                getRender();
+            });
         });
     }
 
-    const refreshCallBack = () => {
-        props.refreshMaster(trainer.trainerID);
+    const refreshCallBack = async () => {
+        console.log('trainer at callback', trainer);
+        await props.trainer.saveState()
+        .then( () => {
+            props.refreshMaster(trainer.trainerID);
         setRefresh(true);
+        });
     }
 
     const getRender = () => {
@@ -44,7 +52,7 @@ const Main = (props: Props) => {
                 <div className='col'><Menu trainer={trainer} callBack={setActive} refresh={refreshCallBack}></Menu></div>
             </div>
             <div className='row'>
-                <div className='col'><Stats trainer={trainer} /></div>
+                <div className='col'><Stats trainer={trainer} refresh={refreshCallBack} /></div>
             </div>
             </>);
     }

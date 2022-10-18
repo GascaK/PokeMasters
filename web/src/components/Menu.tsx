@@ -1,6 +1,7 @@
 import { PokemonTemplate } from "../interfaces/pokemon";
 import { PokeItemsTemplate } from "../interfaces/items";
 import PokemonMaster from "../interfaces/master";
+import Button from 'react-bootstrap/Button';
 
 import Pokedex from "./Pokedex";
 import Backpack from "./Backpack";
@@ -27,6 +28,12 @@ const Menu = (props: Props) => {
         props.refresh();
     }
 
+    const getRandomItem = async () => {
+        const item = await props.trainer.getRandomItem();
+        props.trainer.addItem(item);
+        refreshAll();
+    }
+
     return (<>
         <div className='row'>
             <div className='col'><h3 className='text-center'>Menu</h3></div>
@@ -35,6 +42,7 @@ const Menu = (props: Props) => {
         <div className='row'><Backpack items={props.trainer.getItems()} useItemCallBack={useItem}/></div>
         <div className='row'><VisitCity trainer={props.trainer} refresh={refreshAll}/></div>
         <div className='row'><TallGrass trainer={props.trainer} refresh={refreshAll}/></div>
+        <div className='row'><Button onClick={getRandomItem}>Got Item!</Button></div>
     </>)
 }
 

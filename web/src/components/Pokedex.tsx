@@ -26,6 +26,10 @@ const Pokedex = (props: Props) => {
     const briefList = new Map<string, number>();
     let sortedList: Array<PokemonTemplate>;
 
+    const getRandomInt = (max: number): number => {
+        return Math.floor(Math.random() * max);
+    }
+
     const setNewActive = (activeSlot: string): void => {
         setPokeTracker([]);
         props.callBack(activeSlot);
@@ -109,7 +113,13 @@ const Pokedex = (props: Props) => {
         });
 
         if(chosenOnes.length >= EVOLVE_MIN && valid){
-            await instance.getNewPokemonByID(props.trainerID, chosenOnes[0].pokedex + 1)
+            let value = 1;
+            
+            if (chosenOnes[0].pokedex === 133){
+                value = getRandomInt(3);
+            }
+
+            await instance.getNewPokemonByID(props.trainerID, chosenOnes[0].pokedex + value)
             .then( (res) => {
                 chosenOnes.forEach( async (pokemon) => {
                     await instance.changeTrainerPokemonByID(-1, pokemon._id)

@@ -23,12 +23,19 @@ class PokemonMaster {
 
     getPokemon() { return this.pokemon; }
 
+    getPokemonByID(pokeID: number) { 
+        const indexOfObject = this.pokemon.findIndex( (poke: PokemonTemplate) => {
+            return poke._id === pokeID;
+        })
+        return this.pokemon[indexOfObject];
+    }
+
     setPokemon(newPokemon: Array<PokemonTemplate>) { this.pokemon = newPokemon; }
 
     async encounterPokemon(tier: number): Promise<PokemonTemplate> {
         let pokemon: PokemonTemplate | undefined = undefined;
 
-        await this.instance.encounterRandomPokemon(this.trainerID, tier)
+        await this.instance.encounterRandomPokemon(tier)
         .then( async (res) => {
             pokemon = res;
             pokemon.trainerID = -1;
@@ -41,13 +48,7 @@ class PokemonMaster {
     }
 
     catchPokemon(pokeID: number) {
-        const indexOfObject = this.pokemon.findIndex( (poke: PokemonTemplate) => {
-            return poke._id === pokeID;
-        })
-        if (indexOfObject !== -1) {
-            this.pokemon.splice(indexOfObject, 1);
-            this.instance.changeTrainerPokemonByID(this.trainerID, pokeID);
-        }
+        this.instance.changeTrainerPokemonByID(this.trainerID, pokeID);
     }
 
     removePokemon(pokeID: number) {
@@ -64,6 +65,17 @@ class PokemonMaster {
     setItems(newItems: Array<PokeItemsTemplate>) { this.items = newItems; }
 
     addItem(newItem: PokeItemsTemplate) { this.items.push(newItem); }
+
+    async getRandomItem() {
+        const item: Array<PokeItemsTemplate> = [];
+        item.push(await this.instance.getShopItem(this.trainerID));
+        this.instance.instance.post(`/items/${this.trainerID}?item_id=${item[0]._id}`)
+        .then( () => {
+            alert(`Item got: ${item[0].name}`);
+        });
+
+        return item[0];
+    }
 
     removeItem(itemID: number) {
         const IndexOfObject = this.items.findIndex( (item: PokeItemsTemplate) => {
@@ -90,6 +102,11 @@ class PokemonMaster {
             })
         }
         return shop;
+    }
+
+    async saveState(): Promise<void>{
+        console.log('b4 save', this);
+        this.instance.save(this);
     }
 }
 

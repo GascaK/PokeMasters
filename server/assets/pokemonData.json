@@ -178,7 +178,7 @@
         "name": "Raichu",
         "hp": 15,
         "speed": 2,
-        "tier": 2,
+        "tier": 3,
         "type": ["electric"]
     },
     "027": {
@@ -409,7 +409,7 @@
         "name": "Arcanine",
         "hp": 15,
         "speed": 1,
-        "tier": 2,
+        "tier": 3,
         "type": ["fire"]
     },
     "060": {
@@ -506,8 +506,8 @@
     "073": {
         "name": "Tentacruel",
         "hp": 15,
-        "speed": 0,
-        "tier": 2,
+        "speed": 1,
+        "tier": 3,
         "type": ["water", "poison"]
     },
     "074": {
@@ -542,7 +542,7 @@
         "name": "Rapidash",
         "hp": 15,
         "speed": 2,
-        "tier": 2,
+        "tier": 3,
         "type": ["fire"]
     },
     "079": {
@@ -570,7 +570,7 @@
         "name": "Magneton",
         "hp": 15,
         "speed": 0,
-        "tier": 2,
+        "tier": 3,
         "type": ["electric"]
     },
     "083": {
@@ -617,9 +617,9 @@
     },
     "089": {
         "name": "Muk",
-        "hp": 15,
+        "hp": 20,
         "speed": 0,
-        "tier": 2,
+        "tier": 3,
         "type": ["poison"]
     },
     "090": {
@@ -673,7 +673,7 @@
     },
     "097": {
         "name": "Hypno",
-        "hp": 10,
+        "hp": 15,
         "speed": -1,
         "tier": 2,
         "type": ["psychic"]
@@ -702,8 +702,8 @@
     "101": {
         "name": "Electrode",
         "hp": 15,
-        "speed": 0,
-        "tier": 2,
+        "speed": 1,
+        "tier": 3,
         "type": ["electric"]
     },
     "102": {
@@ -715,9 +715,9 @@
     },
     "103": {
         "name": "Exeggutor",
-        "hp": 15,
+        "hp": 20,
         "speed": 0,
-        "tier": 2,
+        "tier": 3,
         "type": ["grass", "psychic"]
     },
     "104": {
@@ -752,7 +752,7 @@
         "name": "Lickitung",
         "hp": 15,
         "speed": 0,
-        "tier": 1,
+        "tier": 2,
         "type": ["normal"]
     },
     "109": {
@@ -766,7 +766,7 @@
         "name": "Weezing",
         "hp": 15,
         "speed": 0,
-        "tier": 2,
+        "tier": 3,
         "type": ["poison"]
     },
     "111": {
@@ -864,7 +864,7 @@
         "name": "Jynx",
         "hp": 15,
         "speed": 0,
-        "tier": 1,
+        "tier": 2,
         "type": ["psychic", "ice"]
     },
     "125": {

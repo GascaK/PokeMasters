@@ -79,7 +79,7 @@ class ItemController(Resource):
         return json.dumps({"message": "Success!", "Status": 200})
 
     def get_random_item(self):
-        return random.choice(PokeItems.query.filter(PokeItems.cost >= 1).all())
+        return random.choice(PokeItems.query.filter().all())
 
     def get_item_by_id(self, id):
         item = PokeItems.query.filter_by(_id=id).first()

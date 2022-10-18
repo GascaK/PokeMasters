@@ -32,6 +32,8 @@ class PokemonCreator(Resource):
         while(max_tier > 0):
             new_mons.append(self.generate_random_mon(trainerID, max_tier))
             max_tier -= 1
+
+        print(new_mons)
         return random.choice(new_mons)
 
     def generate_random_mon(self, trainerID, tier):

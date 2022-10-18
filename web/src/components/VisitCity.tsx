@@ -51,6 +51,7 @@ const VisitCity = (props: Props) => {
 
     useEffect(() => {
         setupShop();
+        props.refresh();
     }, [show]);
 
     return (<>

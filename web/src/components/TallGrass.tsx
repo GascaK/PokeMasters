@@ -40,15 +40,15 @@ export interface Props{
 const TallGrass = (props: Props) => {
     const [show, setShow] = useState(false);
     const [data, setData] = useState(<>Loading..</>);
-    let wildPokemon: PokemonTemplate | undefined;
+    const catchWaitList = new Map<PokemonTemplate, boolean>();
 
     const randomEncounter = async () => {
         const tier: number = props.trainer.currentTier;
-        const id: number = props.trainer.trainerID;
 
         props.trainer.encounterPokemon(tier)
-        .then((res) => {
-            wildPokemon = res;
+        .then((res: PokemonTemplate) => {
+            catchWaitList.set(res, false);
+
             const imgFile = res.pokedex < 10 ? '00' + res.pokedex : res.pokedex < 100 ? '0' + res.pokedex : res.pokedex;
             const imgLoc = `${process.env.PUBLIC_URL}/imgs/${imgFile}.png`;
             setData(<>
@@ -69,6 +69,14 @@ const TallGrass = (props: Props) => {
                 <div className='col'><Move atk={res.moves ? res.moves[0] : undefined} /></div>
                 <div className='col'><Move atk={res.moves ? res.moves[1] : undefined} /></div>
             </div>
+            <div className='row'>
+                <div className='col'>
+                    <Button variant="primary" onClick={() => handleCatch(res)}>Catch!</Button>
+                </div>
+                <div className='col'>
+                    <Button variant="secondary" onClick={() => handleRun(res)}>Run Away.</Button>
+                </div>
+            </div>
             </>);
         })
         .catch((err) => {
@@ -76,17 +84,19 @@ const TallGrass = (props: Props) => {
         });
     }
 
-    const handleRun = () => {
-        if (wildPokemon) {
-            props.trainer.removePokemon(wildPokemon._id);
+    const handleRun = (pokemon: PokemonTemplate | undefined) => {
+        if (pokemon) {
+            props.trainer.removePokemon(pokemon._id);
         }
+        props.refresh();
         setShow(false);
     }
 
-    const handleCatch = () => {
-        if (wildPokemon) {
-            props.trainer.catchPokemon(wildPokemon._id);
+    const handleCatch = (pokemon: PokemonTemplate) => {
+        if (pokemon) {
+            props.trainer.catchPokemon(pokemon._id);
         }
+        props.refresh();
         setShow(false);
     }
     
@@ -96,12 +106,12 @@ const TallGrass = (props: Props) => {
         props.refresh();
     }, [show]);
 
-        
+
     return (<>
         <Button onClick={() => setShow(true)} className="primary border">
             Tall Grass!
         </Button>
-        <Modal show={show} onHide={handleRun}>
+        <Modal show={show} onHide={() => handleRun(undefined)}>
             <Modal.Header closeButton>
                 <Modal.Title>Wild Pokemon</Modal.Title>
             </Modal.Header>
@@ -109,11 +119,6 @@ const TallGrass = (props: Props) => {
             <Modal.Body>
             {data}
             </Modal.Body>
-
-            <Modal.Footer>
-                <Button variant="primary" onClick={handleCatch}>Catch!</Button>
-                <Button variant="secondary" onClick={handleRun}>Run Away.</Button>
-            </Modal.Footer>
         </Modal>
     </>)
 };

@@ -4,12 +4,12 @@ import PokemonMaster from "../interfaces/master";
 
 export interface Props{
     trainer: PokemonMaster;
+    refresh: any;
 }
 const Stats = (props: Props) => {
     const [data, setData] = useState(<>Loading..</>);
 
     useEffect(() => {
-        console.log(props.trainer.badges);
         setData(<>
         <div className='row'>
             <div className='col'>
@@ -19,8 +19,16 @@ const Stats = (props: Props) => {
                 {props.trainer.badges}
             </div>
             <div className='col'>
-                <Button onClick={() => props.trainer.badges = props.trainer.badges + 1}>
-                    +
+                {/* <Button onClick={() => {
+                    props.trainer.badges = props.trainer.badges + 1;
+                    props.refresh();
+                    }}>
+                    Don't Touch Erik...
+                </Button> */}
+            </div>
+            <div className='col'>
+                <Button onClick={() => console.log(props.trainer.badges)}>
+                    -
                 </Button>
             </div>
         </div>

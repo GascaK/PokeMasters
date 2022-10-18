@@ -6,7 +6,7 @@ import PokemonMaster  from './interfaces/master';
 
 class ServerService {
     instance = axios.create({
-        baseURL: 'http://192.168.1.28:5000/',
+        baseURL: 'http://192.168.1.4:5000/',
         timeout: 12000,
         withCredentials: false,
         headers: {
@@ -26,7 +26,7 @@ class ServerService {
             PokemonTrainer.dollars = data.dollars;
             PokemonTrainer.name = data.name;
             PokemonTrainer.badges = data.badges;
-            if(data.bades < 3){
+            if(data.badges < 3){
                 PokemonTrainer.currentTier = 1;
             }
             else if(data.badges >= 3 && data.badges < 6){
@@ -34,6 +34,17 @@ class ServerService {
             } else {
                 PokemonTrainer.currentTier = 3;
             }
+
+            await this.instance.get(`/pokemon/${data.poke1}`)
+            .then(async (res) => {
+                PokemonTrainer.activePokemon = res.data;
+                PokemonTrainer.activePokemon.moves = [];
+                PokemonTrainer.activePokemon.moves.push(await this.getPokemonMove(res.data.move1));
+                PokemonTrainer.activePokemon.moves.push(await this.getPokemonMove(res.data.move2));
+            })
+            .catch( (err) => {
+                console.log(err);
+            });
         });
         return PokemonTrainer;
     }
@@ -93,12 +104,14 @@ class ServerService {
         return pokemon!;
     }
 
-    async encounterRandomPokemon(trainerID: number, tier: number): Promise<PokemonTemplate>{
-        console.log("Encountering wild pokemon");
+    async encounterRandomPokemon(tier: number): Promise<PokemonTemplate>{
         const pokemon: Array<PokemonTemplate> = [];
-        await this.instance.get<PokemonTemplate>(`/trainers/${trainerID}/pokemon?tier=${tier}`)
+        await this.instance.get<PokemonTemplate>(`/trainers/999/pokemon?tier=${tier}`)
         .then((res) => {
             pokemon.push(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
         });
         return pokemon[0];
     }
@@ -115,7 +128,7 @@ class ServerService {
 
     async deleteTrainerItemByID(trainerID: number, itemID: number): Promise<void>{
         await this.instance.put(`/items/${trainerID}?item_id=${itemID}`)
-        .then( (res) => {
+        .then( () => {
             console.log(`Item: ${itemID} deleted.`);
         });
     }
@@ -127,6 +140,14 @@ class ServerService {
             item.push(res.data);
         });
         return item[0];
+    }
+
+    async save(t: PokemonMaster): Promise<void>{
+        const url = `/trainers/${t.trainerID}?badges=${t.badges}&tier=${t.currentTier}&poke1=${t.activePokemon._id}`;
+        await this.instance.post(url)
+        .then((res) => {
+            console.log(res);
+        })
     }
 }
 
