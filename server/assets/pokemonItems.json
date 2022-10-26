@@ -2,12 +2,12 @@
     "items": [
         {
             "name": "Master Ball",
-            "cost": 1000,
+            "cost": 1350,
             "text": "Automatically catch the next Pokemon encountered."
         },
         {
             "name": "Great Ball",
-            "cost": 500,
+            "cost": 450,
             "text": "Add +3 to your next attempt at catching a wild Pokemon."
         },
         {
@@ -22,12 +22,12 @@
         },
         {
             "name": "Red Flute",
-            "cost": 700,
+            "cost": 450,
             "text": "Subtract -3 from any opponents next attempt at catching a wild Pokemon."
         },
         {
             "name": "Potion",
-            "cost": 200,
+            "cost": 150,
             "text": "Heal +3 HP from your active Pokemon."
         },
         {
@@ -42,12 +42,12 @@
         },
         {
             "name": "Revive",
-            "cost": 500,
+            "cost": 625,
             "text": "Revive one KO'ed Pokemon to half HP (Rounded Up)."
         },
         {
             "name": "Max Revive",
-            "cost": 700,
+            "cost": 850,
             "text": "Revive one KO'ed Pokemon to full HP."
         },
         {
@@ -58,16 +58,16 @@
         {
             "name": "Star Piece",
             "cost": -1,
-            "text": "Sell for $500"
+            "text": "Sell for $350"
         },
         {
             "name": "Scarf Band",
-            "cost": 400,
+            "cost": 350,
             "text": "Increase the Max HP of your active Pokemon by 3."
         },
         {
             "name": "Leftovers",
-            "cost": 400,
+            "cost": 375,
             "text": "At the end of your turn, heal your active Pokemon by 1 HP."
         },
         {
@@ -77,13 +77,38 @@
         },
         {
             "name": "Winners Debt",
-            "cost": 300,
+            "cost": 200,
             "text": "The next trainer battle you win, your opponent must give you an extra $100."
         },
         {
             "name": "Looker Ticket",
             "cost": 500,
             "text": "Challenge any trainer to a battle."
+        },
+        {
+            "name": "Ultra Ball",
+            "cost": 650,
+            "text": "Add +5 to your next attempt at catching a wild Pokemon."
+        },
+        {
+            "name": "Acro Bike",
+            "cost": 1000,
+            "text": "Your movement die is now a d8 going forward."
+        },
+        {
+            "name": "Flat Tire",
+            "cost": 400,
+            "text": "Choose an opponent; their next movement die is a d4."
+        },
+        {
+            "name": "HM02: Fly",
+            "cost": 650,
+            "text": "Fly to Safron City."
+        },
+        {
+            "name": "Weakness Policy",
+            "cost": 300,
+            "text": "Your active pokemon has no weakness."
         }
     ]
 }

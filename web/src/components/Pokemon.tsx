@@ -66,10 +66,10 @@ const Pokemon = (props: Props) => {
                 <Button onClick={() => setHealth(pokemon.hp)} className='col'>HEAL</Button>
             </div>
             <div className='row'>
-                <div className='col'><Move atk={pokemon.moves?.[0]} /></div>
+                <div className='col col-sm'><h4>E:</h4><Move atk={pokemon.moves?.[0]} /></div>
             </div>
             <div className='col'>
-                <div className='col'><Move atk={pokemon.moves?.[1]} /></div>
+                <div className='col col-md'><h4>O:</h4><Move atk={pokemon.moves?.[1]} /></div>
             </div>
             </Container>
         </>);

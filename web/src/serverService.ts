@@ -6,7 +6,7 @@ import PokemonMaster  from './interfaces/master';
 
 class ServerService {
     instance = axios.create({
-        baseURL: 'http://192.168.1.4:5000/',
+        baseURL: 'http://192.168.1.14:5000/',
         timeout: 12000,
         withCredentials: false,
         headers: {
