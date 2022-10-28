@@ -42,6 +42,7 @@ const VisitCity = (props: Props) => {
                             <Button variant='primary' onClick={() => buyItem(item)}>Buy</Button>
                         </div>
                     </div>
+                    <hr/>
                     </>);
             });
 
