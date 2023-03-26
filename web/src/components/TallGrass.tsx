@@ -88,7 +88,6 @@ const TallGrass = (props: Props) => {
         if (pokemon) {
             props.trainer.removePokemon(pokemon._id);
         }
-        props.refresh();
         setShow(false);
     }
 
@@ -96,7 +95,6 @@ const TallGrass = (props: Props) => {
         if (pokemon) {
             props.trainer.catchPokemon(pokemon._id);
         }
-        props.refresh();
         setShow(false);
     }
     

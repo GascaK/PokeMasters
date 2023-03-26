@@ -12,6 +12,9 @@ const Stats = (props: Props) => {
     useEffect(() => {
         setData(<>
         <div className='row'>
+            <h3 className='text-center'>Stats</h3>
+        </div>
+        <div className='row'>
             <div className='col'>
                 Badges:
             </div>
