@@ -1,0 +1,23 @@
+<h2>{{trainer.name}} Data:</h2>
+<form class="form-floating">
+  <div>
+    <label for="nameID">Name</label>
+    <input type="text" class="form-control" id="nameID" placeholder="{{trainer.name}}" value="{{trainer.name}}" disabled>
+  </div>
+  <div>
+    <label for="moneyID">Current Money</label>
+    <input type="text" class="form-control" id="moneyID" placeholder="{{trainer.dollars}}" value="{{trainer.dollars}}" disabled>
+  </div>
+  <div>
+    <label for="badgesID">Badge Count</label>
+    <input class="form-control" id="badgesID" placeholder="{{trainer.badges}}" value="{{trainer.badges}}" #badges>
+  </div>
+  <div>
+    <label for="tierID">Current Tier</label>
+    <input type="text" class="form-control" id="tierID" placeholder="{{trainer.currentTier}}" value="{{trainer.currentTier}}" #tier>
+  </div>
+  <div>
+    <button class="btn btn-primary" type="button" (click)="onSubmit(badges.value, tier.value)">Submit</button>
+  </div>
+</form>
+

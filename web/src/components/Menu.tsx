@@ -7,6 +7,7 @@ import Pokedex from "./Pokedex";
 import Backpack from "./Backpack";
 import VisitCity from "./VisitCity";
 import TallGrass from "./TallGrass";
+import Legendary from "./Legendary";
 
 export interface Props {
     trainer: PokemonMaster;
@@ -42,6 +43,7 @@ const Menu = (props: Props) => {
         <div className='row'><Backpack items={props.trainer.getItems()} useItemCallBack={useItem}/></div>
         <div className='row'><VisitCity trainer={props.trainer} refresh={refreshAll}/></div>
         <div className='row'><TallGrass trainer={props.trainer} refresh={refreshAll}/></div>
+        <div className='row'><Legendary trainer={props.trainer} refresh={refreshAll}/></div>
         <div className='row'><Button onClick={getRandomItem}>Got Item!</Button></div>
     </>)
 }

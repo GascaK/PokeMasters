@@ -1,0 +1,6 @@
+<div *ngIf="trainerTracker.infoView">
+  <app-info [trainerTracker]="trainerTracker"></app-info>
+</div>
+<div *ngIf="trainerTracker.defaultView">
+    <button type="button" (click)="viewInfo()">Info</button>
+</div>

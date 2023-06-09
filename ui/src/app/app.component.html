@@ -1,0 +1,6 @@
+<div *ngIf="!loggedIn()">
+  <app-login [trainerTracker]="trackerService"></app-login>
+</div>
+<div *ngIf="loggedIn()">
+  <app-homepage [trainerTracker]="trackerService"></app-homepage>
+</div>
