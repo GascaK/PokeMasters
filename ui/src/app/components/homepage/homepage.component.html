@@ -1,6 +1,17 @@
-<div *ngIf="trainerTracker.infoView">
+<div *ngIf="trainerTracker.views.get('infoView')">
   <app-info [trainerTracker]="trainerTracker"></app-info>
 </div>
-<div *ngIf="trainerTracker.defaultView">
-    <button type="button" (click)="viewInfo()">Info</button>
+<div *ngIf="trainerTracker.views.get('dexView')">
+  <app-pokedex [trainerTracker]="trainerTracker"></app-pokedex>
+</div>
+<div *ngIf="trainerTracker.views.get('defaultView')">
+  <div>
+    <app-active></app-active>
+  </div>
+  <div>
+    <button type="button" (click)="setView('dexView')">PokeDEX</button>
+  </div>
+  <div>
+    <button type="button" (click)="setView('infoView')">Info</button>
+  </div>
 </div>

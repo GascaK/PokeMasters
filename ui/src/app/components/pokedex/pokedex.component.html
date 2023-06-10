@@ -1,0 +1,51 @@
+<div class="row">
+    <span class="col"><button class="button" (click)="exitView()">Exit</button></span>
+</div>
+<div *ngIf="!moreInformation">
+    <table class="table">
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">HP</th>
+        <th scope="col">Speed</th>
+        <th scope="col">Choose</th>
+    </tr>
+    <tr *ngFor="let pokemon of trainer.pokemon">
+        <td>{{pokemon.name | uppercase}}</td>
+        <td>{{pokemon.hp}}</td>
+        <td>{{pokemon.speed}}</td>
+        <td><button class="btn-primary" (click)="moreInfo(pokemon.pokedex)">Select</button></td>
+    </tr>
+    </table>
+</div>
+<div *ngIf="moreInformation">
+    <div class="row">
+        <div class="col">
+            <h3>{{infoList[0].data.name}}</h3>
+        </div>
+        <div class="col">
+            <h4>#{{infoList[0].data.pokedex}}</h4>
+        </div>
+    </div>
+    <table class="table">
+    <tr>
+        <th scope="col">HP</th>
+        <th scope="col">Speed</th>
+        <th scope="col">Move1</th>
+        <th scope="col">Move2</th>
+        <th>EV</th>
+    </tr>
+    <tr *ngFor="let pokemon of infoList">
+        <td>{{pokemon.data.hp}}</td>
+        <td>{{pokemon.data.speed}}</td>
+        <td *ngIf="pokemon.data.moves">{{pokemon.data.moves[0]?.name}}:{{pokemon.data.moves[0]?.hit}}</td>
+        <td *ngIf="pokemon.data.moves">{{pokemon.data.moves[1]?.name}}:{{pokemon.data.moves[0]?.hit}}</td>
+        <td><button (click)="sendToBench(pokemon.data._id)">Bench</button></td>
+        <td><input class="form-check-input" type="checkbox" [(ngModel)]="pokemon.checked"></td>
+    </tr>
+    </table>
+    <div class="row">
+        <button class="btn btn-primary col" (click)="exitInfoPanel()">Exit</button>
+        <button *ngIf="validated.length>=0" class="btn btn-secondary col" (click)="evolve()">Evolve!</button>
+    </div>
+
+</div>

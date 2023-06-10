@@ -12,6 +12,7 @@ export class PokemonMaster implements Trainer{
     pokemon: Array<PokemonTemplate> = [];
     items: Array<PokeItemsTemplate> = [];
     badges: number = 0;
+    activePokemon: PokemonTemplate;
 
     constructor(public trainerID: number, public instance: ServerService) {
 

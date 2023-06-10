@@ -3,12 +3,13 @@ import { PokemonMaster } from "../interfaces/pokeMaster";
 
 export class TrackerService {
     public master: PokemonMaster;
-    public defaultView: boolean;
-    public infoView: boolean;
+    public views = new Map<string, boolean>;
 
     constructor() {
-        this.defaultView = true;
-        this.infoView = false;
+        this.views.set("defaultView", true);
+        this.views.set("infoView", false);
+        this.views.set("activeView", false);
+        this.views.set("dexView", false);
     }
 
     setMaster(pMaster: PokemonMaster): void {
@@ -24,16 +25,15 @@ export class TrackerService {
     }
 
     setNewView(view: string) {
-        this.setViewsOff();
-        if (view == "infoView") {
-            this.infoView = true;
-        } else {
-            this.defaultView = true;
+        if (this.views.has(view)) {
+            this.setViewsOff();
+            this.views.set(view, true);
         }
     }
 
     setViewsOff(): void {
-        this.defaultView = false;
-        this.infoView = false;
+        for (let [key, value] of this.views) {
+            this.views.set(key, false);
+        }
     }
 }

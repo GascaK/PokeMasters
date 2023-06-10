@@ -11,7 +11,7 @@ export class HomepageComponent {
     @Input() trainerTracker: TrackerService;
     public serverService = new ServerService();
 
-    viewInfo(): void {
-        this.trainerTracker.setNewView("infoView");
+    setView(view: string) {
+        this.trainerTracker.setNewView(view);
     }
 }

@@ -26,6 +26,7 @@ export class ServerService {
                 trainer.name = data.name;
                 trainer.badges = data.badges;
                 trainer.getCurrentTier();
+                trainer.pokemon = await this.getTrainerPokemon(trainerID);
             });
         return trainer;
     }
@@ -36,29 +37,29 @@ export class ServerService {
     //     return trainerItems;
     // }
 
-    // async getTrainerPokemon(trainerID: number): Promise<Array<PokemonTemplate>>{
-    //     const res = await this.instance.get(`/trainers/${trainerID}/pokedex`);
-    //     const fullDex = JSON.parse(res.data);
-    //     const pokeIDs: Array<number> = [];
-    //     const trainerDex: Array<PokemonTemplate> = [];
+    async getTrainerPokemon(trainerID: number): Promise<Array<PokemonTemplate>>{
+        const res = await this.instance.get(`/trainers/${trainerID}/pokedex`);
+        const fullDex = JSON.parse(res.data);
+        const pokeIDs: Array<number> = [];
+        const trainerDex: Array<PokemonTemplate> = [];
 
-    //     fullDex.forEach( (pokeDexEntry: any) => {
-    //         pokeIDs.push(...pokeDexEntry.ids);
-    //     });
+        fullDex.forEach( (pokeDexEntry: any) => {
+            pokeIDs.push(...pokeDexEntry.ids);
+        });
 
-    //     pokeIDs.forEach( async (pokeID) => {
-    //         await this.instance.get<PokemonTemplate>(`/pokemon/${pokeID}`)
-    //         .then( async (res) => {
-    //             const pokemon = res.data;
-    //             pokemon.moves = [];
-    //             pokemon.moves.push(await this.getPokemonMove(pokemon.move1));
-    //             pokemon.moves.push(await this.getPokemonMove(pokemon.move2));
-    //             pokemon.currentHP = pokemon.hp;
-    //             trainerDex.push(pokemon);
-    //         });
-    //     });
-    //     return trainerDex;
-    // }
+        pokeIDs.forEach( async (pokeID) => {
+            await this.instance.get<PokemonTemplate>(`/pokemon/${pokeID}`)
+            .then( async (res) => {
+                const pokemon = res.data;
+                pokemon.moves = [];
+                pokemon.moves.push(await this.getPokemonMove(pokemon.move1));
+                pokemon.moves.push(await this.getPokemonMove(pokemon.move2));
+                pokemon.currentHP = pokemon.hp;
+                trainerDex.push(pokemon);
+            });
+        });
+        return trainerDex;
+    }
 
     ////// Pokemon Functions //////
     // async encounterRandomPokemon(tier: number): Promise<PokemonTemplate | null>{
@@ -103,14 +104,14 @@ export class ServerService {
     //     });
     // }
 
-    // async getPokemonMove(moveID: number): Promise<PokeMoveTemplate | null>{
-    //     let moveData: PokeMoveTemplate | null = null;
-    //     await this.instance.get<PokeMoveTemplate>(`/moves/${moveID}`)
-    //     .then( (res) => {
-    //         moveData = res.data;
-    //     });
-    //     return moveData;
-    // }
+    async getPokemonMove(moveID: number): Promise<PokeMoveTemplate | null>{
+        let moveData: PokeMoveTemplate | null = null;
+        await this.instance.get<PokeMoveTemplate>(`/moves/${moveID}`)
+        .then( (res) => {
+            moveData = res.data;
+        });
+        return moveData;
+    }
 
     // ////// Shop Items //////
     // async getItem(trainerID: number, store: boolean = true): Promise<PokeItemsTemplate | null>{

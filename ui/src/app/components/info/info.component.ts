@@ -10,7 +10,6 @@ import { PokemonMaster } from 'src/app/interfaces/pokeMaster';
 })
 export class InfoComponent implements OnInit {
     @Input() trainerTracker: TrackerService;
-    @Input('badgesID') badges: number;
     public trainer: PokemonMaster;
 
     ngOnInit() {
