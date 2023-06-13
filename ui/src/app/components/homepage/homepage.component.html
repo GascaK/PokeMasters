@@ -6,12 +6,12 @@
 </div>
 <div *ngIf="trainerTracker.views.get('defaultView')">
   <div>
-    <app-active></app-active>
+    <app-active [trainer]="trainerTracker.getMaster()"></app-active>
   </div>
   <div>
-    <button type="button" (click)="setView('dexView')">PokeDEX</button>
+    <button class="btn btn-primary col-12" (click)="setView('dexView')">PokeDEX</button>
   </div>
   <div>
-    <button type="button" (click)="setView('infoView')">Info</button>
+    <button class="btn btn-primary col-12" (click)="setView('infoView')">Info</button>
   </div>
 </div>

@@ -50,12 +50,17 @@ export class PokedexComponent implements OnInit {
     evolve() {
         if (this.validated.length >= 3) {
             console.log("Evolving..");
+        } else {
+            console.log("Not enough selected");
+            alert("Warning: Stop cheating..");
         }
         this.exitInfoPanel();
     }
 
-    sendToBench(id: number) {
-        console.log(id);
+    sendToBench(pokemon: PokemonTemplate) {
+        console.log(pokemon._id);
+        this.trainer.activePokemon = pokemon;
+        this.exitView();
     }
 
     exitInfoPanel() {

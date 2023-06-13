@@ -26,6 +26,7 @@ export class ServerService {
                 trainer.name = data.name;
                 trainer.badges = data.badges;
                 trainer.getCurrentTier();
+                trainer.activePokemon = await this.getPokemonByID(data.poke1);
                 trainer.pokemon = await this.getTrainerPokemon(trainerID);
             });
         return trainer;
@@ -59,6 +60,21 @@ export class ServerService {
             });
         });
         return trainerDex;
+    }
+
+    async getPokemonByID(id: number): Promise<PokemonTemplate> {
+        let pokemon: PokemonTemplate;
+        await this.instance.get<PokemonTemplate>(`/pokemon/${id}`)
+            .then( async (res) => {                                   
+                const pokemon: PokemonTemplate = res.data;
+                pokemon.currentHP = pokemon.hp;
+                pokemon.moves?.push(await this.getPokemonMove(res.data.move1));
+                pokemon.moves?.push(await this.getPokemonMove(res.data.move2));
+            })
+            .catch( (err) => {
+                console.log(err);
+            });
+        return pokemon!;
     }
 
     ////// Pokemon Functions //////
@@ -109,6 +125,9 @@ export class ServerService {
         await this.instance.get<PokeMoveTemplate>(`/moves/${moveID}`)
         .then( (res) => {
             moveData = res.data;
+        })
+        .catch( (err) => {
+            console.log(err);
         });
         return moveData;
     }
