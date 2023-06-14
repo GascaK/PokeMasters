@@ -13,7 +13,7 @@ export class PokedexComponent implements OnInit {
     public trainer: PokemonMaster;
     public moreInformation = false;
     public infoList: {data: PokemonTemplate, checked: boolean}[] = [];
-    public validated: Array<number> = [];
+    public validated: Array<PokemonTemplate> = [];
     interval: any;
 
     ngOnInit() {
@@ -42,14 +42,22 @@ export class PokedexComponent implements OnInit {
     trackChecked() {
         this.infoList.forEach( (value) => {
             if(value.checked) {
-                this.validated.push(value.data._id);
+                this.validated.push(value.data);
             }
         })
     }
 
-    evolve() {
-        if (this.validated.length >= 3) {
-            console.log("Evolving..");
+    async evolve(mons: Array<PokemonTemplate>) {
+        if (this.validated.length >= 1) {
+            await this.trainer.evolvePokemon(mons)
+                .then( (newPokemonID) => {
+                    this.trainer.pokemon.forEach( (pokemon) => {
+                        if (newPokemonID == pokemon._id) {
+                            this.trainer.activePokemon = pokemon;
+                        }
+                    })
+                });
+                this.exitView();
         } else {
             console.log("Not enough selected");
             alert("Warning: Stop cheating..");

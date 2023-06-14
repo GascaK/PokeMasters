@@ -14,6 +14,8 @@ export class PokemonMaster implements Trainer{
     badges: number = 0;
     activePokemon: PokemonTemplate;
 
+    evolveMinimum = 3;
+
     constructor(public trainerID: number, public instance: ServerService) {
 
     }
@@ -52,6 +54,23 @@ export class PokemonMaster implements Trainer{
 
     saveAll(): void {
         this.instance.save(this);
+    }
+
+    async evolvePokemon(pokemonToDelete: Array<PokemonTemplate>): Promise<number> {
+        let evolutionID = pokemonToDelete[0].pokedex + 1;
+
+        pokemonToDelete.forEach( (pokemon) => {
+            this.instance.postPokemonByID(pokemon._id, 999);
+            let index = this.pokemon.indexOf(pokemon, 0);
+            if (index > -1) {
+                this.pokemon.splice(index, 1);
+            }
+        });
+
+        let evolvedPokemon = await this.instance.getNewPokemonByPokedex(this.trainerID, evolutionID);
+        let evolvedPokemonID = evolvedPokemon._id;
+        this.pokemon.push(evolvedPokemon);
+        return evolvedPokemonID;
     }
 
     // catchPokemon(pokeID: number) {

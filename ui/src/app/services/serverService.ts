@@ -77,6 +77,33 @@ export class ServerService {
         return pokemon!;
     }
 
+    async getNewPokemonByPokedex(trainerID: number, pokedex: number): Promise<PokemonTemplate>{
+        let pokemon: PokemonTemplate;
+
+        await this.instance.get<PokemonTemplate>(`/pokemon/${trainerID}/${pokedex}`)
+        .then( async (res) => {
+            pokemon = res.data;
+            pokemon.moves = [];
+            pokemon.moves.push(await this.getPokemonMove(pokemon.move1));
+            pokemon.moves.push(await this.getPokemonMove(pokemon.move2));
+        });
+        return pokemon!;
+    }
+
+    async postPokemonByID(id: number, trainerID: number): Promise<boolean> {
+        let status: boolean;
+        await this.instance.put(`/pokemon/${id}?trainerID=${trainerID}`)
+            .then( (res) => {
+                console.log(res);
+                status = true;
+            })
+            .catch( (err) => {
+                console.log(err);
+                status = false;
+            });
+        return status!;
+    }
+
     ////// Pokemon Functions //////
     // async encounterRandomPokemon(tier: number): Promise<PokemonTemplate | null>{
     //     if(![1, 2, 3].includes(tier)){
@@ -93,19 +120,6 @@ export class ServerService {
     //     })
     //     .catch((err) => {
     //         console.log(err);
-    //     });
-    //     return pokemon;
-    // }
-
-    // async getNewPokemonByID(trainerID: number, pokedex: number): Promise<PokemonTemplate | null>{
-    //     let pokemon: PokemonTemplate | null = null;
-
-    //     await this.instance.get<PokemonTemplate>(`/pokemon/${trainerID}/${pokedex}`)
-    //     .then( async (res) => {
-    //         pokemon = res.data;
-    //         pokemon.moves = [];
-    //         pokemon.moves.push(await this.getPokemonMove(pokemon.move1));
-    //         pokemon.moves.push(await this.getPokemonMove(pokemon.move2));
     //     });
     //     return pokemon;
     // }

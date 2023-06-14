@@ -45,7 +45,7 @@
     </table>
     <div class="row">
         <button class="btn btn-primary col" (click)="exitInfoPanel()">Exit</button>
-        <button *ngIf="validated.length>=0" class="btn btn-secondary col" (click)="evolve()">Evolve!</button>
+        <button *ngIf="validated.length>=0" class="btn btn-secondary col" (click)="evolve(validated)">Evolve!</button>
     </div>
 
 </div>

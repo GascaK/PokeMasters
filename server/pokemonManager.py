@@ -70,14 +70,14 @@ class PokemonLocator(Resource):
     def put(self, pokeID):
         args = self.reqparse.parse_args()
         chosen = pokemon.query.filter_by(_id=pokeID).first()
-        if chosen:
+        if chosen and args['trainerID']:
             chosen.trainerID = args['trainerID']
             db.session.commit()
             return({"message": "Successs"})
-        abort(404, message=f"No pokemon with id {pokeID} found.")
+        abort(404, message=f"No pokemon with id {pokeID} found. Or {args['trainerID']}")
 
 class PokemonEvolver(Resource):
-    def __init(self):
+    def __init__(self):
         pass
 
     @marshal_with(pokemon_resource)
