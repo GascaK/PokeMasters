@@ -2,18 +2,18 @@
     "items": [
         {
             "name": "Master Ball",
-            "cost": 1350,
+            "cost": 10350,
             "text": "Automatically catch the next Pokemon encountered."
         },
         {
             "name": "Great Ball",
-            "cost": 450,
-            "text": "Add +3 to your next attempt at catching a wild Pokemon."
+            "cost": 650,
+            "text": "Add +4 to your next attempt at catching a wild Pokemon."
         },
         {
             "name": "Poke Ball",
-            "cost": 200,
-            "text": "Add +1 to your next attempt at catching a wild Pokemon."
+            "cost": 300,
+            "text": "Add +2 to your next attempt at catching a wild Pokemon."
         },
         {
             "name": "Red Card",
@@ -22,13 +22,13 @@
         },
         {
             "name": "Red Flute",
-            "cost": 450,
+            "cost": 650,
             "text": "Subtract -3 from any opponents next attempt at catching a wild Pokemon."
         },
         {
             "name": "Potion",
-            "cost": 150,
-            "text": "Heal +3 HP from your active Pokemon."
+            "cost": 250,
+            "text": "Heal +5 HP from your active Pokemon."
         },
         {
             "name": "Max Potion",
@@ -37,8 +37,8 @@
         },
         {
             "name": "Soda Water",
-            "cost": 300,
-            "text": "Heal +5 HP from your active Pokemon."
+            "cost": 325,
+            "text": "Heal +8 HP from your active Pokemon."
         },
         {
             "name": "Revive",
@@ -78,37 +78,107 @@
         {
             "name": "Winners Debt",
             "cost": 200,
-            "text": "The next trainer battle you win, your opponent must give you an extra $100."
+            "text": "The next trainer battle you win, your opponent must give you an extra $200."
         },
         {
             "name": "Looker Ticket",
             "cost": 500,
-            "text": "Challenge any trainer to a battle."
+            "text": "Challenge any trainer to a battle instead of having your turn."
         },
         {
             "name": "Ultra Ball",
-            "cost": 650,
-            "text": "Add +5 to your next attempt at catching a wild Pokemon."
+            "cost": 950,
+            "text": "Add +6 to your next attempt at catching a wild Pokemon."
         },
         {
             "name": "Acro Bike",
-            "cost": 1000,
+            "cost": 10000,
             "text": "Your movement die is now a d8 going forward."
         },
         {
             "name": "Flat Tire",
             "cost": 400,
-            "text": "Choose an opponent; their next movement die is a d4."
+            "text": "Choose an opponent. Their next movement die is a d4."
         },
         {
             "name": "HM02: Fly",
-            "cost": 650,
+            "cost": 10650,
             "text": "Fly to Safron City."
         },
         {
             "name": "Weakness Policy",
             "cost": 300,
             "text": "Your active pokemon has no weakness."
+        },
+        {
+            "name": "Trainer Repel",
+            "cost": 750,
+            "text": "Ignore the next Battle spot you or an opponent lands on."
+        },
+        {
+            "name": "Pokemon Fan Club",
+            "cost": 350,
+            "text": "Encounter a Wild Pokemon instead of having your turn."
+        },
+        {
+            "name": "Team Rocket's Plan",
+            "cost": 350,
+            "text": "If your opponent would land on a WildPokemon spot, instead treat it as a Battle spot."
+        },
+        {
+            "name": "Lost Vacuum",
+            "cost": 450,
+            "text": "If your opponent would land on an Item spot, instead give that item to yourself."
+        },
+        {
+            "name": "Double Team",
+            "cost": 485,
+            "text": "You have advantage on your next movement roll."
+        },
+        {
+            "name": "Bill's Helping Hand",
+            "cost": 950,
+            "text": "During your next GYM battle, subtract -2 damage from a GYM Leaders active pokemon's attacks."
+        },
+        {
+            "name": "Pokemon Doll",
+            "cost": 650,
+            "text": "If you would be chosen for another trainers Battle partner, instead reroll the die one time."
+        },
+        {
+            "name": "Pokemon Incense",
+            "cost": 785,
+            "text": "Choose a Pokemon Type. Your next WildPokemon roll will be of that type."
+        },
+        {
+            "name": "Golden Hammer",
+            "cost": 430,
+            "text": "Choose an opponent. Their active pokemon drops any item held in their hands."
+        },
+        {
+            "name": "Heavy Ball",
+            "cost": 450,
+            "text": "Add +5 to your next attempt at catching a wild Pokemon with a speed value in the negatives."
+        },
+        {
+            "name": "Quick Ball",
+            "cost": 550,
+            "text": "Add +4 to your next attempt at catching a wild Pokemon with a speed value greater than 3."
+        },
+        {
+            "name": "Bright Powder",
+            "cost": 550,
+            "text": "Subtract -3 to your opponents initiative die on their next battle."
+        },
+        {
+            "name": "Lucky Specs",
+            "cost": 480,
+            "text": "Add +3 to your next initiative die roll."
+        },
+        {
+            "name": "Black Sludge",
+            "cost": 650,
+            "text": "During your next GYM battle, you go first instead of the GYM Leader."
         }
     ]
 }

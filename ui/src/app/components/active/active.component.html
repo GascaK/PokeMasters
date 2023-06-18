@@ -9,7 +9,7 @@
         </div>
         <div><img src="{{imgLoc}}" alt="PokeImage" style="width: 100%; z-index: 0;"></div>
         <div *ngIf="active.moves">
-            <div *ngFor="let move of active.moves" class="{{active.moves[0]?.mType}}">
+            <div *ngFor="let move of active.moves" class="{{move!.mType}}">
                 <span style="font-size:large">{{move?.name}}:</span>
                 <span style="text-align: center;">d{{move?.hit}}</span>
                 <span style="float:right; font-weight: bold;">{{move?.special}}</span>

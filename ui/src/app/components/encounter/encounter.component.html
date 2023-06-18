@@ -1,0 +1,64 @@
+<div *ngIf="!showPokemon" style="width:100%;height:0;padding-bottom:79%;position:relative;">
+    <iframe src="https://giphy.com/embed/DRfu7BT8ZK1uo" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+</div>
+<div *ngIf="showPokemon">
+    <div class="card" *ngIf="wildPokemon">
+        <div class="card-body">
+            <div class="card-title">
+                <div style="clear:both">
+                    <h3 style="display:inline">{{wildPokemon.name}}</h3>
+                    <i class="fa-solid fa-bolt" style="float:right"></i>
+                    <h2 style="display:inline;float:right">{{wildPokemon.speed}}</h2>
+                </div>
+            </div>
+            <div><img src="{{imgLoc}}" alt="PokeImage" style="width:100%;z-index:0;"></div>
+            <div *ngIf="wildPokemon.moves">
+                <div *ngFor="let move of wildPokemon.moves" class="{{move!.mType}}">
+                    <span style="font-size:large">{{move?.name}}:</span>
+                    <span style="text-align:center;">d{{move?.hit}}</span>
+                    <span style="float:right;font-weight:bold;">{{move?.special}}</span>
+                </div>
+            </div>
+            <div class="row" style="padding-top: 3px">
+                <h2 class="col" style="float:right">{{wildPokemon.currentHP}}</h2>/<h2 class="col">{{wildPokemon.hp}}</h2>
+            </div>
+            <div class="row">
+                <span class="col" style="text-align:right;"><i class="fa-solid fa-dice-d20"></i></span>
+                <span class="col" *ngIf="wildPokemon.tier==1">
+                    <h2>Roll 8+</h2>
+                </span>
+                <span class="col" *ngIf="wildPokemon.tier==2">
+                    <h2>Roll 11+</h2>
+                </span>
+                <span class="col" *ngIf="wildPokemon.tier==3">
+                    <h2>Roll 14+</h2>
+                </span>
+                <span class="col" *ngIf="wildPokemon.tier==4">
+                    <h2>Roll 17+</h2>
+                </span>
+            </div>
+            <div class="row">
+                <div class="col col-6 previous">
+                    <button class="btn btn-primary" style="display:block;width:100%" (click)="catchPokemon(wildPokemon)">Caught</button>
+                </div>
+                <div class="col col-6 next">
+                    <button class="btn btn-danger" style="display:block;width:100%" (click)="fleePokemon()">Flee</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title" style="text-align:center">
+                <h3>Available Items</h3>
+            </div>
+            <div *ngFor="let item of itemList | keyvalue">
+                <div class="row">
+                    <div class="col">{{item.value.name}}</div>
+                    <div class="col">{{item.value.count}}</div>
+                    <div class="col">{{item.value.text}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

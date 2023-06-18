@@ -11,13 +11,20 @@ import { TrackerService } from 'src/app/services/trackingService';
 export class HomepageComponent implements OnInit {
     @Input() trainerTracker: TrackerService;
     public serverService = new ServerService();
+    public legendary: boolean;
     public trainer: PokemonMaster;
 
     ngOnInit(): void {
+        this.legendary = false;
         this.trainer = this.trainerTracker.getMaster();
     }
 
     setView(view: string) {
         this.trainerTracker.setNewView(view);
+    }
+
+    encounterLegendary() {
+        this.legendary = true;
+        this.trainerTracker.setNewView("encounterView");
     }
 }

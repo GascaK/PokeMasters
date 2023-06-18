@@ -10,6 +10,9 @@ export class TrackerService {
         this.views.set("infoView", false);
         this.views.set("activeView", false);
         this.views.set("dexView", false);
+        this.views.set("encounterView", false);
+        this.views.set("shopView", false);
+        this.views.set("backpackView", false);
     }
 
     setMaster(pMaster: PokemonMaster): void {

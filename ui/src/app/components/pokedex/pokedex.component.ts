@@ -48,7 +48,7 @@ export class PokedexComponent implements OnInit {
     }
 
     async evolve(mons: Array<PokemonTemplate>) {
-        if (this.validated.length >= 1) {
+        if (this.validated.length >= 3) {
             await this.trainer.evolvePokemon(mons)
                 .then( (newPokemonID) => {
                     this.trainer.pokemon.forEach( (pokemon) => {

@@ -8,7 +8,10 @@ import { LoginComponent } from './components/login/login.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { InfoComponent } from './components/info/info.component';
 import { ActiveComponent } from './components/active/active.component';
-import { PokedexComponent } from './components/pokedex/pokedex.component'
+import { PokedexComponent } from './components/pokedex/pokedex.component';
+import { EncounterComponent } from './components/encounter/encounter.component';
+import { ShopComponent } from './components/shop/shop.component';
+import { BackpackComponent } from './components/backpack/backpack.component'
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { PokedexComponent } from './components/pokedex/pokedex.component'
     HomepageComponent,
     InfoComponent,
     ActiveComponent,
-    PokedexComponent
+    PokedexComponent,
+    EncounterComponent,
+    ShopComponent,
+    BackpackComponent
   ],
   imports: [
     BrowserModule,

@@ -28,7 +28,7 @@ export class InfoComponent implements OnInit {
         } else {
             alert(`Invalid Value for badge: ${badges}`);
         }
-        if(!isNaN(checkedTier) && checkedTier >= 0 && checkedTier <= 2) {
+        if(!isNaN(checkedTier) && checkedTier >= 1 && checkedTier <= 3) {
             this.trainer.currentTier = checkedTier;
         } else {
             alert(`Invalid Value for tier: ${tier}`);

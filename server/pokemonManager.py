@@ -25,16 +25,15 @@ class PokemonCreator(Resource):
     
     @marshal_with(pokemon_resource)
     def get(self, trainerID):
-        new_mons = []
         args = self.reqparse.parse_args()
-        max_tier = int(args["tier"])
+        try:
+            tier = int(args["tier"])
+        except:
+            tier = 1
 
-        while(max_tier > 0):
-            new_mons.append(self.generate_random_mon(trainerID, max_tier))
-            max_tier -= 1
-
-        print(new_mons)
-        return random.choice(new_mons)
+        new_mon = self.generate_random_mon(trainerID, tier)
+        print(new_mon)
+        return new_mon
 
     def generate_random_mon(self, trainerID, tier):
         def v(pl: int):
@@ -49,8 +48,8 @@ class PokemonCreator(Resource):
 
         move1 = mg.get_random_move(tier, base.type1)._id
         move2 = mg.get_random_move(tier, base.type2)._id
-        hp = base.hp+v(5) # hp is always atleast 2.
-        new_mon = pokemon(trainerID, base._id, base.name, base.type1, base.type2, hp if hp>=2 else 2, base.tier, move1, move2, base.speed+v(2))
+        hp = base.hp+v(8) # hp is always atleast 2.
+        new_mon = pokemon(trainerID, base._id, base.name, base.type1, base.type2, hp if hp>=2 else 2, base.tier, move1, move2, base.speed+v(4))
         db.session.add(new_mon)
         db.session.commit()
         return new_mon
@@ -95,7 +94,7 @@ class PokemonEvolver(Resource):
 
         move1 = mg.get_random_move(base.tier, base.type1)._id
         move2 = mg.get_random_move(base.tier, base.type2)._id
-        hp = base.hp+v(5) # hp is always atleast 2.
+        hp = base.hp+v(8) # hp is always atleast 2.
         new_mon = pokemon(trainerID,
                           base._id,
                           base.name,
@@ -103,7 +102,7 @@ class PokemonEvolver(Resource):
                           base.type2,
                           hp if hp>=2 else 2, base.tier,
                           move1, move2,
-                          base.speed+v(2))
+                          base.speed+v(4))
         db.session.add(new_mon)
         db.session.commit()
         return new_mon

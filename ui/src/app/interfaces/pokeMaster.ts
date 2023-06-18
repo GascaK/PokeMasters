@@ -60,7 +60,7 @@ export class PokemonMaster implements Trainer{
         let evolutionID = pokemonToDelete[0].pokedex + 1;
 
         pokemonToDelete.forEach( (pokemon) => {
-            this.instance.postPokemonByID(pokemon._id, 999);
+            this.instance.changePokemonTrainerByID(pokemon._id, 999);
             let index = this.pokemon.indexOf(pokemon, 0);
             if (index > -1) {
                 this.pokemon.splice(index, 1);
@@ -73,60 +73,61 @@ export class PokemonMaster implements Trainer{
         return evolvedPokemonID;
     }
 
-    // catchPokemon(pokeID: number) {
-    //     this.instance.changeTrainerPokemonByID(this.trainerID, pokeID);
-    // }
+    async encounterRandomPokemonByTier(tier: number): Promise<PokemonTemplate> {
+        let pokemonToCatch: PokemonTemplate;
+        await this.instance.encounterRandomPokemon(tier)
+            .then( (pokemon) => {
+                pokemonToCatch = pokemon!;
+            })
+            .catch( (err) => {
+                console.log("Unable to encounter pokemon.")
+            });
+        return pokemonToCatch!;
+    }
 
-    // removePokemon(pokeID: number) {
-    //     const indexOfObject = this.pokemon.findIndex( (poke: PokemonTemplate) => {
-    //         return poke._id === pokeID;
-    //     })
-    //     if (indexOfObject !== -1) {
-    //         this.pokemon.splice(indexOfObject, 1);
-    //     }
-    // }
+    catchPokemon(wildPokemon: PokemonTemplate) {
+        this.pokemon.push(wildPokemon);
+        this.instance.changePokemonTrainerByID(wildPokemon._id, this.trainerID);
+    }
 
-    // getItems() { return this.items; }
+    async getRandomItem(): Promise<PokeItemsTemplate> {
+        const item = await this.instance.getItem(this.trainerID, false);
+        await this.instance.buyItem(this.trainerID, item._id);
+        this.items.push(item);
+        console.log(`Got Item!: ${item.name}`);
+        return item;
+    }
 
-    // setItems(newItems: Array<PokeItemsTemplate>) { this.items = newItems; }
+    async buyItem(item: PokeItemsTemplate) {
+        await this.instance.buyItem(this.trainerID, item._id);
+        this.items.push(item);
+        console.log(`Got Item!: ${item.name}`);
+    }
 
-    // addItem(newItem: PokeItemsTemplate) { this.items.push(newItem); }
+    removeItem(itemID: number) {
+        const IndexOfObject = this.items.findIndex( (item: PokeItemsTemplate) => {
+            return item._id === itemID;
+        })
+        if (IndexOfObject !== -1) {
+            this.items.splice(IndexOfObject, 1);
+        }
 
-    // async getRandomItem() {
-    //     const item: Array<PokeItemsTemplate> = [];
-    //     item.push(await this.instance.getShopItem(this.trainerID));
-    //     this.instance.instance.post(`/items/${this.trainerID}?item_id=${item[0]._id}`)
-    //     .then( () => {
-    //         alert(`Item got: ${item[0].name}`);
-    //     });
-
-    //     return item[0];
-    // }
-
-    // removeItem(itemID: number) {
-    //     const IndexOfObject = this.items.findIndex( (item: PokeItemsTemplate) => {
-    //         return item._id === itemID;
-    //     })
-    //     if (IndexOfObject !== -1) {
-    //         this.items.splice(IndexOfObject, 1);
-    //     }
-
-    //     this.instance.deleteTrainerItemByID(this.trainerID, itemID);
-    // }
+        this.instance.deleteTrainerItemByID(this.trainerID, itemID);
+    }
 
     // setBench(one: PokemonTemplate, two: PokemonTemplate) {
     // }
 
-    // async getShop(numberOfItems: number): Promise<Array<PokeItemsTemplate>>{
-    //     const shop: Array<PokeItemsTemplate> = [];
-    //     for(var i=0; i<numberOfItems; i++){
-    //         const item = await this.instance.getShopItem(this.trainerID)
-    //         .then( (shopItem) => {
-    //             shop.push(shopItem);
-    //         })
-    //     }
-    //     return shop;
-    // }
+    async getShop(numberOfItems: number): Promise<Array<PokeItemsTemplate>>{
+        const shop: Array<PokeItemsTemplate> = [];
+        for(var i=0; i<numberOfItems; i++){
+            await this.instance.getItem(this.trainerID)
+                .then( (shopItem) => {
+                    shop.push(shopItem);
+                })
+        }
+        return shop;
+    }
 
     async saveState(): Promise<void>{
         console.log('b4 save', this);

@@ -1,0 +1,20 @@
+<div>
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title" style="text-align:center">
+                <h3>Items</h3>
+            </div>
+            <div *ngFor="let item of itemList | keyvalue">
+                <div class="row" style="padding:3px;">
+                    <div class="col">{{item.value.name}}</div>
+                    <div class="col">{{item.value.count}}</div>
+                    <div class="col">{{item.value.text}}</div>
+                    <div class="col">
+                        <button class="btn btn-primary" (click)="useItem(item.value.id)">Use</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div><button class="btn btn-primary" (click)="exitBackpack()">Exit</button></div>
+</div>
