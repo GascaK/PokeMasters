@@ -3,6 +3,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TrackerService } from 'src/app/services/trackingService';
 import { PokemonMaster } from 'src/app/interfaces/pokeMaster';
 
+import statusEffects from 'src/app/components/info/status_effects.json';
+
+
 @Component({
     selector: 'app-info',
     templateUrl: './info.component.html',
@@ -11,6 +14,7 @@ import { PokemonMaster } from 'src/app/interfaces/pokeMaster';
 export class InfoComponent implements OnInit {
     @Input() trainerTracker: TrackerService;
     public trainer: PokemonMaster;
+    public statuses: Array<{name: string, text: string}> = statusEffects.status_effects;
 
     ngOnInit() {
         if (this.trainerTracker?.isMasterSet())

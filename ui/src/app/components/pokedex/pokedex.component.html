@@ -1,16 +1,16 @@
 <div *ngIf="!moreInformation">
-    <table class="table">
+    <table class="table table-bordered">
     <tr>
+        <th scope="col">Dex#</th>
         <th scope="col">Name</th>
-        <th scope="col">HP</th>
-        <th scope="col">Speed</th>
+        <th scope="col">Count</th>
         <th scope="col">Choose</th>
     </tr>
-    <tr *ngFor="let pokemon of trainer.pokemon">
-        <td>{{pokemon.name | uppercase}}</td>
-        <td>{{pokemon.hp}}</td>
-        <td>{{pokemon.speed}}</td>
-        <td><button class="btn-primary" (click)="moreInfo(pokemon.pokedex)">Select</button></td>
+    <tr *ngFor="let pokemon of finalPokedex | keyvalue">
+        <td>{{pokemon.key}}</td>
+        <td>{{pokemon.value.name | uppercase}}</td>
+        <td>{{pokemon.value.count}}</td>
+        <td><button class="btn-primary" (click)="moreInfo(pokemon.key)">Select</button></td>
     </tr>
     </table>
 </div>
@@ -46,5 +46,5 @@
     </div>
 </div>
 <div class="row">
-    <span class="col"><button class="btn btn-primary" (click)="exitView()">Exit</button></span>
+    <button class="btn btn-danger col" (click)="exitView()">Exit</button>
 </div>

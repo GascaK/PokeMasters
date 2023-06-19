@@ -97,7 +97,7 @@
         },
         {
             "name": "Flat Tire",
-            "cost": 400,
+            "cost": 300,
             "text": "Choose an opponent. Their next movement die is a d4."
         },
         {
@@ -113,7 +113,7 @@
         {
             "name": "Trainer Repel",
             "cost": 750,
-            "text": "Ignore the next Battle spot you or an opponent lands on."
+            "text": "Ignore the next Battle spot you land on."
         },
         {
             "name": "Pokemon Fan Club",
@@ -131,7 +131,7 @@
             "text": "If your opponent would land on an Item spot, instead give that item to yourself."
         },
         {
-            "name": "Double Team",
+            "name": "Trecking Shoes",
             "cost": 485,
             "text": "You have advantage on your next movement roll."
         },
@@ -177,7 +177,7 @@
         },
         {
             "name": "Black Sludge",
-            "cost": 650,
+            "cost": 350,
             "text": "During your next GYM battle, you go first instead of the GYM Leader."
         }
     ]

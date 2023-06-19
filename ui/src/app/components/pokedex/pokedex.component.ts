@@ -14,12 +14,30 @@ export class PokedexComponent implements OnInit {
     public moreInformation = false;
     public infoList: {data: PokemonTemplate, checked: boolean}[] = [];
     public validated: Array<PokemonTemplate> = [];
+    public sortedPokemon: Map<number, {name: string, count: number}> = new Map;
+    public finalPokedex: Map<number, {name: string, count: number}>;
     interval: any;
 
     ngOnInit() {
         if (this.trainerTracker?.isMasterSet())
         {
             this.trainer = this.trainerTracker.getMaster();
+            
+            if (this.trainer.pokemon) {
+                this.trainer.pokemon.forEach( (mon) => {
+                    let count = 1;
+                    if (this.sortedPokemon.has(mon.pokedex)) {
+                        count = this.sortedPokemon.get(mon.pokedex)!.count + 1;
+                    }
+                    this.sortedPokemon.set(mon.pokedex, {
+                        name: mon.name,
+                        count: count
+                    });
+                });
+                this.finalPokedex = new Map([...this.sortedPokemon.entries()].sort());
+                console.log(this.finalPokedex);
+            }
+
             this.interval = setInterval(() => {
                 this.validated = [];
                 this.trackChecked();

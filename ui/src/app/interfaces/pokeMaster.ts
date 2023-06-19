@@ -22,11 +22,11 @@ export class PokemonMaster implements Trainer{
 
     getCurrentTier(): number {
         if (this.badges < 3){
-            this.currentTier=0;
-        } else if (this.badges < 6 ){
             this.currentTier=1;
-        } else {
+        } else if (this.badges < 6 ){
             this.currentTier=2;
+        } else {
+            this.currentTier=3;
         }
         return this.currentTier;
     }

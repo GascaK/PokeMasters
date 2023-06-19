@@ -1,7 +1,7 @@
 {
     "001":{
         "name": "Bulbasaur",
-        "hp": 10,
+        "hp": 8,
         "speed": -1,
         "tier": 1,
         "type": ["grass", "poison"]
@@ -22,7 +22,7 @@
     },
     "004":{
         "name": "Charmander",
-        "hp": 10,
+        "hp": 7,
         "speed": -1,
         "tier": 1,
         "type": ["fire"]
@@ -43,7 +43,7 @@
     },
     "007": {
         "name": "Squirtle",
-        "hp": 10,
+        "hp": 8,
         "speed": -1,
         "tier": 1,
         "type": ["water"]

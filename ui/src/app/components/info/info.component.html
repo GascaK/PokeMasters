@@ -20,4 +20,16 @@
     <button class="btn btn-primary" type="button" (click)="onSubmit(badges.value, tier.value)">Submit</button>
   </div>
 </form>
-
+<div>
+  <div class="row">
+    <h3 style="text-align: center;">Status Conditions</h3>
+  </div>
+  <table class="table table-bordered">
+    <th scope="col">Name</th>
+    <th scope="col">Info</th>
+    <tr *ngFor="let status of statuses">
+      <td style="font-weight:bold;">{{status.name}}</td>
+      <td>{{status.text}}</td>
+    </tr>
+  </table>
+</div>

@@ -19,7 +19,6 @@ export class ServerService {
         await this.instance.get(`/trainers/${trainerID}`)
             .then(async (res) => {
                 const data = JSON.parse(res.data);
-                // trainer.items = await this.getTrainerItems(trainerID);
                 trainer.dollars = data.dollars;
                 trainer.name = data.name;
                 trainer.badges = data.badges;
@@ -61,6 +60,41 @@ export class ServerService {
         return trainerDex;
     }
 
+    ////// Pokemon Functions //////
+    async encounterRandomPokemon(tier: number): Promise<PokemonTemplate | undefined>{
+        if(![1, 2, 3, 4].includes(tier)){
+            throw new Error("Invalid Tier");
+        }
+        const res = await this.instance.get<PokemonTemplate>(`/trainers/999/pokemon?tier=${tier}`);
+        if (res) {
+            const pokemon = res.data;
+            pokemon.currentHP = pokemon.hp;
+            pokemon.moves = [];
+            pokemon.moves.push(await this.getPokemonMove(pokemon.move1));
+            pokemon.moves.push(await this.getPokemonMove(pokemon.move2));
+            console.log("Pokemon");
+            console.log(pokemon);
+            return pokemon;
+        } else {
+            console.log("Error returning Pokemon.");
+            return;
+        }
+    }
+    // Release Pokemon.
+    async changePokemonTrainerByID(id: number, trainerID: number): Promise<boolean> {
+        let status: boolean;
+        await this.instance.put(`/pokemon/${id}?trainerID=${trainerID}`)
+            .then( (res) => {
+                console.log(res);
+                status = true;
+            })
+            .catch( (err) => {
+                console.log(err);
+                status = false;
+            });
+        return status!;
+    }
+
     async getPokemonByID(id: number): Promise<PokemonTemplate> {
         let pokemon: PokemonTemplate;
         await this.instance.get<PokemonTemplate>(`/pokemon/${id}`)
@@ -87,41 +121,6 @@ export class ServerService {
             pokemon.moves.push(await this.getPokemonMove(pokemon.move2));
         });
         return pokemon!;
-    }
-
-    async changePokemonTrainerByID(id: number, trainerID: number): Promise<boolean> {
-        let status: boolean;
-        await this.instance.put(`/pokemon/${id}?trainerID=${trainerID}`)
-            .then( (res) => {
-                console.log(res);
-                status = true;
-            })
-            .catch( (err) => {
-                console.log(err);
-                status = false;
-            });
-        return status!;
-    }
-
-    ////// Pokemon Functions //////
-    async encounterRandomPokemon(tier: number): Promise<PokemonTemplate | undefined>{
-        if(![1, 2, 3, 4].includes(tier)){
-            throw new Error("Invalid Tier");
-        }
-        const res = await this.instance.get<PokemonTemplate>(`/trainers/999/pokemon?tier=${tier}`);
-        if (res) {
-            const pokemon = res.data;
-            pokemon.currentHP = pokemon.hp;
-            pokemon.moves = [];
-            pokemon.moves.push(await this.getPokemonMove(pokemon.move1));
-            pokemon.moves.push(await this.getPokemonMove(pokemon.move2));
-            console.log("Pokemon");
-            console.log(pokemon);
-            return pokemon;
-        } else {
-            console.log("Error returning Pokemon.");
-            return;
-        }
     }
 
     async getPokemonMove(moveID: number): Promise<PokeMoveTemplate | null>{

@@ -31,7 +31,7 @@
             {
                 "name": "will-o-wisp",
                 "hit": 4,
-                "special": "burn"
+                "special": "none"
             },
             {
                 "name": "fire spin",
@@ -41,7 +41,7 @@
             {
                 "name": "flame wheel",
                 "hit": 6,
-                "special": "none"
+                "special": "burn"
             }
         ],
         "electric": [
@@ -58,12 +58,12 @@
             {
                 "name": "nuzzle",
                 "hit": 4,
-                "special": "none"
+                "special": "primed"
             },
             {
                 "name": "charge",
                 "hit": 6,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "rock": [
@@ -80,7 +80,7 @@
             {
                 "name": "stone edge",
                 "hit": 4,
-                "special": "none"
+                "special": "primed"
             },
             {
                 "name": "rock throw",
@@ -119,7 +119,7 @@
             {
                 "name": "quick attack",
                 "hit": 4,
-                "special": "none"
+                "special": "primed"
             },
             {
                 "name": "gust",
@@ -151,7 +151,7 @@
             {
                 "name": "acid",
                 "hit": 6,
-                "special": "poison"
+                "special": "recharging"
             }
         ],
         "bug": [
@@ -173,7 +173,7 @@
             {
                 "name": "struggle bug",
                 "hit": 6,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "flying": [
@@ -188,7 +188,7 @@
                 "special": "none"
             },
             {
-                "name": "gust",
+                "name": "air slash",
                 "hit": 4,
                 "special": "none"
             },
@@ -217,14 +217,14 @@
             {
                 "name": "spikes",
                 "hit": 6,
-                "special": "none"
+                "special": "getting pumped"
             }
         ],
         "fighting": [
             {
                 "name": "double kick",
                 "hit": 6,
-                "special": "none"
+                "special": "getting pumped"
             },
             {
                 "name": "rock smash",
@@ -239,7 +239,7 @@
             {
                 "name": "counter",
                 "hit": 6,
-                "special": "none"
+                "special": "semi-invulnerable"
             }
         ],
         "psychic": [
@@ -283,7 +283,7 @@
             {
                 "name": "ice ball",
                 "hit": 6,
-                "special": "none"
+                "special": "power boost"
             }
         ],
         "ghost": [
@@ -322,7 +322,7 @@
             {
                 "name": "breaking swipe",
                 "hit": 4,
-                "special": "none"
+                "special": "getting pumped"
             },
             {
                 "name": "dragon tail",
@@ -374,7 +374,7 @@
             {
                 "name": "inferno",
                 "hit": 8,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "electric": [
@@ -391,12 +391,12 @@
             {
                 "name": "charge beam",
                 "hit": 6,
-                "special": "none"
+                "special": "recharging"
             },
             {
                 "name": "thunder bolt",
                 "hit": 8,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "rock": [
@@ -418,7 +418,7 @@
             {
                 "name": "roll out",
                 "hit": 8,
-                "special": "none"
+                "special": "getting pumped"
             }
         ],
         "grass": [
@@ -430,24 +430,24 @@
             {
                 "name": "grass knot",
                 "hit": 6,
-                "special": "none"
+                "special": "perish song"
             },
             {
                 "name": "absorb",
                 "hit": 6,
-                "special": "none"
+                "special": "seeded"
             },
             {
                 "name": "power whip",
                 "hit": 8,
-                "special": "none"
+                "special": "primed"
             }
         ],
         "normal": [
             {
                 "name": "rage",
                 "hit": 6,
-                "special": "none"
+                "special": "getting pumped"
             },
             {
                 "name": "strength",
@@ -457,12 +457,12 @@
             {
                 "name": "hyper fang",
                 "hit": 6,
-                "special": "none"
+                "special": "recharging"
             },
             {
                 "name": "body slam",
                 "hit": 8,
-                "special": "none"
+                "special": "primed"
             }
         ],
         "poison": [
@@ -473,13 +473,13 @@
             },
             {
                 "name": "toxic",
-                "hit": 6,
-                "special": "poison"
+                "hit": 4,
+                "special": "semi invulnerable"
             },
             {
                 "name": "dire claw",
                 "hit": 6,
-                "special": "poison"
+                "special": "super poison"
             },
             {
                 "name": "poison fang",
@@ -491,22 +491,22 @@
             {
                 "name": "bug buzz",
                 "hit": 6,
-                "special": "none"
+                "special": "primed"
             },
             {
                 "name": "silver wind",
                 "hit": 6,
-                "special": "none"
+                "special": "confusion"
             },
             {
                 "name": "twineedle",
                 "hit": 6,
-                "special": "none"
+                "special": "poisoned"
             },
             {
                 "name": "fury cutter",
                 "hit": 8,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "flying": [
@@ -518,34 +518,34 @@
             {
                 "name": "beak blast",
                 "hit": 6,
-                "special": "none"
+                "special": "primed"
             },
             {
-                "name": "air slash",
+                "name": "beak blast",
                 "hit": 6,
                 "special": "confusion"
             },
             {
                 "name": "wing attack",
                 "hit": 8,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "ground": [
             {
                 "name": "bone rush",
                 "hit": 6,
-                "special": "none"
+                "special": "paralyzed"
             },
             {
                 "name": "dig",
                 "hit": 6,
-                "special": "none"
+                "special": "semi invulnerable"
             },
             {
                 "name": "sand tomb",
                 "hit": 6,
-                "special": "none"
+                "special": "perish song"
             },
             {
                 "name": "magnitude",
@@ -557,12 +557,12 @@
             {
                 "name": "close combat",
                 "hit": 6,
-                "special": "none"
+                "special": "mimic"
             },
             {
                 "name": "cross chop",
                 "hit": 6,
-                "special": "none"
+                "special": "power boost"
             },
             {
                 "name": "jump kick",
@@ -572,7 +572,7 @@
             {
                 "name": "focus punch",
                 "hit": 8,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "psychic": [
@@ -584,12 +584,12 @@
             {
                 "name": "psycho cut",
                 "hit": 6,
-                "special": "none"
+                "special": "infatuation"
             },
             {
                 "name": "psychic fang",
                 "hit": 6,
-                "special": "none"
+                "special": "power boost"
             },
             {
                 "name": "eerie spell",
@@ -606,24 +606,24 @@
             {
                 "name": "ice punch",
                 "hit": 6,
-                "special": "none"
+                "special": "getting pumped"
             },
             {
                 "name": "freezy frost",
-                "hit": 6,
-                "special": "none"
+                "hit": 4,
+                "special": "perish song"
             },
             {
                 "name": "icicle spear",
                 "hit": 8,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "ghost": [
             {
                 "name": "spirit shackle",
-                "hit": 6,
-                "special": "none"
+                "hit": 4,
+                "special": "perish song"
             },
             {
                 "name": "curse",
@@ -654,8 +654,8 @@
             },
             {
                 "name": "dragon claw",
-                "hit": 6,
-                "special": "none"
+                "hit": 8,
+                "special": "recharging"
             },
             {
                 "name": "dragon breath",
@@ -681,7 +681,7 @@
             {
                 "name": "steam eruption",
                 "hit": 8,
-                "special": "none"
+                "special": "burn"
             },
             {
                 "name": "hydro cannon",
@@ -708,7 +708,7 @@
             {
                 "name": "flamethrower",
                 "hit": 10,
-                "special": "none"
+                "special": "power boost"
             }
         ],
         "electric": [
@@ -720,73 +720,73 @@
             {
                 "name": "fusion bolt",
                 "hit": 8,
-                "special": "none"
+                "special": "primed"
             },
             {
                 "name": "zap cannon",
                 "hit": 8,
-                "special": "none"
+                "special": "semi invulnerable"
             },
             {
                 "name": "thunder",
                 "hit": 10,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "rock": [
             {
                 "name": "ancient power",
                 "hit": 8,
-                "special": "none"
+                "special": "perish song"
             },
             {
                 "name": "smack down",
                 "hit": 8,
-                "special": "none"
+                "special": "recharging"
             },
             {
                 "name": "rock tomb",
                 "hit": 8,
-                "special": "none"
+                "special": "confusion"
             },
             {
                 "name": "meteor beam",
                 "hit": 10,
-                "special": "none"
+                "special": "semi invulnerable"
             }
         ],
         "grass": [
             {
                 "name": "energy ball",
                 "hit": 8,
-                "special": "none"
+                "special": "primed"
             },
             {
                 "name": "magical leaf",
                 "hit": 8,
-                "special": "none"
+                "special": "getting pumped"
             },
             {
                 "name": "bullet seed",
                 "hit": 8,
-                "special": "none"
+                "special": "seeded"
             },
             {
                 "name": "solar beam",
                 "hit": 10,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "normal": [
             {
                 "name": "super fang",
                 "hit": 8,
-                "special": "none"
+                "special": "confusion"
             },
             {
                 "name": "hidden power",
                 "hit": 8,
-                "special": "none"
+                "special": "power boost"
             },
             {
                 "name": "mega punch",
@@ -796,7 +796,7 @@
             {
                 "name": "hyper beam",
                 "hit": 10,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "poison": [
@@ -808,7 +808,7 @@
             {
                 "name": "gastro acid",
                 "hit": 8,
-                "special": "none"
+                "special": "burn"
             },
             {
                 "name": "venoshock",
@@ -818,139 +818,139 @@
             {
                 "name": "venom drench",
                 "hit": 10,
-                "special": "poison"
+                "special": "super poison"
             }
         ],
         "bug": [
             {
                 "name": "fell stinger",
                 "hit": 8,
-                "special": "none"
+                "special": "burn"
             },
             {
                 "name": "infestation",
                 "hit": 8,
-                "special": "none"
+                "special": "infatuation"
             },
             {
                 "name": "megahorn",
                 "hit": 8,
-                "special": "none"
+                "special": "power boost"
             },
             {
                 "name": "signal beam",
                 "hit": 10,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "flying": [
             {
                 "name": "brave bird",
                 "hit": 8,
-                "special": "none"
+                "special": "recharging"
             },
             {
                 "name": "max airstream",
                 "hit": 8,
-                "special": "none"
+                "special": "semi invulnerable"
             },
             {
                 "name": "aerial ace",
                 "hit": 8,
-                "special": "none"
+                "special": "primed"
             },
             {
                 "name": "dragon ascent",
                 "hit": 10,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "ground": [
             {
                 "name": "fissure",
                 "hit": 8,
-                "special": "none"
+                "special": "burn"
             },
             {
                 "name": "tectonic rage",
                 "hit": 10,
-                "special": "none"
+                "special": "power boost"
             },
             {
                 "name": "bulldoze",
                 "hit": 8,
-                "special": "none"
+                "special": "confusion"
             },
             {
                 "name": "earthquake",
                 "hit": 10,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "fighting": [
             {
                 "name": "dynamic punch",
                 "hit": 8,
-                "special": "none"
+                "special": "getting pumped"
             },
             {
                 "name": "vital throw",
                 "hit": 8,
-                "special": "none"
+                "special": "getting pumped"
             },
             {
                 "name": "triple kick",
                 "hit": 8,
-                "special": "none"
+                "special": "confusion"
             },
             {
                 "name": "meteor assault",
                 "hit": 10,
-                "special": "none"
+                "special": "semi invulnerable"
             }
         ],
         "psychic": [
             {
                 "name": "prismatic laser",
                 "hit": 8,
-                "special": "none"
+                "special": "confusion"
             },
             {
                 "name": "psystrike",
                 "hit": 8,
-                "special": "none"
+                "special": "super poison"
             },
             {
                 "name": "psybeam",
                 "hit": 8,
-                "special": "none"
+                "special": "recharging"
             },
             {
                 "name": "shattered psyche",
                 "hit": 10,
-                "special": "none"
+                "special": "infatuation"
             }
         ],
         "ice": [
             {
                 "name": "avalanche",
                 "hit": 8,
-                "special": "none"
+                "special": "burn"
             },
             {
                 "name": "mountain gale",
                 "hit": 8,
-                "special": "none"
+                "special": "power boost"
             },
             {
                 "name": "blizzard",
                 "hit": 8,
-                "special": "none"
+                "special": "paralyzed"
             },
             {
                 "name": "ice beam",
                 "hit": 10,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "ghost": [
@@ -962,7 +962,7 @@
             {
                 "name": "destiny bond",
                 "hit": 8,
-                "special": "none"
+                "special": "perish song"
             },
             {
                 "name": "nightmare",
@@ -972,29 +972,29 @@
             {
                 "name": "sinister arrow raid",
                 "hit": 10,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "dragon": [
             {
                 "name": "dragon rush",
                 "hit": 8,
-                "special": "none"
+                "special": "power boost"
             },
             {
                 "name": "scale shot",
                 "hit": 8,
-                "special": "none"
+                "special": "getting pumped"
             },
             {
                 "name": "devastating drake",
                 "hit": 8,
-                "special": "none"
+                "special": "primed"
             },
             {
                 "name": "draco meteor",
                 "hit": 10,
-                "special": "none"
+                "special": "recharging"
             }
         ]
     },
@@ -1009,105 +1009,105 @@
             {
                 "name": "x-wing",
                 "hit": 10,
-                "special": "none"
+                "special": "semi invulnerable"
             },
             {
                 "name": "fly",
                 "hit": 8,
-                "special": "none"
+                "special": "semi invulnerable"
             },
             {
                 "name": "brave bird",
                 "hit": 12,
-                "special": "none"
+                "special": "mimic"
             }
         ],
         "ice": [
             {
                 "name": "subzero slammer",
                 "hit": 10,
-                "special": "none"
+                "special": "power boost"
             },
             {
                 "name": "glaciate",
                 "hit": 10,
-                "special": "none"
+                "special": "semi invulnerable"
             },
             {
                 "name": "max hailstorm",
                 "hit": 10,
-                "special": "none"
+                "special": "primed"
             },
             {
                 "name": "aurora beam",
                 "hit": 12,
-                "special": "none"
+                "special": "recharging"
             }
         ],
         "electric": [
             {
                 "name": "max lightning",
                 "hit": 10,
-                "special": "none"
+                "special": "power boost"
             },
             {
                 "name": "volt crash",
                 "hit": 10,
-                "special": "none"
+                "special": "primed"
             },
             {
                 "name": "gigavolt havoc",
                 "hit": 10,
-                "special": "none"
+                "special": "primed"
             },
             {
                 "name": "10,000,000 volt thunderbolt",
                 "hit": 12,
-                "special": "none"
+                "special": "getting pumped"
             }
         ],
         "fire": [
             {
                 "name": "inferno overdrive",
                 "hit": 10,
-                "special": "none"
+                "special": "confused"
             },
             {
                 "name": "eruption",
                 "hit": 10,
-                "special": "none"
+                "special": "paralyzed"
             },
             {
                 "name": "fusion flare",
                 "hit": 10,
-                "special": "none"
+                "special": "perish song"
             },
             {
                 "name": "wildfire",
                 "hit": 12,
-                "special": "none"
+                "special": "power boost"
             }
         ],
         "psychic": [
             {
                 "name": "hyperspace hole",
                 "hit": 10,
-                "special": "none"
+                "special": "perish song"
             },
             {
                 "name": "psychic terrain",
                 "hit": 10,
-                "special": "none"
+                "special": "power boost"
             },
             {
                 "name": "gravity",
                 "hit": 10,
-                "special": "none"
+                "special": "mimic"
             },
             {
                 "name": "photon geyser",
                 "hit": 12,
-                "special": "none"
+                "special": "getting pumped"
             }
         ]
     }

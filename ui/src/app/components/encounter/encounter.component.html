@@ -14,13 +14,13 @@
             <div><img src="{{imgLoc}}" alt="PokeImage" style="width:100%;z-index:0;"></div>
             <div *ngIf="wildPokemon.moves">
                 <div *ngFor="let move of wildPokemon.moves" class="{{move!.mType}}">
-                    <span style="font-size:large">{{move?.name}}:</span>
-                    <span style="text-align:center;">d{{move?.hit}}</span>
+                    <span style="font-size:large;padding-left:5px;">{{move?.name | titlecase}}:</span>
+                    <span style="font-weight:500;padding-left:5px;">d{{move?.hit}}</span>
                     <span style="float:right;font-weight:bold;">{{move?.special}}</span>
                 </div>
             </div>
             <div class="row" style="padding-top: 3px">
-                <h2 class="col" style="float:right">{{wildPokemon.currentHP}}</h2>/<h2 class="col">{{wildPokemon.hp}}</h2>
+                <h2 class="col" style="text-align:right">{{wildPokemon.currentHP}}</h2>/<h2 class="col">{{wildPokemon.hp}}</h2>
             </div>
             <div class="row">
                 <span class="col" style="text-align:right;"><i class="fa-solid fa-dice-d20"></i></span>
