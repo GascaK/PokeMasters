@@ -14,8 +14,18 @@
   <app-backpack [trainerTracker]="trainerTracker"></app-backpack>
 </div>
 <div *ngIf="trainerTracker.views.get('defaultView')">
+  <div *ngIf="!choosingStarter">
+    <app-active [trainer]="trainer"></app-active>
+  </div>
+  <div *ngIf="choosingStarter">
+    <h3>Choose Your Starter Pokemon:</h3>
+    <button class="grass col-12" style="padding:2px" (click)="setStarter(1)">Grass</button>
+    <button class="fire col-12" style="padding:2px" (click)="setStarter(4)">Fire</button>
+    <button class="water col-12" style="padding:2px" (click)="setStarter(7)">Water</button>
+    <button class="poison col-12" style="padding:2px" (click)="setStarter(10)">Ghost</button>
+  </div>
   <div>
-    <app-active [trainer]="trainerTracker.getMaster()"></app-active>
+    <h4 style="text-align:center">Info</h4>
   </div>
   <div>
     <button class="btn btn-primary col-12" (click)="setView('dexView')">PokeDEX</button>
@@ -33,7 +43,7 @@
     <button class="btn btn-success col-12" (click)="setView('encounterView')">Tall Grass</button>
   </div>
   <div>
-    <button class="btn btn-info col-12" (click)="setView('shopView')">Poke Mart</button>
+    <button class="btn btn-info col-12" (click)="setView('shopView')">Items</button>
   </div>
   <div *ngIf="trainerTracker.getMaster().currentTier==3">
     <button class="btn btn-info col-12" (click)="encounterLegendary()">Legendary</button>

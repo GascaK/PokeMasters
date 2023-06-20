@@ -3,6 +3,6 @@ node_modules
 **/__pycache__/**
 /venv/*
 **/build
-server/database/*
+server/database/**
 web/
 ui/dist

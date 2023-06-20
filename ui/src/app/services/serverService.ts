@@ -99,7 +99,7 @@ export class ServerService {
         let pokemon: PokemonTemplate;
         await this.instance.get<PokemonTemplate>(`/pokemon/${id}`)
             .then( async (res) => {                                   
-                const pokemon: PokemonTemplate = res.data;
+                pokemon = res.data;
                 pokemon.currentHP = pokemon.hp;
                 pokemon.moves?.push(await this.getPokemonMove(res.data.move1));
                 pokemon.moves?.push(await this.getPokemonMove(res.data.move2));
