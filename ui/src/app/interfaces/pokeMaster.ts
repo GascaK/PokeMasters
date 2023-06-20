@@ -123,7 +123,12 @@ export class PokemonMaster implements Trainer{
         for(var i=0; i<numberOfItems; i++){
             await this.instance.getItem(this.trainerID)
                 .then( (shopItem) => {
-                    shop.push(shopItem);
+                    const maxPrice = this.currentTier < 2? 1200 : 9000000;
+                    if (shopItem.cost >= 0 && shopItem.cost <= maxPrice) {
+                        shop.push(shopItem);
+                    } else {
+                        i--;
+                    }
                 })
         }
         return shop;

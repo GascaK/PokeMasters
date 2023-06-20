@@ -1,3 +1,5 @@
+import { PokeItemsTemplate } from "./pokeItems";
+
 export interface PokeMoveTemplate {
     _id: number;
     name: string;
@@ -20,5 +22,6 @@ export interface PokemonTemplate {
     move1: number;
     move2: number;
     moves?: Array<PokeMoveTemplate | null>;
+    item?: PokeItemsTemplate | null;
     speed: number;
 }

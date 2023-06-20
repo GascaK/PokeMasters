@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PokeItemsTemplate } from 'src/app/interfaces/pokeItems';
 import { PokemonMaster } from 'src/app/interfaces/pokeMaster';
 import { PokemonTemplate } from 'src/app/interfaces/pokemon';
 
@@ -12,12 +13,15 @@ export class ActiveComponent implements OnInit{
     public active: PokemonTemplate;
     public imgLoc: string;
     public interval: any;
+    public items: Array<PokeItemsTemplate> = [];
+    public choosingItemStatus = false;
 
     ngOnInit() {
         this.loadActive();
         this.interval = setInterval(() => {
             this.loadCard(this.trainer.activePokemon);
         }, 1000);
+        this.items = this.trainer.items;
     }
 
     loadActive() {
@@ -32,5 +36,29 @@ export class ActiveComponent implements OnInit{
     loadCard(pokemon: PokemonTemplate) {
         const imgFile = pokemon.pokedex < 10 ? '00' + pokemon.pokedex : pokemon.pokedex < 100 ? '0' + pokemon.pokedex : pokemon.pokedex;
         this.imgLoc = `/assets/imgs/${imgFile}.PNG`;
+    }
+
+    chooseNewItem() {
+        this.choosingItemStatus = true;
+    }
+
+    holdItem(item: PokeItemsTemplate) {
+        this.active.item = item;
+        this.trainer.removeItem(item._id);
+        this.exitItemSelection();
+    }
+
+    dropActiveHeldItem() {
+        if (this.active.item) {
+            alert(`Dropping item ${this.active.item!.name}`);
+            this.active.item = null;
+        } else {
+            alert("Nothing to drop.");
+        }
+        this.exitItemSelection();
+    }
+
+    exitItemSelection() {
+        this.choosingItemStatus = false;
     }
 }

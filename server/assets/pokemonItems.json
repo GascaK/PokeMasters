@@ -63,17 +63,17 @@
         {
             "name": "Scarf Band",
             "cost": 350,
-            "text": "Increase the Max HP of your active Pokemon by 3."
+            "text": "Held Item: Increase the Max HP of your active Pokemon by 3."
         },
         {
             "name": "Leftovers",
-            "cost": 375,
-            "text": "At the end of your turn, heal your active Pokemon by 1 HP."
+            "cost": 575,
+            "text": "Held Item: At the end of your turn, heal your active Pokemon by 2 HP."
         },
         {
             "name": "Boxing Gloves",
             "cost": 400,
-            "text": "Increase the damage of your active Pokemon attacks by +1."
+            "text": "Held Item: Increase the damage of your active Pokemon attacks by +1."
         },
         {
             "name": "Winners Debt",
@@ -108,7 +108,7 @@
         {
             "name": "Weakness Policy",
             "cost": 300,
-            "text": "Your active pokemon has no weakness."
+            "text": "Held Item: Your active pokemon has no weakness."
         },
         {
             "name": "Trainer Repel",
@@ -138,7 +138,7 @@
         {
             "name": "Bill's Helping Hand",
             "cost": 950,
-            "text": "During your next GYM battle, subtract -2 damage from a GYM Leaders active pokemon's attacks."
+            "text": "Held Item: During your next GYM battle only, subtract -3 damage from a GYM Leaders active pokemon's attacks."
         },
         {
             "name": "Pokemon Doll",
@@ -178,7 +178,57 @@
         {
             "name": "Black Sludge",
             "cost": 350,
-            "text": "During your next GYM battle, you go first instead of the GYM Leader."
+            "text": "Held Item: During your next GYM battle only, you go first instead of the GYM Leader."
+        },
+        {
+            "name": "Choice Scarf",
+            "cost": 450,
+            "text": "Held Item: Add +1 to your Active Pokemon's speed stat."
+        },
+        {
+            "name": "Quick Claw",
+            "cost": 750,
+            "text": "Held Item: Add +3 to your Active Pokemon's speed stat."
+        },
+        {
+            "name": "Adamant Crystal",
+            "cost": 550,
+            "text": "Held Item: If your Active Pokemon goes first, your first attack does +3 damage."
+        },
+        {
+            "name": "Amulet Coin",
+            "cost": 680,
+            "text": "Held Item: You get an extra $300 from the bank when you when a Trainer Battle."
+        },
+        {
+            "name": "Banana",
+            "cost": 300,
+            "text": "Held Item: Your Even Atk does +1 while your Odd Atk does -2."
+        },
+        {
+            "name": "Odd Pear",
+            "cost": 300,
+            "text": "Held Item: Your Odd Atk does +1 while your Even Atk does -2."
+        },
+        {
+            "name": "Bronze Cup",
+            "cost": 850,
+            "text": "Held Item: Your Active Pokemon's HP stat is -3, all your Atk's do +2 damage."
+        },
+        {
+            "name": "Antidote",
+            "cost": 300,
+            "text": "Heal all your Active Pokemon's status conditions."
+        },
+        {
+            "name": "Clear Amulet",
+            "cost": 2380,
+            "text": "Held Item: When you would land on an Item spot instead you can encounter a pokemon."
+        },
+        {
+            "name": "Choice Specs",
+            "cost": 2550,
+            "text": "Held Item: When you would land on a Wild Encounter spot instead you can find a random item."
         }
     ]
 }

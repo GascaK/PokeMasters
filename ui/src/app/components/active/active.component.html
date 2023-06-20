@@ -1,4 +1,33 @@
-<div class="card" *ngIf="trainer.activePokemon">
+<div *ngIf="choosingItemStatus">
+    <div class="row">
+        <h3>Items:</h3>
+    </div>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <th scope="col">Name</th>
+                <th scope="col">Text</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Buy</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of items">
+                    <th>{{item.name}}</th>
+                    <td>{{item.text}}</td>
+                    <td>{{item.cost}}</td>
+                    <td><button class="btn btn-primary" (click)="holdItem(item)">Select</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="padding-bottom:3px;">
+            <button class="btn btn-danger col-12" (click)="dropActiveHeldItem()">Drop Held Item</button>
+        </div>
+        <div>
+            <button class="btn btn-primary col-12" (click)="exitItemSelection()">Exit</button>
+        </div>
+    </div>
+</div>
+<div class="card" *ngIf="trainer.activePokemon && !choosingItemStatus">
     <div class="card-body">
         <div class="card-title">
             <div style="clear:both">
@@ -7,7 +36,7 @@
                 <h2 style="display: inline; float:right">{{active.speed}}</h2>
             </div>
         </div>
-        <div><img src="{{imgLoc}}" alt="PokeImage" style="width: 100%; z-index: 0;"></div>
+        <div><img src="{{imgLoc}}" fetchpriority="high" alt="PokeImage" style="width: 100%; z-index: 0;"></div>
         <div *ngIf="active.moves">
             <div class="{{active.moves[0]!.mType}}">
                 <span style="font-size:medium;font-weight:bold;">Even</span>
@@ -26,6 +55,16 @@
             <button class="btn btn-primary col" (click)="active.currentHP=active.currentHP!-1">-</button>
             <h2 class="col" style="text-align:right;">{{active.currentHP}}</h2>/<h2 class="col">{{active.hp}}</h2>
             <button (click)="active.currentHP=active.currentHP!+1" class="btn btn-primary col">+</button>
+        </div>
+        <div class="row">
+            <h3 style="padding:3px;text-align:center;">Held Item</h3>
+            <button *ngIf="active.item" class="btn btn-success col-12" (click)="chooseNewItem()">
+                <span style="text-align:left;font-weight:bold;">{{active.item.name}}</span>
+                <span style="padding-left:5px;text-align:right;">{{active.item.text}}</span>
+            </button>
+            <button *ngIf="!active.item" class="btn btn-secondary col-12" (click)="chooseNewItem()">
+                Held Item Empty
+            </button>
         </div>
     </div>
 </div>

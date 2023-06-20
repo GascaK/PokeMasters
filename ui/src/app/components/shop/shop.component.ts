@@ -16,12 +16,13 @@ export class ShopComponent implements OnInit {
     ngOnInit() {
         if (this.trainerTracker?.isMasterSet()){
             this.trainer = this.trainerTracker.getMaster();
-            this.getNewShop(5);
+            this.getNewShop(6);
         }
     }
 
     async getNewShop(shelfSpace: number) {
        this.shop = await this.trainer.getShop(shelfSpace);
+       this.shop.sort((a, b): number => { return a.cost-b.cost })
     }
 
     async purchaseItem(item: PokeItemsTemplate) {
