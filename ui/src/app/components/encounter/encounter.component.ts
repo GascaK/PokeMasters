@@ -41,7 +41,16 @@ export class EncounterComponent implements OnInit{
             this.showPokemon = true;
             const tier = this.legendary ? 4 : this.trainer.getCurrentTier();
 
-            this.wildPokemon = await this.trainer.encounterRandomPokemonByTier(tier);
+            const wildPokemonList: Array<PokemonTemplate> = [];
+            if (tier == 4) {
+                wildPokemonList.push(await this.trainer.encounterRandomPokemonByTier(4));
+            } else {
+                for (let i=tier; i>0; i--) {
+                    wildPokemonList.push(await this.trainer.encounterRandomPokemonByTier(i));
+                }
+            }
+
+            this.wildPokemon = wildPokemonList[Math.floor(Math.random() * wildPokemonList.length)];
             this.loadCard(this.wildPokemon);
         }, 4000);
     }

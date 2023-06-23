@@ -17,20 +17,21 @@ export class ActiveComponent implements OnInit{
     public choosingItemStatus = false;
 
     ngOnInit() {
-        this.loadActive();
-        this.interval = setInterval(() => {
-            this.loadCard(this.trainer.activePokemon);
-        }, 1000);
-        this.items = this.trainer.items;
-    }
-
-    loadActive() {
         if (this.trainer.activePokemon) {
             this.active = this.trainer.activePokemon;
             if (! this.active.currentHP ) {
                 this.active.currentHP = this.active.hp;
             }
+            this.loadCard(this.active);
+            this.items = this.trainer.items;
         }
+        this.interval = setTimeout( () => {
+            console.log(this.trainer.activePokemon);
+            if (this.trainer.activePokemon) {
+                this.active = this.trainer.activePokemon;
+                this.loadCard(this.active);
+            }
+        }, 1000);
     }
 
     loadCard(pokemon: PokemonTemplate) {

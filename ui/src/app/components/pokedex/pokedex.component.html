@@ -10,7 +10,7 @@
         <td>{{pokemon.key}}</td>
         <td>{{pokemon.value.name | uppercase}}</td>
         <td>{{pokemon.value.count}}</td>
-        <td><button class="btn-primary" (click)="moreInfo(pokemon.key)">Select</button></td>
+        <td><button class="btn btn-primary col-12" (click)="moreInfo(pokemon.key)">Select</button></td>
     </tr>
     </table>
 </div>
@@ -36,7 +36,7 @@
         <td>{{pokemon.data.speed}}</td>
         <td *ngIf="pokemon.data.moves">{{pokemon.data.moves[0]?.name}}:{{pokemon.data.moves[0]?.hit}}</td>
         <td *ngIf="pokemon.data.moves">{{pokemon.data.moves[1]?.name}}:{{pokemon.data.moves[0]?.hit}}</td>
-        <td><button (click)="sendToBench(pokemon.data)">Bench</button></td>
+        <td><button class="btn btn-primary" (click)="sendToBench(pokemon.data)">Bench</button></td>
         <td><input class="form-check-input" type="checkbox" [(ngModel)]="pokemon.checked"></td>
     </tr>
     </table>

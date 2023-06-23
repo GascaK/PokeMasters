@@ -135,7 +135,6 @@ export class PokemonMaster implements Trainer{
     }
 
     async saveState(): Promise<void>{
-        console.log('b4 save', this);
         this.instance.save(this);
     }
 }

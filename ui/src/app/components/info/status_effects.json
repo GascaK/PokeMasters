@@ -58,7 +58,7 @@
         },
         {
             "name": "Revive",
-            "text": "Your pokemon returns to it's max health."
+            "text": "Your pokemon heals for +10 health."
         }
     ]
 }

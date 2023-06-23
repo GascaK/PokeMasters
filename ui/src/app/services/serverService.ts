@@ -101,8 +101,8 @@ export class ServerService {
             .then( async (res) => {                                   
                 pokemon = res.data;
                 pokemon.currentHP = pokemon.hp;
-                pokemon.moves?.push(await this.getPokemonMove(res.data.move1));
-                pokemon.moves?.push(await this.getPokemonMove(res.data.move2));
+                pokemon.moves?.push(await this.getPokemonMove(pokemon.move1));
+                pokemon.moves?.push(await this.getPokemonMove(pokemon.move2));
             })
             .catch( (err) => {
                 console.log(err);
@@ -123,8 +123,8 @@ export class ServerService {
         return pokemon!;
     }
 
-    async getPokemonMove(moveID: number): Promise<PokeMoveTemplate | null>{
-        let moveData: PokeMoveTemplate | null = null;
+    async getPokemonMove(moveID: number): Promise<PokeMoveTemplate>{
+        let moveData: PokeMoveTemplate;
         await this.instance.get<PokeMoveTemplate>(`/moves/${moveID}`)
         .then( (res) => {
             moveData = res.data;
@@ -132,7 +132,7 @@ export class ServerService {
         .catch( (err) => {
             console.log(err);
         });
-        return moveData;
+        return moveData!;
     }
 
     // ////// Shop Items //////
@@ -156,7 +156,7 @@ export class ServerService {
     }
 
     async save(t: PokemonMaster): Promise<void>{
-        const url = `/trainers/${t.trainerID}?badges=${t.badges}&tier=${t.currentTier}&dollars=${t.dollars}`;
+        const url = `/trainers/${t.trainerID}?badges=${t.badges}&tier=${t.currentTier}&dollars=${t.dollars}&poke1=${t.activePokemon._id}`;
         await this.instance.post(url)
             .then((res) => {
                 console.log(res);

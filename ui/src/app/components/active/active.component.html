@@ -27,7 +27,7 @@
         </div>
     </div>
 </div>
-<div class="card" *ngIf="trainer.activePokemon && !choosingItemStatus">
+<div class="card" *ngIf="active && !choosingItemStatus" style="background-color:rgb(255, 203, 5)">
     <div class="card-body">
         <div class="card-title">
             <div style="clear:both">
@@ -37,26 +37,27 @@
             </div>
         </div>
         <div><img src="{{imgLoc}}" fetchpriority="high" alt="PokeImage" style="width: 100%; z-index: 0;"></div>
-        <div *ngIf="active.moves">
-            <div class="{{active.moves[0]!.mType}}">
-                <span style="font-size:medium;font-weight:bold;">Even</span>
+        <div style="background-color:lightcyan;">
+          <div *ngIf="active.moves">
+            <div class="{{active.moves[0]!.mType}}" style="padding-top:3px;height:40px;justify-content:center;">
+                <span style="font-size:medium;font-weight:bold;padding-left:3px">Even</span>
                 <span style="font-size:large;padding-left:5px;">{{active.moves[0]?.name | titlecase}}:</span>
                 <span style="font-weight:500;padding-left:5px;">d{{active.moves[0]?.hit}}</span>
-                <span style="float:right;font-weight:bold;">{{active.moves[0]?.special}}</span>
+                <span style="float:right;font-weight:bold;padding-right:3px;">{{active.moves[0]?.special}}</span>
             </div>
-            <div class="{{active.moves[1]!.mType}}">
-                <span style="font-size:medium;font-weight:bold;">Odd</span>
+            <div class="{{active.moves[1]!.mType}}" style="padding-top:3px;height:40px;">
+                <span style="font-size:medium;font-weight:bold;padding-left:3px">Odd</span>
                 <span style="font-size:large;padding-left:5px;">{{active.moves[1]?.name | titlecase}}:</span>
                 <span style="font-weight:500;padding-left:5px;">d{{active.moves[1]?.hit}}</span>
-                <span style="float:right;font-weight:bold;">{{active.moves[1]?.special}}</span>
+                <span style="float:right;font-weight:bold;padding-right:3px;">{{active.moves[1]?.special}}</span>
             </div>
-        </div>
-        <div class="row" style="padding-top:3px">
+          </div>
+          <div class="row" style="padding-top:3px;justify-content: center;">
             <button class="btn btn-primary col" (click)="active.currentHP=active.currentHP!-1">-</button>
             <h2 class="col" style="text-align:right;">{{active.currentHP}}</h2>/<h2 class="col">{{active.hp}}</h2>
             <button (click)="active.currentHP=active.currentHP!+1" class="btn btn-primary col">+</button>
-        </div>
-        <div class="row">
+          </div>
+          <div class="row">
             <h3 style="padding:3px;text-align:center;">Held Item</h3>
             <button *ngIf="active.item" class="btn btn-success col-12" (click)="chooseNewItem()">
                 <span style="text-align:left;font-weight:bold;">{{active.item.name}}</span>
@@ -65,6 +66,7 @@
             <button *ngIf="!active.item" class="btn btn-secondary col-12" (click)="chooseNewItem()">
                 Held Item Empty
             </button>
+          </div>
         </div>
     </div>
 </div>
