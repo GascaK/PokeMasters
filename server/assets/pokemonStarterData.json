@@ -106,5 +106,60 @@
         "tier": 3,
         "type": ["poison", "poison"],
         "moves": [145, 148]
+    },
+    "013":{
+        "pid": 172,
+        "name": "Pichu",
+        "hp": 8,
+        "speed": 2,
+        "tier": 1,
+        "type": ["electric", "electric"],
+        "moves": [9, 11]
+    },
+    "014":{
+        "pid": 25,
+        "name": "Pikachu",
+        "hp": 14,
+        "speed": 3,
+        "tier": 2,
+        "type": ["electric", "electric"],
+        "moves": [69, 72]
+    },
+    "015":{
+        "pid": 26,
+        "name": "Raichu",
+        "hp": 20,
+        "speed": 4,
+        "tier": 3,
+        "type": ["electric", "electric"],
+        "moves": [131, 132]
+    },
+
+    "016":{
+        "pid": 56,
+        "name": "Mankey",
+        "hp": 9,
+        "speed": -1,
+        "tier": 1,
+        "type": ["fighting", "fighting"],
+        "moves": [43, 44]
+    },
+    "017":{
+        "pid": 57,
+        "name": "Primeape",
+        "hp": 16,
+        "speed": 1,
+        "tier": 2,
+        "type": ["fighting", "fighting"],
+        "moves": [101, 103]
+    },
+    "018":{
+        "pid": 979,
+        "name": "Annihilape",
+        "hp": 21,
+        "speed": 2,
+        "tier": 3,
+        "type": ["fighting", "fighting"],
+        "moves": [161, 164]
     }
 }

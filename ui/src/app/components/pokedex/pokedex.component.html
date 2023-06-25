@@ -36,7 +36,8 @@
         <td>{{pokemon.data.speed}}</td>
         <td *ngIf="pokemon.data.moves">{{pokemon.data.moves[0]?.name}}:{{pokemon.data.moves[0]?.hit}}</td>
         <td *ngIf="pokemon.data.moves">{{pokemon.data.moves[1]?.name}}:{{pokemon.data.moves[0]?.hit}}</td>
-        <td><button class="btn btn-primary" (click)="sendToBench(pokemon.data)">Bench</button></td>
+        <td *ngIf="validateBenchCapacity(pokemon.data)"><button class="btn btn-primary" (click)="sendToBench(pokemon.data)">Bench</button></td>
+        <td *ngIf="!validateBenchCapacity(pokemon.data)"><button class="btn btn-secondary" disabled>Invalid</button></td>
         <td><input class="form-check-input" type="checkbox" [(ngModel)]="pokemon.checked"></td>
     </tr>
     </table>

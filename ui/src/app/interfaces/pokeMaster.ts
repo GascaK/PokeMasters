@@ -12,8 +12,9 @@ export class PokemonMaster implements Trainer{
     pokemon: Array<PokemonTemplate> = [];
     items: Array<PokeItemsTemplate> = [];
     badges: number = 0;
-    activePokemon: PokemonTemplate;
-
+    activePokemon: PokemonTemplate | undefined;
+    benchOne?: PokemonTemplate;
+    benchTwo?: PokemonTemplate;
     evolveMinimum = 3;
 
     constructor(public trainerID: number, public instance: ServerService) {
@@ -123,7 +124,14 @@ export class PokemonMaster implements Trainer{
         for(var i=0; i<numberOfItems; i++){
             await this.instance.getItem(this.trainerID)
                 .then( (shopItem) => {
-                    const maxPrice = this.currentTier < 2? 1200 : 9000000;
+                    let maxPrice = 0;
+                    if (this.currentTier == 1) {
+                        maxPrice = 500;
+                    } else if (this.currentTier == 2) {
+                        maxPrice = 1000;
+                    } else {
+                        maxPrice = 1000000;
+                    }
                     if (shopItem.cost >= 0 && shopItem.cost <= maxPrice) {
                         shop.push(shopItem);
                     } else {

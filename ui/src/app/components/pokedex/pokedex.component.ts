@@ -83,6 +83,17 @@ export class PokedexComponent implements OnInit {
         this.exitInfoPanel();
     }
 
+    validateBenchCapacity(pokemon: PokemonTemplate): boolean {
+        if (pokemon._id == this.trainer.activePokemon?._id) {
+            return false;
+        } else if (pokemon._id == this.trainer.benchOne?._id) {
+            return false;
+        } else if (pokemon._id == this.trainer.benchTwo?._id) {
+            return false;
+        }
+        return true;
+    }
+
     sendToBench(pokemon: PokemonTemplate) {
         console.log(pokemon._id);
         this.trainer.activePokemon = pokemon;

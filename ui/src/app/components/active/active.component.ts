@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { PokeItemsTemplate } from 'src/app/interfaces/pokeItems';
 import { PokemonMaster } from 'src/app/interfaces/pokeMaster';
 import { PokemonTemplate } from 'src/app/interfaces/pokemon';
@@ -17,6 +17,21 @@ export class ActiveComponent implements OnInit{
     public choosingItemStatus = false;
 
     ngOnInit() {
+        this.loadActive();
+        this.interval = setTimeout( () => {
+            console.log(this.trainer.activePokemon);
+            if (this.trainer.activePokemon) {
+                this.active = this.trainer.activePokemon;
+                this.loadCard(this.active);
+            }
+        }, 1000);
+    }
+
+    update() {
+        this.loadActive();
+    }
+
+    loadActive() {
         if (this.trainer.activePokemon) {
             this.active = this.trainer.activePokemon;
             if (! this.active.currentHP ) {
@@ -25,13 +40,6 @@ export class ActiveComponent implements OnInit{
             this.loadCard(this.active);
             this.items = this.trainer.items;
         }
-        this.interval = setTimeout( () => {
-            console.log(this.trainer.activePokemon);
-            if (this.trainer.activePokemon) {
-                this.active = this.trainer.activePokemon;
-                this.loadCard(this.active);
-            }
-        }, 1000);
     }
 
     loadCard(pokemon: PokemonTemplate) {

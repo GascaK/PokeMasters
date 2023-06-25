@@ -38,7 +38,7 @@
         },
         {
             "name": "Semi-Invulnerable",
-            "text": "Your next attack does no damage. Your Opponents Pokemon does no damage next turn."
+            "text": "Your next attack does no damage. Your Opponents Pokemon does half damage next turn."
         },
         {
             "name": "Primed",
@@ -54,11 +54,11 @@
         },
         {
             "name": "Mimic",
-            "text": "Your Opponents Pokemon must use this Pokemon's move pool to attack."
+            "text": "Your Opponents Pokemon must use this Pokemon's move pool to attack next turn."
         },
         {
             "name": "Revive",
-            "text": "Your pokemon heals for +10 health."
+            "text": "Your pokemon heals for +5 health."
         }
     ]
 }

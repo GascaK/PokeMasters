@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { PokemonMaster } from 'src/app/interfaces/pokeMaster';
+import { PokemonTemplate } from 'src/app/interfaces/pokemon';
 import ServerService from 'src/app/services/serverService';
 import { TrackerService } from 'src/app/services/trackingService';
+import { ActiveComponent } from '../active/active.component';
 
 @Component({
     selector: 'app-homepage',
@@ -10,16 +12,17 @@ import { TrackerService } from 'src/app/services/trackingService';
 })
 export class HomepageComponent implements OnInit {
     @Input() trainerTracker: TrackerService;
+    @ViewChild(ActiveComponent, {static: false}) childC: ActiveComponent;
     public serverService = new ServerService();
-    public legendary: boolean;
     public choosingStarter = false;
+    public legendary = false;
     public trainer: PokemonMaster;
     public interval: any;
 
     ngOnInit(): void {
-        this.trainer = this.trainerTracker.getMaster();
         this.legendary = false;
         this.choosingStarter = false;
+        this.trainer = this.trainerTracker.getMaster();
         this.interval = setInterval(() => {
             if (this.trainer.pokemon.length == 0) {
                 this.choosingStarter = true;
@@ -41,7 +44,6 @@ export class HomepageComponent implements OnInit {
     async setStarter(id: number) {
         await this.serverService.getPokemonByID(id)
             .then( (pokemon) => {
-                console.log(pokemon);
                 this.trainer.catchPokemon(pokemon);
                 this.trainer.activePokemon = pokemon;
             })
@@ -49,5 +51,31 @@ export class HomepageComponent implements OnInit {
                 console.log(err);
                 alert(err);
             });
+    }
+
+    setBenchOne(pokemon: PokemonTemplate | undefined) {
+        if (this.trainer.benchOne) {
+            this.trainer.activePokemon = this.trainer.benchOne;
+            this.trainer.benchOne = pokemon;
+        } else {
+            this.trainer.benchOne = pokemon;
+            this.trainer.activePokemon = undefined;
+            this.trainerTracker.setNewView("dexView");
+        }
+        this.trainer.saveAll();
+        this.childC.update();
+    }
+
+    setBenchTwo(pokemon: PokemonTemplate | undefined) {
+        if (this.trainer.benchTwo) {
+            this.trainer.activePokemon = this.trainer.benchTwo;
+            this.trainer.benchTwo = pokemon;
+        } else {
+            this.trainer.benchTwo = pokemon;
+            this.trainer.activePokemon = undefined;
+            this.trainerTracker.setNewView("dexView");
+        }
+        this.trainer.saveAll();
+        this.childC.update();
     }
 }

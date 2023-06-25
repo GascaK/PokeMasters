@@ -26,6 +26,12 @@ export class ServerService {
                 trainer.activePokemon = await this.getPokemonByID(data.poke1);
                 trainer.pokemon = await this.getTrainerPokemon(trainerID);
                 trainer.items = await this.getTrainerItems(trainerID);
+                if (data.poke2) {
+                    trainer.benchOne = await this.getPokemonByID(data.poke2);
+                }
+                if (data.poke3) {
+                    trainer.benchTwo = await this.getPokemonByID(data.poke3);
+                }
             });
         return trainer;
     }
@@ -101,8 +107,9 @@ export class ServerService {
             .then( async (res) => {                                   
                 pokemon = res.data;
                 pokemon.currentHP = pokemon.hp;
-                pokemon.moves?.push(await this.getPokemonMove(pokemon.move1));
-                pokemon.moves?.push(await this.getPokemonMove(pokemon.move2));
+                pokemon.moves = [];
+                pokemon.moves.push(await this.getPokemonMove(pokemon.move1));
+                pokemon.moves.push(await this.getPokemonMove(pokemon.move2));
             })
             .catch( (err) => {
                 console.log(err);
@@ -156,7 +163,23 @@ export class ServerService {
     }
 
     async save(t: PokemonMaster): Promise<void>{
-        const url = `/trainers/${t.trainerID}?badges=${t.badges}&tier=${t.currentTier}&dollars=${t.dollars}&poke1=${t.activePokemon._id}`;
+        let url = `/trainers/${t.trainerID}?badges=${t.badges}&tier=${t.currentTier}&dollars=${t.dollars}`;
+        if (t.activePokemon) {
+            url += `&poke1=${t.activePokemon._id}`;
+        } else {
+            url += "&poke1=0";
+        }
+        if (t.benchOne) {
+            url += `&poke2=${t.benchOne._id}`;
+        } else {
+            url += "&poke2=0";
+        }
+        if (t.benchTwo) {
+            url += `&poke3=${t.benchTwo._id}`;
+        } else {
+            url += "&poke3=0";
+        }
+
         await this.instance.post(url)
             .then((res) => {
                 console.log(res);

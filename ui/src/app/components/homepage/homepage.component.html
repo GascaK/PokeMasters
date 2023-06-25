@@ -13,19 +13,34 @@
 <div *ngIf="trainerTracker.views.get('backpackView')">
   <app-backpack [trainerTracker]="trainerTracker"></app-backpack>
 </div>
-<div *ngIf="trainerTracker.views.get('defaultView')">
-  <div *ngIf="!choosingStarter">
-    <app-active [trainer]="trainer"></app-active>
-  </div>
+<div class="row" *ngIf="trainerTracker.views.get('defaultView')">
   <div *ngIf="choosingStarter">
     <h3>Choose Your Starter Pokemon:</h3>
     <button class="grass col-12" style="padding:2px" (click)="setStarter(1)">Grass</button>
     <button class="fire col-12" style="padding:2px" (click)="setStarter(4)">Fire</button>
     <button class="water col-12" style="padding:2px" (click)="setStarter(7)">Water</button>
     <button class="poison col-12" style="padding:2px" (click)="setStarter(10)">Ghost</button>
+    <button class="electric col-12" style="padding:2px" (click)="setStarter(13)">Electric</button>
+    <button class="fighting col-12" style="padding:2px" (click)="setStarter(16)">Fighting</button>
+  </div>
+  <div *ngIf="!choosingStarter">
+    <app-active [trainer]="trainer"></app-active>
   </div>
   <div>
-    <h4 style="text-align:center">Info</h4>
+    <h4 style="text-align:center">Bench</h4>
+  </div>
+  <div class="col">
+    <button class="btn btn-primary col-12" (click)="setBenchOne(trainer.activePokemon)">
+      {{trainer.benchOne?.name || "Empty Slot"}}
+    </button>
+  </div>
+  <div class="col">
+    <button class="btn btn-primary col-12" (click)="setBenchTwo(trainer.activePokemon)">
+      {{trainer.benchTwo?.name || "Empty Slot"}}
+    </button>
+  </div>
+  <div>
+    <h4 style="text-align:center">{{trainer.name}}'s Info:</h4>
   </div>
   <div>
     <button class="btn btn-primary col-12" (click)="setView('dexView')">PokeDEX</button>
@@ -34,7 +49,7 @@
     <button class="btn btn-primary col-12" (click)="setView('backpackView')">BackPack</button>
   </div>
   <div>
-    <button class="btn btn-primary col-12" (click)="setView('infoView')">Info</button>
+    <button class="btn btn-primary col-12" (click)="setView('infoView')">Settings</button>
   </div>
   <div>
     <h4 style="text-align:center">Actions</h4>

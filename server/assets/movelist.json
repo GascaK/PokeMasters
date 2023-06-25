@@ -151,7 +151,7 @@
             {
                 "name": "acid",
                 "hit": 6,
-                "special": "recharging"
+                "special": "primed"
             }
         ],
         "bug": [

@@ -16,9 +16,14 @@
             "text": "Add +2 to your next attempt at catching a wild Pokemon."
         },
         {
+            "name": "Joker's Ball",
+            "cost": 1050,
+            "text": "Flip a coin. If heads, add +5 to your next attempt at catching a wild Pokemon. If tails, subtract -5."
+        },
+        {
             "name": "Red Card",
-            "cost": 300,
-            "text": "Subtract -1 from any opponents next attempt at catching a wild Pokemon."
+            "cost": 400,
+            "text": "Subtract -2 from any opponents next attempt at catching a wild Pokemon."
         },
         {
             "name": "Red Flute",
@@ -27,17 +32,17 @@
         },
         {
             "name": "Potion",
-            "cost": 250,
+            "cost": 350,
             "text": "Heal +5 HP from your active Pokemon."
         },
         {
             "name": "Max Potion",
-            "cost": 500,
+            "cost": 700,
             "text": "Heal +10 HP from your active Pokemon."
         },
         {
             "name": "Soda Water",
-            "cost": 325,
+            "cost": 525,
             "text": "Heal +8 HP from your active Pokemon."
         },
         {
@@ -61,8 +66,13 @@
             "text": "Sell for $350"
         },
         {
+            "name": "Silver Leaf",
+            "cost": -1,
+            "text": "Sell for $500"
+        },
+        {
             "name": "Scarf Band",
-            "cost": 350,
+            "cost": 650,
             "text": "Held Item: Increase the Max HP of your active Pokemon by 3."
         },
         {
@@ -73,7 +83,7 @@
         {
             "name": "Boxing Gloves",
             "cost": 400,
-            "text": "Held Item: Increase the damage of your active Pokemon attacks by +1."
+            "text": "Held Item: Increase the DMG of your active Pokemon attacks by +1."
         },
         {
             "name": "Winners Debt",
@@ -87,7 +97,7 @@
         },
         {
             "name": "Ultra Ball",
-            "cost": 950,
+            "cost": 1050,
             "text": "Add +6 to your next attempt at catching a wild Pokemon."
         },
         {
@@ -117,12 +127,12 @@
         },
         {
             "name": "Pokemon Fan Club",
-            "cost": 350,
+            "cost": 550,
             "text": "Encounter a Wild Pokemon instead of having your turn."
         },
         {
             "name": "Team Rocket's Plan",
-            "cost": 350,
+            "cost": 550,
             "text": "If your opponent would land on a WildPokemon spot, instead treat it as a Battle spot."
         },
         {
@@ -138,7 +148,7 @@
         {
             "name": "Bill's Helping Hand",
             "cost": 950,
-            "text": "Held Item: During your next GYM battle only, subtract -3 damage from a GYM Leaders active pokemon's attacks."
+            "text": "During your next GYM battle only, subtract -3 DMG from a GYM Leaders active pokemon's attacks."
         },
         {
             "name": "Pokemon Doll",
@@ -147,23 +157,33 @@
         },
         {
             "name": "Pokemon Incense",
-            "cost": 785,
+            "cost": 1785,
             "text": "Choose a Pokemon Type. Your next WildPokemon roll will be of that type."
         },
         {
             "name": "Golden Hammer",
-            "cost": 430,
+            "cost": 730,
             "text": "Choose an opponent. Their active pokemon drops any item held in their hands."
         },
         {
             "name": "Heavy Ball",
             "cost": 450,
-            "text": "Add +5 to your next attempt at catching a wild Pokemon with a speed value in the negatives."
+            "text": "Add +4 to your next attempt at catching a wild Pokemon with a speed value in the negatives."
         },
         {
             "name": "Quick Ball",
             "cost": 550,
-            "text": "Add +4 to your next attempt at catching a wild Pokemon with a speed value greater than 3."
+            "text": "Add +3 to your next attempt at catching a wild Pokemon with a speed value greater than 3."
+        },
+        {
+            "name": "Repeat Ball",
+            "cost": 1050,
+            "text": "Add +2 to your next attempt at catching a wild Pokemon. The wild pokemon does not flee if this ball fails."
+        },
+        {
+            "name": "Heal Ball",
+            "cost": 450,
+            "text": "Add +3 to your next attempt at catching a wild Pokemon with an HP stat of 8 or higher."
         },
         {
             "name": "Bright Powder",
@@ -171,14 +191,19 @@
             "text": "Subtract -3 to your opponents initiative die on their next battle."
         },
         {
+            "name": "Level Ball",
+            "cost": 1050,
+            "text": "Add +3 to your next attempt at catching a wild Pokemon of tier 2 or greater."
+        },
+        {
             "name": "Lucky Specs",
-            "cost": 480,
+            "cost": 680,
             "text": "Add +3 to your next initiative die roll."
         },
         {
             "name": "Black Sludge",
-            "cost": 350,
-            "text": "Held Item: During your next GYM battle only, you go first instead of the GYM Leader."
+            "cost": 750,
+            "text": "During your next GYM battle only, you go first instead of the GYM Leader."
         },
         {
             "name": "Choice Scarf",
@@ -187,37 +212,62 @@
         },
         {
             "name": "Quick Claw",
-            "cost": 750,
+            "cost": 1250,
             "text": "Held Item: Add +3 to your Active Pokemon's speed stat."
         },
         {
             "name": "Adamant Crystal",
             "cost": 550,
-            "text": "Held Item: If your Active Pokemon goes first, your first attack does +3 damage."
+            "text": "Held Item: If your Active Pokemon goes first, your first attack does +3 DMG."
+        },
+        {
+            "name": "Heartgold Crystal",
+            "cost": 1550,
+            "text": "Held Item: If your Active Pokemon goes first, your first attack does double DMG."
+        },
+        {
+            "name": "Soulsilver Crystal",
+            "cost": 1550,
+            "text": "Held Item: If your Opponents Pokemon goes first, their first attack does 1/2 DMG."
+        },
+        {
+            "name": "Trick Room",
+            "cost": 1250,
+            "text": "Held Item: The slower initiative roll goes first."
         },
         {
             "name": "Amulet Coin",
             "cost": 680,
-            "text": "Held Item: You get an extra $300 from the bank when you when a Trainer Battle."
+            "text": "Held Item: You get an extra $100 from the bank when you win when a Trainer Battle."
         },
         {
             "name": "Banana",
             "cost": 300,
-            "text": "Held Item: Your Even Atk does +1 while your Odd Atk does -2."
+            "text": "Held Item: Your Even Atk does +1 DMG while your Odd Atk does -2 DMG."
+        },
+        {
+            "name": "Ruby Banana",
+            "cost": 1350,
+            "text": "Held Item: Your Even Atk does +3 DMG while your Odd Atk does -5 DMG."
         },
         {
             "name": "Odd Pear",
             "cost": 300,
-            "text": "Held Item: Your Odd Atk does +1 while your Even Atk does -2."
+            "text": "Held Item: Your Odd Atk does +3 DMG while your Even Atk does -5 DMG."
+        },
+        {
+            "name": "Odd Saphire Pear",
+            "cost": 1300,
+            "text": "Held Item: Your Odd Atk does +3 DMG while your Even Atk does -5 DMG."
         },
         {
             "name": "Bronze Cup",
-            "cost": 850,
-            "text": "Held Item: Your Active Pokemon's HP stat is -3, all your Atk's do +2 damage."
+            "cost": 1250,
+            "text": "Held Item: Your Active Pokemon's HP stat is -3, all your Atk's do +2 DMG."
         },
         {
             "name": "Antidote",
-            "cost": 300,
+            "cost": 500,
             "text": "Heal all your Active Pokemon's status conditions."
         },
         {
