@@ -1,6 +1,6 @@
-from server.base import db
-from server.models import PokeMoves, PokeItems, PokemonBase, trainers, trainerItems, pokemon
-from server.base import create_app
+from db_server.base import db
+from db_server.models import PokeMoves, PokeItems, PokemonBase, trainers, trainerItems, pokemon
+from db_server.base import create_app
 
 import os
 import json

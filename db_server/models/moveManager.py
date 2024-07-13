@@ -1,5 +1,5 @@
 from flask_restful import abort, Resource, marshal_with, fields
-from .models import PokeMoves
+from ..interfaces.models import PokeMoves
 import random
 import json
 

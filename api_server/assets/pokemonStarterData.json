@@ -1,0 +1,237 @@
+{
+    "9991":{
+        "pid": 1,
+        "name": "Bulbasaur",
+        "hp": 12,
+        "speed": -1,
+        "tier": 1,
+        "moveTypes": ["grass", "poison"],
+        "evolution": {
+            "evolves": true,
+            "evoLine": [9992]
+        },
+        "moves": [18, 27]
+    },
+    "9992":{
+        "pid": 2,
+        "name": "Ivysaur",
+        "hp": 18,
+        "speed": 0,
+        "tier": 2,
+        "moveTypes": ["grass", "poison"],
+        "evolution": {
+            "evolves": true,
+            "evoLine": [9993]
+        },
+        "moves": [76, 85]
+    },
+    "9993":{
+        "pid": 3,
+        "name": "Venusaur",
+        "hp": 24,
+        "speed": 1,
+        "tier": 3,
+        "moveTypes": ["grass", "poison"],
+        "evolution": {
+            "evolves": false,
+            "evoLine": []
+        },
+        "moves": [137, 148]
+    },
+    "9994":{
+        "pid": 4,
+        "name": "Charmander",
+        "hp": 12,
+        "speed": -1,
+        "tier": 1,
+        "moveTypes": ["fire", "fire"],
+        "evolution": {
+            "evolves": true,
+            "evoLine": [9995]
+        },
+        "moves": [5, 7]
+        },
+    "9995":{
+        "pid": 5,
+        "name": "Charmeleon",
+        "hp": 16,
+        "speed": 0,
+        "tier": 2,
+        "moveTypes": ["fire", "fire"],
+        "evolution": {
+            "evolves": true,
+            "evoLine": [9996]
+        },
+        "moves": [64, 66]
+    },
+    "9996":{
+        "pid": 6,
+        "name": "Charizard",
+        "hp": 22,
+        "speed": 1,
+        "tier": 3,
+        "moveTypes": ["fire", "fire"],
+        "evolution": {
+            "evolves": false,
+            "evoLine": []
+        },
+        "moves": [125, 128]
+    },
+    "9997":{
+        "pid": 7,
+        "name": "Squirtle",
+        "hp": 12,
+        "speed": -1,
+        "tier": 1,
+        "moveTypes": ["water", "water"],
+        "evolution": {
+            "evolves": true,
+            "evoLine": [9998]
+        },
+        "moves": [0, 3]
+        },
+    "9998":{
+        "pid": 8,
+        "name": "Wartortle",
+        "hp": 20,
+        "speed": 0,
+        "tier": 2,
+        "moveTypes": ["water", "water"],
+        "evolution": {
+            "evolves": true,
+            "evoLine": [9999]
+        },
+        "moves": [60, 63]
+    },
+    "9999":{
+        "pid": 9,
+        "name": "Blastoise",
+        "hp": 27,
+        "speed": 0,
+        "tier": 3,
+        "moveTypes": ["water", "water"],
+        "evolution": {
+            "evolves": false,
+            "evoLine": []
+        },
+        "moves": [120, 123]
+    },
+    "10000":{
+        "pid": 92,
+        "name": "Gastly",
+        "hp": 10,
+        "speed": 0,
+        "tier": 1,
+        "moveTypes": ["poison", "poison"],
+        "evolution": {
+            "evolves": true,
+            "evoLine": [10001]
+        },
+        "moves": [24, 27]
+        },
+    "10001":{
+        "pid": 93,
+        "name": "Haunter",
+        "hp": 18,
+        "speed": 1,
+        "tier": 2,
+        "moveTypes": ["poison", "poison"],
+        "evolution": {
+            "evolves": true,
+            "evoLine": [10002]
+        },
+        "moves": [84, 87]
+    },
+    "10002":{
+        "pid": 94,
+        "name": "Gengar",
+        "hp": 24,
+        "speed": 1,
+        "tier": 3,
+        "moveTypes": ["poison", "poison"],
+        "evolution": {
+            "evolves": false,
+            "evoLine": []
+        },
+        "moves": [144, 147]
+    },
+    "10003":{
+        "pid": 172,
+        "name": "Pichu",
+        "hp": 8,
+        "speed": 2,
+        "tier": 1,
+        "moveTypes": ["electric", "electric"],
+        "evolution": {
+            "evolves": true,
+            "evoLine": [10004]
+        },
+        "moves": [8, 10]
+    },
+    "10004":{
+        "pid": 25,
+        "name": "Pikachu",
+        "hp": 14,
+        "speed": 3,
+        "tier": 2,
+        "moveTypes": ["electric", "electric"],
+        "evolution": {
+            "evolves": true,
+            "evoLine": [10005]
+        },
+        "moves": [68, 71]
+    },
+    "10005":{
+        "pid": 26,
+        "name": "Raichu",
+        "hp": 20,
+        "speed": 4,
+        "tier": 3,
+        "moveTypes": ["electric", "electric"],
+        "evolution": {
+            "evolves": false,
+            "evoLine": []
+        },
+        "moves": [130, 132]
+    },
+
+    "10006":{
+        "pid": 56,
+        "name": "Mankey",
+        "hp": 9,
+        "speed": -1,
+        "tier": 1,
+        "moveTypes": ["fighting", "fighting"],
+        "evolution": {
+            "evolves": true,
+            "evoLine": [10007]
+        },
+        "moves": [41, 43]
+    },
+    "10007":{
+        "pid": 57,
+        "name": "Primeape",
+        "hp": 16,
+        "speed": 1,
+        "tier": 2,
+        "moveTypes": ["fighting", "fighting"],
+        "evolution": {
+            "evolves": true,
+            "evoLine": [10008]
+        },
+        "moves": [101, 103]
+    },
+    "10008":{
+        "pid": 979,
+        "name": "Annihilape",
+        "hp": 21,
+        "speed": 2,
+        "tier": 3,
+        "moveTypes": ["fighting", "fighting"],
+        "evolution": {
+            "evolves": false,
+            "evoLine": []
+        },
+        "moves": [161, 164]
+    }
+}

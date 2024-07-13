@@ -1,0 +1,84 @@
+{
+    "specials": [
+        {
+            "id": 0,
+            "name": "Poison",
+            "text": "Your Opponents pokemon takes 1 damage in between both turns."
+        },
+        {
+            "id": 1,
+            "name": "Super Poison",
+            "text": "Your Opponents pokemon takes 2 damage in between both turns."
+        },
+        {
+            "id": 2,
+            "name": "Confusion",
+            "text": "Before your Opponents next attack they flip a coin. If Heads their active pokemon takes 1 damage instead."
+        },
+        {
+            "id": 3,
+            "name": "Paralyzed",
+            "text": "Before your Opponents next attack they flip a coin. If Heads nothing happens."
+        },
+        {
+            "id": 4,
+            "name": "Burn",
+            "text": "Your Opponents Pokemon takes 1 damage in between both turns."
+        },
+        {
+            "id": 5,
+            "name": "Recharging",
+            "text": "Your Pokemon does nothing on your next turn."
+        },
+        {
+            "id": 6,
+            "name": "Perish Song",
+            "text": "Your Opponents Pokemon is cursed and will faint in 5 turns from this attack. Your Pokemon cannot switch out or attack until this effect ends."
+        },
+        {
+            "id": 7,
+            "name": "Infatuation",
+            "text": "Your Opponents Pokemon's next attack does -3 damage."
+        },
+        {
+            "id": 8,
+            "name": "Power Boost",
+            "text": "This attack does +2 damage. Your Opponents Pokemon's next attack does +1 damage."
+        },
+        {
+            "id": 9,
+            "name": "Semi-Invulnerable",
+            "text": "Your next attack does no damage. Your Opponents Pokemon does half damage (rounded down) next turn."
+        },
+        {
+            "id": 10,
+            "name": "Primed",
+            "text": "This attack does +1 damage."
+        },
+        {
+            "id": 11,
+            "name": "Seeded",
+            "text": "Your Opponents Pokemon takes 1 damage in between turns. This Pokemon gains +1 HP in between each turn."
+        },
+        {
+            "id": 12,
+            "name": "Getting Pumped",
+            "text": "For every consecutive attack with getting pumped add +1 damage to your next attack."
+        },
+        {
+            "id": 13,
+            "name": "Self Destructive",
+            "text": "Your Pokemon takes 1 damage."
+        },
+        {
+            "id": 14,
+            "name": "Revive",
+            "text": "Your pokemon heals for +3 health."
+        },
+        {
+            "id": 15,
+            "name": "Reversal",
+            "text": "If your pokemon attacks first but its speed is slower than your opponents, this attack does +5 damage."
+        }
+    ]
+}
