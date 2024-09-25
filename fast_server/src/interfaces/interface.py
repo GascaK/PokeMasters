@@ -1,6 +1,8 @@
 import random
+import json
 
 from typing import Dict
+from .models import ItemModel, PokemonBaseModel, PokemonModel
 
 
 class PokemonBase():
@@ -26,7 +28,7 @@ class Move():
         self.move_type = move_type
         self.id: int = id
         self.special: Special = special
-    
+
     def get_datalization(self):
         return {
             "hit": self.hit,
@@ -75,53 +77,60 @@ class Moves():
             return random.choice(self.moves)
 
 class Item():
-    def __init__(self, name, cost, text, tier, id=None, trainer=-1):
+    def __init__(self, name, cost, text, tier, id=0, owner=-1):
         self.id = id
         self.name = name
         self.cost = cost
         self.text = text
         self.tier = tier
-        self.trainer = trainer
+        self.owner = owner
     
     def get_datalization(self):
         return {
+            "id": self.id,
             "name": self.name,
             "cost": self.cost,
             "text": self.text,
-            "tier": self.tier
+            "tier": self.tier,
+            "owner": self.owner
         }
     
     def __repr__(self):
         return f"{self.id}: t{self.tier} {self.name} - {self.text} ${self.cost}"
 
-class Items():
+class PokeCenter():
     def __init__(self, items):
-        self.items: list[Item] = items
+        self.items: list[ItemModel] = items
     
     def get_all(self):
         return self.items
     
-    def get_by_id(self, id: int) -> Item:
+    def get_by_name(self, name: str) -> ItemModel:
+        for item in self.items:
+            if item.name == name:
+                return item
+    
+    def get_by_id(self, id: int) -> ItemModel:
         for item in self.items:
             if item.id == id:
                 return item
     
-    def get_by_tier(self, items, tier: int=1) -> list[Item]:
+    def get_by_tier(self, items: list[ItemModel], tier: int=1) -> list[ItemModel]:
         selected = []
         for item in items:
             if item.tier == tier:
                 selected.append(item)
         return selected
     
-    def randomize(self, items) -> Item:
+    def randomize(self, items: list[ItemModel]) -> ItemModel:
         try:
             return random.choice(items)
         except IndexError as e:
             print("No values found")
 
 class PokemonBase():
-    def __init__(self, pid, name, hp, speed, special, physical, tier, types, evolutions, catch_rate):
-        self.pid = pid
+    def __init__(self, dex_id, name, hp, speed, special, physical, tier, types, evolutions, catch_rate):
+        self.dex_id = dex_id
         self.name = name
         self.hp = hp
         self.speed = speed
@@ -131,37 +140,44 @@ class PokemonBase():
         self.types = types
         self.evolutions = evolutions
         self.catch_rate = catch_rate
+    
+    def toJSON(self):
+        return json.dumps(
+            self,
+            default=lambda o: o.__dict__, 
+            sort_keys=True
+            )
 
     def __repr__(self):
-        return f"{self.pid}:{self.name} - {self.evolutions}\n\thp:{self.hp} sp:{self.speed} special:{self.special} physical:{self.physical}"
+        return f"{self.dex_id}:{self.name} t[{self.types}]- {self.evolutions}\n\thp:{self.hp} sp:{self.speed} special:{self.special} physical:{self.physical}"
 
 class PokedexBase():
-    def __init__(self, pokemon_list: list[PokemonBase|Pokemon]):
+    def __init__(self, pokemon_list: list[PokemonBaseModel|PokemonModel]):
         self._list = pokemon_list
 
-    def get_all(self) -> list[PokemonBase|Pokemon]:
+    def get_all(self) -> list[PokemonBaseModel|PokemonModel]:
         return self._list
 
-    def get_by_pid(self, pid: int) -> PokemonBase|Pokemon:
+    def get_by_dex_id(self, dex_id: int) -> PokemonBaseModel|PokemonModel:
         for pokemon in self._list:
-            if pokemon.pid == pid:
+            if pokemon.dex_id == dex_id:
                 return pokemon
 
-    def get_by_type(self, pokemon_list: list[PokemonBase|Pokemon], base_type: str) -> list[PokemonBase|Pokemon]:
+    def get_by_type(self, pokemon_list: list[PokemonBaseModel|PokemonModel], base_type: str) -> list[PokemonBaseModel|PokemonModel]:
         selected = []
         for pokemon in pokemon_list:
-            if base_type in pokemon.base_type:
+            if base_type in pokemon.types:
                 selected.append(pokemon)
         return selected
 
-    def get_by_tier(self, pokemon_list: list[PokemonBase|Pokemon], tier: int) -> list[PokemonBase|Pokemon]:
+    def get_by_tier(self, pokemon_list: list[PokemonBaseModel|PokemonModel], tier: int) -> list[PokemonBaseModel|PokemonModel]:
         selected = []
         for pokemon in pokemon_list:
             if pokemon.tier == tier:
                 selected.append(pokemon)
         return selected
 
-    def randomize(self, pokemon_list: list[PokemonBase|Pokemon]) -> PokemonBase|Pokemon:
+    def randomize(self, pokemon_list: list[PokemonBaseModel|PokemonModel]) -> PokemonBaseModel|PokemonModel:
         if pokemon_list:
             return random.choice(pokemon_list)
         else:
@@ -171,27 +187,32 @@ class Pokemon(PokemonBase):
     def __init__(self, base: PokemonBase,
                  stats: Dict[str:str, str:int],
                  sprite: Dict[str:str, str:int],
-                 trainer: int=0,
+                 id: int = 0,
+                 owner: int = 0,
                  moves: list[Move]=None,
-                 items: list[Item]=None):
+                 items: list[Item]=None,
+                 types: list[str]= None):
 
         for stat in stats:
             if stat["name"] == "speed":
-                speed = stat["base_stat"]
+                speed = stat["value"]
             elif stat["name"] == "hp":
-                hp = stat["base_stat"]
+                hp = stat["value"]
             elif stat["name"] == "special":
-                special = stat["base_stat"]
+                special = stat["value"]
             elif stat["name"] == "physical":
-                physical = stat["base_stat"]
+                physical = stat["value"]
 
+
+        self.id: int = id
         self.base: PokemonBase = base
         self.sprite: Dict[str:str, str:int] = sprite
         self.stats: Dict[str:str, str:int] = stats
-        self.trainer: int = trainer
+        self.owner: int = owner
         self.moves: list[Move] = moves
         self.items: list[Item] = items
-        super().__init__(base.pid,
+        self.types: list[str] = base.types
+        super().__init__(base.dex_id,
                          base.name,
                          hp,
                          speed,
@@ -204,66 +225,53 @@ class Pokemon(PokemonBase):
 
 
     def get_datalization(self):
+        # Format for database.
         for stat in self.stats:
             if stat["name"] == "speed":
-                speed = stat["base_stat"]
+                speed = stat["value"]
                 speed_mod = stat["mod"]
             elif stat["name"] == "hp":
-                hp = stat["base_stat"]
+                hp = stat["value"]
                 hp_mod = stat["mod"]
             elif stat["name"] == "special":
-                special = stat["base_stat"]
+                special = stat["value"]
                 special_mod = stat["mod"]
             elif stat["name"] == "physical":
-                physical = stat["base_stat"]
+                physical = stat["value"]
                 physical_mod = stat["mod"]
 
         return {
-            "id": self.base.pid,
-            "trainer": self.trainer,
+            "id": self.id,
+            "dex_id": self.base.dex_id,
+            "owner": self.owner,
             "name": self.base.name,
             "tier": self.base.tier,
             "stats": [
                 {
                     "name": "hp",
-                    "base_stat": hp,
-                    "mod": hp_mod,
-                    "current_value": hp
+                    "value": hp,
+                    "mod": hp_mod
                 },
                 {
                     "name": "speed",
-                    "base_stat": speed,
-                    "mod": speed_mod,
-                    "current_value": speed
+                    "value": speed,
+                    "mod": speed_mod
                 },
                 {
                     "name": "special",
-                    "base_stat": special,
-                    "mod": special_mod,
-                    "current_value": special
+                    "value": special,
+                    "mod": special_mod
                 },
                 {
                     "name": "physical",
-                    "base_stat": physical,
-                    "mod": physical_mod,
-                    "current_value": physical
+                    "value": physical,
+                    "mod": physical_mod
                 }
             ],
-            "moves": [
-                {
-                    "id": self.moves[0].id
-                },
-                {
-                    "id": self.moves[1].id
-                }
-            ],
-            "items": [
-                {
-                    "id": self.items[0].id
-                }
-            ],
-            "shiny": self.sprite["is_shiny"],
-            "sprite_url": self.sprite["url"],
+            "moves": [x.id for x in self.moves],
+            "catch_rate": self.catch_rate,
+            "shiny": self.sprite["shiny"],
+            "sprite_url": self.sprite["sprite_url"],
             "type1": self.base.types[0],
             "type2": self.base.types[1]
         }
@@ -272,13 +280,28 @@ class Pokemon(PokemonBase):
         for stat in self.stats:
             if stat["name"] == "hp":
                 hp_mod = stat["mod"]
-                hp = stat["base_stat"]
+                hp = stat["value"]
             elif stat["name"] == "speed":
                 speed_mod = stat["mod"]
-                speed = stat["base_stat"]
+                speed = stat["value"]
             elif stat["name"] == "special":
-                special = stat["base_stat"]
+                special = stat["value"]
             elif stat["name"] == "physical":
-                physical = stat["base_stat"]
+                physical = stat["value"]
 
-        return f"{"**" if self.sprite.get("is_shiny") else ""}{self.pid}:{self.name} - {self.evolutions}\n\t{hp_mod} hp:{hp} {speed_mod} sp:{speed} special:{special} physical:{physical}\n\t{self.moves}\n\t{self.items}"
+        return f"{"**" if self.sprite.get("shiny") else ""}{self.dex_id}:{self.name} {self.base.types} - {self.evolutions}\n\t{hp_mod} hp:{hp} {speed_mod} sp:{speed} special:{special} physical:{physical}\n\t{self.moves}\n\t{self.items}"
+
+class Player():
+    def __init__(self, name: int, id: int=0, badges: int=0, dollars: int=0):
+        self.id = id
+        self.name = name
+        self.badges = badges
+        self.dollars = dollars
+
+    def get_datalization(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "badges": self.badges,
+            "dollars": self.dollars
+        }

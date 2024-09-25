@@ -1,4 +1,0 @@
-
-
-class ItemLoader():
-    pass

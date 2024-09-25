@@ -4,9 +4,12 @@ import requests
 import os
 import json
 
+from typing import List
+
 import pokebase as pb
 
-from interfaces.interface import PokemonBase, PokedexBase, Move, Moves, Special, Item, Items
+from ..interfaces.interface import PokemonBase, PokedexBase, Move, Moves, Special, Item, PokeCenter
+from ..interfaces.models import ItemModel
 
 
 class BaseLoader():
@@ -14,14 +17,14 @@ class BaseLoader():
 
     POKEDEX: PokedexBase = None
     MOVEDEX: Moves = None
-    ITEMDEX: Items = None
+    POKECENTER: PokeCenter = None
     SP_ATK: list[Special] = []
 
     # Variables
-    CATCH_RATE_T1 = 6
-    CATCH_RATE_T2 = 9
-    CATCH_RATE_T3 = 13
-    CATCH_RATE_T4 = 16
+    CATCH_RATE_T1 = 7
+    CATCH_RATE_T2 = 11
+    CATCH_RATE_T3 = 16
+    CATCH_RATE_T4 = 20
 
     LEVEL_1_MAX_EXP = 75
     LEVEL_2_MAX_EXP = 150
@@ -38,8 +41,30 @@ class BaseLoader():
         self.generations = self.update_generations(generations)
         self.load_moves()
         self.load_special_moves()
-        self.load_pokemon()
         self.load_items()
+
+        # Load Cache
+        try:
+            with open("cache/pokedex.json") as file:
+                data = json.load(file)
+                dex = []
+                for mon in [json.loads(x) for x in data["cache"]]:
+                    dex.append(PokemonBase(
+                        dex_id=mon.get("dex_id"),
+                        name=mon.get("name"),
+                        hp=mon.get("hp"),
+                        speed=mon.get("speed"),
+                        special=mon.get("special"),
+                        physical=mon.get("physical"),
+                        tier=mon.get("tier"),
+                        types=mon.get("types"),
+                        evolutions=mon.get("evolutions"),
+                        catch_rate=mon.get("catch_rate"),
+                    ))
+                self.POKEDEX = PokedexBase(dex)
+        except Exception as e:
+                print(e)
+                self.load_pokemon()
 
     def get_generations(self):
         return self.generations
@@ -47,7 +72,7 @@ class BaseLoader():
     def update_generations(self, generations: list[int]):
         base = []
         if not generations:
-            x = range(1, 2)
+            x = range(1, 4)
             for y in x:
                 base.append(y)
         if 1 in generations:
@@ -68,7 +93,6 @@ class BaseLoader():
     def set_dex(self, pokedex):
         self.POKEDEX = pokedex
 
-    
     def load_pokemon(self):
         def pull_chain(node: dict):
             # Go through evolution tree recursively
@@ -82,7 +106,7 @@ class BaseLoader():
             for each in node["evolves_to"]:
                 pull_chain(each)
 
-        pokedex = []
+        pokedex: List[PokemonBase] = []
         for pid in self.get_generations():
             print(f"\n\n***Loading Pokemon PID: {pid}***")
             base = pb.APIResource("pokemon", pid)
@@ -153,7 +177,7 @@ class BaseLoader():
 
             # Pend to Dex
             pokedex.append(PokemonBase(
-                pid = pid,
+                dex_id = pid,
                 name = base.name,
                 hp = hp,
                 speed = speed,
@@ -165,22 +189,26 @@ class BaseLoader():
                 catch_rate = catch_rate
             ))
 
+        # Create pokedex cache
+        with open("cache/pokedex.json", "w") as file:
+            json.dump({"cache": [x.toJSON() for x in pokedex]}, file)
+
         # Set Pokedex
         self.POKEDEX = PokedexBase(pokedex)
 
     def load_items(self):
         with open(self.FILE_LOC + "/items.json", "r", encoding="utf-8") as file:
             data = json.load(file)
-        
-        temp: list[Item] = []
+
+        temp: list[ItemModel] = []
         for item in data["items"]:
-            temp.append(Item(
+            temp.append(ItemModel(
                 name = item["name"],
                 cost = item["cost"],
                 text = item["text"],
                 tier = item["tier"]
             ))
-        self.ITEMDEX = Items(temp)
+        self.POKECENTER = PokeCenter(temp)
 
     def load_special_moves(self):
         with open(self.FILE_LOC + "/specials.json", "r", encoding="utf-8") as file:

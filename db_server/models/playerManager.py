@@ -29,30 +29,32 @@ class TrainerLocator(Resource):
 
     @marshal_with(player_resource)
     def post(self, id):
-        payload: dict = request.get_json()
+        payload: dict = json.loads(request.get_json())
         if not payload:
             abort(400, message="Invalid payload data.")
 
         try:
             p = Player(
-                name    = payload["name"],
+                name    = payload.get("name", "newb"),
                 badges  = payload.get("badges", 0),
                 dollars = payload.get("dollars", 0)
             )
             db_session.add(p)
             db_session.commit()
 
-            return p
+            return p.toJSON()
 
         except Exception as e:
             print(e)
             return str(e)
 
     @marshal_with(player_resource)
-    def put(self, id):
-        payload: dict = request.get_json()
+    def patch(self, id):
+        payload: dict = json.loads(request.get_json())
+        if not payload or type(payload) != dict:
+            abort(400, message="Invalid payload.")
 
-        player = Player.query.filter_by(id=id).first()
+        player: Player = Player.query.filter_by(id=id).first()
         if not player:
             abort(400, message="Unable to save trainer data.")
 
@@ -61,8 +63,16 @@ class TrainerLocator(Resource):
         player.badges = payload.get("badges") or player.badges
 
         db_session.commit()
+        return player.toJSON()
 
-        return player
+class TrainerPokemonLocator(Resource):
+    # '/player/<int:id>/pokemon
+    def get(self, id: int):
+        chosen: list[Pokemon] = Pokemon.query.filter_by(owner=id).all()
+        if not chosen:
+            abort(404, message=f"Unable to locate pokemon with ID: {id}")
+
+        return [x.toJSON() for x in chosen], 200
 
 item_resource = {
     'id': fields.Integer,
@@ -74,17 +84,16 @@ item_resource = {
 }
 class TrainerItemLocator(Resource):
     # /player/<int:id>/items
-    @marshal_with(item_resource)
     def get(self, id):
-        item = Items.query.filter_by(trainer=id).all()
-        if not item:
+        items = Items.query.filter_by(owner=id).all()
+        if not items:
             abort(400, message="Unable to find item.")
 
-        return item
+        return [x.toJSON() for x in items], 200
     
     @marshal_with(item_resource)
     def post(self, id):
-        payload: dict = request.get_json()
+        payload: dict = json.loads(request.get_json())
         if not payload:
             abort(400, message="Invalid payload.")
         

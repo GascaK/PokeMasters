@@ -8,14 +8,14 @@
         },
         {
             "name": "Great Ball",
-            "cost": 650,
-            "text": "Add +4 to your next attempt at catching a wild Pokemon.",
+            "cost": 450,
+            "text": "Add +1 to your next attempt at catching a wild Pokemon.",
             "tier": 2
         },
         {
             "name": "Poke Ball",
             "cost": 300,
-            "text": "Add +1 to your next attempt at catching a wild Pokemon.",
+            "text": "Attempt at catching a wild Pokemon.",
             "tier": 1
         },
         {
@@ -116,8 +116,8 @@
         },
         {
             "name": "Ultra Ball",
-            "cost": 2050,
-            "text": "Add +5 to your next attempt at catching a wild Pokemon.",
+            "cost": 750,
+            "text": "Add +2 to your next attempt at catching a wild Pokemon.",
             "tier": 3
         },
         {
@@ -201,7 +201,7 @@
         {
             "name": "Heavy Ball",
             "cost": 450,
-            "text": "Add +4 to your next attempt at catching a wild Pokemon with a speed value in the negatives.",
+            "text": "Add +3 to your next attempt at catching a wild Pokemon with a speed value in the negatives.",
             "tier": 1
         },
         {
@@ -219,8 +219,8 @@
         {
             "name": "Heal Ball",
             "cost": 450,
-            "text": "Add +3 to your next attempt at catching a wild Pokemon with an HP stat of 8 or higher.",
-            "tier": 1
+            "text": "Add +3 to your next attempt at catching a wild Pokemon with an HP stat of 15 or higher.",
+            "tier": 2
         },
         {
             "name": "Bright Powder",
@@ -230,8 +230,8 @@
         },
         {
             "name": "Level Ball",
-            "cost": 1050,
-            "text": "Add +3 to your next attempt at catching a wild Pokemon of tier 2 or greater.",
+            "cost": 850,
+            "text": "Add +4 to your next attempt at catching a wild Pokemon of tier 2 or greater.",
             "tier": 2
         },
         {
@@ -335,6 +335,12 @@
             "cost": 2550,
             "text": "Held Item: When you would land on a Wild Encounter spot instead you can find a random item.",
             "tier": 3
+        },
+        {
+            "name": "Shiny Charm",
+            "cost": 5000,
+            "text": "Quadruple your shiny encounter rate.",
+            "tier": 2
         }
     ]
 }
