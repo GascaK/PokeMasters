@@ -24,7 +24,7 @@ router = APIRouter(
 
 
 @router.get("/", tags=["items"])
-def get_items(username: int, id: Annotated[int, Body()]) -> ItemModel:
+def get_items(username: int, id: int) -> ItemModel:
     # Return Item from db.
     try:
         item: ItemModel = item_builder.get_item(id)
@@ -39,7 +39,7 @@ def get_items(username: int, id: Annotated[int, Body()]) -> ItemModel:
         raise HTTPException(status_code=400, detail="Your ID does not match this item.")
 
 @router.delete("/", tags=["items"])
-def delete_items(username: int, id: Annotated[int, Body()]) -> None:
+def delete_items(username: int, id: int) -> None:
     # Delete Item from DB.
     try:
         item: ItemModel = item_builder.get_item(id)
@@ -53,8 +53,8 @@ def delete_items(username: int, id: Annotated[int, Body()]) -> None:
     else:
         raise HTTPException(status_code=400, detail="Your ID does not match this item.")
 
-@router.get("/random", tags=["items"])
-def get_items_random(username: int, tier: Annotated[int | None, Body()]=1) -> ItemModel:
+@router.post("/random", tags=["items"])
+def post_items_random(username: int, tier: Annotated[int | None, Body()]=1) -> ItemModel:
     item: ItemModel = item_builder.random_item(tier=random.randint(1, tier))
 
     if item:
@@ -65,9 +65,9 @@ def get_items_random(username: int, tier: Annotated[int | None, Body()]=1) -> It
 
 @router.get("/shop", tags=["items", "shop"])
 def get_items_shop(
-        username: int, 
-        tier: Annotated[int, Body()], 
-        shop_size: Annotated[int | None, Body()]=5
+        username: int,
+        tier: int = 1,
+        shop_size: int = 5
     ) -> List[ItemModel]:
     # Get Shop of items.
 
@@ -81,7 +81,7 @@ def get_items_shop(
         if tier >= 3:
             items.append(item_builder.get_item_by_name("Ultra Ball"))
 
-    # Add 5 random items.
+    # Add random items.
     for _ in range(shop_size):
         item: ItemModel = item_builder.random_item(tier=random.randint(1, tier))
         items.append(item)

@@ -21,13 +21,13 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
-@router.get("/encounter", response_model=PokemonModel, tags=["pokemon", "encounter"])
-def get_pokemon_encounter(
+@router.post("/encounter", response_model=PokemonModel, tags=["pokemon", "encounter"])
+def post_pokemon_encounter(
         username: int,
         items: list[ItemModel]=None,
         tier: Annotated[int | None, Body()]=1,
         encounter_type: Annotated[str | None, Body()]=None,
-    ):
+    ) -> PokemonModel:
 
     # Encounter a wild Pokemon
     try:
@@ -106,8 +106,7 @@ def put_pokemon_encounter_id(
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Failed to save got item. {e}")
 
-        return {"msg": f"{pokemon.id}:{pokemon.base.name} was caught. " + \
-                f"GOT ITEM: {got_item if got_item else ""}", "data": {"roll": die, "mods": modifiers}}
+        return {"msg": "caught", "data": {"roll": die, "mods": modifiers, "item": item}}
 
 
     # Did not catch. Consequences..
@@ -122,18 +121,18 @@ def put_pokemon_encounter_id(
             raise HTTPException(status_code=500, detail=f"Unable to delete pokemon?.. {e}")
 
         print(f"{pokemon.base.name} ran away...")
-        return {"msg": "The pokemon ran away...", "data": {"roll": die, "mods": modifiers}}
+        return {"msg": "escaped", "data": {"roll": die, "mods": modifiers}}
 
     # Try again..
     # increase escape chance by 15 percent.
-    return {"msg": "Did not catch Pokemon. Try again..", "data": {"roll": die, "mods": modifiers, "escape": escape+.15}}
+    return {"msg": "retry", "data": {"roll": die, "mods": modifiers, "escape": escape+.15}}
 
 
 @router.put("/evolve", tags=["pokemon", "evolve"])
 def put_pokemon_evolve(
         username: int, 
         ids: Annotated[list[int], Body()],
-    ):
+    ) -> PokemonModel:
 
     # Get list of pokemon
     staged: List[PokemonModel] = []
@@ -171,4 +170,4 @@ def put_pokemon_evolve(
         poke_builder.delete_pokemon(each.id)
         released.append(each.id)
 
-    return {"msg": "Pokemon evolved", "data": pokemon, "released": released}
+    return pokemon

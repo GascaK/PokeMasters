@@ -53,20 +53,17 @@ def post_player(username: int, name: Annotated[str, Body()]) -> PlayerModel:
 @router.patch("/", tags=["player"])
 def patch_player(
         username: int,
-        id:   Annotated[int, Body()],
-        name: Annotated[str | None, Body()], 
-        dollars: Annotated[int | None, Body()], 
-        badges:  Annotated[int | None, Body()]
+        player: PlayerModel
     ) -> PlayerModel:
 
     # Update a current player
     try:
-        player = player_builder.get_player(id)
-        player.name = name or player.name
-        player.dollars = dollars or player.dollars
-        player.badges = badges or player.badges
+        temp = player_builder.get_player(player.id)
+        temp.name = player.name or temp.name
+        temp.dollars = player.dollars or temp.dollars
+        temp.badges = player.badges or temp.badges
 
-        return player_builder.save_player(player)
+        return player_builder.save_player(temp)
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error saving player: {e}")
@@ -97,13 +94,13 @@ def get_player_items(username: int) -> list[ItemModel]:
         raise HTTPException(status_code=500, detail=f"Error getting player items: {e}")
 
 @router.delete("/items", tags=["player"])
-def delete_player_items(username: int, item: ItemModel) -> None:
+def delete_player_items(username: int, id: int) -> None:
     # delete player items
     try:
-        i = item_builder.get_item(item.id)
-        if i.owner != item.owner:
+        i = item_builder.get_item(id)
+        if i.owner != username:
             raise HTTPException(status_code=400, detail="This item does not belong to you.")
 
-        return item_builder.delete_item(item)
+        return item_builder.delete_item(i)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error deleting player items: {e}")

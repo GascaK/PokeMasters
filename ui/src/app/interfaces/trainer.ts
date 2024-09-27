@@ -3,11 +3,10 @@ import { PokemonTemplate } from './pokemon';
 
 
 export interface Trainer {
-    trainerID: number;
+    id?: number;
     name: string;
-    currentTier: number;
-    dollars: number;
-    pokemon: Array<PokemonTemplate>;
-    items: Array<PokeItemsTemplate>
     badges: number;
+    dollars: number;
+    pokemon?: Array<PokemonTemplate>;
+    items?: Array<PokeItemsTemplate>
 }

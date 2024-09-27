@@ -1,6 +1,8 @@
 export interface PokeItemsTemplate {
-    _id: number;
+    id: number;
     name: string;
     cost: number;
     text: string;
+    tier: number;
+    owner: number;
 }

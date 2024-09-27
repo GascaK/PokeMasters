@@ -13,13 +13,4 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
-p_loader: PokemonBuilder = PokemonBuilder(BaseLoader())
 
-
-@router.get("/", tags=["pokemon"])
-def get_index(username: int):
-    pass
-
-@router.post("/", tags=["pokemon"])
-def post_encounter(username):
-    pass

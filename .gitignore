@@ -5,6 +5,6 @@ node_modules
 **/build
 server/database/**
 web/
-ui/dist
+dist/
 games/**
 /db_server/database/**

@@ -2,191 +2,231 @@ import axios, { Axios } from 'axios';
 
 import { PokeItemsTemplate } from '../interfaces/pokeItems';
 import { PokemonMaster } from '../interfaces/pokeMaster';
+import { Trainer } from '../interfaces/trainer';
 import { PokemonTemplate, PokeMoveTemplate } from '../interfaces/pokemon';
 
 export class ServerService {
     instance = axios.create({
-        baseURL: 'http://192.168.1.22:5000/',
-        timeout: 12000,
+        baseURL: 'http://127.0.0.1:8000/api/v1',
+        timeout: 10000,
         withCredentials: false,
         headers: {
-        'Content-Type': 'text/plain'
+        'Content-Type': 'application/json'
         }
     });
 
-    async getPokemonMaster(trainerID: number): Promise<PokemonMaster>{
-        const trainer = new PokemonMaster(trainerID, this);
-        await this.instance.get(`/trainers/${trainerID}`)
+    ////// Player Functions //////
+    async getPlayer(username: number): Promise<Trainer>{
+        return await this.instance.get<Trainer>(`${username}/player`)
             .then(async (res) => {
-                const data = JSON.parse(res.data);
-                trainer.dollars = data.dollars;
-                trainer.name = data.name;
-                trainer.badges = data.badges;
-                trainer.getCurrentTier();
-                trainer.activePokemon = await this.getPokemonByID(data.poke1);
-                trainer.pokemon = await this.getTrainerPokemon(trainerID);
-                trainer.items = await this.getTrainerItems(trainerID);
-                if (data.poke2) {
-                    trainer.benchOne = await this.getPokemonByID(data.poke2);
-                }
-                if (data.poke3) {
-                    trainer.benchTwo = await this.getPokemonByID(data.poke3);
-                }
+                console.log(res.data);
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
             });
-        return trainer;
     }
 
-    async getTrainerItems(trainerID: number): Promise<Array<PokeItemsTemplate>>{
-        const res = await this.instance.get<Array<PokeItemsTemplate>>(`/items/${trainerID}`);
-        const trainerItems: Array<PokeItemsTemplate> = res.data;
-        return trainerItems;
+    async postPlayer(username: number, name: string): Promise<Trainer>{
+        const body = name;
+        return await this.instance.post<Trainer>(`${username}/player`, body)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
+            });
     }
 
-    async getTrainerPokemon(trainerID: number): Promise<Array<PokemonTemplate>>{
-        const res = await this.instance.get(`/trainers/${trainerID}/pokedex`);
-        const fullDex = JSON.parse(res.data);
-        const pokeIDs: Array<number> = [];
-        const trainerDex: Array<PokemonTemplate> = [];
+    async patchPlayer(username: number, player: Trainer): Promise<Trainer>{
+        const body = player;
 
-        fullDex.forEach( (pokeDexEntry: any) => {
-            pokeIDs.push(...pokeDexEntry.ids);
-        });
-
-        pokeIDs.forEach( async (pokeID) => {
-            await this.instance.get<PokemonTemplate>(`/pokemon/${pokeID}`)
-            .then( async (res) => {
-                const pokemon = res.data;
-                pokemon.moves = [];
-                pokemon.moves.push(await this.getPokemonMove(pokemon.move1));
-                pokemon.moves.push(await this.getPokemonMove(pokemon.move2));
-                pokemon.currentHP = pokemon.hp;
-                trainerDex.push(pokemon);
+        return await this.instance.patch<Trainer>(`${username}/player`, body)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
             });
-        });
-        return trainerDex;
+    }
+
+    async getTrainerPokemon(username: number): Promise<Array<PokemonTemplate>>{
+        return await this.instance.get<Array<PokemonTemplate>>(`${username}/player/pokemon`)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
+            });
+    }
+
+    async getTrainerItems(username: number): Promise<Array<PokeItemsTemplate>>{
+        return await this.instance.get<Array<PokeItemsTemplate>>(`${username}/player/items/`)
+            .then(async(res) => {
+                console.log(res.data);
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
+            });
+    }
+
+    async deleteTrainerItems(username: number, item: PokeItemsTemplate): Promise<void>{
+        return await this.instance.delete<void>(`${username}/player/items?id=${item.id}`)
+            .then(async(res) => {
+                console.log(res.data);
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
+            });
     }
 
     ////// Pokemon Functions //////
-    async encounterRandomPokemon(tier: number): Promise<PokemonTemplate | undefined>{
+    async encounterRandomPokemon(
+        username: number, 
+        tier: number, 
+        type: string | null=null,
+        items: Array<PokeItemsTemplate>
+    ): Promise<PokemonTemplate> {
         if(![1, 2, 3, 4].includes(tier)){
             throw new Error("Invalid Tier");
         }
-        const res = await this.instance.get<PokemonTemplate>(`/trainers/999/pokemon?tier=${tier}`);
-        if (res) {
-            const pokemon = res.data;
-            pokemon.currentHP = pokemon.hp;
-            pokemon.moves = [];
-            pokemon.moves.push(await this.getPokemonMove(pokemon.move1));
-            pokemon.moves.push(await this.getPokemonMove(pokemon.move2));
-            console.log("Pokemon");
-            console.log(pokemon);
-            return pokemon;
-        } else {
-            console.log("Error returning Pokemon.");
-            return;
+
+        const body = {
+            "items": items,
+            "tier": tier,
+            "encounter_type": type
         }
+        return await this.instance.post<PokemonTemplate>(`/${username}/pokemon/encounter`, body)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
+            });
     }
-    // Release Pokemon.
-    async changePokemonTrainerByID(id: number, trainerID: number): Promise<boolean> {
-        let status: boolean;
-        await this.instance.put(`/pokemon/${id}?trainerID=${trainerID}`)
-            .then( (res) => {
-                console.log(res);
-                status = true;
+
+    async catchRandomPokemon(
+        username: number,
+        pokemon_id: number,
+        items: Array<PokeItemsTemplate>,
+        escape: number = .15
+    ): Promise<any> {
+        const body = {
+            "pokemon_id": pokemon_id,
+            "items": items,
+            "escape": escape
+        }
+
+        return await this.instance.put<any>(`/${username}/pokemon/encounter`, body)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
+            });
+    }
+
+    async evolvePokemon(
+        username: number,
+        ids: Array<number>
+    ): Promise<PokemonTemplate> {
+        const body = ids
+
+        return await this.instance.put<PokemonTemplate>(`/${username}/pokemon/evolve`, body)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
+            });
+    }
+
+    ////// Item Functions //////
+    async getItems(username: number, id: number): Promise<PokeItemsTemplate>{
+        return await this.instance.get<PokeItemsTemplate>(`${username}/items?id=${id}`)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
+            });
+    }
+
+    async deleteItems(username: number, id: number): Promise<void>{
+        return await this.instance.delete<void>(`${username}/items?id=${id}`)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
             })
             .catch( (err) => {
                 console.log(err);
-                status = false;
+                throw err;
             });
-        return status!;
     }
 
-    async getPokemonByID(id: number): Promise<PokemonTemplate> {
-        let pokemon: PokemonTemplate;
-        await this.instance.get<PokemonTemplate>(`/pokemon/${id}`)
-            .then( async (res) => {                                   
-                pokemon = res.data;
-                pokemon.currentHP = pokemon.hp;
-                pokemon.moves = [];
-                pokemon.moves.push(await this.getPokemonMove(pokemon.move1));
-                pokemon.moves.push(await this.getPokemonMove(pokemon.move2));
+    async postItemsRandom(username: number, tier: number=1): Promise<PokeItemsTemplate>{
+        const body = tier;
+
+        return await this.instance.post<PokeItemsTemplate>(`${username}/items/random`, body)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
             })
             .catch( (err) => {
-                console.log(err);
-            });
-        return pokemon!;
-    }
-
-    async getNewPokemonByPokedex(trainerID: number, pokedex: number): Promise<PokemonTemplate>{
-        let pokemon: PokemonTemplate;
-
-        await this.instance.get<PokemonTemplate>(`/pokemon/${trainerID}/${pokedex}`)
-        .then( async (res) => {
-            pokemon = res.data;
-            pokemon.moves = [];
-            pokemon.moves.push(await this.getPokemonMove(pokemon.move1));
-            pokemon.moves.push(await this.getPokemonMove(pokemon.move2));
-        });
-        return pokemon!;
-    }
-
-    async getPokemonMove(moveID: number): Promise<PokeMoveTemplate>{
-        let moveData: PokeMoveTemplate;
-        await this.instance.get<PokeMoveTemplate>(`/moves/${moveID}`)
-        .then( (res) => {
-            moveData = res.data;
-        })
-        .catch( (err) => {
-            console.log(err);
-        });
-        return moveData!;
-    }
-
-    // ////// Shop Items //////
-    async getItem(trainerID: number, store: boolean = true): Promise<PokeItemsTemplate>{
-        const item = await this.instance.get<PokeItemsTemplate>(`/items/${trainerID}?store=${store}`);
-        return item.data;
-    }
-
-    async buyItem(trainerID: number, itemID: number) {
-        await this.instance.post(`/items/${trainerID}?item_id=${itemID}`)
-            .catch( (err) => {
-                console.log(err);
+                console.error(err);
+                throw err;
             });
     }
 
-    async deleteTrainerItemByID(trainerID: number, itemID: number): Promise<void>{
-        await this.instance.put(`/items/${trainerID}?item_id=${itemID}`)
-        .then( () => {
-            console.log(`Item: ${itemID} deleted.`);
-        });
-    }
+    async getItemsShop(username: number, tier: number=1, shop_size: number=5): Promise<Array<PokeItemsTemplate>>{
+        const url = `${username}/items/shop?tier=${tier}?shop_size=${shop_size}`;
 
-    async save(t: PokemonMaster): Promise<void>{
-        let url = `/trainers/${t.trainerID}?badges=${t.badges}&tier=${t.currentTier}&dollars=${t.dollars}`;
-        if (t.activePokemon) {
-            url += `&poke1=${t.activePokemon._id}`;
-        } else {
-            url += "&poke1=0";
-        }
-        if (t.benchOne) {
-            url += `&poke2=${t.benchOne._id}`;
-        } else {
-            url += "&poke2=0";
-        }
-        if (t.benchTwo) {
-            url += `&poke3=${t.benchTwo._id}`;
-        } else {
-            url += "&poke3=0";
-        }
-
-        await this.instance.post(url)
-            .then((res) => {
-                console.log(res);
+        return await this.instance.get<Array<PokeItemsTemplate>>(url)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
             })
-            .catch((err) => {
-                console.log(err);
+            .catch( (err) => {
+                console.error(err);
+                throw err;
             });
+    }
+
+    async postItemsShopBuy(username: number, item: PokeItemsTemplate): Promise<PokeItemsTemplate>{
+        const body = item;
+
+        return await this.instance.post<PokeItemsTemplate>(`${username}/items/shop/buy`, body)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
+            })
+            .catch( (err) => {
+                console.error(err);
+                throw err;
+            }); 
+    }
+
+    async postItemsShopSell(username: number, item: PokeItemsTemplate): Promise<Trainer>{
+        const body = item;
+
+        return await this.instance.post<Trainer>(`${username}/items/shop/sell`, body)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
+            })
+            .catch( (err) => {
+                console.error(err);
+                throw err;
+            }); 
     }
 }
 
