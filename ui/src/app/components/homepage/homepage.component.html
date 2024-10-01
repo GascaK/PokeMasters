@@ -1,42 +1,33 @@
-<div *ngIf="trainerTracker.views.get('infoView')">
-  <app-info [trainerTracker]="trainerTracker"></app-info>
+<div *ngIf="menuService.views.get('infoView')">
+  <app-info [trainerTracker]="trainerTracker" [menuService]="menuService"></app-info>
 </div>
-<div *ngIf="trainerTracker.views.get('dexView')">
-  <app-pokedex [trainerTracker]="trainerTracker"></app-pokedex>
+<div *ngIf="menuService.views.get('dexView')">
+  <app-pokedex [trainerTracker]="trainerTracker" [serverService]="serverService" [menuService]="menuService"></app-pokedex>
 </div>
-<div *ngIf="trainerTracker.views.get('encounterView')">
+<!-- <div *ngIf="trainerTracker.views.get('encounterView')">
   <app-encounter [trainerTracker]="trainerTracker" [legendary]="legendary"></app-encounter>
+</div> -->
+<div *ngIf="menuService.views.get('shopView')">
+  <app-shop [trainerTracker]="trainerTracker" [serverService]="serverService" [menuService]="menuService"></app-shop>
 </div>
-<div *ngIf="trainerTracker.views.get('shopView')">
-  <app-shop [trainerTracker]="trainerTracker"></app-shop>
+<div *ngIf="menuService.views.get('backpackView')">
+  <app-backpack [trainerTracker]="trainerTracker" [serverService]="serverService" [menuService]="menuService"></app-backpack>
 </div>
-<div *ngIf="trainerTracker.views.get('backpackView')">
-  <app-backpack [trainerTracker]="trainerTracker"></app-backpack>
-</div>
-<div class="row" *ngIf="trainerTracker.views.get('defaultView')">
-  <div *ngIf="choosingStarter">
-    <h3>Choose Your Starter Pokemon:</h3>
-    <button class="grass col-12" style="padding:2px" (click)="setStarter(1)">Grass</button>
-    <button class="fire col-12" style="padding:2px" (click)="setStarter(4)">Fire</button>
-    <button class="water col-12" style="padding:2px" (click)="setStarter(7)">Water</button>
-    <button class="poison col-12" style="padding:2px" (click)="setStarter(10)">Ghost</button>
-    <button class="electric col-12" style="padding:2px" (click)="setStarter(13)">Electric</button>
-    <button class="fighting col-12" style="padding:2px" (click)="setStarter(16)">Fighting</button>
-  </div>
-  <div *ngIf="!choosingStarter">
+<div class="row" *ngIf="menuService.views.get('defaultView')">
+  <!-- <div>
     <app-active [trainer]="trainer"></app-active>
-  </div>
+  </div> -->
   <div>
     <h4 style="text-align:center">Bench</h4>
   </div>
   <div class="col">
-    <button class="btn btn-primary col-12" (click)="setBenchOne(trainer.activePokemon)">
-      {{trainer.benchOne?.name || "Empty Slot"}}
+    <button class="btn btn-primary col-12" (click)="setBench(active, 0)">
+      {{bench[0]?.base?.name || "Empty Slot"}}
     </button>
   </div>
   <div class="col">
-    <button class="btn btn-primary col-12" (click)="setBenchTwo(trainer.activePokemon)">
-      {{trainer.benchTwo?.name || "Empty Slot"}}
+    <button class="btn btn-primary col-12" (click)="setBench(active, 1)">
+      {{bench[1]?.base?.name || "Empty Slot"}}
     </button>
   </div>
   <div>
@@ -60,7 +51,7 @@
   <div>
     <button class="btn btn-info col-12" (click)="setView('shopView')">Items</button>
   </div>
-  <div *ngIf="trainerTracker.getMaster().currentTier==3">
+  <div *ngIf="trainer.getCurrentTier()==3">
     <button class="btn btn-dark col-12" (click)="encounterLegendary()">Legendary</button>
   </div>
 </div>

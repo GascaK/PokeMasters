@@ -9,7 +9,7 @@ from typing import List
 import pokebase as pb
 
 from ..interfaces.interface import PokemonBase, PokedexBase, Move, Moves, Special, Item, PokeCenter
-from ..interfaces.models import ItemModel
+from ..interfaces.models import ItemModel, PokemonBaseModel
 
 
 class BaseLoader():
@@ -38,7 +38,8 @@ class BaseLoader():
     SP_BASE_LN = 80
 
     def __init__(self, generations: list[int]=[]):
-        self.generations = self.update_generations(generations)
+        self.generations = generations
+        self.dex_list = self.update_generations(generations)
         self.load_moves()
         self.load_special_moves()
         self.load_items()
@@ -49,7 +50,7 @@ class BaseLoader():
                 data = json.load(file)
                 dex = []
                 for mon in [json.loads(x) for x in data["cache"]]:
-                    dex.append(PokemonBase(
+                    dex.append(PokemonBaseModel(
                         dex_id=mon.get("dex_id"),
                         name=mon.get("name"),
                         hp=mon.get("hp"),
@@ -60,6 +61,8 @@ class BaseLoader():
                         types=mon.get("types"),
                         evolutions=mon.get("evolutions"),
                         catch_rate=mon.get("catch_rate"),
+                        url_shiny=mon.get("url_shiny"),
+                        url_default=mon.get("url_default")
                     ))
                 self.POKEDEX = PokedexBase(dex)
         except Exception as e:
@@ -68,6 +71,9 @@ class BaseLoader():
 
     def get_generations(self):
         return self.generations
+    
+    def get_dex_list(self):
+        return self.dex_list
 
     def update_generations(self, generations: list[int]):
         base = []
@@ -100,14 +106,14 @@ class BaseLoader():
             if node.get("species", {}).get("name") == base.name:
                 for evolve in node.get("evolves_to"):
                     evolve_pid = int(evolve["species"]["url"].split("/")[-2])
-                    if evolve_pid in self.get_generations():
+                    if evolve_pid in self.get_dex_list():
                         evolutions.append(evolve_pid)
 
             for each in node["evolves_to"]:
                 pull_chain(each)
 
-        pokedex: List[PokemonBase] = []
-        for pid in self.get_generations():
+        pokedex: List[PokemonBaseModel] = []
+        for pid in self.get_dex_list():
             print(f"\n\n***Loading Pokemon PID: {pid}***")
             base = pb.APIResource("pokemon", pid)
             print(f"\tloading {base.name} base info...")
@@ -176,7 +182,7 @@ class BaseLoader():
 
 
             # Pend to Dex
-            pokedex.append(PokemonBase(
+            pokedex.append(PokemonBaseModel(
                 dex_id = pid,
                 name = base.name,
                 hp = hp,
@@ -186,7 +192,9 @@ class BaseLoader():
                 tier = tier,
                 types = types,
                 evolutions = evolutions,
-                catch_rate = catch_rate
+                catch_rate = catch_rate,
+                url_shiny = base.sprites.front_shiny,
+                url_default = base.sprites.front_default
             ))
 
         # Create pokedex cache

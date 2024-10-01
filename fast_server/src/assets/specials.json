@@ -13,12 +13,12 @@
         {
             "id": 2,
             "name": "Confusion",
-            "text": "Before your Opponents next attack they flip a coin. If Heads their active pokemon takes 1 damage instead."
+            "text": "Before your Opponents next attack they flip a coin. If Heads their active pokemon takes 1 damage."
         },
         {
             "id": 3,
             "name": "Paralyzed",
-            "text": "Before your Opponents next attack they flip a coin. If Heads nothing happens."
+            "text": "Before your Opponents next attack they flip a coin. If Heads their attack does -1 damage."
         },
         {
             "id": 4,
@@ -63,12 +63,12 @@
         {
             "id": 12,
             "name": "Getting Pumped",
-            "text": "For every consecutive attack with getting pumped add +1 damage to your next attack."
+            "text": "For every consecutive attack with 'getting pumped' add +1 damage to your next attack."
         },
         {
             "id": 13,
             "name": "Self Destructive",
-            "text": "Your Pokemon takes 1 damage."
+            "text": "Your Pokemon takes 3 damage."
         },
         {
             "id": 14,
@@ -78,7 +78,7 @@
         {
             "id": 15,
             "name": "Reversal",
-            "text": "If your pokemon attacks first but its speed is slower than your opponents, this attack does +5 damage."
+            "text": "On this battles first attack, if your speed is slower than your opponent this attack does +5 damage."
         }
     ]
 }

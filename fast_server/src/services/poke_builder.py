@@ -2,9 +2,6 @@ import random
 import requests
 import json
 
-import pokebase as pb
-
-from ..interfaces.interface import Pokemon, Move, Item 
 from ..interfaces.models import \
     PokemonModel, PokemonBaseModel, SpriteModel, StatsModel, MoveModel, SpecialModel, ItemModel
 from .base_loader import BaseLoader
@@ -36,22 +33,20 @@ class PokemonBuilder():
         self.item_db = self._loader.POKECENTER
         self.spatk_db = self._loader.SP_ATK
 
-    def random_encounter(self, tier=1, _type: str=None, items: list[ItemModel]=None) -> PokemonModel:
+    def random_encounter(self, dex_id=None, tier=1, _type: str=None, items: list[ItemModel]=[]) -> PokemonModel:
         print("Creating Pokemon...")
 
         # Choose Pokemon
-        temp = self.poke_db.get_all()
-        if _type:
-            temp = self.poke_db.get_by_type(temp, _type)
+        if dex_id:
+            temp = self.poke_db.get_by_dex_id(dex_id)
+        elif _type:
+            temp = self.poke_db.get_by_type(self.poke_db.get_all(), _type)
+            temp = self.poke_db.get_by_tier(self.poke_db.get_all(), tier)
 
-        temp = self.poke_db.get_by_tier(temp, tier)
-        base: PokemonBaseModel = self.poke_db.randomize(temp)
+        base: PokemonBaseModel = temp if type(temp) != list else self.poke_db.randomize(temp)
         if not base:
             print("No Pokemon found.")
             return
-
-        api_resource = pb.APIResource("pokemon", base.dex_id)
-
 
         # Randomizers
         # HP
@@ -105,34 +100,19 @@ class PokemonBuilder():
         for item in items:
             if item.name == "Shiny Charm":
                 chance = self.SHINY_CHARM_CHANCE
-        print(chance)
 
         # Sprite
         if random.random() <= chance:
             shiny = True
-            pend_sprite = api_resource.sprites.front_shiny
+            pend_sprite = base.url_shiny
         else:
             shiny = False
-            pend_sprite = api_resource.sprites.front_default
+            pend_sprite = base.url_default
 
         sprite = {
             "sprite_url": pend_sprite,
             "shiny": shiny
         }
-
-
-        base = PokemonBaseModel(
-            dex_id = base.dex_id,
-            name = base.name,
-            tier = base.tier,
-            catch_rate = base.catch_rate,
-            hp = base.hp,
-            speed = base.speed,
-            special = base.special,
-            physical = base.physical,
-            types = base.types,
-            evolutions = base.evolutions
-        )
 
         pokemon = PokemonModel(base=base, stats=stats, sprite=sprite, moves=moves, items=[])
         return pokemon
@@ -144,21 +124,7 @@ class PokemonBuilder():
 
         print(f"Evolving {pokemon.base.name} into #{pokemon.base.evolutions}")
         pid = random.choice(pokemon.base.evolutions)
-        api_resource = pb.APIResource("pokemon", pid)
-
         temp = self.poke_db.get_by_dex_id(pid)
-        base = PokemonBaseModel(
-            dex_id = temp.dex_id,
-            name = temp.name,
-            tier = temp.tier,
-            catch_rate = temp.catch_rate,
-            hp = temp.hp,
-            speed = temp.speed,
-            special = temp.special,
-            physical = temp.physical,
-            types = temp.types,
-            evolutions = temp.evolutions
-        )
 
         for stat in pokemon.stats:
             if stat.name == "hp":
@@ -174,12 +140,9 @@ class PokemonBuilder():
                 physical_mod = stat.mod
                 physical = temp.physical + physical_mod
 
-        sprite_url = api_resource.sprites.front_default
-        if pokemon.sprite.shiny:
-            sprite_url = api_resource.sprites.front_shiny
         
         sprite = {
-            "sprite_url": sprite_url,
+            "sprite_url": temp.url_shiny if pokemon.sprite.shiny else temp.url_default,
             "shiny": pokemon.sprite.shiny
         }
 
@@ -212,7 +175,7 @@ class PokemonBuilder():
 
         moves = self._get_valid_moves(pokemon.base)
 
-        p = PokemonModel(base=base, owner=pokemon.owner, stats=stats, sprite=sprite, moves=moves, items=pokemon.items)
+        p = PokemonModel(base=temp, owner=pokemon.owner, stats=stats, sprite=sprite, moves=moves, items=pokemon.items)
         return self.save_pokemon(p, owner=pokemon.owner)
 
 
@@ -236,7 +199,9 @@ class PokemonBuilder():
                     special = base_data.special,
                     physical = base_data.physical,
                     evolutions = base_data.evolutions,
-                    catch_rate = base_data.catch_rate
+                    catch_rate = base_data.catch_rate,
+                    url_shiny = base_data.url_shiny,
+                    url_default = base_data.url_default
                 ),
                 sprite=SpriteModel(
                     shiny = data["shiny"],
@@ -357,6 +322,7 @@ class PokemonBuilder():
         }.get(item.name, 0)
 
     def save_pokemon(self, pokemon: PokemonModel, owner: int=0) -> PokemonModel:
+        print("saving")
         try:
             r = requests.put(f"{self.db_uri}/pokemon/{owner}",
                 json=pokemon.model_dump_json(),

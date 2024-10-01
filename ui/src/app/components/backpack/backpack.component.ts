@@ -1,7 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { PokeItemsTemplate } from 'src/app/interfaces/pokeItems';
 import { PokemonMaster } from 'src/app/interfaces/pokeMaster';
-import { TrackerService } from 'src/app/services/trackingService';
+
+import { MenuService } from 'src/app/services/menuService';
+import { ServerService } from 'src/app/services/serverService';
+import { TrainerTracker } from 'src/app/services/trainerTracker';
 
 @Component({
     selector: 'app-backpack',
@@ -9,40 +13,66 @@ import { TrackerService } from 'src/app/services/trackingService';
     styleUrls: ['./backpack.component.css']
 })
 export class BackpackComponent implements OnInit{
-    @Input() trainerTracker: TrackerService;
+    @Input() trainerTracker: TrainerTracker;
+    @Input() serverService: ServerService;
+    @Input() menuService: MenuService;
+    
     public trainer: PokemonMaster;
-    public itemList = new Map<string, {id: number, name: string, count: number, text: string}>; 
+    public itemList: Map<string, {id: number, name: string, count: number, text: string}>; 
 
-    ngOnInit() {
-        if (this.trainerTracker?.isMasterSet())
+    async ngOnInit() {
+        if (this.trainerTracker?.isLoggedIn())
         {
-            this.trainer = this.trainerTracker.getMaster();
-            let inventory: number;
-            this.trainer.items.forEach( (item) => {
-                console.log(item);
-                if (this.itemList.has(item.name)) {
-                    inventory = this.itemList.get(item.name)!.count + 1;
-                } else {
-                    inventory = 1;
-                }
-                this.itemList.set(item.name, {
-                    id: item._id,
-                    name: item.name,
-                    count: inventory,
-                    text: item.text
-                })
-
-            });
+            this.trainer = await this.trainerTracker.getTrainer();
+            this.updateItemList();
         }
     }
 
+    updateItemList() {
+        this.itemList = new Map<string, {id: number, name: string, count: number, text: string}>
+        let inventory: number;
+        this.trainer.items.forEach( (item) => {
+            if (this.itemList.has(item.name)) {
+                inventory = this.itemList.get(item.name)!.count + 1;
+            } else {
+                inventory = 1;
+            }
+            this.itemList.set(item.name, {
+                id: item.id,
+                name: item.name,
+                count: inventory,
+                text: item.text
+            });
+        });
+    }
+
     useItem(itemID: number) {
-        this.trainer.removeItem(itemID);
+        this.serverService.deleteItems(this.trainer.id, itemID)
+            .then((res) => {
+                console.log("Item removed.")
+            }).catch((err) => {
+                console.error(err);
+            });
         this.exitBackpack();
     }
 
+    async sellItem(itemID: number) {
+        this.trainer.items.forEach(async (item) => {
+            if (item.id == itemID){
+                await this.trainer.sellItem(item)
+                    .then(async () => {
+                        await this.trainer.reloadItems()
+                            .then(() => {
+                                this.updateItemList();
+                            });
+                    });
+                return;
+            }
+        });
+    }
+
     exitBackpack() {
-        this.trainerTracker.setNewView("defaultView");
+        this.menuService.setNewView("defaultView");
     }
 
 }

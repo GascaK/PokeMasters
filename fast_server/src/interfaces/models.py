@@ -41,6 +41,8 @@ class PokemonBaseModel(BaseModel):
     special: int
     physical: int
     types: list[str]
+    url_shiny: str
+    url_default: str
     evolutions: list[int] = []
 
 class PokemonModel(BaseModel):

@@ -1,6 +1,8 @@
-<div *ngIf="!loggedIn()">
-  <app-login [trainerTracker]="trackerService"></app-login>
-</div>
-<div *ngIf="loggedIn()">
-  <app-homepage [trainerTracker]="trackerService"></app-homepage>
+<div>
+  <div *ngIf="!isLoggedIn()">
+    <app-login [trainerTracker]="trainerTracker" [serverService]="serverService"></app-login>
+  </div>
+  <div *ngIf="isLoggedIn()">
+    <app-homepage [trainerTracker]="trainerTracker"></app-homepage>
+  </div>
 </div>

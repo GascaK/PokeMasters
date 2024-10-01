@@ -123,12 +123,12 @@
         {
             "name": "Acro Bike",
             "cost": 10000,
-            "text": "Your movement die is now a d8 going forward.",
+            "text": "Your next movement die is now a d8.",
             "tier": 4
         },
         {
             "name": "Flat Tire",
-            "cost": 300,
+            "cost": 400,
             "text": "Choose an opponent. Their next movement die is a d4.",
             "tier": 1
         },
@@ -302,8 +302,8 @@
         },
         {
             "name": "Odd Pear",
-            "cost": 300,
-            "text": "Held Item: Your Odd Atk does +3 DMG while your Even Atk does -5 DMG.",
+            "cost": 450,
+            "text": "Held Item: Your Odd Atk does +2 DMG while your Even Atk does -5 DMG.",
             "tier": 2
         },
         {

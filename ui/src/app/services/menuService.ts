@@ -1,8 +1,5 @@
-import { PokemonMaster } from "../interfaces/pokeMaster";
 
-
-export class TrackerService {
-    public master: PokemonMaster;
+export class MenuService {
     public views = new Map<string, boolean>;
 
     constructor() {
@@ -13,18 +10,6 @@ export class TrackerService {
         this.views.set("encounterView", false);
         this.views.set("shopView", false);
         this.views.set("backpackView", false);
-    }
-
-    setMaster(pMaster: PokemonMaster): void {
-        this.master = pMaster;
-    }
-
-    getMaster(): PokemonMaster{
-        return this.master;
-    }
-
-    isMasterSet(): Boolean {
-        return this.master != null;
     }
 
     setNewView(view: string) {

@@ -25,6 +25,44 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
+@router.get("/find", tags=["player"])
+def get_player_find(username: int, name: str) -> PlayerModel:
+    try:
+        player: PlayerModel = player_builder.get_player_by_name(name)
+        print(player)
+        return player
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error grabbing player: {e}")
+
+@router.get("/starters", tags=["player", "pokemon"])
+def get_player_starters(username: int) -> list[PokemonModel]:
+    starters = []
+    for generation in base_loader.get_generations():
+        starters = {
+            1: [1, 4, 7],
+            2: [152, 155, 159]
+        }.get(generation)
+
+    try:
+        saved: list[PokemonModel] = []
+        for starter in starters:
+            pokemon = poke_builder.random_encounter(dex_id=starter)
+            saved.append(pokemon)
+
+        if not saved:
+            raise HTTPException(status_code=500, detail="No starters generations were given.")
+        
+        return saved
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Unable to encounter starters.")
+
+@router.post("/starters", tags=["player", "pokemon"])
+def post_player_starters(username: int, pokemon: PokemonModel) -> PokemonModel:
+    try:
+        return poke_builder.save_pokemon(pokemon, owner=username)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Unable to save pokemon.")
+
 @router.get("/", tags=["player"])
 def get_player(username: int) -> PlayerModel:
     # Get a current player

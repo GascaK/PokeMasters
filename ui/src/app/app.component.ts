@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-
-import { TrackerService } from './services/trackingService';
+import { TrainerTracker } from './services/trainerTracker';
+import ServerService from './services/serverService';
 
 @Component({
     selector: 'app-root',
@@ -8,10 +8,23 @@ import { TrackerService } from './services/trackingService';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    public trackerService = new TrackerService();
-    constructor(){}
-    
-    public loggedIn() {
-        return this.trackerService.isMasterSet();
+    public trainerTracker: TrainerTracker;
+    public serverService: ServerService;
+
+    constructor(){
+        this.serverService = new ServerService();
+        this.trainerTracker = new TrainerTracker();
+    }
+
+    public login(id: number): void {
+        this.trainerTracker.setTrainer(id, this.serverService);
+    }
+
+    public isLoggedIn() {
+        if (this.trainerTracker && this.trainerTracker.isLoggedIn()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

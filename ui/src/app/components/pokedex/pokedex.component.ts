@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PokemonMaster } from 'src/app/interfaces/pokeMaster';
 import { PokemonTemplate } from 'src/app/interfaces/pokemon';
-import { TrackerService } from 'src/app/services/trackingService';
+import { PokemonMaster } from 'src/app/interfaces/pokeMaster';
+
+import { MenuService } from 'src/app/services/menuService';
+import { TrainerTracker } from 'src/app/services/trainerTracker';
+import { ServerService } from 'src/app/services/serverService';
 
 @Component({
     selector: 'app-pokedex',
@@ -9,8 +12,11 @@ import { TrackerService } from 'src/app/services/trackingService';
     styleUrls: ['./pokedex.component.css']
 })
 export class PokedexComponent implements OnInit {
-    @Input() trainerTracker: TrackerService;
+    @Input() trainerTracker: TrainerTracker;
+    @Input() serverService: ServerService;
+    @Input() menuService: MenuService;
     public trainer: PokemonMaster;
+
     public moreInformation = false;
     public infoList: {data: PokemonTemplate, checked: boolean}[] = [];
     public validated: Array<PokemonTemplate> = [];
@@ -18,19 +24,19 @@ export class PokedexComponent implements OnInit {
     public finalPokedex: Map<number, {name: string, count: number}>;
     interval: any;
 
-    ngOnInit() {
-        if (this.trainerTracker?.isMasterSet())
+    async ngOnInit() {
+        this.trainer = await this.trainerTracker.getTrainer();
+
+        if (this.trainerTracker)
         {
-            this.trainer = this.trainerTracker.getMaster();
-            
             if (this.trainer.pokemon) {
                 this.trainer.pokemon.forEach( (mon) => {
                     let count = 1;
-                    if (this.sortedPokemon.has(mon.pokedex)) {
-                        count = this.sortedPokemon.get(mon.pokedex)!.count + 1;
+                    if (this.sortedPokemon.has(mon.base.dex_id)) {
+                        count = this.sortedPokemon.get(mon.base.dex_id)!.count + 1;
                     }
-                    this.sortedPokemon.set(mon.pokedex, {
-                        name: mon.name,
+                    this.sortedPokemon.set(mon.base.dex_id, {
+                        name: mon.base.name,
                         count: count
                     });
                 });
@@ -48,7 +54,7 @@ export class PokedexComponent implements OnInit {
     moreInfo(id: number) {
         this.moreInformation = true;
         this.trainer.pokemon.forEach((pokemon: PokemonTemplate) => {
-            if(pokemon.pokedex == id) {
+            if(pokemon.base.dex_id == id) {
                 this.infoList.push({
                     data: pokemon,
                     checked: false
@@ -67,38 +73,31 @@ export class PokedexComponent implements OnInit {
 
     async evolve(mons: Array<PokemonTemplate>) {
         if (this.validated.length >= 3) {
-            await this.trainer.evolvePokemon(mons)
-                .then( (newPokemonID) => {
-                    this.trainer.pokemon.forEach( (pokemon) => {
-                        if (newPokemonID == pokemon._id) {
-                            this.trainer.activePokemon = pokemon;
-                        }
-                    })
-                });
-                this.exitView();
-        } else {
-            console.log("Not enough selected");
-            alert("Warning: Stop cheating..");
+            await this.serverService.evolvePokemon(this.trainer.id, [])
+                .then( (res) => {
+                    this.exitView();
+                }).catch( (err) => {
+                    console.error(err);
+                })
         }
         this.exitInfoPanel();
     }
 
-    validateBenchCapacity(pokemon: PokemonTemplate): boolean {
-        if (pokemon._id == this.trainer.activePokemon?._id) {
-            return false;
-        } else if (pokemon._id == this.trainer.benchOne?._id) {
-            return false;
-        } else if (pokemon._id == this.trainer.benchTwo?._id) {
-            return false;
-        }
-        return true;
-    }
+    // validateBenchCapacity(pokemon: PokemonTemplate): boolean {
+    //     if (pokemon._id == this.trainer.activePokemon?._id) {
+    //         return false;
+    //     } else if (pokemon._id == this.trainer.benchOne?._id) {
+    //         return false;
+    //     } else if (pokemon._id == this.trainer.benchTwo?._id) {
+    //         return false;
+    //     }
+    //     return true;
+    // }
 
-    sendToBench(pokemon: PokemonTemplate) {
-        console.log(pokemon._id);
-        this.trainer.activePokemon = pokemon;
-        this.exitView();
-    }
+    // sendToBench(pokemon: PokemonTemplate) {
+    //     this.trainer.activePokemon = pokemon;
+    //     this.exitView();
+    // }
 
     exitInfoPanel() {
         this.infoList = [];
@@ -106,6 +105,6 @@ export class PokedexComponent implements OnInit {
     }
 
     exitView() {
-        this.trainerTracker.setNewView("defaultView");
+        this.menuService.setNewView("defaultView");
     }
 }

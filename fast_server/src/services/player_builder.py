@@ -36,6 +36,17 @@ class PlayerBuilder():
         except Exception as e:
             print(e)
             raise e
+        
+    def get_player_by_name(self, name: str) -> PlayerModel:
+        try:
+            resp = requests.get(f"{self.db_uri}/player/{name}/find", headers=self.headers, timeout=30)
+            resp.raise_for_status()
+
+            p: dict = resp.json()
+            return self.build_player(p)
+        except Exception as e:
+            print(e)
+            raise e
     
     def new_player(self, player: PlayerModel) -> PlayerModel:
         try:

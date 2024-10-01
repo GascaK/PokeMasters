@@ -1,12 +1,23 @@
-<div>
-    <button class="btn btn-primary" (click)="login(1)">Kevin</button>
-    <button class="btn btn-primary" (click)="login(3)">Chris</button>
-    <button class="btn btn-primary" (click)="login(4)">Erick</button>
-    <button class="btn btn-primary" (click)="login(2)">Kenny</button>
-    <input type="text" id="username" 
+<input [(ngModel)]="username" type="text" id="username" 
         placeholder="Enter your username" />
-    <button id="submitBtn">
+<div *ngIf="!newPlayerMenu">
+    <div>
+        <button id="submitBtn" class="btn btn-primary" (click)="login()">
         Submit
-    </button>
-    <p id="result"></p>
+        </button>
+    </div>
+    <div>
+        <button id="newPlayerBtn" class="btn btn-secondary" (click)="newPlayer()">
+            New Player
+        </button>
+    </div>
+</div>
+<div *ngIf="newPlayerMenu">
+    <div *ngFor="let starter of starters">
+        <div>{{starter.base.name}}</div>
+        <img src="{{starter.sprite.sprite_url}}" alt="Pokemon Image">
+        <button id="chosenStarter" class="btn btn-primary" (click)="createPlayer(starter)">
+            Choose
+        </button>
+    </div>
 </div>

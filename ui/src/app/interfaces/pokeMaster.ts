@@ -17,17 +17,24 @@ export class PokemonMaster implements Trainer{
     }
 
     async build(): Promise<void> {
-        await this.instance.getPlayer(this.id)
-            .then( (res) => {
-                this.name = res.name;
-                this.dollars = res.dollars;
-                this.badges = res.badges;
-            })
-            .catch( (err) => {
-                console.error(err);
-                throw err;
-            });
+        this.reloadPlayer();
+        this.reloadPokemon();
+        this.reloadItems();
+    }
 
+    async reloadPlayer(): Promise<void>{
+        await this.instance.getPlayer(this.id)
+        .then( (res) => {
+            this.name = res.name;
+            this.dollars = res.dollars;
+            this.badges = res.badges;
+        })
+        .catch( (err) => {
+            console.error(err);
+            throw err;
+        });
+    }
+    async reloadPokemon(): Promise<void>{
         await this.instance.getTrainerPokemon(this.id)
             .then( (res) => {
                 this.pokemon = res;
@@ -36,7 +43,9 @@ export class PokemonMaster implements Trainer{
                 console.error(err);
                 throw err;
             });
-        
+    }
+
+    async reloadItems(): Promise<void>{
         await this.instance.getTrainerItems(this.id)
             .then( (res) => {
                 this.items = res;
@@ -181,16 +190,14 @@ export class PokemonMaster implements Trainer{
     }
 
     async sellItem(item: PokeItemsTemplate): Promise<Trainer> {
-        return await this.instance.postItemsShopSell(
-            this.id,
-            item
-        ).then( (res) => {
-            console.log(res);
-            return res;
-        }).catch( (err) => {
-            console.error(err);
-            throw err;
-        });
+        return await this.instance.postItemsShopSell(this.id, item)
+            .then( (res) => {
+                console.log(res);
+                return res;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
+            });
     }
 
     async saveTrainer(): Promise<Trainer>{

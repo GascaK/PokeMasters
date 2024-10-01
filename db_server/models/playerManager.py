@@ -65,12 +65,19 @@ class TrainerLocator(Resource):
         db_session.commit()
         return player.toJSON()
 
+class TrainerFinderLocator(Resource):
+    # '/player/<name:str>/find
+    def get(self, name: str):
+        player: Player = Player.query.filter_by(name=name).first()
+        if not player:
+            abort(401, message=f"No trainer found for trainer id: {id}")
+
+        return player.toJSON()
+
 class TrainerPokemonLocator(Resource):
     # '/player/<int:id>/pokemon
     def get(self, id: int):
         chosen: list[Pokemon] = Pokemon.query.filter_by(owner=id).all()
-        if not chosen:
-            abort(404, message=f"Unable to locate pokemon with ID: {id}")
 
         return [x.toJSON() for x in chosen], 200
 
@@ -85,9 +92,7 @@ item_resource = {
 class TrainerItemLocator(Resource):
     # /player/<int:id>/items
     def get(self, id):
-        items = Items.query.filter_by(owner=id).all()
-        if not items:
-            abort(400, message="Unable to find item.")
+        items: Items = Items.query.filter_by(owner=id).all()
 
         return [x.toJSON() for x in items], 200
     

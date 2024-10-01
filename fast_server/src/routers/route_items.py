@@ -53,6 +53,13 @@ def delete_items(username: int, id: int) -> None:
     else:
         raise HTTPException(status_code=400, detail="Your ID does not match this item.")
 
+@router.post("/starter", tags=["items"])
+def post_items_starter(username: int, amount=5) -> None:
+    for _ in range(amount):
+        item = item_builder.get_item_by_name("Poke Ball")
+        item.owner = username
+        item_builder.save_item(item)
+
 @router.post("/random", tags=["items"])
 def post_items_random(username: int, tier: Annotated[int | None, Body()]=1) -> ItemModel:
     item: ItemModel = item_builder.random_item(tier=random.randint(1, tier))

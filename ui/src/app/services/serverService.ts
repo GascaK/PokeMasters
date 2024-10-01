@@ -1,9 +1,8 @@
 import axios, { Axios } from 'axios';
 
 import { PokeItemsTemplate } from '../interfaces/pokeItems';
-import { PokemonMaster } from '../interfaces/pokeMaster';
 import { Trainer } from '../interfaces/trainer';
-import { PokemonTemplate, PokeMoveTemplate } from '../interfaces/pokemon';
+import { PokemonTemplate } from '../interfaces/pokemon';
 
 export class ServerService {
     instance = axios.create({
@@ -16,6 +15,16 @@ export class ServerService {
     });
 
     ////// Player Functions //////
+    async findPlayerByName(name: string): Promise<Trainer>{
+        return await this.instance.get<Trainer>(`0/player/find?name=${name}`)
+            .then(async (res) => {
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
+            })
+    }
+
     async getPlayer(username: number): Promise<Trainer>{
         return await this.instance.get<Trainer>(`${username}/player`)
             .then(async (res) => {
@@ -27,9 +36,9 @@ export class ServerService {
             });
     }
 
-    async postPlayer(username: number, name: string): Promise<Trainer>{
+    async createPlayer(name: string): Promise<Trainer>{
         const body = name;
-        return await this.instance.post<Trainer>(`${username}/player`, body)
+        return await this.instance.post<Trainer>(`0/player`, body)
             .then(async (res) => {
                 console.log(res.data);
                 return res.data;
@@ -86,6 +95,28 @@ export class ServerService {
     }
 
     ////// Pokemon Functions //////
+    async encounterStarters(username: number): Promise<Array<PokemonTemplate>>{
+        return await this.instance.get<Array<PokemonTemplate>>(`${username}/player/starters`)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
+            })
+    }
+
+    async catchStarters(username: number, pokemon: PokemonTemplate): Promise<PokemonTemplate>{
+        return await this.instance.post<PokemonTemplate>(`${username}/player/starters`, pokemon)
+            .then( (res) => {
+                console.log(res.data);
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
+            })
+    }
+
     async encounterRandomPokemon(
         username: number, 
         tier: number, 
@@ -161,6 +192,13 @@ export class ServerService {
             });
     }
 
+    async starterItems(username: number): Promise<void>{
+        return await this.instance.post<void>(`${username}/items/starter`)
+            .then( () => {
+                console.log("Balls added.")
+            })
+    }
+
     async deleteItems(username: number, id: number): Promise<void>{
         return await this.instance.delete<void>(`${username}/items?id=${id}`)
             .then(async (res) => {
@@ -188,7 +226,7 @@ export class ServerService {
     }
 
     async getItemsShop(username: number, tier: number=1, shop_size: number=5): Promise<Array<PokeItemsTemplate>>{
-        const url = `${username}/items/shop?tier=${tier}?shop_size=${shop_size}`;
+        const url = `${username}/items/shop?tier=${tier}&shop_size=${shop_size}`;
 
         return await this.instance.get<Array<PokeItemsTemplate>>(url)
             .then(async (res) => {

@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-import { TrackerService } from 'src/app/services/trackingService';
 import { PokemonMaster } from 'src/app/interfaces/pokeMaster';
 
 import statusEffects from 'src/app/components/info/status_effects.json';
+import { TrainerTracker } from 'src/app/services/trainerTracker';
+import { MenuService } from 'src/app/services/menuService';
 
 
 @Component({
@@ -12,32 +12,28 @@ import statusEffects from 'src/app/components/info/status_effects.json';
     styleUrls: ['./info.component.css']
 })
 export class InfoComponent implements OnInit {
-    @Input() trainerTracker: TrackerService;
+    @Input() trainerTracker: TrainerTracker;
+    @Input() menuService: MenuService;
+
     public trainer: PokemonMaster;
     public statuses: Array<{name: string, text: string}> = statusEffects.status_effects;
 
-    ngOnInit() {
-        if (this.trainerTracker?.isMasterSet())
+    async ngOnInit() {
+        if (this.trainerTracker?.isLoggedIn())
         {
-            this.trainer = this.trainerTracker.getMaster();
+            this.trainer = await this.trainerTracker.getTrainer();
         }
     }
 
     onSubmit(badges: string, tier: string) {
         const checkedBadge = parseInt(badges);
-        const checkedTier = parseInt(tier);
         
         if (!isNaN(checkedBadge) && checkedBadge >= 0 && checkedBadge <= 8) {
-            this.trainer.badges = checkedBadge;
+            this.trainer.setBadges(checkedBadge);
         } else {
             alert(`Invalid Value for badge: ${badges}`);
         }
-        if(!isNaN(checkedTier) && checkedTier >= 1 && checkedTier <= 3) {
-            this.trainer.currentTier = checkedTier;
-        } else {
-            alert(`Invalid Value for tier: ${tier}`);
-        }
-        this.trainerTracker.getMaster().saveAll();
-        this.trainerTracker.setNewView("defaultView");
+
+        this.menuService.setNewView("defaultView");
     }
 }

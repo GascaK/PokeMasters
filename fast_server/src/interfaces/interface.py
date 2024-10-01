@@ -129,7 +129,7 @@ class PokeCenter():
             print("No values found")
 
 class PokemonBase():
-    def __init__(self, dex_id, name, hp, speed, special, physical, tier, types, evolutions, catch_rate):
+    def __init__(self, dex_id, name, hp, speed, special, physical, tier, types, evolutions, catch_rate, url_shiny, url_default):
         self.dex_id = dex_id
         self.name = name
         self.hp = hp
@@ -140,6 +140,8 @@ class PokemonBase():
         self.types = types
         self.evolutions = evolutions
         self.catch_rate = catch_rate
+        self.url_shiny = url_shiny
+        self.url_default = url_default
     
     def toJSON(self):
         return json.dumps(
