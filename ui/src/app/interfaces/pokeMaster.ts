@@ -2,6 +2,7 @@ import ServerService from '../services/serverService';
 
 import { PokeItemsTemplate } from './pokeItems';
 import { PokemonTemplate } from './pokemon';
+import { PokeTeam, Bench } from './pokeTeam';
 import { Trainer } from "./trainer";
 
 
@@ -12,8 +13,14 @@ export class PokemonMaster implements Trainer{
     pokemon: Array<PokemonTemplate> = [];
     items: Array<PokeItemsTemplate> = [];
 
+    team: PokeTeam;
+
     constructor(public id: number, public instance: ServerService) {
         this.build()
+        this.team = new PokeTeam();
+        this.team.active = new Bench();
+        this.team.benchOne = new Bench();
+        this.team.benchTwo = new Bench();
     }
 
     async build(): Promise<void> {

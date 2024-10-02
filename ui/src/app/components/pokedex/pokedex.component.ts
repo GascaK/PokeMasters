@@ -55,6 +55,7 @@ export class PokedexComponent implements OnInit {
         this.moreInformation = true;
         this.trainer.pokemon.forEach((pokemon: PokemonTemplate) => {
             if(pokemon.base.dex_id == id) {
+                console.log("special", pokemon.moves[0].special);
                 this.infoList.push({
                     data: pokemon,
                     checked: false
@@ -72,8 +73,13 @@ export class PokedexComponent implements OnInit {
     }
 
     async evolve(mons: Array<PokemonTemplate>) {
+        let ids: Array<number> = [];
         if (this.validated.length >= 3) {
-            await this.serverService.evolvePokemon(this.trainer.id, [])
+            this.validated.forEach((mon) => {
+                ids.push(mon.id);
+            });
+
+            await this.serverService.evolvePokemon(this.trainer.id, ids)
                 .then( (res) => {
                     this.exitView();
                 }).catch( (err) => {
@@ -83,21 +89,30 @@ export class PokedexComponent implements OnInit {
         this.exitInfoPanel();
     }
 
-    // validateBenchCapacity(pokemon: PokemonTemplate): boolean {
-    //     if (pokemon._id == this.trainer.activePokemon?._id) {
-    //         return false;
-    //     } else if (pokemon._id == this.trainer.benchOne?._id) {
-    //         return false;
-    //     } else if (pokemon._id == this.trainer.benchTwo?._id) {
-    //         return false;
-    //     }
-    //     return true;
-    // }
+    validateBenchCapacity(pokemon: PokemonTemplate): boolean {
+        if (pokemon.id == this.trainer.team.active?.pokemon?.id) {
+            return false;
+        } else if (pokemon.id == this.trainer.team.benchOne?.pokemon?.id) {
+            return false;
+        } else if (pokemon.id == this.trainer.team.benchTwo?.pokemon?.id) {
+            return false;
+        }
+        return true;
+    }
 
-    // sendToBench(pokemon: PokemonTemplate) {
-    //     this.trainer.activePokemon = pokemon;
-    //     this.exitView();
-    // }
+    setActive(pokemon: PokemonTemplate) {
+        this.trainer.team.active.pokemon = pokemon;
+        pokemon.stats.forEach((stat) => {
+            if (stat.name == "hp") {
+                this.trainer.team.active.currentHP = stat.value;
+                this.trainer.team.active.maxHP = stat.value;
+            } else if (stat.name == "speed") {
+                this.trainer.team.active.speed = stat.value;
+            }
+        })
+
+        this.exitView();
+    }
 
     exitInfoPanel() {
         this.infoList = [];

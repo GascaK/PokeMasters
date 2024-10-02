@@ -14,7 +14,6 @@ app = FastAPI(title="PokeMasters", version="0.1.0")
 origins = [
     "http://localhost:4200",
 ]
-#app.mount("/", StaticFiles(directory="dist"), name="static")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -28,3 +27,6 @@ _ = BaseLoader(generations=answers.POKEMON_GENERATIONS)
 app.include_router(route_pokemon.router)
 app.include_router(route_items.router)
 app.include_router(route_player.router)
+
+# Mount routes last.
+app.mount("/", StaticFiles(directory="dist"), name="static")

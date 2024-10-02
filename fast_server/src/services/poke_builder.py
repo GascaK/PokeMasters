@@ -42,6 +42,8 @@ class PokemonBuilder():
         elif _type:
             temp = self.poke_db.get_by_type(self.poke_db.get_all(), _type)
             temp = self.poke_db.get_by_tier(self.poke_db.get_all(), tier)
+        else:
+            temp = self.poke_db.get_by_tier(self.poke_db.get_all(), tier)
 
         base: PokemonBaseModel = temp if type(temp) != list else self.poke_db.randomize(temp)
         if not base:

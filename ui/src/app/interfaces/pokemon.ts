@@ -25,13 +25,19 @@ export interface PokeSpriteTemplate{
     sprite_url: string;
 }
 
+export interface PokeSpecialTemplate{
+    id: number,
+    name: string;
+    text: string;
+}
+
 export interface PokeMoveTemplate {
     id: number;
     name: string;
-    moveType: string;
+    move_type: string;
     tier: number;
     hit: string;
-    special: string;
+    special: PokeSpecialTemplate;
 }
 
 export interface PokemonTemplate {

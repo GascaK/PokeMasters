@@ -2,6 +2,9 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { PokeItemsTemplate } from 'src/app/interfaces/pokeItems';
 import { PokemonMaster } from 'src/app/interfaces/pokeMaster';
 import { PokemonTemplate } from 'src/app/interfaces/pokemon';
+import { PokeTeam, Bench } from 'src/app/interfaces/pokeTeam';
+import { MenuService } from 'src/app/services/menuService';
+import { TrainerTracker } from 'src/app/services/trainerTracker';
 
 @Component({
     selector: 'app-active',
@@ -9,62 +12,77 @@ import { PokemonTemplate } from 'src/app/interfaces/pokemon';
     styleUrls: ['./active.component.css']
 })
 export class ActiveComponent implements OnInit{
-    @Input() trainer: PokemonMaster;
-    public active: PokemonTemplate;
+    @Input() trainerTracker: TrainerTracker;
+    @Input() menuService: MenuService;
+    @Input() team: PokeTeam;
+
+    public trainer: PokemonMaster;
+
     public imgLoc: string;
     public interval: any;
     public items: Array<PokeItemsTemplate> = [];
     public choosingItemStatus = false;
 
-    ngOnInit() {
-        this.loadActive();
-        this.interval = setTimeout( () => {
-            console.log(this.trainer.activePokemon);
-            if (this.trainer.activePokemon) {
-                this.active = this.trainer.activePokemon;
-                this.loadCard(this.active);
-            }
-        }, 1000);
-    }
-
-    update() {
-        this.loadActive();
+    async ngOnInit() {
+        this.trainer = await this.trainerTracker.getTrainer();
     }
 
     loadActive() {
-        if (this.trainer.activePokemon) {
-            this.active = this.trainer.activePokemon;
-            if (! this.active.currentHP ) {
-                this.active.currentHP = this.active.hp;
-            }
-            this.loadCard(this.active);
-            this.items = this.trainer.items;
+        console.log(this.team.active);
+        if (this.team.active.pokemon) {
+            this.team.active.pokemon.stats.forEach((stat) => {
+                if (stat.name == "hp"){
+                    this.team.active.currentHP = stat.value;
+                    this.team.active.maxHP = stat.value;
+                }
+                if (stat.name == "speed"){
+                    this.team.active.speed = stat.value;
+                }
+            });
         }
     }
 
-    loadCard(pokemon: PokemonTemplate) {
-        const imgFile = pokemon.pokedex < 10 ? '00' + pokemon.pokedex : pokemon.pokedex < 100 ? '0' + pokemon.pokedex : pokemon.pokedex;
-        this.imgLoc = `/assets/imgs/${imgFile}.PNG`;
-    }
-
     chooseNewItem() {
+        this.items = this.trainer.items;
         this.choosingItemStatus = true;
     }
 
     holdItem(item: PokeItemsTemplate) {
-        this.active.item = item;
-        this.trainer.removeItem(item._id);
+        this.team.active.item = item;
+        this.trainer.deleteItem(item.id);
         this.exitItemSelection();
     }
 
     dropActiveHeldItem() {
-        if (this.active.item) {
-            alert(`Dropping item ${this.active.item!.name}`);
-            this.active.item = null;
+        if (this.team.active.item) {
+            alert(`Dropping item ${this.team.active.item.name}`);
+            this.team.active.item = null;
         } else {
             alert("Nothing to drop.");
         }
         this.exitItemSelection();
+    }
+
+    setBenchOne() {
+        if (!this.team.benchOne) {
+            this.team.active = this.team.benchOne;
+            this.menuService.setNewView("dexView");
+        } else {
+            const temp = this.team.active;
+            this.team.active = this.team.benchOne;
+            this.team.benchOne = temp;
+        }
+    }
+    
+    setBenchTwo() {
+        if (!this.team.benchTwo) {
+            this.team.active = this.team.benchTwo;
+            this.menuService.setNewView("dexView");
+        } else {
+            const temp = this.team.active;
+            this.team.active = this.team.benchTwo;
+            this.team.benchTwo = temp;
+        }
     }
 
     exitItemSelection() {

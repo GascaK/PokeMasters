@@ -106,7 +106,7 @@ def put_pokemon_encounter_id(
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Failed to save got item. {e}")
 
-        return {"msg": "caught", "data": {"roll": die, "mods": modifiers, "item": item}}
+        return {"msg": "caught", "data": {"roll": die, "mods": modifiers, "item": got_item}}
 
 
     # Did not catch. Consequences..

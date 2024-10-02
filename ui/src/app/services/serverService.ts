@@ -121,7 +121,7 @@ export class ServerService {
         username: number, 
         tier: number, 
         type: string | null=null,
-        items: Array<PokeItemsTemplate>
+        items: Array<PokeItemsTemplate>=[]
     ): Promise<PokemonTemplate> {
         if(![1, 2, 3, 4].includes(tier)){
             throw new Error("Invalid Tier");

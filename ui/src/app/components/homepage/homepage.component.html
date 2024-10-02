@@ -4,9 +4,9 @@
 <div *ngIf="menuService.views.get('dexView')">
   <app-pokedex [trainerTracker]="trainerTracker" [serverService]="serverService" [menuService]="menuService"></app-pokedex>
 </div>
-<!-- <div *ngIf="trainerTracker.views.get('encounterView')">
-  <app-encounter [trainerTracker]="trainerTracker" [legendary]="legendary"></app-encounter>
-</div> -->
+<div *ngIf="menuService.views.get('encounterView')">
+  <app-encounter [trainerTracker]="trainerTracker" [serverService]="serverService" [menuService]="menuService" [legendary]="legendary"></app-encounter>
+</div>
 <div *ngIf="menuService.views.get('shopView')">
   <app-shop [trainerTracker]="trainerTracker" [serverService]="serverService" [menuService]="menuService"></app-shop>
 </div>
@@ -14,21 +14,8 @@
   <app-backpack [trainerTracker]="trainerTracker" [serverService]="serverService" [menuService]="menuService"></app-backpack>
 </div>
 <div class="row" *ngIf="menuService.views.get('defaultView')">
-  <!-- <div>
-    <app-active [trainer]="trainer"></app-active>
-  </div> -->
   <div>
-    <h4 style="text-align:center">Bench</h4>
-  </div>
-  <div class="col">
-    <button class="btn btn-primary col-12" (click)="setBench(active, 0)">
-      {{bench[0]?.base?.name || "Empty Slot"}}
-    </button>
-  </div>
-  <div class="col">
-    <button class="btn btn-primary col-12" (click)="setBench(active, 1)">
-      {{bench[1]?.base?.name || "Empty Slot"}}
-    </button>
+    <app-active [trainerTracker]="trainerTracker" [team]="trainer.team" [menuService]="menuService"></app-active>
   </div>
   <div>
     <h4 style="text-align:center">{{trainer.name}}'s Info:</h4>
@@ -49,7 +36,7 @@
     <button class="btn btn-success col-12" (click)="setView('encounterView')">Tall Grass</button>
   </div>
   <div>
-    <button class="btn btn-info col-12" (click)="setView('shopView')">Items</button>
+    <button class="btn btn-info col-12" (click)="setView('shopView')">Poke Center</button>
   </div>
   <div *ngIf="trainer.getCurrentTier()==3">
     <button class="btn btn-dark col-12" (click)="encounterLegendary()">Legendary</button>

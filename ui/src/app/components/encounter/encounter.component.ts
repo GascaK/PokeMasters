@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PokeItemsTemplate } from 'src/app/interfaces/pokeItems';
 import { PokemonMaster } from 'src/app/interfaces/pokeMaster';
 import { PokemonTemplate } from 'src/app/interfaces/pokemon';
-import { TrackerService } from 'src/app/services/trackingService';
+import { MenuService } from 'src/app/services/menuService';
+import ServerService from 'src/app/services/serverService';
+import { TrainerTracker } from 'src/app/services/trainerTracker';
 
 @Component({
     selector: 'app-encounter',
@@ -9,63 +12,91 @@ import { TrackerService } from 'src/app/services/trackingService';
     styleUrls: ['./encounter.component.css']
 })
 export class EncounterComponent implements OnInit{
-    @Input() trainerTracker: TrackerService;
+    @Input() trainerTracker: TrainerTracker;
+    @Input() serverService: ServerService;
+    @Input() menuService: MenuService;
+
     @Input() legendary: boolean = false;
     public trainer: PokemonMaster;
-    public wildPokemon: PokemonTemplate;
+    public pokemon: PokemonTemplate;
     public showPokemon = false;
-    public itemList = new Map<string, {name: string, count: number, text: string}>; 
+    public statBlock = new Map<string, number>;
+    public itemList = new Map<string, {name: string, count: number, text: string, item: PokeItemsTemplate}>; 
     public imgLoc: string;
     interval: any;
 
+    public encounterView = false;
+    public encounterMsg: string;
+    public encounterMod: string;
+    public encounterItem: PokeItemsTemplate | null;
+    public encounterRoll: string;
+
     async ngOnInit(): Promise<void> {
-        if (this.trainerTracker?.isMasterSet()) {
-            this.trainer = this.trainerTracker.getMaster();
-            let inventory: number;
-            this.trainer.items.forEach( (item) => {
-                console.log(item);
-                if (this.itemList.has(item.name)) {
-                    inventory = this.itemList.get(item.name)!.count + 1;
-                } else {
-                    inventory = 1;
-                }
-                this.itemList.set(item.name, {
-                    name: item.name,
-                    count: inventory,
-                    text: item.text
-                })
-
-            });
+        if (this.trainerTracker?.isLoggedIn()) {
+            this.trainer = await this.trainerTracker.getTrainer();
+            this.getInventory();
         }
-        this.interval = setTimeout( async () => {
-            this.showPokemon = true;
-            const tier = this.legendary ? 4 : this.trainer.getCurrentTier();
 
-            const wildPokemonList: Array<PokemonTemplate> = [];
-            if (tier == 4) {
-                wildPokemonList.push(await this.trainer.encounterRandomPokemonByTier(4));
-            } else {
-                for (let i=tier; i>0; i--) {
-                    wildPokemonList.push(await this.trainer.encounterRandomPokemonByTier(i));
-                }
+        const encounterTier = this.legendary ? 4 : this.trainer.getCurrentTier();
+        await this.serverService.encounterRandomPokemon(this.trainer.id, encounterTier, null, [])
+            .then((res) => {
+                console.log(res);
+                this.pokemon = res;
+                this.pokemon.stats.forEach((stat) => {
+                    if (stat.name == "hp") {
+                        this.statBlock.set("hp", stat.value);
+                    }else if (stat.name == "speed"){
+                        this.statBlock.set("speed", stat.value);
+                    }
+                })
+                this.showPokemon = true;
+            }).catch((err) => {
+                console.error(err);
+            });
+    }
+
+    getInventory(){
+        let inventory: number;
+        this.trainer.items.forEach( (item) => {
+            if (!item.name.includes("Ball")){
+                return;
             }
 
-            this.wildPokemon = wildPokemonList[Math.floor(Math.random() * wildPokemonList.length)];
-            this.loadCard(this.wildPokemon);
-        }, 4000);
+            if (this.itemList.has(item.name)) {
+                inventory = this.itemList.get(item.name)!.count + 1;
+            } else {
+                inventory = 1;
+            }
+            this.itemList.set(item.name, {
+                name: item.name,
+                count: inventory,
+                text: item.text,
+                item: item
+            })
+        });
     }
 
-    loadCard(pokemon: PokemonTemplate) {
-        const imgFile = pokemon.pokedex < 10 ? '00' + pokemon.pokedex : pokemon.pokedex < 100 ? '0' + pokemon.pokedex : pokemon.pokedex;
-        this.imgLoc = `/assets/imgs/${imgFile}.PNG`;
-    }
+    async catchPokemon(item: PokeItemsTemplate) {
+        await this.trainer.catchRandomPokemon(this.pokemon.id, [item])
+            .then((res) => {
+                console.log("res", res);
+                this.encounterMod = res.data.mods;
+                this.encounterRoll = res.data.roll;
 
-    catchPokemon(wildPokemon: PokemonTemplate) {
-        this.trainer.catchPokemon(wildPokemon);
-        this.fleePokemon();
+                if (res.msg == "caught"){
+                    this.encounterItem = res.data.item;
+                    this.encounterMsg = "Caught!";
+                } else if(res.msg == "retry"){
+                    this.encounterMsg = "Try Again!";
+                } else {
+                    this.encounterMsg = "Pokemon escaped!";
+                }
+
+                this.encounterView = true;
+            });
     }
 
     fleePokemon(): void {
-        this.trainerTracker.setNewView("defaultView");
+        this.menuService.setNewView("defaultView");
     }
 }
