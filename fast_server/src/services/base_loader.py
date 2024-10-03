@@ -47,9 +47,9 @@ class BaseLoader():
         # Load Cache
         try:
             with open("cache/pokedex.json") as file:
-                data = json.load(file)
+                data: dict = json.loads(file.read())
                 dex = []
-                for mon in [json.loads(x) for x in data["cache"]]:
+                for mon in data["cache"]:
                     dex.append(PokemonBaseModel(
                         dex_id=mon.get("dex_id"),
                         name=mon.get("name"),
@@ -78,7 +78,7 @@ class BaseLoader():
     def update_generations(self, generations: list[int]):
         base = []
         if not generations:
-            x = range(1, 4)
+            x = range(1, 2)
             for y in x:
                 base.append(y)
         if 1 in generations:
@@ -199,7 +199,8 @@ class BaseLoader():
 
         # Create pokedex cache
         with open("cache/pokedex.json", "w") as file:
-            json.dump({"cache": [x.toJSON() for x in pokedex]}, file)
+            f = json.dumps({"cache": [x.__dict__ for x in pokedex]})
+            file.write(f)
 
         # Set Pokedex
         self.POKEDEX = PokedexBase(pokedex)
