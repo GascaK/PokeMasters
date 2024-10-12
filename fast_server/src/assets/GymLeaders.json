@@ -1,874 +1,1200 @@
 {
     "Brock": [
         {
-        "Brock's Zubat":
-            {
-                "hp": 10,
-                "speed": 0,
-                "type": ["flying", "poison"],
-                "move": [
-                    {
-                        "name": "screech",
-                        "hit": 4,
-                        "special": "confused",
-                        "type": "confused"
+            "name": "zubat",
+            "ability": "",
+            "hp": 7,
+            "speed": 1,
+            "types": [
+                "flying",
+                "poison"
+            ],
+            "moves": [
+                {
+                    "name": "screech",
+                    "hit": 4,
+                    "special": {
+                        "id": 0,
+                        "name": "confused",
+                        "text": "Opponenet's Pokemon is now confused."
                     },
-                    {
-                        "name": "tackle",
-                        "hit": 4,
-                        "special": "none",
-                        "type": "normal"
+                    "move_type": "normal"
+                },
+                {
+                    "name": "tackle",
+                    "hit": 4,
+                    "special": null,
+                    "move_type": "normal"
+                },
+                {
+                    "name": "wing attack",
+                    "hit": 6,
+                    "special": null,
+                    "move_type": "flying"
+                }
+            ]
+        },
+        {
+            "name": "geodude",
+            "hp": 6,
+            "speed": -1,
+            "types": [
+                "ground",
+                "rock"
+            ],
+            "ability": "Geodude takes -1 damage from non super effective attacks.",
+            "moves": [
+                {
+                    "name": "rock smash",
+                    "hit": 4,
+                    "special": {
+                        "id": 0,
+                        "name": "Paralyzed",
+                        "text": "Opponenet's Pokemon is now paralyzed."
                     },
-                    {
-                        "name": "wing attack",
-                        "hit": 4,
-                        "special": "none",
-                        "type": "flying"
-                    }
-                ]
-            },
-        "Brock's Geodude":
-            {
-                "hp": 11,
-                "speed": 0,
-                "type": ["ground", "rock"],
-                "move": [
-                    {
-                        "name": "rock smash",
-                        "hit": 4,
-                        "special": "paralyzed",
-                        "type": "rock"
+                    "move_type": "rock"
+                },
+                {
+                    "name": "rock throw",
+                    "hit": 4,
+                    "special": null,
+                    "move_type": "rock"
+                },
+                {
+                    "name": "rock slide",
+                    "hit": 6,
+                    "special": null,
+                    "move_type": "rock"
+                }
+            ]
+        },
+        {
+            "name": "vulpix",
+            "ability": "",
+            "hp": 7,
+            "speed": -1,
+            "types": [
+                "fire"
+            ],
+            "moves": [
+                {
+                    "name": "scratch",
+                    "hit": 4,
+                    "special": null,
+                    "move_type": "normal"
+                },
+                {
+                    "name": "tackle",
+                    "hit": 4,
+                    "special": null,
+                    "move_type": "normal"
+                },
+                {
+                    "name": "ember",
+                    "hit": 6,
+                    "special": {
+                        "id": 0,
+                        "name": "Burned",
+                        "text": "Opponent's Pokemon takes 1 damage inbetween turns."
                     },
-                    {
-                        "name": "rock throw",
-                        "hit": 4,
-                        "special": "none",
-                        "type": "rock"
+                    "move_type": "fire"
+                }
+            ]
+        },
+        {
+            "name": "onix",
+            "hp": 8,
+            "speed": -2,
+            "type": [
+                "ground",
+                "rock"
+            ],
+            "ability": "Onix takes -2 damage from all non super effective attacks.",
+            "move": [
+                {
+                    "name": "bind",
+                    "hit": 4,
+                    "special": {
+                        "id": 0,
+                        "name": "Paralyzed",
+                        "text": "Opponent's Pokemon is now paralyzed."
                     },
-                    {
-                        "name": "rock slide",
-                        "hit": 6,
-                        "special": "none",
-                        "type": "rock"
-                    }
-                ]
-            },
-        "Brock's Vulpix":
-            {
-                "hp": 12,
-                "speed": 1,
-                "type": ["fire"],
-                "move": [
-                    {
-                        "name": "scratch",
-                        "hit": 4,
-                        "special": "none",
-                        "type": "normal"
-                    },
-                    {
-                        "name": "tackle",
-                        "hit": 4,
-                        "special": "none",
-                        "type": "normal"
-                    },
-                    {
-                        "name": "ember",
-                        "hit": 6,
-                        "special": "burned",
-                        "type": "fire"
-                    }
-                ]
-            },
-        "Brock's Onix":
-            {
-                "hp": 13,
-                "speed": 0,
-                "type": ["ground", "rock"],
-                "move": [
-                    {
-                        "name": "bind",
-                        "hit": 4,
-                        "special": "paralyzed",
-                        "type": "normal"
-                    },
-                    {
-                        "name": "tackle",
-                        "hit": 4,
-                        "special": "none",
-                        "type": "normal"
-                    },
-                    {
-                        "name": "rock slide",
-                        "hit": 6,
-                        "special": "none",
-                        "type": "rock"
-                    }
-                ]
-            }
+                    "type": "normal"
+                },
+                {
+                    "name": "tackle",
+                    "hit": 4,
+                    "special": null,
+                    "type": "normal"
+                },
+                {
+                    "name": "rock slide",
+                    "hit": 6,
+                    "special": null,
+                    "type": "rock"
+                }
+            ]
         }
     ],
-    
     "Misty": [
         {
-        "Misty's Horsea":
-            {
-                "hp": 12,
-                "speed": 0,
-                "type": ["water"],
-                "move": [
-                    {
-                        "name": "bubble",
-                        "hit": 4,
-                        "special": "none",
-                        "type": "water"
+            "name": "Horsea",
+            "ability": "",
+            "hp": 9,
+            "speed": 0,
+            "type": [
+                "water"
+            ],
+            "move": [
+                {
+                    "name": "bubble",
+                    "hit": 4,
+                    "special": {
+                        "id": 0,
+                        "name": "confused",
+                        "text": "Opponenet's Pokemon is now confused."
                     },
-                    {
-                        "name": "water gun",
-                        "hit": 4,
-                        "special": "none",
-                        "type": "water"
+                    "type": "water"
+                },
+                {
+                    "name": "water gun",
+                    "hit": 4,
+                    "special": null,
+                    "type": "water"
+                },
+                {
+                    "name": "aqua jet",
+                    "hit": 6,
+                    "special": null,
+                    "type": "water"
+                }
+            ]
+        },
+        {
+            "name": "goldeen",
+            "ability": "",
+            "hp": 11,
+            "speed": 1,
+            "type": [
+                "water"
+            ],
+            "move": [
+                {
+                    "name": "water gun",
+                    "hit": 4,
+                    "special": {
+                        "id": 0,
+                        "name": "confused",
+                        "text": "Opponenet's Pokemon is now confused."
                     },
-                    {
-                        "name": "aqua jet",
-                        "hit": 6,
-                        "special": "none",
-                        "type": "water"
-                    }
-                ]
-            },
-        "Misty's Goldeen":
-            {
-                "hp": 13,
-                "speed": 1,
-                "type": ["water"],
-                "move": [
-                    {
-                        "name": "water gun",
-                        "hit": 4,
-                        "special": "none",
-                        "type": "water"
+                    "type": "water"
+                },
+                {
+                    "name": "tackle",
+                    "hit": 4,
+                    "special": null,
+                    "type": "normal"
+                },
+                {
+                    "name": "snipe shot",
+                    "hit": 6,
+                    "special": null,
+                    "type": "normal"
+                }
+            ]
+        },
+        {
+            "name": "staryu",
+            "ability": "",
+            "hp": 12,
+            "speed": 1,
+            "type": [
+                "water"
+            ],
+            "move": [
+                {
+                    "name": "water gun",
+                    "hit": 4,
+                    "special": {
+                        "id": 0,
+                        "name": "confused",
+                        "text": "Opponenet's Pokemon is now confused."
                     },
-                    {
-                        "name": "tackle",
-                        "hit": 4,
-                        "special": "none",
-                        "type": "normal"
+                    "type": "water"
+                },
+                {
+                    "name": "bubble beam",
+                    "hit": 4,
+                    "special": {
+                        "id": 0,
+                        "name": "confused",
+                        "text": "Opponenet's Pokemon is now confused."
                     },
-                    {
-                        "name": "bite",
-                        "hit": 6,
-                        "special": "none",
-                        "type": "normal"
-                    }
-                ]
-            },
-        "Misty's Staryu":
-            {
-                "hp": 14,
-                "speed": 1,
-                "type": ["water"],
-                "move": [
-                    {
-                        "name": "water gun",
-                        "hit": 4,
-                        "special": "none",
-                        "type": "water"
+                    "type": "water"
+                },
+                {
+                    "name": "surf",
+                    "hit": 6,
+                    "special": null,
+                    "type": "water"
+                }
+            ]
+        },
+        {
+            "name": "psyduck",
+            "ability": "",
+            "hp": 13,
+            "speed": 1,
+            "type": [
+                "water"
+            ],
+            "move": [
+                {
+                    "name": "aqua jet",
+                    "hit": 4,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyzed",
+                        "text": "Opponenet's Pokemon is now paralyzed."
                     },
-                    {
-                        "name": "bubble beam",
-                        "hit": 6,
-                        "special": "confused",
-                        "type": "water"
+                    "type": "water"
+                },
+                {
+                    "name": "surf",
+                    "hit": 6,
+                    "special": null,
+                    "type": "water"
+                },
+                {
+                    "name": "psychic",
+                    "hit": 6,
+                    "special": {
+                        "id": 0,
+                        "name": "confused",
+                        "text": "Opponenet's Pokemon is now confused."
                     },
-                    {
-                        "name": "surf",
-                        "hit": 8,
-                        "special": "none",
-                        "type": "water"
-                    }
-                ]
-            },
-        "Misty's Starmie":
-            {
-                "hp": 15,
-                "speed": 1,
-                "type": ["water"],
-                "move": [
-                    {
-                        "name": "aqua jet",
-                        "hit": 6,
-                        "special": "none",
-                        "type": "water"
-                    },
-                    {
-                        "name": "surf",
-                        "hit": 8,
-                        "special": "none",
-                        "type": "water"
-                    },
-                    {
-                        "name": "hydro pump",
-                        "hit": 8,
-                        "special": "none",
-                        "type": "water"
-                    }
-                ]
-
-            }
+                    "type": "water"
+                }
+            ]
         }
     ],
-
     "Lt. Surge": [
-    {
-        "Lt. Surge's Magnemite":
-            {
-                "hp": 14,
-                "speed": 1,
-                "type": ["electric"],
-                "move": [
-                    {
-                        "name": "tunder wave",
-                        "hit": 4,
-                        "special": "paralyzed",
-                        "type": "electric"
+        {
+            "name": "magnemite",
+            "ability": "",
+            "hp": 12,
+            "speed": 3,
+            "type": [
+                "electric"
+            ],
+            "move": [
+                {
+                    "name": "tunder wave",
+                    "hit": 4,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyzed",
+                        "text": "Opponenet's Pokemon is now paralyzed."
                     },
-                    {
-                        "name": "thunder shock",
-                        "hit": 6,
-                        "special": "none",
-                        "type": "electric"
+                    "type": "electric"
+                },
+                {
+                    "name": "thunder shock",
+                    "hit": 4,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyzed",
+                        "text": "Opponenet's Pokemon is now paralyzed."
                     },
-                    {
-                        "name": "thunder bolt",
-                        "hit": 8,
-                        "special": "paralyzed",
-                        "type": "electric"
-                    }
-                ]
-            },
-        "Lt. Surge's Voltorb":
-            {
-                "hp": 15,
-                "speed": 0,
-                "type": ["electric"],
-                "move": [
-                    {
-                        "name": "tackle",
-                        "hit": 4,
-                        "special": "none",
-                        "type": "normal"
+                    "type": "electric"
+                },
+                {
+                    "name": "thunder bolt",
+                    "hit": 6,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyzed",
+                        "text": "Opponenet's Pokemon is now paralyzed."
                     },
-                    {
-                        "name": "thunder shock",
-                        "hit": 6,
-                        "special": "none",
-                        "type": "electric"
+                    "type": "electric"
+                }
+            ]
+        },
+        {
+            "name": "voltorb",
+            "ability": "",
+            "hp": 13,
+            "speed": 0,
+            "type": [
+                "electric"
+            ],
+            "move": [
+                {
+                    "name": "tackle",
+                    "hit": 4,
+                    "special": null,
+                    "type": "normal"
+                },
+                {
+                    "name": "thunder shock",
+                    "hit": 6,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyzed",
+                        "text": "Opponenet's Pokemon is now paralyzed."
                     },
-                    {
-                        "name": "roll out",
-                        "hit": 8,
-                        "special": "none",
-                        "type": "normal"
-                    }
-                ]
-
-            },
-        "Lt. Surge's Pikachu":
-            {
-                "hp": 16,
-                "speed": 2,
-                "type": ["electric"],
-                "move": [
-                    {
-                        "name": "quick attack",
-                        "hit": 6,
-                        "special": "none",
-                        "type": "normal"
+                    "type": "electric"
+                },
+                {
+                    "name": "roll out",
+                    "hit": 6,
+                    "special": {
+                        "id": 0,
+                        "name": "Continous",
+                        "text": "Roll Out does +3 damage for everytime it was used this battle."
                     },
-                    {
+                    "type": "normal"
+                }
+            ]
+        },
+        {
+            "name": "pikachu",
+            "ability": "",
+            "hp": 14,
+            "speed": 4,
+            "type": [
+                "electric"
+            ],
+            "move": [
+                {
+                    "name": "quick attack",
+                    "hit": 4,
+                    "special": null,
+                    "type": "normal"
+                },
+                {
+                    "name": "swift",
+                    "hit": 6,
+                    "special": {
+                        "id": 0,
                         "name": "swift",
-                        "hit": 6,
-                        "special": "none",
-                        "type": "normal"
+                        "text": "This attack always does max damage."
                     },
-                    {
-                        "name": "thunder bolt",
-                        "hit": 8,
-                        "special": "paralyzed",
-                        "type": "electric"
-                    }
-                ]
-            },
-        "Lt. Surge's Raichu":
-            {
-                "hp": 17,
-                "speed": 2,
-                "type": ["electric"],
-                "move": [
-                    {
-                        "name": "volt tackle",
-                        "hit": 8,
-                        "special": "none",
-                        "type": "electric"
+                    "type": "normal"
+                },
+                {
+                    "name": "thunder bolt",
+                    "hit": 8,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyzed",
+                        "text": "Opponenet's Pokemon is now paralyzed."
                     },
-                    {
-                        "name": "thunder bolt",
-                        "hit": 10,
-                        "special": "paralyzed",
-                        "type": "electric"
+                    "type": "electric"
+                }
+            ]
+        },
+        {
+            "name": "raichu",
+            "ability": "",
+            "hp": 15,
+            "speed": 5,
+            "type": [
+                "electric"
+            ],
+            "move": [
+                {
+                    "name": "volt tackle",
+                    "hit": 4,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyzed",
+                        "text": "Opponenet's Pokemon is now paralyzed."
                     },
-                    {
-                        "name": "thunder",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "electric"
-                    }
-                ]
-            }
-     }
+                    "type": "electric"
+                },
+                {
+                    "name": "thunder bolt",
+                    "hit": 6,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyzed",
+                        "text": "Opponenet's Pokemon is now paralyzed."
+                    },
+                    "type": "electric"
+                },
+                {
+                    "name": "thunder",
+                    "hit": 8,
+                    "special": null,
+                    "type": "electric"
+                }
+            ]
+        }
     ],
-
     "Erika": [
         {
-        "Erika's Victreebell":
-            {
-                "hp": 16,
-                "speed": 0,
-                "type": ["grass"],
-                "move": [
-                    {
-                        "name": "razor leaf",
-                        "hit": 6,
-                        "special": "none",
-                        "type": "grass"
+            "name": "Victreebell",
+            "ability": "",
+            "hp": 16,
+            "speed": 3,
+            "type": [
+                "grass"
+            ],
+            "move": [
+                {
+                    "name": "razor leaf",
+                    "hit": 6,
+                    "special": null,
+                    "type": "grass"
+                },
+                {
+                    "name": "vine whip",
+                    "hit": 8,
+                    "special": null,
+                    "type": "grass"
+                },
+                {
+                    "name": "leech seed",
+                    "hit": 8,
+                    "special": {
+                        "id": 0,
+                        "name": "heal",
+                        "text": "Pokemon heals +3 health."
                     },
-                    {
-                        "name": "vine whip",
-                        "hit": 8,
-                        "special": "none",
-                        "type": "grass"
+                    "type": "grass"
+                }
+            ]
+        },
+        {
+            "name": "Vileplume",
+            "ability": "",
+            "hp": 17,
+            "speed": 2,
+            "type": [
+                "grass",
+                "poison"
+            ],
+            "move": [
+                {
+                    "name": "stun spore",
+                    "hit": 6,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyzed",
+                        "text": "Opponenet's Pokemon is now paralyzed."
                     },
-                    {
-                        "name": "leech seed",
-                        "hit": 8,
-                        "special": "none",
-                        "type": "grass"
-                    }
-                ]
-            },
-        "Erika's Vileplume":
-            {
-                "hp": 17,
-                "speed": 0,
-                "type": ["grass", "poison"],
-                "move": [
-                    {
-                        "name": "stun spore",
-                        "hit": 6,
-                        "special": "paralyzed",
-                        "type": "grass"
+                    "type": "grass"
+                },
+                {
+                    "name": "leaf blade",
+                    "hit": 6,
+                    "special": null,
+                    "type": "grass"
+                },
+                {
+                    "name": "solar beam",
+                    "hit": 10,
+                    "special": null,
+                    "type": "grass"
+                }
+            ]
+        },
+        {
+            "name": "Tangela",
+            "ability": "",
+            "hp": 18,
+            "speed": 1,
+            "type": [
+                "grass"
+            ],
+            "move": [
+                {
+                    "name": "stun spore",
+                    "hit": 6,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyzed",
+                        "text": "Opponenet's Pokemon is now paralyzed."
                     },
-                    {
-                        "name": "leaf blade",
-                        "hit": 8,
-                        "special": "none",
-                        "type": "grass"
+                    "type": "grass"
+                },
+                {
+                    "name": "vine whip",
+                    "hit": 8,
+                    "special": null,
+                    "type": "grass"
+                },
+                {
+                    "name": "power whip",
+                    "hit": 8,
+                    "special": {
+                        "id": 0,
+                        "name": "heal",
+                        "text": "Pokemon heals +3 health."
                     },
-                    {
-                        "name": "solar beam",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "grass"
-                    }
-                ]
-            },
-        "Erika's Tangela":
-            {
-                "hp": 18,
-                "speed": 1,
-                "type": ["grass"],
-                "move": [
-                    {
-                        "name": "stun spore",
-                        "hit": 6,
-                        "special": "paralyzed",
-                        "type": "grass"
+                    "type": "grass"
+                }
+            ]
+        },
+        {
+            "name": "Gloom",
+            "ability": "",
+            "hp": 19,
+            "speed": 0,
+            "type": [
+                "grass",
+                "poison"
+            ],
+            "move": [
+                {
+                    "name": "vine whip",
+                    "hit": 6,
+                    "special": {
+                        "id": 0,
+                        "name": "heal",
+                        "text": "Pokemon heals +3 health."
                     },
-                    {
-                        "name": "vine whip",
-                        "hit": 8,
-                        "special": "none",
-                        "type": "grass"
+                    "type": "grass"
+                },
+                {
+                    "name": "stun spore",
+                    "hit": 8,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyzed",
+                        "text": "Opponenet's Pokemon is now paralyzed."
                     },
-                    {
-                        "name": "power whip",
-                        "hit": 8,
-                        "special": "none",
-                        "type": "grass"
-                    }
-                ]
-            },
-        "Erika's Gloom":
-            {
-                "hp": 19,
-                "speed": 0,
-                "type": ["grass", "poison"],
-                "move": [
-                    {
-                        "name": "vine whip",
-                        "hit": 8,
-                        "special": "none",
-                        "type": "grass"
-                    },
-                    {
-                        "name": "stun spore",
-                        "hit": 10,
-                        "special": "paralyzed",
-                        "type": "grass"
-                    },
-                    {
-                        "name": "solar beam",
-                        "hit": 12,
-                        "special": "none",
-                        "type": "grass"
-                    }
-                ]
-            }
+                    "type": "grass"
+                },
+                {
+                    "name": "solar beam",
+                    "hit": 8,
+                    "special": null,
+                    "type": "grass"
+                }
+            ]
         }
     ],
-
     "Koga": [
-    {
-        "Koga's Koffing":
-            {
-                "hp": 18,
-                "speed": 0,
-                "type": ["poison"],
-                "move": [
-                    {
-                        "name": "acid",
-                        "hit": 8,
-                        "special": "poison",
-                        "type": "poison"
+        {
+            "name": "Koffing",
+            "ability": "",
+            "hp": 18,
+            "speed": 3,
+            "type": [
+                "poison"
+            ],
+            "move": [
+                {
+                    "name": "acid",
+                    "hit": 6,
+                    "special": {
+                        "id": 0,
+                        "name": "poison",
+                        "text": "Opponenet's Pokemon is now poisoned."
                     },
-                    {
-                        "name": "poison gas",
-                        "hit": 8,
-                        "special": "poison",
-                        "type": "poison"
+                    "type": "poison"
+                },
+                {
+                    "name": "poison gas",
+                    "hit": 8,
+                    "special": {
+                        "id": 0,
+                        "name": "poison",
+                        "text": "Opponenet's Pokemon is now poisoned."
                     },
-                    {
-                        "name": "sludge bomb",
-                        "hit": 8,
-                        "special": "poison",
-                        "type": "poison"
-                    }
-                ]
-            },
-        "Koga's Venonat":
-            {
-                "hp": 19,
-                "speed": 1,
-                "type": ["bug", "poison"],
-                "move": [
-                    {
-                        "name": "toxic",
-                        "hit": 8,
-                        "special": "poison",
-                        "type": "poison"
+                    "type": "poison"
+                },
+                {
+                    "name": "sludge bomb",
+                    "hit": 10,
+                    "special": {
+                        "id": 0,
+                        "name": "poison",
+                        "text": "Opponenet's Pokemon is now poisoned."
                     },
-                    {
-                        "name": "acid",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "poison"
+                    "type": "poison"
+                }
+            ]
+        },
+        {
+            "name": "Venonat",
+            "ability": "",
+            "hp": 19,
+            "speed": 4,
+            "type": [
+                "bug",
+                "poison"
+            ],
+            "move": [
+                {
+                    "name": "toxic",
+                    "hit": 6,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyzed",
+                        "text": "Opponenet's Pokemon is now paralyzed."
                     },
-                    {
-                        "name": "infestation",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "bug"
-                    }
-                ]
-            },
-        "Koga's Weezing":
-            {
-                "hp": 20,
-                "speed": 0,
-                "type": ["poison"],
-                "move": [
-                    {
-                        "name": "poison gas",
-                        "hit": 8,
-                        "special": "poison",
-                        "type": "poison"
+                    "type": "poison"
+                },
+                {
+                    "name": "acid",
+                    "hit": 6,
+                    "special": {
+                        "id": 0,
+                        "name": "poison",
+                        "text": "Opponenet's Pokemon is now poisoned."
                     },
-                    {
-                        "name": "toxic spikes",
-                        "hit": 8,
-                        "special": "poison",
-                        "type": "poison"
+                    "type": "poison"
+                },
+                {
+                    "name": "infestation",
+                    "hit": 4,
+                    "special": {
+                        "id": 0,
+                        "name": "heal",
+                        "text": "Pokemon heals +4 health."
                     },
-                    {
-                        "name": "poison fang",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "poison"
-                    }
-                ]
-            },
-        "Koga's Muk":
-            {
-                "hp": 21,
-                "speed": -1,
-                "type": ["poison"],
-                "move": [
-                    {
-                        "name": "corrosive gas",
-                        "hit": 10,
-                        "special": "poison",
-                        "type": "poison"
+                    "type": "bug"
+                }
+            ]
+        },
+        {
+            "name": "weezing",
+            "ability": "",
+            "hp": 20,
+            "speed": 5,
+            "type": [
+                "poison"
+            ],
+            "move": [
+                {
+                    "name": "poison gas",
+                    "hit": 8,
+                    "special": {
+                        "id": 0,
+                        "name": "poison",
+                        "text": "Opponenet's Pokemon is now poisoned."
                     },
-                    {
-                        "name": "sludge bomb",
-                        "hit": 10,
-                        "special": "paralyzed",
-                        "type": "poison"
+                    "type": "poison"
+                },
+                {
+                    "name": "toxic spikes",
+                    "hit": 8,
+                    "special": {
+                        "id": 0,
+                        "name": "poison",
+                        "text": "Opponenet's Pokemon is now poisoned."
                     },
-                    {
-                        "name": "venoshock",
-                        "hit": 12,
-                        "special": "none",
-                        "type": "poison"
-                    }
-                ]
-            }
+                    "type": "poison"
+                },
+                {
+                    "name": "poison fang",
+                    "hit": 10,
+                    "special": {
+                        "id": 0,
+                        "name": "poison",
+                        "text": "Opponenet's Pokemon is now poisoned."
+                    },
+                    "type": "poison"
+                }
+            ]
+        },
+        {
+            "name": "muk",
+            "ability": "",
+            "hp": 21,
+            "speed": -3,
+            "type": [
+                "poison"
+            ],
+            "move": [
+                {
+                    "name": "corrosive gas",
+                    "hit": 8,
+                    "special": {
+                        "id": 0,
+                        "name": "super poison",
+                        "text": "Opponenet's Pokemon is now double poisoned."
+                    },
+                    "type": "poison"
+                },
+                {
+                    "name": "sludge bomb",
+                    "hit": 10,
+                    "special": {
+                        "id": 0,
+                        "name": "super poison",
+                        "text": "Opponenet's Pokemon is now double poisoned."
+                    },
+                    "type": "poison"
+                },
+                {
+                    "name": "venoshock",
+                    "hit": 10,
+                    "special": {
+                        "id": 0,
+                        "name": "poison",
+                        "text": "Opponenet's Pokemon is now poisoned."
+                    },
+                    "type": "poison"
+                }
+            ]
         }
     ],
     "Sabrina": [
-    {
-        "Sabrina's Mr. Mime":
-            {
-                "hp": 20,
-                "speed": 1,
-                "type": ["psychic"],
-                "move": [
-                    {
-                        "name": "hypnosis",
-                        "hit": 10,
-                        "special": "paralyzed",
-                        "type": "psychic"
+        {
+            "name": "Mr. Mime",
+            "ability": "",
+            "hp": 20,
+            "speed": 3,
+            "type": [
+                "psychic"
+            ],
+            "move": [
+                {
+                    "name": "hypnosis",
+                    "hit": 10,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyz",
+                        "text": "Opponenet's Pokemon is now paralyzed."
                     },
-                    {
-                        "name": "psywave",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "psychic"
+                    "type": "psychic"
+                },
+                {
+                    "name": "psywave",
+                    "hit": 10,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyze",
+                        "text": "Opponenet's Pokemon is now paralyzeed."
                     },
-                    {
-                        "name": "stomp",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "normal"
-                    }
-                ]
-            },
-        "Sabrina's Venomoth":
-            {
-                "hp": 21,
-                "speed": 1,
-                "type": ["bug", "poison"],
-                "move": [
-                    {
-                        "name": "stun spore",
-                        "hit": 8,
-                        "special": "paralyzed",
-                        "type": "grass"
+                    "type": "psychic"
+                },
+                {
+                    "name": "stomp",
+                    "hit": 12,
+                    "special": {
+                        "id": 0,
+                        "name": "confusion",
+                        "text": "Opponenet's Pokemon is now confused."
                     },
-                    {
-                        "name": "hypnosis",
-                        "hit": 8,
-                        "special": "paralyzed",
-                        "type": "psychic"
+                    "type": "normal"
+                }
+            ]
+        },
+        {
+            "name": "venomoth",
+            "ability": "",
+            "hp": 21,
+            "speed": 3,
+            "type": [
+                "bug",
+                "poison"
+            ],
+            "move": [
+                {
+                    "name": "stun spore",
+                    "hit": 8,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyze",
+                        "text": "Opponenet's Pokemon is now paralyzeed."
                     },
-                    {
-                        "name": "psywave",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "psychic"
-                    }  
-                ]
-            },
-        "Sabrina's Kadabra":
-            {
-                "hp": 22,
-                "speed": 1,
-                "type": ["pyschic"],
-                "move": [
-                    {
-                        "name": "psychic",
-                        "hit": 10,
-                        "special": "paralyzed",
-                        "type": "psychic"
+                    "type": "grass"
+                },
+                {
+                    "name": "hypnosis",
+                    "hit": 6,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyze",
+                        "text": "Opponenet's Pokemon is now paralyzeed."
                     },
-                    {
-                        "name": "psyshock",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "psychic"
+                    "type": "psychic"
+                },
+                {
+                    "name": "psywave",
+                    "hit": 12,
+                    "special": null,
+                    "type": "psychic"
+                }
+            ]
+        },
+        {
+            "name": "Kadabra",
+            "ability": "",
+            "hp": 22,
+            "speed": 2,
+            "type": [
+                "pyschic"
+            ],
+            "move": [
+                {
+                    "name": "psychic",
+                    "hit": 10,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyze",
+                        "text": "Opponenet's Pokemon is now paralyzeed."
                     },
-                    {
-                        "name": "telekinesis",
-                        "hit": 12,
-                        "special": "none",
-                        "type": "psychic"
-                    }
-                ]
-            },
-        "Sabrina's Alakazam":
-            {
-                "hp": 23,
-                "speed": 1,
-                "type": ["psychic"],
-                "move": [
-                    {
-                        "name": "psyshock",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "psychic"
+                    "type": "psychic"
+                },
+                {
+                    "name": "psyshock",
+                    "hit": 10,
+                    "special": {
+                        "id": 0,
+                        "name": "confusion",
+                        "text": "Opponenet's Pokemon is now confused."
                     },
-                    {
-                        "name": "psybeam",
-                        "hit": 10,
-                        "special": "paralyzed",
-                        "type": "psychic"
+                    "type": "psychic"
+                },
+                {
+                    "name": "telekinesis",
+                    "hit": 12,
+                    "special": {
+                        "id": 0,
+                        "name": "confusion",
+                        "text": "Opponenet's Pokemon is now confused"
                     },
-                    {
-                        "name": "telekinesis",
-                        "hit": 12,
-                        "special": "none",
-                        "type": "psychic"
-                    }
-                ]
-            }
+                    "type": "psychic"
+                }
+            ]
+        },
+        {
+            "name": "Alakazam",
+            "ability": "",
+            "hp": 23,
+            "speed": 4,
+            "type": [
+                "psychic"
+            ],
+            "move": [
+                {
+                    "name": "psyshock",
+                    "hit": 10,
+                    "special": null,
+                    "type": "psychic"
+                },
+                {
+                    "name": "psybeam",
+                    "hit": 10,
+                    "special": {
+                        "id": 0,
+                        "name": "paralyze",
+                        "text": "Opponenet's Pokemon is now paralyzeed."
+                    },
+                    "type": "psychic"
+                },
+                {
+                    "name": "telekinesis",
+                    "hit": 12,
+                    "special": null,
+                    "type": "psychic"
+                }
+            ]
         }
     ],
     "Blaine": [
-    {
-        "Blaine's Growlithe":
-            {
-                "hp": 22,
-                "speed": 0,
-                "type": ["fire"],
-                "move": [
-                    {
-                        "name": "fire spine",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "fire"
+        {
+            "name": "growlith",
+            "ability": "",
+            "hp": 22,
+            "speed": 5,
+            "type": [
+                "fire"
+            ],
+            "move": [
+                {
+                    "name": "fire spine",
+                    "hit": 12,
+                    "special": {
+                        "id": 0,
+                        "name": "burn",
+                        "text": "Opponenet's Pokemon is now double burned."
                     },
-                    {
-                        "name": "fire fang",
-                        "hit": 10,
-                        "special": "burned",
-                        "type": "fire"
+                    "type": "fire"
+                },
+                {
+                    "name": "fire fang",
+                    "hit": 12,
+                    "special": {
+                        "id": 0,
+                        "name": "burn",
+                        "text": "Opponenet's Pokemon is now double burned."
                     },
-                    {
-                        "name": "heat wave",
-                        "hit": 12,
-                        "special": "burned",
-                        "type": "fire"
-                    }
-                ]
-            },
-        "Blaine's Rapidash":
-            {
-                "hp": 23,
-                "speed": 1,
-                "type": ["fire"],
-                "move": [
-                    {
-                        "name": "flame charge",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "fire"
+                    "type": "fire"
+                },
+                {
+                    "name": "heat wave",
+                    "hit": 12,
+                    "special": {
+                        "id": 0,
+                        "name": "burn",
+                        "text": "Opponenet's Pokemon is now double burned."
                     },
-                    {
-                        "name": "fire blast",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "fire"
+                    "type": "fire"
+                }
+            ]
+        },
+        {
+            "name": "Rapidash",
+            "ability": "",
+            "hp": 23,
+            "speed": 6,
+            "type": [
+                "fire"
+            ],
+            "move": [
+                {
+                    "name": "flame charge",
+                    "hit": 10,
+                    "special": {
+                        "id": 0,
+                        "name": "burn",
+                        "text": "Opponenet's Pokemon is now double burned."
                     },
-                    {
-                        "name": "flare blitz",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "fire"
-                    }  
-                ]
-            },
-        "Blaine's Ninetales":
-            {
-                "hp": 24,
-                "speed": 1,
-                "type": ["fire"],
-                "move": [
-                    {
-                        "name": "fire blast",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "fire"
+                    "type": "fire"
+                },
+                {
+                    "name": "fire blast",
+                    "hit": 10,
+                    "special": {
+                        "id": 0,
+                        "name": "burn",
+                        "text": "Opponenet's Pokemon is now double burned."
                     },
-                    {
-                        "name": "overheat",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "fire"
+                    "type": "fire"
+                },
+                {
+                    "name": "flare blitz",
+                    "hit": 12,
+                    "special": {
+                        "id": 0,
+                        "name": "burn",
+                        "text": "Opponenet's Pokemon is now double burned."
                     },
-                    {
-                        "name": "flame charge",
-                        "hit": 12,
-                        "special": "burned",
-                        "type": "fire"
-                    }
-                ]
-            },
-        "Blaine's Arcanine":
-            {
-                "hp": 25,
-                "speed": 1,
-                "type": ["fire"],
-                "move": [
-                    {
-                        "name": "fusion flare",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "fire"
+                    "type": "fire"
+                }
+            ]
+        },
+        {
+            "name": "Ninetales",
+            "ability": "",
+            "hp": 24,
+            "speed": 4,
+            "type": [
+                "fire"
+            ],
+            "move": [
+                {
+                    "name": "fire blast",
+                    "hit": 10,
+                    "special": {
+                        "id": 0,
+                        "name": "burn",
+                        "text": "Opponenet's Pokemon is now double burned."
                     },
-                    {
-                        "name": "incinerate",
-                        "hit": 12,
-                        "special": "burned",
-                        "type": "fire"
+                    "type": "fire"
+                },
+                {
+                    "name": "overheat",
+                    "hit": 14,
+                    "special": {
+                        "id": 0,
+                        "name": "burn",
+                        "text": "Opponenet's Pokemon is now double burned."
                     },
-                    {
-                        "name": "flamethrower",
-                        "hit": 12,
-                        "special": "burned",
-                        "type": "fire"
-                    }
-                ]
-            }
+                    "type": "fire"
+                },
+                {
+                    "name": "flame charge",
+                    "hit": 12,
+                    "special": {
+                        "id": 0,
+                        "name": "burn",
+                        "text": "Opponenet's Pokemon is now double burned."
+                    },
+                    "type": "fire"
+                }
+            ]
+        },
+        {
+            "name": "Arcanine",
+            "ability": "",
+            "hp": 25,
+            "speed": 6,
+            "type": [
+                "fire"
+            ],
+            "move": [
+                {
+                    "name": "fusion flare",
+                    "hit": 10,
+                    "special": {
+                        "id": 0,
+                        "name": "burn",
+                        "text": "Opponenet's Pokemon is now double burned."
+                    },
+                    "type": "fire"
+                },
+                {
+                    "name": "incinerate",
+                    "hit": 14,
+                    "special": {
+                        "id": 0,
+                        "name": "burn",
+                        "text": "Opponenet's Pokemon is now double burned."
+                    },
+                    "type": "fire"
+                },
+                {
+                    "name": "flamethrower",
+                    "hit": 12,
+                    "special": {
+                        "id": 0,
+                        "name": "burn",
+                        "text": "Opponenet's Pokemon is now double burned."
+                    },
+                    "type": "fire"
+                }
+            ]
         }
     ],
-    
     "Giovanni": [
-    {
-        "Giovanni's Persian":
-            {
-                "hp": 25,
-                "speed": 1,
-                "type": ["normal"],
-                "move": [
-                    {
-                        "name": "hyper fang",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "normal"
+        {
+            "name": "Persian",
+            "ability": "",
+            "hp": 25,
+            "speed": 6,
+            "type": [
+                "normal"
+            ],
+            "move": [
+                {
+                    "name": "hyper fang",
+                    "hit": 16,
+                    "special": null,
+                    "type": "normal"
+                },
+                {
+                    "name": "fury swipes",
+                    "hit": 14,
+                    "special": null,
+                    "type": "normal"
+                },
+                {
+                    "name": "crush grip",
+                    "hit": 16,
+                    "special": null,
+                    "type": "normal"
+                }
+            ]
+        },
+        {
+            "name": "Rhydon",
+            "ability": "",
+            "hp": 24,
+            "speed": 4,
+            "type": [
+                "ground",
+                "rock"
+            ],
+            "move": [
+                {
+                    "name": "drill run",
+                    "hit": 16,
+                    "special": null,
+                    "type": "ground"
+                },
+                {
+                    "name": "earth power",
+                    "hit": 18,
+                    "special": null,
+                    "type": "ground"
+                },
+                {
+                    "name": "earthquake",
+                    "hit": 20,
+                    "special": null,
+                    "type": "ground"
+                }
+            ]
+        },
+        {
+            "name": "Nidoqueen",
+            "ability": "",
+            "hp": 26,
+            "speed": 4,
+            "type": [
+                "poison",
+                "ground"
+            ],
+            "move": [
+                {
+                    "name": "bulldoze",
+                    "hit": 14,
+                    "special": null,
+                    "type": "ground"
+                },
+                {
+                    "name": "fissure",
+                    "hit": 16,
+                    "special": null,
+                    "type": "ground"
+                },
+                {
+                    "name": "venoshock",
+                    "hit": 16,
+                    "special": {
+                        "id": 0,
+                        "name": "super poison",
+                        "text": "Opponenet's Pokemon is now double poisoned."
                     },
-                    {
-                        "name": "fury swipes",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "normal"
+                    "type": "poison"
+                }
+            ]
+        },
+        {
+            "name": "Nidoking",
+            "ability": "",
+            "hp": 27,
+            "speed": 5,
+            "type": [
+                "poison",
+                "ground"
+            ],
+            "move": [
+                {
+                    "name": "poison jab",
+                    "hit": 16,
+                    "special": {
+                        "id": 0,
+                        "name": "super poison",
+                        "text": "Opponenet's Pokemon is now double poisoned."
                     },
-                    {
-                        "name": "crush grip",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "normal"
-                    }  
-                ]
-            },
-        "Giovanni's Rhydon":
-            {
-                "hp": 24,
-                "speed": 1,
-                "type": ["ground", "rock"],
-                "move": [
-                    {
-                        "name": "drill run",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "ground"
+                    "type": "poison"
+                },
+                {
+                    "name": "earthquake",
+                    "hit": 18,
+                    "special": null,
+                    "type": "ground"
+                },
+                {
+                    "name": "venoshock",
+                    "hit": 18,
+                    "special": {
+                        "id": 0,
+                        "name": "super poison",
+                        "text": "Opponenet's Pokemon is now double poisoned."
                     },
-                    {
-                        "name": "earth power",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "ground"
-                    },
-                    {
-                        "name": "earthquake",
-                        "hit": 12,
-                        "special": "none",
-                        "type": "ground"
-                    }
-                ]
-            },
-        "Giovanni's Nidoqueen":
-            {
-                "hp": 26,
-                "speed": 0,
-                "type": ["poison", "ground"],
-                "move": [
-                    {
-                        "name": "bulldoze",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "ground"
-                    },
-                    {
-                        "name": "fissure",
-                        "hit": 10,
-                        "special": "none",
-                        "type": "ground"
-                    },
-                    {
-                        "name": "venoshock",
-                        "hit": 12,
-                        "special": "poison",
-                        "type": "poison"
-                    }
-                ]
-            },
-        "Giovanni's Nidoking":
-            {
-                "hp": 27,
-                "speed": 0,
-                "type": ["poison", "ground"],
-                "move": [
-                    {
-                        "name": "poison jab",
-                        "hit": 10,
-                        "special": "poison",
-                        "type": "poison"
-                    },
-                    {
-                        "name": "earthquake",
-                        "hit": 12,
-                        "special": "none",
-                        "type": "ground"
-                    },
-
-                    {
-                        "name": "venoshock",
-                        "hit": 12,
-                        "special": "poison",
-                        "type": "poison"
-                    }
-                ]
-            }
+                    "type": "poison"
+                }
+            ]
         }
     ]
 }

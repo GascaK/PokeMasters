@@ -38,12 +38,24 @@
         </div>
         <div><img src="{{team.active.pokemon!.sprite.sprite_url}}" fetchpriority="high" alt="PokeImage" style="width: 100%; z-index: 0;"></div>
         <div style="background-color:lightcyan;">
-          <div *ngFor="let move of team.active.pokemon!.moves">
-            <div class="{{move.move_type}}" style="padding-top:3px;height:40px;justify-content:center;">
-                <!-- <span style="font-size:medium;font-weight:bold;padding-left:3px">Even</span> -->
-                <span style="font-size:large;padding-left:5px;">{{move.name | titlecase}}:</span>
-                <span style="font-weight:500;padding-left:5px;">d {{move.hit}}</span>
-                <span style="float:right;font-weight:bold;padding-right:3px;">{{move.special?.text}}</span>
+          <div class="{{team.active.pokemon!.moves[0].move_type}}">
+            <div class="row">
+              <span class="col" style="font-size:medium;font-weight:bold;justify-content:center;">Odd</span>
+              <span class="col" style="font-size:large;padding-left:5px;">{{team.active.pokemon!.moves[0].name | titlecase}}:</span>
+              <span class="col" style="font-weight:500;padding-left:5px;">d {{team.active.pokemon!.moves[0].hit}}</span>
+            </div>
+            <div class="row">
+                <span class="col" style="float:right;font-weight:bold;clear:left;">{{team.active.pokemon.moves[0].special?.text}}</span>
+            </div>
+          </div>
+          <div class="{{team.active.pokemon!.moves[1].move_type}}">
+            <div class="row">
+              <span class="col" style="font-size:medium;font-weight:bold;justify-content:center;">Even</span>
+              <span class="col" style="font-size:large;padding-left:5px;">{{team.active.pokemon!.moves[1].name | titlecase}}:</span>
+              <span class="col" style="font-weight:500;padding-left:5px;">d {{team.active.pokemon!.moves[1].hit}}</span>
+            </div>
+            <div class="row">
+                <span class="col" style="float:right;font-weight:bold;clear:left;">{{team.active.pokemon.moves[1].special?.text}}</span>
             </div>
           </div>
           <div class="row" style="padding-top:3px;justify-content: center;">
@@ -63,14 +75,17 @@
           </div>
         </div>
         <div class="row">
+            <span class="{{type}} col" *ngFor="let type of team.active.pokemon!.base.types">{{type}}</span>
+        </div>
+        <div class="row" style="padding-top:10px">
             <div class="col">
                 <button class="btn btn-primary col-12" (click)="setBenchOne()">
-                  {{team.benchOne?.pokemon?.base?.name || "Empty Slot"}}
+                  {{team.benchOne.pokemon?.base?.name || "Empty Slot"}}
                 </button>
               </div>
               <div class="col">
                 <button class="btn btn-primary col-12" (click)="setBenchTwo()">
-                  {{team.benchTwo?.pokemon?.base?.name || "Empty Slot"}}
+                  {{team.benchTwo.pokemon?.base?.name || "Empty Slot"}}
                 </button>
               </div>
         </div>

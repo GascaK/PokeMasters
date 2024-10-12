@@ -32,15 +32,14 @@
             <th>EV</th>
         </tr>
         <tr *ngFor="let pokemon of infoList">
-            <hr class="dashed">
             <td *ngFor="let stat of pokemon.data.stats">
                 <div *ngIf="stat.name == 'hp'">{{stat.value}}</div>
             </td>
             <td *ngFor="let stat of pokemon.data.stats">
                 <div *ngIf="stat.name == 'speed'">{{stat.value}}</div>
             </td>
-            <td *ngIf="pokemon.data.moves">{{pokemon.data.moves[0]?.name}}:{{pokemon.data.moves[0]?.hit}}-{{pokemon.data.moves[0]?.special?.text}}</td>
-            <td *ngIf="pokemon.data.moves">{{pokemon.data.moves[1]?.name}}:{{pokemon.data.moves[0]?.hit}}-{{pokemon.data.moves[1]?.special?.text}}</td>
+            <td *ngIf="pokemon.data.moves">{{pokemon.data.moves[0].name}}:{{pokemon.data.moves[0].hit}}-{{pokemon.data.moves[0].special.text}}</td>
+            <td *ngIf="pokemon.data.moves">{{pokemon.data.moves[1].name}}:{{pokemon.data.moves[0].hit}}-{{pokemon.data.moves[1].special.text}}</td>
             <td><button class="btn btn-primary" (click)="setActive(pokemon.data)">Active</button></td>
             <!-- <td *ngIf="!validateBenchCapacity(pokemon.data)"><button class="btn btn-secondary" disabled>Invalid</button></td> -->
             <td><input class="form-check-input" type="checkbox" [(ngModel)]="pokemon.checked"></td>

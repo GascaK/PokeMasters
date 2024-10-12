@@ -11,7 +11,9 @@ import { ActiveComponent } from './components/active/active.component';
 import { PokedexComponent } from './components/pokedex/pokedex.component';
 import { EncounterComponent } from './components/encounter/encounter.component';
 import { ShopComponent } from './components/shop/shop.component';
-import { BackpackComponent } from './components/backpack/backpack.component'
+import { BackpackComponent } from './components/backpack/backpack.component';
+import { BattleComponent } from './components/battle/battle.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { BackpackComponent } from './components/backpack/backpack.component'
     PokedexComponent,
     EncounterComponent,
     ShopComponent,
-    BackpackComponent
+    BackpackComponent,
+    BattleComponent,
   ],
   imports: [
     BrowserModule,

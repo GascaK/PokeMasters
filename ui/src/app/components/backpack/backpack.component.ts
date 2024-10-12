@@ -48,8 +48,8 @@ export class BackpackComponent implements OnInit{
 
     useItem(itemID: number) {
         this.serverService.deleteItems(this.trainer.id, itemID)
-            .then((res) => {
-                console.log("Item removed.")
+            .then(() => {
+                console.log("Item removed.");
             }).catch((err) => {
                 console.error(err);
             });
@@ -61,6 +61,7 @@ export class BackpackComponent implements OnInit{
             if (item.id == itemID){
                 await this.trainer.sellItem(item)
                     .then(async () => {
+                        alert(`Sold item $${item.cost}: ${item.name}`)
                         await this.trainer.reloadItems()
                             .then(() => {
                                 this.updateItemList();

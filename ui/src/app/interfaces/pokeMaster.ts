@@ -107,7 +107,6 @@ export class PokemonMaster implements Trainer{
             type,
             items
         ).then( (res) => {
-            console.log(res);
             return res;
         }).catch( (err) => {
             console.error(err);
@@ -115,14 +114,13 @@ export class PokemonMaster implements Trainer{
         });
     }
 
-    async catchRandomPokemon(pokemon_id: number, items: Array<PokeItemsTemplate>=[], escape: number=.15): Promise<any>{
+    async catchRandomPokemon(pokemon_id: number, items: Array<PokeItemsTemplate>=[], escapeChance: number=.15): Promise<any>{
         return await this.instance.catchRandomPokemon(
             this.id,
             pokemon_id,
             items,
-            escape=escape
+            escapeChance=escapeChance
         ).then( (res) => {
-            console.log(res);
             return res;
         }).catch( (err) => {
             console.error(err);
@@ -135,7 +133,6 @@ export class PokemonMaster implements Trainer{
             this.id,
             ids
         ).then( (res) => {
-            console.log(res);
             return res;
         }).catch( (err) => {
             console.error(err);
@@ -148,7 +145,6 @@ export class PokemonMaster implements Trainer{
             this.id,
             id
         ).then( (res) => {
-            console.log(res);
             return res;
         }).catch( (err) => {
             console.error(err);
@@ -161,7 +157,6 @@ export class PokemonMaster implements Trainer{
             this.id,
             tier=tier
         ).then( (res) => {
-            console.log(res);
             return res;
         }).catch( (err) => {
             console.error(err);
@@ -175,7 +170,6 @@ export class PokemonMaster implements Trainer{
             tier=tier,
             shop_size=shop_size
         ).then( (res) => {
-            console.log(res);
             return res;
         }).catch( (err) => {
             console.error(err);
@@ -188,7 +182,6 @@ export class PokemonMaster implements Trainer{
             this.id,
             item
         ).then( (res) => {
-            console.log(res);
             return res;
         }).catch( (err) => {
             console.error(err);
@@ -199,7 +192,6 @@ export class PokemonMaster implements Trainer{
     async sellItem(item: PokeItemsTemplate): Promise<Trainer> {
         return await this.instance.postItemsShopSell(this.id, item)
             .then( (res) => {
-                console.log(res);
                 return res;
             }).catch( (err) => {
                 console.error(err);
@@ -210,7 +202,6 @@ export class PokemonMaster implements Trainer{
     async saveTrainer(): Promise<Trainer>{
         return this.instance.patchPlayer(this.id, this)
             .then( (res) => {
-                console.log(res);
                 return res;
             })
             .catch( (err) => {

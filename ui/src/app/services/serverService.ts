@@ -6,7 +6,7 @@ import { PokemonTemplate } from '../interfaces/pokemon';
 
 export class ServerService {
     instance = axios.create({
-        baseURL: 'http://192.168.1.16:8000/api/v1',
+        baseURL: 'http://127.0.0.1:8000/api/v1',
         timeout: 10000,
         withCredentials: false,
         headers: {
@@ -28,7 +28,6 @@ export class ServerService {
     async getPlayer(username: number): Promise<Trainer>{
         return await this.instance.get<Trainer>(`${username}/player`)
             .then(async (res) => {
-                console.log(res.data);
                 return res.data;
             }).catch( (err) => {
                 console.error(err);
@@ -40,7 +39,6 @@ export class ServerService {
         const body = name;
         return await this.instance.post<Trainer>(`0/player`, body)
             .then(async (res) => {
-                console.log(res.data);
                 return res.data;
             }).catch( (err) => {
                 console.error(err);
@@ -121,7 +119,7 @@ export class ServerService {
         username: number, 
         tier: number, 
         type: string | null=null,
-        items: Array<PokeItemsTemplate>=[]
+        items: Array<PokeItemsTemplate>
     ): Promise<PokemonTemplate> {
         if(![1, 2, 3, 4].includes(tier)){
             throw new Error("Invalid Tier");
@@ -132,6 +130,7 @@ export class ServerService {
             "tier": tier,
             "encounter_type": type
         }
+        console.log(body);
         return await this.instance.post<PokemonTemplate>(`/${username}/pokemon/encounter`, body)
             .then(async (res) => {
                 console.log(res.data);
@@ -146,12 +145,12 @@ export class ServerService {
         username: number,
         pokemon_id: number,
         items: Array<PokeItemsTemplate>,
-        escape: number = .15
+        escapeChance: number = .15
     ): Promise<any> {
         const body = {
             "pokemon_id": pokemon_id,
             "items": items,
-            "escape": escape
+            "escape": escapeChance
         }
 
         return await this.instance.put<any>(`/${username}/pokemon/encounter`, body)
@@ -206,7 +205,7 @@ export class ServerService {
                 return res.data;
             })
             .catch( (err) => {
-                console.log(err);
+                console.error(err);
                 throw err;
             });
     }

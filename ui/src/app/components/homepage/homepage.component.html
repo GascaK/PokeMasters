@@ -13,6 +13,9 @@
 <div *ngIf="menuService.views.get('backpackView')">
   <app-backpack [trainerTracker]="trainerTracker" [serverService]="serverService" [menuService]="menuService"></app-backpack>
 </div>
+<div *ngIf="menuService.views.get('battleView')">
+  <app-battle [trainerTracker]="trainerTracker" [serverService]="serverService" [menuService]="menuService"></app-battle>
+</div>
 <div class="row" *ngIf="menuService.views.get('defaultView')">
   <div>
     <app-active [trainerTracker]="trainerTracker" [team]="trainer.team" [menuService]="menuService"></app-active>
@@ -37,6 +40,9 @@
   </div>
   <div>
     <button class="btn btn-info col-12" (click)="setView('shopView')">Poke Center</button>
+  </div>
+  <div>
+    <button class="btn btn-warning col-12" (click)="setView('battleView')">Battle</button>
   </div>
   <div *ngIf="trainer.getCurrentTier()==3">
     <button class="btn btn-dark col-12" (click)="encounterLegendary()">Legendary</button>

@@ -8,12 +8,12 @@ from .base_loader import BaseLoader
 
 
 class PokemonBuilder():
-    MIN_HP = 3
+    MIN_HP = 4
     MIN_MOVES = 2
     ITEM_CHANCE = 1/5
     SHINY_CHANCE = 1/4096
     SHINY_CHARM_CHANCE = SHINY_CHANCE * 4
-    MOD_MULTIPLYER = 1.2
+    MOD_MULTIPLYER = 1.150
 
     headers={
         'Content-type':'application/json', 
@@ -100,9 +100,11 @@ class PokemonBuilder():
 
         chance = self.SHINY_CHANCE
         for item in items:
+            print(item.name)
             if item.name == "Shiny Charm":
                 chance = self.SHINY_CHARM_CHANCE
 
+        print("SHINY CHANCE", chance)
         # Sprite
         if random.random() <= chance:
             shiny = True

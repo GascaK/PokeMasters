@@ -10,6 +10,7 @@ export class MenuService {
         this.views.set("encounterView", false);
         this.views.set("shopView", false);
         this.views.set("backpackView", false);
+        this.views.set("battleView", false);
     }
 
     setNewView(view: string) {

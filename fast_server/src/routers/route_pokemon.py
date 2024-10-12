@@ -24,7 +24,7 @@ router = APIRouter(
 @router.post("/encounter", response_model=PokemonModel, tags=["pokemon", "encounter"])
 def post_pokemon_encounter(
         username: int,
-        items: list[ItemModel]=None,
+        items: Annotated[list[ItemModel], Body()]=None,
         tier: Annotated[int | None, Body()]=1,
         encounter_type: Annotated[str | None, Body()]=None,
     ) -> PokemonModel:
@@ -32,7 +32,7 @@ def post_pokemon_encounter(
     # Encounter a wild Pokemon
     try:
         encounter_tier = random.randint(1 if tier!=4 else 4, tier)
-        print(encounter_tier)
+        print(items)
         pokemon = poke_builder.random_encounter(tier=encounter_tier, _type=encounter_type, items=items)
         saved: PokemonModel = poke_builder.save_pokemon(pokemon, owner=0)
         return saved
@@ -102,6 +102,7 @@ def put_pokemon_encounter_id(
         if random.random() <= answers.ITEM_RANDOM_CHANCE:
             item: ItemModel = item_builder.random_item(tier=1)
             try:
+                item.owner = username
                 got_item = item_builder.save_item(item)
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Failed to save got item. {e}")
@@ -111,7 +112,7 @@ def put_pokemon_encounter_id(
 
     # Did not catch. Consequences..
     print(f"Did not catch... Rolling to escape.")
-    if random.random() <= escape or escape <= answers.POKEMON_ESCAPE_CHANCE or die == 1:
+    if random.random() <= escape or die == 1:
         # Run away if rolled escape chance LESS than escape OR
         # Escape chance was modified to be less than lowest percent OR
         # User rolled a NAT 1 RIP
