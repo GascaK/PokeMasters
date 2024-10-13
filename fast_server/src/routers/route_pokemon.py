@@ -3,6 +3,7 @@ import requests
 from typing import List, Annotated
 
 from fastapi import APIRouter, HTTPException, Body
+from pydantic import BaseModel
 
 import answers
 from src.services.base_loader import BaseLoader
@@ -24,15 +25,15 @@ router = APIRouter(
 @router.post("/encounter", response_model=PokemonModel, tags=["pokemon", "encounter"])
 def post_pokemon_encounter(
         username: int,
-        items: Annotated[list[ItemModel], Body()]=None,
         tier: Annotated[int | None, Body()]=1,
+        items: list[ItemModel]=None,
         encounter_type: Annotated[str | None, Body()]=None,
     ) -> PokemonModel:
 
     # Encounter a wild Pokemon
     try:
         encounter_tier = random.randint(1 if tier!=4 else 4, tier)
-        print(items)
+        print("items.", items)
         pokemon = poke_builder.random_encounter(tier=encounter_tier, _type=encounter_type, items=items)
         saved: PokemonModel = poke_builder.save_pokemon(pokemon, owner=0)
         return saved
@@ -44,8 +45,8 @@ def post_pokemon_encounter(
 @router.put("/encounter", tags=["pokemon", "encounter"])
 def put_pokemon_encounter_id(
         username: int,
-        pokemon_id: Annotated[int, Body()], 
-        items: list[ItemModel]=None, 
+        pokemon_id: Annotated[int, Body()],
+        items: list[ItemModel]=None,
         escape: Annotated[float | None, Body()]=answers.POKEMON_ESCAPE_CHANCE
     ):
 

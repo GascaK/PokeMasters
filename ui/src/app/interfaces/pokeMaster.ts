@@ -100,12 +100,12 @@ export class PokemonMaster implements Trainer{
         this.saveTrainer();
     }
 
-    async encounterRandomPokemon(tier: number=1, type: string="", items=[]): Promise<PokemonTemplate> {
+    async encounterRandomPokemon(tier: number=1, items=[], type: string=""): Promise<PokemonTemplate> {
         return await this.instance.encounterRandomPokemon(
             this.id,
             tier,
-            type,
-            items
+            items,
+            type
         ).then( (res) => {
             return res;
         }).catch( (err) => {

@@ -118,8 +118,8 @@ export class ServerService {
     async encounterRandomPokemon(
         username: number, 
         tier: number, 
-        type: string | null=null,
-        items: Array<PokeItemsTemplate>
+        items: Array<PokeItemsTemplate>,
+        type: string | null=null
     ): Promise<PokemonTemplate> {
         if(![1, 2, 3, 4].includes(tier)){
             throw new Error("Invalid Tier");
@@ -130,7 +130,7 @@ export class ServerService {
             "tier": tier,
             "encounter_type": type
         }
-        console.log(body);
+        console.log("body", body);
         return await this.instance.post<PokemonTemplate>(`/${username}/pokemon/encounter`, body)
             .then(async (res) => {
                 console.log(res.data);

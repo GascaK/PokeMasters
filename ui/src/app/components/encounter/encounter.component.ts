@@ -37,11 +37,11 @@ export class EncounterComponent implements OnInit{
     async ngOnInit(): Promise<void> {
         if (this.trainerTracker?.isLoggedIn()) {
             this.trainer = await this.trainerTracker.getTrainer();
-            this.getInventory();
+            await this.getInventory();
         }
 
         const encounterTier = this.legendary ? 4 : this.trainer.getCurrentTier();
-        await this.serverService.encounterRandomPokemon(this.trainer.id, encounterTier, null, this.encounterItems)
+        await this.serverService.encounterRandomPokemon(this.trainer.id, encounterTier, this.encounterItems, "")
             .then((res) => {
                 this.pokemon = res;
                 this.pokemon.stats.forEach((stat) => {

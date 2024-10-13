@@ -12,7 +12,7 @@ class PokemonBuilder():
     MIN_MOVES = 2
     ITEM_CHANCE = 1/5
     SHINY_CHANCE = 1/4096
-    SHINY_CHARM_CHANCE = SHINY_CHANCE * 4
+    SHINY_CHARM_CHANCE = 1 #SHINY_CHANCE * 4
     MOD_MULTIPLYER = 1.150
 
     headers={
@@ -35,6 +35,7 @@ class PokemonBuilder():
 
     def random_encounter(self, dex_id=None, tier=1, _type: str=None, items: list[ItemModel]=[]) -> PokemonModel:
         print("Creating Pokemon...")
+        print(items)
 
         # Choose Pokemon
         if dex_id:
