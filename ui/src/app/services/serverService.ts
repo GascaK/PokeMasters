@@ -6,7 +6,7 @@ import { PokemonTemplate } from '../interfaces/pokemon';
 
 export class ServerService {
     instance = axios.create({
-        baseURL: 'http://127.0.0.1:8000/api/v1',
+        baseURL: 'http://0.0.0.0:8010/api/v1',
         timeout: 10000,
         withCredentials: false,
         headers: {

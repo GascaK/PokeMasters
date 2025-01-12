@@ -15,7 +15,7 @@ origins = ['*']
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -35,4 +35,4 @@ subapp.add_middleware(
     allow_headers=["*"],
 )
 # Mount routes last.
-subapp.mount("/", StaticFiles(directory="dist"), name="static")
+app.mount("/", StaticFiles(directory="dist"), name="static")

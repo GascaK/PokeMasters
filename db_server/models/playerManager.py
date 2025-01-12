@@ -70,7 +70,7 @@ class TrainerFinderLocator(Resource):
     def get(self, name: str):
         player: Player = Player.query.filter_by(name=name).first()
         if not player:
-            abort(401, message=f"No trainer found for trainer id: {id}")
+            abort(404, message=f"No trainer found for trainer id: {id}")
 
         return player.toJSON()
 

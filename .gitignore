@@ -4,7 +4,6 @@ node_modules
 */venv/*
 **/build
 server/database/**
-web/
 dist/
 games/**
 /db_server/database/**
