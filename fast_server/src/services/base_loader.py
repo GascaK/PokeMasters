@@ -34,10 +34,11 @@ class BaseLoader():
     TYPE_MAX = 2
     HP_DIVISOR = 4
 
-    SP_DIVISOR = 10
-    SP_BASE_LN = 80
+    SP_DIVISOR = 8
+    SP_BASE_LN = 50
 
     def __init__(self, generations: list[int]=[]):
+        self.cache_loc = "cache/pokedex.json"
         self.generations = generations
         self.dex_list = self.update_generations(generations)
         self.load_moves()
@@ -46,7 +47,7 @@ class BaseLoader():
 
         # Load Cache
         try:
-            with open("cache/pokedex.json") as file:
+            with open(self.cache_loc, "r") as file:
                 data: dict = json.loads(file.read())
                 dex = []
                 for mon in data["cache"]:
@@ -198,7 +199,7 @@ class BaseLoader():
             ))
 
         # Create pokedex cache
-        with open("cache/pokedex.json", "w") as file:
+        with open(self.cache_loc, "w") as file:
             f = json.dumps({"cache": [x.__dict__ for x in pokedex]})
             file.write(f)
 

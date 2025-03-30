@@ -7,18 +7,18 @@
         },
         {
             "id": 1,
-            "name": "Super Poison",
-            "text": "Your Opponents pokemon takes 2 damage in between both turns."
+            "name": "Bad Execution",
+            "text": "This attack is not affected by weakness or resistance."
         },
         {
             "id": 2,
             "name": "Confusion",
-            "text": "Before your Opponents next attack they flip a coin. If Heads their active pokemon takes 1 damage."
+            "text": "Before your Opponents next attack they flip a coin. If Heads their active pokemon takes 2 damage before attacking."
         },
         {
             "id": 3,
             "name": "Paralyzed",
-            "text": "Before your Opponents next attack they flip a coin. If Heads their attack does -1 damage."
+            "text": "Before your Opponents next attack they flip a coin. If Heads their attack does -2 damage."
         },
         {
             "id": 4,
@@ -38,17 +38,17 @@
         {
             "id": 7,
             "name": "Infatuation",
-            "text": "Your Opponents Pokemon's next attack does -3 damage."
+            "text": "Your Opponents Pokemon's next attack does -1 damage."
         },
         {
             "id": 8,
             "name": "Power Boost",
-            "text": "This attack does +2 damage. Your Opponents Pokemon's next attack does +1 damage."
+            "text": "This attack does +2 damage. Your Opponents Pokemon's next attack does +3 damage."
         },
         {
             "id": 9,
-            "name": "Semi-Invulnerable",
-            "text": "Your next attack does no damage. Your Opponents Pokemon does half damage (rounded down) next turn."
+            "name": "Splash",
+            "text": "Flip a coin. If tails, this attack does nothing."
         },
         {
             "id": 10,
@@ -58,27 +58,122 @@
         {
             "id": 11,
             "name": "Seeded",
-            "text": "Your Opponents Pokemon takes 1 damage in between turns. This Pokemon gains +1 HP in between each turn."
+            "text": "Your Opponent's Pokemon takes 1 damage in between turns. This Pokemon gains +1 HP."
         },
         {
             "id": 12,
             "name": "Getting Pumped",
-            "text": "For every consecutive attack with 'getting pumped' add +1 damage to your next attack."
+            "text": "For every consecutive attack with 'Getting Pumped' add +1 damage to your next attack."
         },
         {
             "id": 13,
             "name": "Self Destructive",
-            "text": "Your Pokemon takes 3 damage."
+            "text": "This ATK does +2 damage. Your Pokemon takes 3 damage."
         },
         {
             "id": 14,
-            "name": "Revive",
-            "text": "Your pokemon heals for +3 health."
+            "name": "Roost",
+            "text": "Your pokemon heals for +2 health."
         },
         {
             "id": 15,
             "name": "Reversal",
-            "text": "On this battles first attack, if your speed is slower than your opponent this attack does +8 damage."
+            "text": "On this battles first attack, if your speed is slower than your opponent this attack does +5 damage."
+        },
+        {
+            "id": 16,
+            "name": "Sleep",
+            "text": "Your Opponent's Pokemon is now asleep."
+        },
+        {
+            "id": 17,
+            "name": "Rest",
+            "text": "This Pokemon is now asleep."
+        },
+        {
+            "id": 18,
+            "name": "Lackluster",
+            "text": "This ATK does -1 damage. This Pokemon heals for 1 HP."
+        },
+        {
+            "id": 19,
+            "name": "Joker",
+            "text": "Flip a coin. If Heads deal +3 damage. If Tails, this Pokemon takes 5 damage."
+        },
+        {
+            "id": 20,
+            "name": "Froggy",
+            "text": "After this attack does damage. Switch out this pokemon."
+        },
+        {
+            "id": 21,
+            "name": "Oblivious Rage",
+            "text": "If this Pokemon took damage last turn this attack does nothing."
+        },
+        {
+            "id": 22,
+            "name": "Payback",
+            "text": "If this Pokemon took damage last turn this attack does +1 damage."
+        },
+        {
+            "id": 23,
+            "name": "Glass Cannon",
+            "text": "If this Pokemon took damage last turn this attack does -2 damage."
+        },
+        {
+            "id": 24,
+            "name": "Strong Affliction",
+            "text": "If this Pokemon is affected by a status condition, this attack does +2 damage."
+        },
+        {
+            "id": 25,
+            "name": "Down But Not Out",
+            "text": "If this Pokemon has 5 or less HP left this attack does +3 damage."
+        },
+        {
+            "id": 26,
+            "name": "Execute",
+            "text": "If your Opponents Pokemon has 3 or less HP left, this Atk Defeats that Pokemon."
+        },
+        {
+            "id": 27,
+            "name": "Biding Time",
+            "text": "This ATK cannot be used if your Opponents Pokemon has 10 or more HP left."
+        },
+        {
+            "id": 28,
+            "name": "First Strike",
+            "text": "If your Opponents Pokemon has no damage, this ATK does +2 damage."
+        },
+        {
+            "id": 29,
+            "name": "Watcher",
+            "text": "If your Opponents Pokemon has no damage, this Pokemon cannot use this ATK."
+        },
+        {
+            "id": 30,
+            "name": "Chilling Rein",
+            "text": "If this Pokemon is affected by a status condition, this ATK does +3 damage."
+        },
+        {
+            "id": 31,
+            "name": "Lucky",
+            "text": "Flip a coin until you get tails. This ATK does +1 for every heads."
+        },
+        {
+            "id": 32,
+            "name": "Unlucky",
+            "text": "Flip a coin until you get heads. This ATK does -1 for every tails."
+        },
+        {
+            "id": 33,
+            "name": "Greedy",
+            "text": "If this Pokemon has a Held Item, this ATK does -2 damage."
+        },
+        {
+            "id": 35,
+            "name": "Pacifist",
+            "text": "If this Pokemon does not have a Held Item, this ATK does +1 damage."
         }
     ]
 }

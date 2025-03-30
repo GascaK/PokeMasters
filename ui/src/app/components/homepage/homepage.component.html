@@ -20,31 +20,25 @@
   <div>
     <app-active [trainerTracker]="trainerTracker" [team]="trainer.team" [menuService]="menuService"></app-active>
   </div>
-  <div>
-    <h4 style="text-align:center">{{trainer.name}}'s Info:</h4>
-  </div>
-  <div>
-    <button class="btn btn-primary col-12" (click)="setView('dexView')">PokeDEX</button>
-  </div>
-  <div>
-    <button class="btn btn-primary col-12" (click)="setView('backpackView')">BackPack</button>
-  </div>
-  <div>
-    <button class="btn btn-primary col-12" (click)="setView('infoView')">Settings</button>
-  </div>
-  <div>
-    <h4 style="text-align:center">Actions</h4>
-  </div>
-  <div>
-    <button class="btn btn-success col-12" (click)="setView('encounterView')">Tall Grass</button>
-  </div>
-  <div>
-    <button class="btn btn-info col-12" (click)="setView('shopView')">Poke Center</button>
-  </div>
-  <div>
-    <button class="btn btn-warning col-12" (click)="setView('battleView')">Battle</button>
-  </div>
-  <div *ngIf="trainer.getCurrentTier()==3">
-    <button class="btn btn-dark col-12" (click)="encounterLegendary()">Legendary</button>
-  </div>
+  <section class="contains-code">
+    <div>
+      <h4 style="text-align:center">{{trainer.name}}'s Info:</h4>
+    </div>
+    <ul class="framed buttons">
+      <li><button class="pokemon" (click)="setView('dexView')">PokeDEX</button></li>
+      <li><button (click)="setView('backpackView')">BackPack</button></li>
+      <li><button (click)="setView('infoView')">Settings</button></li>
+    </ul>
+  </section>
+  <section>
+    <div style="padding:5px;">
+      <h4 style="text-align:center">Actions</h4>
+    </div>
+    <ul class="framed buttons">
+      <li><button (click)="setView('encounterView')">Tall Grass</button></li>
+      <li><button (click)="setView('shopView')">Poke Center</button></li>
+      <li><button (click)="setView('battleView')">Interact</button></li>
+      <li *ngIf="trainer.badges>=8"><button (click)="encounterLegendary()">Legendary</button></li>
+    </ul>
+  </section>
 </div>

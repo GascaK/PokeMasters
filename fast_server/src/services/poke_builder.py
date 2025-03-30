@@ -10,9 +10,10 @@ from .base_loader import BaseLoader
 class PokemonBuilder():
     MIN_HP = 4
     MIN_MOVES = 2
+    LEGEND_MIN_HP = 20
     ITEM_CHANCE = 1/5
-    SHINY_CHANCE = 1/4096
-    SHINY_CHARM_CHANCE = 1 #SHINY_CHANCE * 4
+    SHINY_CHANCE = 1/2048
+    SHINY_CHARM_CHANCE = SHINY_CHANCE * 4
     MOD_MULTIPLYER = 1.150
 
     headers={
@@ -20,7 +21,7 @@ class PokemonBuilder():
         'Accept':'application/json'
     }
 
-    def __init__(self, base_loader: BaseLoader, db_uri="http://127.0.0.1:5000"):
+    def __init__(self, base_loader: BaseLoader, db_uri="http://poke-db:5000"):
         self.db_uri = db_uri
 
         # Load Base Loader
@@ -52,19 +53,27 @@ class PokemonBuilder():
             return
 
         # Randomizers
+
         # HP
         mod = random.random()*self.MOD_MULTIPLYER
         hp = int(base.hp*mod)
-        hp  = self.MIN_HP if hp < self.MIN_HP else hp
+        
+        # Set Minimum hp.
+        minimum = self.LEGEND_MIN_HP if base.tier == 4 else self.MIN_HP
+        hp = minimum if hp < minimum else hp
+
         hp_mod = hp-base.hp
+
         # Speed
         mod = random.random()*self.MOD_MULTIPLYER
         speed = int(base.speed*mod)
         speed_mod = speed-base.speed
+
         # Special
         mod = random.random()*self.MOD_MULTIPLYER
         special = int(base.special*mod)
         special_mod = special-base.special
+
         # Physical
         mod = random.random()*self.MOD_MULTIPLYER
         physical = int(base.physical*mod)
@@ -133,16 +142,16 @@ class PokemonBuilder():
 
         for stat in pokemon.stats:
             if stat.name == "hp":
-                hp_mod = stat.mod
+                hp_mod = stat.mod + random.randint(1, 7)
                 hp = temp.hp + hp_mod
             elif stat.name == "speed":
-                speed_mod = stat.mod
+                speed_mod = stat.mod + random.randint(1, 3)
                 speed = temp.speed + speed_mod
             elif stat.name == "special":
-                special_mod = stat.mod
+                special_mod = stat.mod + random.randint(50, 200)
                 special = temp.special + special_mod
             elif stat.name == "physical":
-                physical_mod = stat.mod
+                physical_mod = stat.mod + random.randint(50, 200)
                 physical = temp.physical + physical_mod
 
         
@@ -182,7 +191,6 @@ class PokemonBuilder():
 
         p = PokemonModel(base=temp, owner=pokemon.owner, stats=stats, sprite=sprite, moves=moves, items=pokemon.items)
         return self.save_pokemon(p, owner=pokemon.owner)
-
 
     def build_pokemon(self, data: dict) -> PokemonModel:
         try:

@@ -44,13 +44,8 @@ export class ShopComponent implements OnInit {
                 }
             }).catch((err) => {
                 console.error(err);
+                alert((err as Error).message);
             });
-    }
-
-    async randomItem() {
-        const item = await this.trainer.getRandomItem(this.trainer.getCurrentTier());
-        alert(`Got Item: ${item.name}`);
-        this.returnView();
     }
 
     returnView() {

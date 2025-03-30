@@ -26,6 +26,7 @@ export class HomepageComponent implements OnInit {
     }
 
     setView(view: string) {
+        this.legendary = false;
         this.menuService.setNewView(view);
     }
 

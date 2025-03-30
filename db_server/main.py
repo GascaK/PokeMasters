@@ -13,7 +13,7 @@ app = Flask("db_server")
 api = Api()
 
 CORS(app)
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{Root.app_dir()}\\database\\pokemasters.sqlite3"
+#app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:////app/db_server/database/pokemasters.sqlite3"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 api.add_resource(MoveLocator, "/moves/<int:id>")

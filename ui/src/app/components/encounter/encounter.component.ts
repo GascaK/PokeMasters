@@ -55,6 +55,8 @@ export class EncounterComponent implements OnInit{
             }).catch((err) => {
                 console.error(err);
             });
+        
+        this.legendary = false;
     }
 
     async getInventory(): Promise<void> {

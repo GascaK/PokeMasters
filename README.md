@@ -34,11 +34,10 @@ Before getting started coding, verify you have these apps installed:
 3. python3 db_server/main.py
 
 ### Docker
-docker build . -t pokemasters-server:server -f docker/server.Dockerfile
-docker run -it --name pkm-server --rm -p 8010:8010 --network host pokemasters-server:server
+cd ui
+npm run build
+docker build . -t poke-server:latest -f docker/server.Dockerfile
+docker run --rm -p 8010:8010 --network pokeNetwork --name poke-server docker.io/library/poke-server:latest
 
-docker build . -t pokemasters-server:api -f docker/api.Dockerfile
-docker run -it --name pkm-api --rm -p 8000:8000 --network host pokemasters-server:api
-
-docker build . -t pokemasters-db:latest -f docker/database.Dockerfile
-docker run -it --name db-server  --rm -p 5000:5000 --network host -v $pwd/db_server/database:/app/database pokemasters-db:latest
+docker build . -t poke_db:latest -f docker/database.Dockerfile
+docker run --rm -p 5000:5000 -v '//d/Projects/PokeMasters/db_server/database:/app/database' --network pokeNetwork --name=poke-db docker.io/library/poke_db:latest

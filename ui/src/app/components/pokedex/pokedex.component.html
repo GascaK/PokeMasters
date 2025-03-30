@@ -36,14 +36,24 @@
         </tr>
         <tr *ngFor="let pokemon of infoList">
             <td scope="col">{{pokemon.data.id}}</td>
-            <div *ngFor="let stat of pokemon.data.stats">
-                <td scope="col" *ngIf="stat.name == 'hp'">{{stat.value}}</td>
+            <!-- <div class="col" *ngFor="let stat of pokemon.data.stats">
+                <td *ngIf="stat.name == 'hp'">{{stat.value}}</td>
             </div>
-            <div *ngFor="let stat of pokemon.data.stats">
-                <td scope="col" *ngIf="stat.name == 'speed'">{{stat.value}}</td>
-            </div>
-            <td scope="col" *ngIf="pokemon.data.moves">{{pokemon.data.moves[0].name}}:{{pokemon.data.moves[0].hit}}-<p *ngIf="pokemon.data.moves[0].special">*</p></td>
-            <td scope="col" *ngIf="pokemon.data.moves">{{pokemon.data.moves[1].name}}:{{pokemon.data.moves[1].hit}}-<p *ngIf="pokemon.data.moves[1].special">*</p></td>
+            <div class="col" *ngFor="let stat of pokemon.data.stats">
+                <td *ngIf="stat.name == 'speed'">{{stat.value}}</td>
+            </div> -->
+            <td scope="col">
+                <div *ngFor="let stat of pokemon.data.stats">
+                    <h4 *ngIf="stat.name == 'hp'">{{stat.value}}</h4>
+                </div>
+            </td>
+            <td scope="col">
+                <div *ngFor="let stat of pokemon.data.stats">
+                    <h4 *ngIf="stat.name == 'speed'">{{stat.value}}</h4>
+                </div>
+            </td>
+            <td scope="col" *ngIf="pokemon.data.moves">{{pokemon.data.moves[0].name}}:{{pokemon.data.moves[0].hit}}<p *ngIf="pokemon.data.moves[0].special">*</p></td>
+            <td scope="col" *ngIf="pokemon.data.moves">{{pokemon.data.moves[1].name}}:{{pokemon.data.moves[1].hit}}<p *ngIf="pokemon.data.moves[1].special">*</p></td>
             <td scope="col" *ngIf="validateBenchCapacity(pokemon.data)" ><button class="btn btn-primary" (click)="setActive(pokemon.data)">Active</button></td>
             <td scope="col" *ngIf="!validateBenchCapacity(pokemon.data)"><button class="btn btn-secondary" disabled>Invalid</button></td>
             <td scope="col"><input class="form-check-input" type="checkbox" [(ngModel)]="pokemon.checked"></td>

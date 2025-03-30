@@ -1,5 +1,6 @@
 <div>
-    <div style="text-align: center;"><h3>Pok&eacute; Mart</h3>
+    <div style="text-align: center;"><h3>Pok&eacute; Mart</h3></div>
+    <div>{{trainer.dollars}}</div>
     <div>
         <table class="table table-striped">
             <thead>
@@ -19,10 +20,7 @@
         </table>
     </div>
     <div class="row">
-        <div class="col col-6 previous">
-            <button class="btn btn-secondary" style="display:block;width:100%" (click)="randomItem()">Random Item!</button>
-        </div>
-        <div class="col col-6 next">
+        <div class="col">
             <button class="btn btn-primary" style="display:block;width:100%" (click)="returnView()">Exit</button>
         </div>
     </div>

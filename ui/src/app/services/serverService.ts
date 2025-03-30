@@ -6,7 +6,7 @@ import { PokemonTemplate } from '../interfaces/pokemon';
 
 export class ServerService {
     instance = axios.create({
-        baseURL: 'http://0.0.0.0:8010/api/v1',
+        baseURL: 'http://192.168.1.28:8010/api/v1',
         timeout: 10000,
         withCredentials: false,
         headers: {
@@ -26,7 +26,7 @@ export class ServerService {
     }
 
     async getPlayer(username: number): Promise<Trainer>{
-        return await this.instance.get<Trainer>(`${username}/player`)
+        return await this.instance.get<Trainer>(`${username}/player/`)
             .then(async (res) => {
                 return res.data;
             }).catch( (err) => {
@@ -37,7 +37,7 @@ export class ServerService {
 
     async createPlayer(name: string): Promise<Trainer>{
         const body = name;
-        return await this.instance.post<Trainer>(`0/player`, body)
+        return await this.instance.post<Trainer>(`0/player/`, body)
             .then(async (res) => {
                 return res.data;
             }).catch( (err) => {
@@ -49,7 +49,7 @@ export class ServerService {
     async patchPlayer(username: number, player: Trainer): Promise<Trainer>{
         const body = player;
 
-        return await this.instance.patch<Trainer>(`${username}/player`, body)
+        return await this.instance.patch<Trainer>(`${username}/player/`, body)
             .then(async (res) => {
                 console.log(res.data);
                 return res.data;
@@ -71,7 +71,7 @@ export class ServerService {
     }
 
     async getTrainerItems(username: number): Promise<Array<PokeItemsTemplate>>{
-        return await this.instance.get<Array<PokeItemsTemplate>>(`${username}/player/items/`)
+        return await this.instance.get<Array<PokeItemsTemplate>>(`${username}/player/items`)
             .then(async(res) => {
                 console.log(res.data);
                 return res.data;
@@ -199,7 +199,7 @@ export class ServerService {
     }
 
     async deleteItems(username: number, id: number): Promise<void>{
-        return await this.instance.delete<void>(`${username}/items?id=${id}`)
+        return await this.instance.delete<void>(`${username}/items/delete?id=${id}`)
             .then(async (res) => {
                 console.log(res.data);
                 return res.data;

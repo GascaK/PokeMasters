@@ -2,7 +2,7 @@ import json
 from flask import request
 
 from flask_restful import abort, fields, marshal_with, Resource, reqparse
-from services.alchemy_loader import db_session
+from services.alchemy_loader import Session
 
 from interfaces.models import Items
 
@@ -22,7 +22,9 @@ class ItemLocator(Resource):
 
     @marshal_with(item_resource)
     def get(self, id: int):
-        item = Items.query.filter_by(id=id).first()
+        with Session() as session:
+            item = session.query(Items).filter_by(id=id).first()
+
         if not item:
             abort(400, message="Unable to find item.")
 
@@ -41,9 +43,9 @@ class ItemLocator(Resource):
                 tier=payload["tier"],
                 owner=payload["owner"]
             )
-            db_session.add(i)
-            db_session.commit()
-
+            with Session() as session:
+                session.add(i)
+                session.commit()
             return i.toJSON()
         except Exception as e:
             print(e)
@@ -51,8 +53,9 @@ class ItemLocator(Resource):
         
     def delete(self, id):
         try:
-            Items.query.filter_by(id=id).delete()
-            db_session.commit()
+            with Session() as session:
+                session.query(Items).filter_by(id=id).delete()
+                session.commit()
         except Exception as e:
             print(e)
             return {"message": str(e)}, 503

@@ -49,7 +49,7 @@ export class ActiveComponent implements OnInit{
 
     holdItem(item: PokeItemsTemplate) {
         this.team.active.item = item;
-        this.trainer.deleteItem(item.id);
+        // this.trainer.deleteItem(item.id); Do not delete item after use.
         this.exitItemSelection();
     }
 

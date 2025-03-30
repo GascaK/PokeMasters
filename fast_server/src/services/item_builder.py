@@ -11,7 +11,7 @@ class ItemBuilder():
         'Accept':'application/json'
     }
 
-    def __init__(self, base_loader: BaseLoader, db_uri="http://127.0.0.1:5000"):
+    def __init__(self, base_loader: BaseLoader, db_uri="http://poke-db:5000"):
        self.poke_center: PokeCenter = base_loader.POKECENTER
        self.db_uri = db_uri
 

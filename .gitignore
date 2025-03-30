@@ -3,7 +3,6 @@ node_modules
 **/__pycache__/**
 */venv/*
 **/build
-server/database/**
 dist/
 games/**
-/db_server/database/**
+db_server/database/**

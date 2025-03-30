@@ -38,7 +38,7 @@ def get_items(username: int, id: int) -> ItemModel:
     else:
         raise HTTPException(status_code=400, detail="Your ID does not match this item.")
 
-@router.delete("/", tags=["items"])
+@router.delete("/delete", tags=["items"])
 def delete_items(username: int, id: int) -> None:
     # Delete Item from DB.
     try:

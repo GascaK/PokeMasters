@@ -1,23 +1,26 @@
-<input [(ngModel)]="username" type="text" id="username" 
-        placeholder="Enter your username" />
-<div *ngIf="!newPlayerMenu">
-    <div>
-        <button id="submitBtn" class="btn btn-primary" (click)="login()">
-        Submit
-        </button>
+<div class="align-items: center; justify-content: center;">
+    <img src="assets/imgs/pokemon_title_logo.jpg" atl="Pokemon Logo">
+    <input [(ngModel)]="username" type="text" id="username" 
+            placeholder="Enter your username" />
+    <div *ngIf="!newPlayerMenu">
+        <div>
+            <button id="submitBtn" class="btn btn-primary" (click)="login()">
+            Submit
+            </button>
+        </div>
+        <div>
+            <button id="newPlayerBtn" class="btn btn-secondary" (click)="newPlayer()">
+                New Player
+            </button>
+        </div>
     </div>
-    <div>
-        <button id="newPlayerBtn" class="btn btn-secondary" (click)="newPlayer()">
-            New Player
-        </button>
-    </div>
-</div>
-<div *ngIf="newPlayerMenu">
-    <div *ngFor="let starter of starters">
-        <div>{{starter.base.name}}</div>
-        <img src="{{starter.sprite.sprite_url}}" alt="Pokemon Image">
-        <button id="chosenStarter" class="btn btn-primary" (click)="createPlayer(starter)">
-            Choose
-        </button>
+    <div *ngIf="newPlayerMenu">
+        <div *ngFor="let starter of starters">
+            <div>{{starter.base.name}}</div>
+            <img src="{{starter.sprite.sprite_url}}" alt="Pokemon Image">
+            <button id="chosenStarter" class="btn btn-primary" (click)="createPlayer(starter)">
+                Choose
+            </button>
+        </div>
     </div>
 </div>

@@ -25,33 +25,43 @@ export class BattleComponent{
     }
 
     randomMoney(): void {
-        const dollars = this.randomInt(500, 1500);
-        this.trainer.getDollars(dollars);
-        alert(`Got $${dollars}`);
+        const atm = this.randomInt(200, 500);
+        const tier = this.trainer.getCurrentTier();
+        const deposit = atm * tier;
+
+        this.trainer.getDollars(deposit);
+        alert(`Got $${deposit}`);
         this.exit();
     }
 
     beatGymLeader(): void {
+        const atm = this.randomInt(500, 1000);
         const tier = this.trainer.getCurrentTier()
-        const x = tier == 1 ? 500 : tier == 2 ? 1000 : 1500;
-        const y = x + 1000;
+        const deposit = atm * tier;
 
-        const dollars = this.randomInt(x, y);
-        this.trainer.getDollars(dollars);
-        alert(`Got $${dollars}`);
+        this.trainer.getDollars(deposit);
+        alert(`Got $${deposit}`);
         this.exit();
     }
 
     beatTrainer(): void {
-        const dollars = this.randomInt(400, 800);
+        const atm = this.randomInt(400, 800);
+        const tier = this.trainer.getCurrentTier()
+        const deposit = atm * tier;
 
-        this.trainer.getDollars(dollars);
-        alert(`Got $${dollars}`);
+        this.trainer.getDollars(deposit);
+        alert(`Got $${deposit}`);
         this.exit();
     }
 
     randomInt(min: number, max: number) {
         return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    async randomItem() {
+        const item = await this.trainer.getRandomItem(this.trainer.getCurrentTier());
+        alert(`Got Item: ${item.name}`);
+        this.exit();
     }
 
     exit(): void {
