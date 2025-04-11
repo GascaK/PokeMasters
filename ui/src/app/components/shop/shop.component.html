@@ -1,27 +1,36 @@
 <div>
-    <div style="text-align: center;"><h3>Pok&eacute; Mart</h3></div>
-    <div>{{trainer.dollars}}</div>
+    <div style="text-align: center;"><h3>Poké Mart</h3></div>
+    <div class="trainer-balance">Balance: {{trainer?.dollars}} $</div>
     <div>
-        <table class="table table-striped">
-            <thead>
-                <th scope="col">Name</th>
-                <th scope="col">Text</th>
-                <th scope="col">Cost</th>
-                <th scope="col">Buy</th>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of shop">
-                    <th>{{item.name}}</th>
-                    <td>{{item.text}}</td>
-                    <td>{{item.cost}}</td>
-                    <td><button class="btn btn-primary" (click)="purchaseItem(item)">Buy</button></td>
-                </tr>
-            </tbody>
-        </table>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Text</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Buy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let group of groupedShop; let isLast = last">
+            <tr>
+              <th colspan="4" class="group-header">{{group.name}} ({{group.count}})</th>
+            </tr>
+            <tr *ngFor="let item of group.items">
+              <th>{{item.name}}</th>
+              <td>{{item.text}}</td>
+              <td>{{item.cost}}</td>
+              <td><button class="btn btn-primary" (click)="purchaseItem(item)">Buy</button></td>
+            </tr>
+            <!-- Add a separator row unless it's the last group -->
+            <tr *ngIf="!isLast" class="group-separator"><td colspan="4"></td></tr>
+          </ng-container>
+        </tbody>
+      </table>
     </div>
-    <div class="row">
-        <div class="col">
-            <button class="btn btn-primary" style="display:block;width:100%" (click)="returnView()">Exit</button>
-        </div>
+    <div class="row mt-3">
+      <div class="col">
+        <button class="btn btn-primary" style="display:block;width:100%" (click)="returnView()">Exit</button>
+      </div>
     </div>
-</div>
+  </div>

@@ -21,7 +21,6 @@ class TrainerLocator(Resource):
 
     @marshal_with(player_resource)
     def get(self, id: int):
-        #player = Player.query.filter_by(id=id).first()
         with Session() as session:
             player = session.query(Player).filter_by(id=id).first()
 

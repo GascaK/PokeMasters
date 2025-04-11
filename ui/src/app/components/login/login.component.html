@@ -1,26 +1,36 @@
-<div class="align-items: center; justify-content: center;">
-    <img src="assets/imgs/pokemon_title_logo.jpg" atl="Pokemon Logo">
-    <input [(ngModel)]="username" type="text" id="username" 
-            placeholder="Enter your username" />
-    <div *ngIf="!newPlayerMenu">
-        <div>
-            <button id="submitBtn" class="btn btn-primary" (click)="login()">
-            Submit
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="text-center">
+        <img src="assets/imgs/pokemon_title_logo.jpg" alt="Pokemon Logo" class="img-fluid mb-4">
+
+        <input 
+            [(ngModel)]="username" 
+            type="text" 
+            id="username" 
+            placeholder="Enter your username" 
+            class="form-control mb-3"
+        />
+
+        <ng-container *ngIf="!newPlayerMenu; else newPlayerTemplate">
+            <button id="submitBtn" class="btn btn-primary mb-2" (click)="login()">
+                Submit
             </button>
-        </div>
-        <div>
             <button id="newPlayerBtn" class="btn btn-secondary" (click)="newPlayer()">
                 New Player
             </button>
-        </div>
-    </div>
-    <div *ngIf="newPlayerMenu">
-        <div *ngFor="let starter of starters">
-            <div>{{starter.base.name}}</div>
-            <img src="{{starter.sprite.sprite_url}}" alt="Pokemon Image">
-            <button id="chosenStarter" class="btn btn-primary" (click)="createPlayer(starter)">
-                Choose
-            </button>
-        </div>
+        </ng-container>
+
+        <ng-template #newPlayerTemplate>
+            <div *ngFor="let starter of starters" class="my-3">
+                <div>{{starter.base.name}}</div>
+                <img [src]="starter.sprite.sprite_url" alt="{{starter.base.name}} Image" class="starter-image img-fluid">
+                <button 
+                    id="chosenStarter" 
+                    class="btn btn-primary mt-2" 
+                    (click)="createPlayer(starter)"
+                >
+                    Choose
+                </button>
+            </div>
+        </ng-template>
     </div>
 </div>

@@ -1,3 +1,42 @@
-#submitBtn {
-    margin-bottom: 50px
+body {
+    background: url('https://example.com/pokemon-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Pokemon', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: white;
+}
+.login-container {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+input[type="text"], input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+input[type="submit"] {
+    padding: 10px;
+    background-color: #f7b733;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+input[type="submit"]:hover {
+    background-color: #ee7e22;
 }

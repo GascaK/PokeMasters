@@ -1,4 +1,4 @@
-<h2>Youngster {{trainer.name}} Data:</h2>
+<h2>Not Pokemon Master {{trainer.name}} Data:</h2>
 <form class="form-floating">
   <div>
     <label for="nameID">Name</label>
@@ -21,15 +21,5 @@
   </div>
 </form>
 <div>
-  <div class="row">
-    <h3 style="text-align: center;">Status Conditions</h3>
-  </div>
-  <table class="table table-bordered">
-    <th scope="col">Name</th>
-    <th scope="col">Info</th>
-    <tr *ngFor="let status of statuses">
-      <td style="font-weight:bold;">{{status.name}}</td>
-      <td>{{status.text}}</td>
-    </tr>
-  </table>
+  <img src="assets/imgs/weakness-chart.png" alt="Pokemon Weakness" class="img-fluid">
 </div>

@@ -6,7 +6,7 @@ import { PokemonTemplate } from '../interfaces/pokemon';
 
 export class ServerService {
     instance = axios.create({
-        baseURL: 'http://192.168.1.28:8010/api/v1',
+        baseURL: 'http://192.168.1.28:80/api/v1',
         timeout: 10000,
         withCredentials: false,
         headers: {
@@ -198,8 +198,8 @@ export class ServerService {
             })
     }
 
-    async deleteItems(username: number, id: number): Promise<void>{
-        return await this.instance.delete<void>(`${username}/items/delete?id=${id}`)
+    async deleteItems(username: number, item: PokeItemsTemplate): Promise<void>{
+        return await this.instance.delete<void>(`${username}/items/delete?id=${item.id}`)
             .then(async (res) => {
                 console.log(res.data);
                 return res.data;
@@ -264,6 +264,23 @@ export class ServerService {
                 console.error(err);
                 throw err;
             }); 
+    }
+
+    async postItemsUpgrade(username: number, pokemon_id: number, items: Array<PokeItemsTemplate>): Promise<Trainer>{
+        const body = {
+            "pokemon_id": pokemon_id,
+            "items": items
+        }
+
+        return await this.instance.post<Trainer>(`${username}/pokemon/upgrade`, body)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
+            })
+            .catch( (err) => {
+                console.error(err);
+                throw err;
+            });
     }
 }
 

@@ -1,0 +1,29 @@
+.group-header {
+    background-color: #e9ecef;
+    font-weight: bold;
+    text-align: left;
+    border-top: 2px solid #dee2e6;
+  }
+  
+  .group-separator td {
+    height: 20px;
+    background-color: white;
+    border: none;
+  }
+  
+  .trainer-balance {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 15px 0;
+    text-align: right;
+    color: #28a745;
+  }
+  
+  table {
+    margin-top: 20px;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+  }
+  
+  th, td {
+    vertical-align: middle;
+  }

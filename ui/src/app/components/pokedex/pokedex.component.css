@@ -1,0 +1,78 @@
+/* Table Styles */
+.table th {
+    font-weight: 600;
+}
+
+.table.align-middle td {
+    vertical-align: middle;
+}
+
+/* Move Styles */
+.moves-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.move-box {
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 6px 10px;
+    background-color: #f8f9fa;
+}
+
+.move-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+}
+
+.move-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #495057;
+}
+
+.special-indicator {
+    color: #6f42c1;
+    font-weight: 600;
+}
+
+.move-divider {
+    border-top: 1px dashed #ced4da;
+    margin: 0 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .moves-container {
+        gap: 5px;
+    }
+    
+    .move-box {
+        padding: 4px 8px;
+    }
+    
+    .move-name {
+        font-size: 0.85rem;
+    }
+    
+    .move-details {
+        font-size: 0.75rem;
+    }
+    
+    .table td, .table th {
+        padding: 0.5rem;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 576px) {
+    .move-name {
+        max-width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

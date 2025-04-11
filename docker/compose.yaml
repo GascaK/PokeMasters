@@ -1,0 +1,30 @@
+services:
+  poke-server:
+    build:
+      context: .
+      dockerfile: docker/server.Dockerfile
+    image: poke-server:latest
+    container_name: poke-server
+    ports:
+      - "80:80"
+    networks:
+      - pokeNetwork
+    depends_on:
+      - poke-db
+
+  poke-db:
+    build:
+      context: .
+      dockerfile: docker/database.Dockerfile
+    image: poke-db:latest
+    container_name: poke-db
+    ports:
+      - "5000:5000"
+    volumes:
+      - //d/Projects/PokeMasters/db_server/database:/app/database
+    networks:
+      - pokeNetwork
+
+networks:
+  pokeNetwork:
+    driver: bridge

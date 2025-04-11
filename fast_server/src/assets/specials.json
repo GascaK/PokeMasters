@@ -18,7 +18,7 @@
         {
             "id": 3,
             "name": "Paralyzed",
-            "text": "Before your Opponents next attack they flip a coin. If Heads their attack does -2 damage."
+            "text": "Before your Opponents next attack they flip a coin. If tails their attack does nothing."
         },
         {
             "id": 4,
@@ -58,7 +58,7 @@
         {
             "id": 11,
             "name": "Seeded",
-            "text": "Your Opponent's Pokemon takes 1 damage in between turns. This Pokemon gains +1 HP."
+            "text": "This ATK does +1 damage. You gain +1 HP."
         },
         {
             "id": 12,
@@ -83,12 +83,12 @@
         {
             "id": 16,
             "name": "Sleep",
-            "text": "Your Opponent's Pokemon is now asleep."
+            "text": "Flip a coin. If Heads, your Opponent's Pokemon is now asleep."
         },
         {
             "id": 17,
             "name": "Rest",
-            "text": "This Pokemon is now asleep."
+            "text": "Flip a coin, If Tails, this Pokemon is now asleep."
         },
         {
             "id": 18,
@@ -113,7 +113,7 @@
         {
             "id": 22,
             "name": "Payback",
-            "text": "If this Pokemon took damage last turn this attack does +1 damage."
+            "text": "If this Pokemon took damage last turn this attack does +2 damage."
         },
         {
             "id": 23,
@@ -171,9 +171,29 @@
             "text": "If this Pokemon has a Held Item, this ATK does -2 damage."
         },
         {
+            "id": 34,
+            "name": "Shadow Strike",
+            "text": "This attack does +3 damage if your opponent's Pokemon is affected by a status condition."
+        },
+        {
             "id": 35,
             "name": "Pacifist",
-            "text": "If this Pokemon does not have a Held Item, this ATK does +1 damage."
+            "text": "If this Pokemon does not have a Held Item, this ATK does +2 damage."
+        },
+        {
+            "id": 36,
+            "name": "Vengeful Spirit",
+            "text": "If your Benched Pokemon were damaged during the last turn, this attack does +3 damage."
+        },
+        {
+            "id": 37,
+            "name": "Thunderclap",
+            "text": "Flip a coin. If Heads, this attack does +3 damage and your opponent's Pokemon is paralyzed. If Tails, this attack does 1 damage."
+        },
+        {
+            "id": 38,
+            "name": "Crippling Bite",
+            "text": "If this ATK does more than 5 damage, your next ATK does +2 damage."
         }
     ]
 }

@@ -26,4 +26,4 @@ app.include_router(route_items.router)
 app.include_router(route_player.router)
 
 # Mount routes last.
-app.mount("/", StaticFiles(directory="dist"), name="static")
+app.mount("/", StaticFiles(directory="dist", html=True), name="index")

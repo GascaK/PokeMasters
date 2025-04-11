@@ -5,19 +5,29 @@
                 <h3>Items</h3>
             </div>
             <div *ngFor="let item of itemList | keyvalue">
-                <div class="row" style="padding:3px;">
+                <!-- Item Details Row -->
+                <div class="row" style="padding:3px; margin-bottom: 10px;">
                     <div class="col">{{item.value.name}}</div>
                     <div class="col">{{item.value.count}}</div>
                     <div class="col">{{item.value.text}}</div>
+                </div>
+                
+                <!-- Action Buttons Row -->
+                <div class="row" style="padding:3px;">
                     <div class="col">
-                        <button class="btn btn-primary" (click)="useItem(item.value.id)">Use</button>
+                        <button class="btn btn-primary" (click)="useItem(item.value.item)">Use</button>
                     </div>
                     <div class="col">
                         <button class="btn btn-secondary" (click)="sellItem(item.value.id)">Sell</button>
                     </div>
                 </div>
+                
+                <!-- Separator between items -->
+                <hr />
             </div>
         </div>
     </div>
-    <div class="row"><button class="btn btn-danger col" (click)="exitBackpack()">Exit</button></div>
+    <div class="row">
+        <button class="btn btn-danger col" (click)="exitBackpack()">Exit</button>
+    </div>
 </div>

@@ -34,10 +34,9 @@ Before getting started coding, verify you have these apps installed:
 3. python3 db_server/main.py
 
 ### Docker
-cd ui
-npm run build
-docker build . -t poke-server:latest -f docker/server.Dockerfile
+cd ui && npm run build && cd ..
+docker build . -t poke-server:latest --no-cache -f docker/server.Dockerfile
 docker run --rm -p 8010:8010 --network pokeNetwork --name poke-server docker.io/library/poke-server:latest
 
-docker build . -t poke_db:latest -f docker/database.Dockerfile
-docker run --rm -p 5000:5000 -v '//d/Projects/PokeMasters/db_server/database:/app/database' --network pokeNetwork --name=poke-db docker.io/library/poke_db:latest
+docker build . -t poke-db:latest -f docker/database.Dockerfile
+docker run --rm -p 5000:5000 -v '//d/Projects/PokeMasters/db_server/database:/app/database' --network pokeNetwork --name=poke-db docker.io/library/poke-db:latest

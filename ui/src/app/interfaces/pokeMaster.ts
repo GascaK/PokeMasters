@@ -140,18 +140,6 @@ export class PokemonMaster implements Trainer{
         });
     }
 
-    async deleteItem(id: number): Promise<void>{
-        return await this.instance.deleteItems(
-            this.id,
-            id
-        ).then( (res) => {
-            return res;
-        }).catch( (err) => {
-            console.error(err);
-            throw err;
-        });
-    }
-
     async getRandomItem(tier: number=1): Promise<PokeItemsTemplate> {
         return await this.instance.postItemsRandom(
             this.id,

@@ -29,8 +29,8 @@ def post_pokemon_encounter(
         items: list[ItemModel]=None,
         encounter_type: Annotated[str | None, Body()]=None,
     ) -> PokemonModel:
+    # Encounter a wild Pokemon.
 
-    # Encounter a wild Pokemon
     try:
         encounter_tier = random.randint(1 if tier!=4 else 4, tier)
         print("items.", items)
@@ -49,6 +49,7 @@ def put_pokemon_encounter_id(
         items: list[ItemModel]=None,
         escape: Annotated[float | None, Body()]=answers.POKEMON_ESCAPE_CHANCE
     ):
+    # Attempt to catch a wild pokemon.
 
     # Exit if no pokeball was used.
     if not items or len([x for x in items if "Ball" in x.name]) == 0:
@@ -95,7 +96,7 @@ def put_pokemon_encounter_id(
     if (die + modifiers) >= pokemon.base.catch_rate:
         print("Caught!")
         try:
-            poke_builder.catch_pokemon(pokemon.id, owner=username)
+            poke_builder.modify_pokemon(pokemon.id, payload={"owner": username})
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Failed saving pokemon to pokedex. {e}")
 
@@ -164,7 +165,7 @@ def put_pokemon_evolve(
         # Choose the shiny one.
         if each.sprite.shiny:
             chosen = each
-    pokemon = poke_builder.evolve(chosen if chosen else staged[-1]) # Evolve chosen OR last input.
+    pokemon = poke_builder.evolve(chosen if chosen else staged[0]) # Evolve chosen OR first pokemon.
 
     # Release evolved pokemon.
     released = []
@@ -173,3 +174,39 @@ def put_pokemon_evolve(
         released.append(each.id)
 
     return pokemon
+
+@router.post("/upgrade", tags=["pokemon", "upgrade"])
+def post_pokemon_upgrade(
+        username: int,
+        pokemon_id: Annotated[int, Body()],
+        items: list[ItemModel]=None,
+    ):
+    
+    # Exit if no item was used.
+    if not items:
+        raise HTTPException(status_code=400, detail="An item must be used to attempt to upgrade a pokemon.")
+    
+    # Encounter a specific already created Pokemon
+    try:
+        pokemon: PokemonModel = poke_builder.get_pokemon(pokemon_id)
+    except requests.HTTPError as e:
+        raise HTTPException(status_code=400, detail=f"Unable to locate pokemon: {e}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Pokemon was lost to the void: {e}")
+    
+    # Check valid Pokemon state. And valid item in payload.
+    if pokemon.owner != username:
+        raise HTTPException(status_code=400, detail="Pokemon does not belong to correct owner catalog.")
+
+    for item in items:
+        if item.name == "X Speed":
+            poke_builder.modify_pokemon(pokemon_id, payload={"speed": [x.value for x in pokemon.stats if x.name == "speed"][0] + 1})
+        elif item.name == "HP Up":
+            poke_builder.modify_pokemon(pokemon_id, payload={"hp": [x.value for x in pokemon.stats if x.name == "hp"][0] + 1})
+        elif item.name == "TM Machine":
+            kept_move = random.choice(pokemon.moves)
+            new_moves = poke_builder._get_valid_moves(pokemon.base)
+
+            poke_builder.modify_pokemon(pokemon_id, payload={"moves": [kept_move.id, random.choice(new_moves).id]})
+        else:
+            pass

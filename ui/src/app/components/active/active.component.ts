@@ -43,19 +43,22 @@ export class ActiveComponent implements OnInit{
     }
 
     chooseNewItem() {
-        this.items = this.trainer.items;
+        this.items = [];
+        this.trainer.items.forEach((item) => {
+            if (item.text.includes("Held Item:")){
+                this.items.push(item);
+            }
+        });
         this.choosingItemStatus = true;
     }
 
     holdItem(item: PokeItemsTemplate) {
         this.team.active.item = item;
-        // this.trainer.deleteItem(item.id); Do not delete item after use.
         this.exitItemSelection();
     }
 
     dropActiveHeldItem() {
         if (this.team.active.item) {
-            alert(`Dropping item ${this.team.active.item.name}`);
             this.team.active.item = null;
         } else {
             alert("Nothing to drop.");

@@ -21,10 +21,11 @@ export class EncounterComponent implements OnInit{
     public pokemon: PokemonTemplate;
     public showPokemon = false;
     public statBlock = new Map<string, number>;
-    public itemList = new Map<string, {name: string, count: number, text: string, item: PokeItemsTemplate}>; 
+    public itemList = new Map<string, {name: string, count: number, text: string, item: PokeItemsTemplate}>;
     public imgLoc: string;
     interval: any;
 
+    public inCollection = false;
     public encounterView = false;
     public encounterRetry = false;
     public encounterMsg: string;
@@ -40,9 +41,17 @@ export class EncounterComponent implements OnInit{
             await this.getInventory();
         }
 
+        this.inCollection = false;
         const encounterTier = this.legendary ? 4 : this.trainer.getCurrentTier();
+
         await this.serverService.encounterRandomPokemon(this.trainer.id, encounterTier, this.encounterItems, "")
             .then((res) => {
+                this.trainer.pokemon.forEach( (pkmn) => {
+                    if (res.base.dex_id == pkmn.base.dex_id){
+                        this.inCollection = true;
+                    }
+                });
+
                 this.pokemon = res;
                 this.pokemon.stats.forEach((stat) => {
                     if (stat.name == "hp") {

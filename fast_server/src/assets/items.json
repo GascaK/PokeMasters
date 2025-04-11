@@ -1,28 +1,16 @@
 {
     "items": [
         {
-            "name": "Master Ball",
-            "cost": 12350,
-            "text": "Automatically catch the next Pokemon encountered.",
-            "tier": 3
-        },
-        {
-            "name": "Great Ball",
-            "cost": 450,
-            "text": "Add +1 to your next attempt at catching a wild Pokemon.",
-            "tier": 2
-        },
-        {
             "name": "Poke Ball",
             "cost": 300,
             "text": "Attempt at catching a wild Pokemon.",
             "tier": 1
         },
         {
-            "name": "Joker's Ball",
-            "cost": 650,
-            "text": "Possibly add +5 to your next attempt at catching a Pokemon. Possibly subtract -5 from your attempt at catching a Pokemon.",
-            "tier": 2
+            "name": "Gold Nugget",
+            "cost": 300,
+            "text": "Sell for $300.",
+            "tier": 1
         },
         {
             "name": "Potion",
@@ -31,10 +19,16 @@
             "tier": 1
         },
         {
-            "name": "Max Potion",
-            "cost": 700,
-            "text": "Heal +10 HP from your active Pokemon.",
-            "tier": 2
+            "name": "Star Piece",
+            "cost": 350,
+            "text": "Sell for $350",
+            "tier": 1
+        },
+        {
+            "name": "Trick Room",
+            "cost": 450,
+            "text": "Held Item: The slower initiative value goes first.",
+            "tier": 1
         },
         {
             "name": "Soda Water",
@@ -49,100 +43,22 @@
             "tier": 1
         },
         {
-            "name": "Max Revive",
-            "cost": 950,
-            "text": "Revive one KO'ed Pokemon to full HP.",
-            "tier": 2
-        },
-        {
-            "name": "Gold Nugget",
-            "cost": 300,
-            "text": "Sell for $300.",
+            "name": "Speed Scarf",
+            "cost": 550,
+            "text": "Held Item: Add +2 to your Active Pokemon's speed stat.",
             "tier": 1
         },
         {
-            "name": "Star Piece",
-            "cost": 350,
-            "text": "Sell for $350",
+            "name": "Pokemon Doll",
+            "cost": 550,
+            "text": "If you would be chosen for another trainers Battle partner, instead reroll the die one time.",
             "tier": 1
-        },
-        {
-            "name": "Silver Leaf",
-            "cost": 500,
-            "text": "Sell for $500",
-            "tier": 2
-        },
-        {
-            "name": "Scarf Band",
-            "cost": 650,
-            "text": "Held Item: Increase the Max HP of your active Pokemon by 3.",
-            "tier": 1
-        },
-        {
-            "name": "Citrus Berry",
-            "cost": 950,
-            "text": "Held Item: If this Pokemon's HP drops below Half HP heal 1d8. Once per battle.",
-            "tier": 3
         },
         {
             "name": "Choice Berry",
-            "cost": 1250,
-            "text": "Held Item: This Atk also heals this Pokemon for 1d4-1 HP.",
-            "tier": 3
-        },
-        {
-            "name": "Rocky Helmet",
-            "cost": 950,
-            "text": "Held Item: When this Pokemon takes damage, your Opponents Pokemon takes 2 damage.",
-            "tier": 2
-        },
-        {
-            "name": "Leftovers",
-            "cost": 575,
-            "text": "Held Item: At the end of your turn, heal your active Pokemon by 2 HP.",
+            "cost": 250,
+            "text": "Heal your active pokemon for 1d4-1 HP.",
             "tier": 1
-        },
-        {
-            "name": "Boxing Gloves",
-            "cost": 400,
-            "text": "Held Item: Increase the DMG of your active Pokemon attacks by +1.",
-            "tier": 1
-        },
-        {
-            "name": "Winners Debt",
-            "cost": 600,
-            "text": "The next trainer battle you win, get double the cash rewards.",
-            "tier": 1
-        },
-        {
-            "name": "Looker Ticket",
-            "cost": 500,
-            "text": "Challenge any trainer to a battle instead of having your turn.",
-            "tier": 1
-        },
-        {
-            "name": "Ultra Ball",
-            "cost": 550,
-            "text": "Add +3 to your next attempt at catching a wild Pokemon.",
-            "tier": 3
-        },
-        {
-            "name": "Acro Bike",
-            "cost": 300,
-            "text": "Your next movement die is now a d8.",
-            "tier": 4
-        },
-        {
-            "name": "Flat Tire",
-            "cost": 300,
-            "text": "Choose an opponent. Their next movement die is a d4.",
-            "tier": 2
-        },
-        {
-            "name": "HM02: Fly",
-            "cost": 5650,
-            "text": "Fly to Safron City.",
-            "tier": 3
         },
         {
             "name": "Weakness Policy",
@@ -151,15 +67,57 @@
             "tier": 1
         },
         {
-            "name": "Trainer Repel",
-            "cost": 750,
-            "text": "Ignore the next Battle spot you land on.",
-            "tier": 3
-        },
-        {
             "name": "Pokemon Fan Club",
             "cost": 350,
             "text": "Encounter a Wild Pokemon instead of having your turn.",
+            "tier": 1
+        },
+        {
+            "name": "Acro Bike",
+            "cost": 500,
+            "text": "Your next movement die is now a d8.",
+            "tier": 2
+        },
+        {
+            "name": "Great Ball",
+            "cost": 450,
+            "text": "Add +1 to your next attempt at catching a wild Pokemon.",
+            "tier": 2
+        },
+        {
+            "name": "Heavy Ball",
+            "cost": 450,
+            "text": "Add +3 to your next attempt at catching a wild Pokemon with a speed value in the negatives.",
+            "tier": 2
+        },
+        {
+            "name": "Quick Ball",
+            "cost": 450,
+            "text": "Add +3 to your next attempt at catching a wild Pokemon with a speed value greater than 3.",
+            "tier": 2
+        },
+        {
+            "name": "Heal Ball",
+            "cost": 450,
+            "text": "Add +3 to your next attempt at catching a wild Pokemon with an HP stat of 15 or higher.",
+            "tier": 2
+        },
+        {
+            "name": "Joker's Ball",
+            "cost": 650,
+            "text": "Possibly add +5 to your next attempt at catching a Pokemon. Possibly subtract -5 from your attempt at catching a Pokemon.",
+            "tier": 2
+        },
+        {
+            "name": "Max Potion",
+            "cost": 700,
+            "text": "Heal +10 HP from your active Pokemon.",
+            "tier": 2
+        },
+        {
+            "name": "Flat Tire",
+            "cost": 300,
+            "text": "Choose an opponent. Their next movement die is a d4.",
             "tier": 1
         },
         {
@@ -175,16 +133,58 @@
             "tier": 2
         },
         {
+            "name": "Max Revive",
+            "cost": 950,
+            "text": "Revive one KO'ed Pokemon to full HP.",
+            "tier": 2
+        },
+        {
+            "name": "Quick Claw",
+            "cost": 800,
+            "text": "Held Item: Add +3 to your Active Pokemon's speed stat.",
+            "tier": 2
+        },
+        {
+            "name": "Focus Sash",
+            "cost": 900,
+            "text": "Held Item: If it has full HP, the holder will endure one potential KO attack, leaving 1 HP.",
+            "tier": 2
+        },
+        {
+            "name": "X Speed",
+            "cost": 1200,
+            "text": "Permanently increase the speed of your Active Pokemon by 1.",
+            "tier": 2
+        },
+        {
             "name": "Trecking Shoes",
             "cost": 385,
             "text": "You have advantage on your next movement roll.",
             "tier": 3
         },
         {
-            "name": "Bill's Helping Hand",
+            "name": "Master Ball",
+            "cost": 12350,
+            "text": "Automatically catch the next Pokemon encountered.",
+            "tier": 3
+        },
+        {
+            "name": "Trainer Repel",
+            "cost": 750,
+            "text": "Ignore the next Battle spot you land on.",
+            "tier": 3
+        },
+        {
+            "name": "Ultra Ball",
+            "cost": 650,
+            "text": "Add +2 to your next attempt at catching a wild Pokemon.",
+            "tier": 3
+        },
+        {
+            "name": "Citrus Berry",
             "cost": 950,
-            "text": "During your next GYM battle only, subtract -3 DMG from a GYM Leaders active pokemon's attacks.",
-            "tier": 2
+            "text": "Held Item: If this Pokemon's HP drops below Half HP heal 1d8. Once per battle.",
+            "tier": 3
         },
         {
             "name": "Red's Parting Gift",
@@ -193,52 +193,10 @@
             "tier": 3
         },
         {
-            "name": "Pokemon Doll",
-            "cost": 550,
-            "text": "If you would be chosen for another trainers Battle partner, instead reroll the die one time.",
-            "tier": 1
-        },
-        {
             "name": "Pokemon Incense",
             "cost": 985,
             "text": "Choose a Pokemon Type. Your next WildPokemon roll will be of that type.",
             "tier": 3
-        },
-        {
-            "name": "Golden Hammer",
-            "cost": 230,
-            "text": "Choose an opponent. Their active pokemon drops any item held in their hands.",
-            "tier": 1
-        },
-        {
-            "name": "Heavy Ball",
-            "cost": 450,
-            "text": "Add +3 to your next attempt at catching a wild Pokemon with a speed value in the negatives.",
-            "tier": 2
-        },
-        {
-            "name": "Quick Ball",
-            "cost": 450,
-            "text": "Add +3 to your next attempt at catching a wild Pokemon with a speed value greater than 3.",
-            "tier": 2
-        },
-        {
-            "name": "Repeat Ball",
-            "cost": 1050,
-            "text": "Add +2 to your next attempt at catching a wild Pokemon.",
-            "tier": 2
-        },
-        {
-            "name": "Heal Ball",
-            "cost": 450,
-            "text": "Add +3 to your next attempt at catching a wild Pokemon with an HP stat of 15 or higher.",
-            "tier": 2
-        },
-        {
-            "name": "Level Ball",
-            "cost": 950,
-            "text": "Add +4 to your next attempt at catching a wild Pokemon of tier 2 or greater.",
-            "tier": 2
         },
         {
             "name": "Black Sludge",
@@ -247,22 +205,22 @@
             "tier": 3
         },
         {
-            "name": "Speed Scarf",
-            "cost": 350,
-            "text": "Held Item: Add +2 to your Active Pokemon's speed stat.",
-            "tier": 1
+            "name": "Odd Pear",
+            "cost": 750,
+            "text": "Held Item: Your Top Atk does +2 DMG while your Bottom Atk does -5 DMG.",
+            "tier": 3
         },
         {
-            "name": "Quick Claw",
-            "cost": 600,
-            "text": "Held Item: Add +3 to your Active Pokemon's speed stat.",
-            "tier": 2
+            "name": "Odd Banana",
+            "cost": 750,
+            "text": "Held Item: Your Bottom Atk does +2 DMG while your Top Atk does -5 DMG",
+            "tier": 3
         },
         {
-            "name": "Adamant Crystal",
-            "cost": 850,
-            "text": "Held Item: If your Active Pokemon goes first, your first attack does +3 DMG.",
-            "tier": 2
+            "name": "Bronze Cup",
+            "cost": 1250,
+            "text": "Held Item: Your Active Pokemon's HP stat is -5, all your Atk's do +2 DMG.",
+            "tier": 3
         },
         {
             "name": "Heartgold Crystal",
@@ -271,81 +229,21 @@
             "tier": 3
         },
         {
-            "name": "Soulsilver Crystal",
-            "cost": 1550,
-            "text": "Held Item: If your Opponents Pokemon goes first, their first attack does 1/2 DMG.",
-            "tier": 2
-        },
-        {
-            "name": "Trick Room",
-            "cost": 450,
-            "text": "Held Item: The slower initiative value goes first.",
-            "tier": 1
-        },
-        {
-            "name": "Banana",
-            "cost": 300,
-            "text": "Held Item: Your Top Atk does +1 DMG while your Bottom Atk does -2 DMG.",
-            "tier": 2
-        },
-        {
-            "name": "Ruby Banana",
-            "cost": 850,
-            "text": "Held Item: Your Top Atk does +3 DMG while your Bottom Atk does -5 DMG.",
-            "tier": 3
-        },
-        {
-            "name": "Odd Pear",
-            "cost": 450,
-            "text": "Held Item: Your Bottom Atk does +1 DMG while your Top Atk does -3 DMG.",
-            "tier": 2
-        },
-        {
-            "name": "Odd Saphire Pear",
-            "cost": 600,
-            "text": "Held Item: Your Top Atk does +2 DMG while your Bottom Atk does -3 DMG.",
-            "tier": 3
-        },
-        {
-            "name": "Bronze Cup",
-            "cost": 2250,
-            "text": "Held Item: Your Active Pokemon's HP stat is -5, all your Atk's do +2 DMG.",
-            "tier": 3
-        },
-        {
-            "name": "Antidote",
-            "cost": 500,
-            "text": "Heal all your Active Pokemon's status conditions.",
-            "tier": 1
-        },
-        {
-            "name": "Clear Amulet",
-            "cost": 1080,
-            "text": "Held Item: When you would land on an Item spot instead you can encounter a pokemon.",
-            "tier": 2
-        },
-        {
-            "name": "Choice Specs",
-            "cost": 1050,
-            "text": "Held Item: When you would land on a Wild Encounter spot instead you can find a random item.",
-            "tier": 2
-        },
-        {
             "name": "Shiny Charm",
             "cost": 2000,
             "text": "Quadruple your shiny encounter rate.",
             "tier": 2
         },
         {
-            "name": "Powerless",
-            "cost": 500,
-            "text": "Held Item: This Pokemon's attacks have no special conditions.",
-            "tier": 1
+            "name": "TM Machine",
+            "cost": 2500,
+            "text": "Randomly change 1 of your Active Pokemon's attacks.",
+            "tier": 2
         },
         {
-            "name": "Focus Sash",
-            "cost": 900,
-            "text": "Held Item: If it has full HP, the holder will endure one potential KO attack, leaving 1 HP.",
+            "name": "Mystic Crystal",
+            "cost": 1200,
+            "text": "Held Item: Increases the damage of your attacks by +3 when your Active Pokemon is at full HP.",
             "tier": 2
         }
     ]

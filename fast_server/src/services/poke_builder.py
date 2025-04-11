@@ -1,4 +1,5 @@
 import random
+import math
 import requests
 import json
 
@@ -8,9 +9,7 @@ from .base_loader import BaseLoader
 
 
 class PokemonBuilder():
-    MIN_HP = 4
     MIN_MOVES = 2
-    LEGEND_MIN_HP = 20
     ITEM_CHANCE = 1/5
     SHINY_CHANCE = 1/2048
     SHINY_CHARM_CHANCE = SHINY_CHANCE * 4
@@ -34,6 +33,7 @@ class PokemonBuilder():
         self.item_db = self._loader.POKECENTER
         self.spatk_db = self._loader.SP_ATK
 
+
     def random_encounter(self, dex_id=None, tier=1, _type: str=None, items: list[ItemModel]=[]) -> PokemonModel:
         print("Creating Pokemon...")
         print(items)
@@ -55,28 +55,31 @@ class PokemonBuilder():
         # Randomizers
 
         # HP
-        mod = random.random()*self.MOD_MULTIPLYER
-        hp = int(base.hp*mod)
-        
-        # Set Minimum hp.
-        minimum = self.LEGEND_MIN_HP if base.tier == 4 else self.MIN_HP
-        hp = minimum if hp < minimum else hp
+        match base.tier:
+            case 4:
+                hp_min = 20
+            case 3:
+                hp_min = 12
+            case 2:
+                hp_min = 8
+            case 1:
+                hp_min = 4
+            case _:
+                raise Exception(msg="No valid tier found.")
 
+        hp = max(hp_min, base.hp + random.randint(-10, 10))
         hp_mod = hp-base.hp
 
         # Speed
-        mod = random.random()*self.MOD_MULTIPLYER
-        speed = int(base.speed*mod)
+        speed = base.speed + random.randint(-3, 3)
         speed_mod = speed-base.speed
 
         # Special
-        mod = random.random()*self.MOD_MULTIPLYER
-        special = int(base.special*mod)
+        special = random.randint(0, base.special)
         special_mod = special-base.special
 
         # Physical
-        mod = random.random()*self.MOD_MULTIPLYER
-        physical = int(base.physical*mod)
+        physical = random.randint(0, base.physical)
         physical_mod = physical-base.physical
 
         # Create Stats
@@ -138,7 +141,7 @@ class PokemonBuilder():
 
         print(f"Evolving {pokemon.base.name} into #{pokemon.base.evolutions}")
         pid = random.choice(pokemon.base.evolutions)
-        temp = self.poke_db.get_by_dex_id(pid)
+        temp: PokemonBaseModel = self.poke_db.get_by_dex_id(pid)
 
         for stat in pokemon.stats:
             if stat.name == "hp":
@@ -187,7 +190,7 @@ class PokemonBuilder():
             }
         ]
 
-        moves = self._get_valid_moves(pokemon.base)
+        moves = self._get_valid_moves(temp)
 
         p = PokemonModel(base=temp, owner=pokemon.owner, stats=stats, sprite=sprite, moves=moves, items=pokemon.items)
         return self.save_pokemon(p, owner=pokemon.owner)
@@ -286,10 +289,10 @@ class PokemonBuilder():
                 special = None
 
                 # Add random special
-                if random.random()*1000 <= base.special:
+                if random.randint(1, 400) <= base.special:
                     special: SpecialModel = random.choice(self.spatk_db)
                 # Add random physical
-                if random.random()*1000 <= base.physical:
+                if random.randint(1, 400) <= base.physical:
                     hit = f"{temp_move.hit}+{base.tier}"
 
                 m = MoveModel(
@@ -324,14 +327,14 @@ class PokemonBuilder():
         return {
             "Poke Ball": 0,
             "Great Ball": 1,
-            "Ultra Ball": 3,
+            "Ultra Ball": 2,
             "Master Ball": 99,
             "Repeat Ball": (escape / .15) - 1,
             "Joker Ball": random.choice([5, -5]),
             "Heavy Ball": 3 if speed < 0 else 0,
             "Quick Ball": 3 if speed >= 3 else 0,
-            "Heal Ball":  4 if hp >= 15 else 0,
-            "Level Ball": 4 if pokemon.base.tier >= 2 else 0
+            "Heal Ball":  3 if hp >= 15 else 0,
+            "Level Ball": 3 if pokemon.base.tier >= 2 else 0
         }.get(item.name, 0)
 
     def save_pokemon(self, pokemon: PokemonModel, owner: int=0) -> PokemonModel:
@@ -357,11 +360,11 @@ class PokemonBuilder():
         except Exception as e:
             print(e)
             raise e
-    
-    def catch_pokemon(self, id: int, owner: int) -> PokemonModel:
+
+    def modify_pokemon(self, id: int, payload: dict = {}) -> PokemonModel:
         try:
             r = requests.patch(f"{self.db_uri}/pokemon/{id}",
-                               json=json.dumps({"owner": owner}),
+                               json=json.dumps(payload),
                                headers=self.headers,
                                timeout=30)
             r.raise_for_status()

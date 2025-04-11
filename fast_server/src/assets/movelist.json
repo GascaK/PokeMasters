@@ -391,7 +391,6 @@
             }
         ]
     },
-
     "tier_2": {
         "water": [
             {
@@ -785,7 +784,6 @@
         ]
 
     },
-
     "tier_3": {
         "water": [
             {
@@ -1178,7 +1176,6 @@
             }
         ]
     },
-
     "tier_4": {
         "flying": [
             {
@@ -1222,7 +1219,7 @@
             {
                 "id": 187,
                 "name": "max hailstorm",
-                "hit": "10",
+                "hit": "8",
                 "special": "primed"
             },
             {
@@ -1248,7 +1245,7 @@
             {
                 "id": 191,
                 "name": "gigavolt havoc",
-                "hit": "10",
+                "hit": "8",
                 "special": "primed"
             },
             {
@@ -1274,7 +1271,7 @@
             {
                 "id": 195,
                 "name": "fusion flare",
-                "hit": "10",
+                "hit": "8",
                 "special": "perish song"
             },
             {
@@ -1300,7 +1297,7 @@
             {
                 "id": 199,
                 "name": "gravity",
-                "hit": "10",
+                "hit": "8",
                 "special": "mimic"
             },
             {

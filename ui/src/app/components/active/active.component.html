@@ -1,111 +1,177 @@
-<div *ngIf="choosingItemStatus">
-    <div class="row">
-        <h3>Items:</h3>
+<!-- Item Selection View -->
+<div *ngIf="choosingItemStatus" class="item-selection">
+  <div class="row">
+    <h3>Items:</h3>
+  </div>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Text</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Buy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <th>{{item.name}}</th>
+        <td>{{item.text}}</td>
+        <td>{{item.cost}}</td>
+        <td><button class="btn btn-primary" (click)="holdItem(item)">Select</button></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="action-buttons">
+    <div class="mb-2">
+      <button class="btn btn-danger col-12" (click)="dropActiveHeldItem()">Drop Held Item</button>
     </div>
     <div>
-        <table class="table table-striped">
-            <thead>
-                <th scope="col">Name</th>
-                <th scope="col">Text</th>
-                <th scope="col">Cost</th>
-                <th scope="col">Buy</th>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of items">
-                    <th>{{item.name}}</th>
-                    <td>{{item.text}}</td>
-                    <td>{{item.cost}}</td>
-                    <td><button class="btn btn-primary" (click)="holdItem(item)">Select</button></td>
-                </tr>
-            </tbody>
-        </table>
-        <div style="padding-bottom:3px;">
-            <button class="btn btn-danger col-12" (click)="dropActiveHeldItem()">Drop Held Item</button>
-        </div>
-        <div>
-            <button class="btn btn-primary col-12" (click)="exitItemSelection()">Exit</button>
-        </div>
+      <button class="btn btn-primary col-12" (click)="exitItemSelection()">Exit</button>
     </div>
+  </div>
 </div>
-<div *ngIf="!team.active.pokemon && !choosingItemStatus">
-  <h5>Load a card from your pokedex.</h5>
-</div>
-<div *ngIf="team.active.pokemon && !choosingItemStatus" class="card" style="background-color:rgb(255, 203, 5)">
-    <div class="card-body">
-        <div class="card-title">
-            <div style="clear:both">
-                <h3 style="display: inline">{{team.active.pokemon!.base.name | uppercase}}</h3>
-                <i class="fa-regular fa-star" *ngIf="team.active.pokemon!.sprite.shiny"></i>
-                <i class="fa-solid fa-bolt" style="float:right"></i>
-                <h2 style="display: inline; float:right">{{team.active.speed}}</h2>
-            </div>
+
+<!-- Active Pokemon Card View -->
+<div *ngIf="team.active.pokemon && !choosingItemStatus" class="card pokemon-card">
+  <div class="card-body p-0">
+    <!-- Card Frame -->
+    <div class="card-frame">
+      <!-- Pokemon Header with Energy/Type Color Banner -->
+      <div class="card-banner" [ngClass]="team.active.pokemon.base.types[0]">
+        <div class="d-flex justify-content-between align-items-center px-3 py-2">
+          <div class="pokemon-name">
+            <h3 class="d-inline">{{team.active.pokemon.base.name | uppercase}}</h3>
+            <i *ngIf="team.active.pokemon.sprite.shiny" class="fa-regular fa-star ms-2 shiny-star"></i>
+          </div>
+          <div class="speed-indicator">
+            <h4 class="d-inline me-1">{{team.active.speed}}</h4>
+            <i class="fa-solid fa-bolt"></i>
+          </div>
         </div>
-        <div><img src="{{team.active.pokemon!.sprite.sprite_url}}" fetchpriority="high" alt="PokeImage" style="width: 100%; z-index: 0;"></div>
-        <div style="background-color:lightcyan;">
-          <div class="{{team.active.pokemon!.moves[0].move_type}}">
-            <div class="row">
-              <span class="col" style="font-size:large;">{{team.active.pokemon!.moves[0].name | titlecase}}:</span>
-              <span class="col" style="font-weight:500;">d {{team.active.pokemon!.moves[0].hit}}</span>
+      </div>
+      
+      <!-- Pokemon Image with Full Size Display -->
+      <div class="pokemon-image-container">
+        <div class="pokemon-image-frame">
+          <img [src]="team.active.pokemon.sprite.sprite_url" fetchpriority="high" alt="PokeImage" class="pokemon-sprite">
+        </div>
+      </div>
+      
+      <!-- Type Icons -->
+      <div class="type-badges">
+        <span 
+          *ngFor="let type of team.active.pokemon.base.types" 
+          [ngClass]="type" 
+          class="type-badge"
+        >
+          {{type}}
+        </span>
+      </div>
+      
+      <!-- Pokemon Moves Section with Improved Text -->
+      <div class="moves-section">
+        <!-- Move 1 -->
+        <div [ngClass]="['move-container', team.active.pokemon.moves[0].move_type]">
+          <div class="move-header">
+            <span class="move-name">{{team.active.pokemon.moves[0].name | titlecase}}</span>
+            <span class="move-damage">d{{team.active.pokemon.moves[0].hit}}</span>
+          </div>
+          <div class="move-details">
+            <div *ngIf="team.active.pokemon.moves[0].special?.name" class="move-special-name">
+              {{team.active.pokemon.moves[0].special?.name}}
             </div>
-            <div class="row">
-                <span class="col" style="float:right;font-weight:bold;clear:left;">{{team.active.pokemon.moves[0].special?.name}}</span>
-            </div>
-            <div class="row">
-                <span class="col" style="float:right;font-weight:bold;clear:left;">{{team.active.pokemon.moves[0].special?.text}}</span>
+            <div *ngIf="team.active.pokemon.moves[0].special?.text" class="move-special-text">
+              {{team.active.pokemon.moves[0].special?.text}}
             </div>
           </div>
-          <div class="{{team.active.pokemon!.moves[1].move_type}}">
-            <div class="row">
-              <span class="col" style="font-size:large;">{{team.active.pokemon!.moves[1].name | titlecase}}:</span>
-              <span class="col" style="font-weight:500;">d {{team.active.pokemon!.moves[1].hit}}</span>
+        </div>
+        
+        <!-- Move 2 -->
+        <div [ngClass]="['move-container', team.active.pokemon.moves[1].move_type]">
+          <div class="move-header">
+            <span class="move-name">{{team.active.pokemon.moves[1].name | titlecase}}</span>
+            <span class="move-damage">d{{team.active.pokemon.moves[1].hit}}</span>
+          </div>
+          <div class="move-details">
+            <div *ngIf="team.active.pokemon.moves[1].special?.name" class="move-special-name">
+              {{team.active.pokemon.moves[1].special?.name}}
             </div>
-            <div class="row">
-              <span class="col" style="float:right;font-weight:bold;clear:left;">{{team.active.pokemon.moves[1].special?.name}}</span>
+            <div *ngIf="team.active.pokemon.moves[1].special?.text" class="move-special-text">
+              {{team.active.pokemon.moves[1].special?.text}}
+            </div>
           </div>
-          <div class="row">
-              <span class="col" style="float:right;font-weight:bold;clear:left;">{{team.active.pokemon.moves[1].special?.text}}</span>
-          </div>
-          </div>
-          <div class="row" style="justify-content:center;">
-            <button class="btn btn-primary col" (click)="team.active.currentHP=team.active.currentHP-1">-</button>
-              <h2 class="col" style="text-align:right;">{{team.active.currentHP}}</h2>
-              /
-              <h2 class="col" *ngIf="team.active.currentHP>=team.active.maxHP">
-                <button class="btn btn-success" (click)="team.active.currentHP=team.active.maxHP">{{team.active.maxHP}}</button>
-              </h2>
-              <h2 class="col" *ngIf="team.active.currentHP<team.active.maxHP && team.active.currentHP>0">
-                <button class="btn btn-warning" (click)="team.active.currentHP=team.active.maxHP">{{team.active.maxHP}}</button>
-              </h2>
-              <h2 class="col" *ngIf="team.active.currentHP<=0">
-                <button class="btn btn-danger" (click)="team.active.currentHP=team.active.maxHP">{{team.active.maxHP}}</button>
-              </h2>
-            <button class="btn btn-primary col" (click)="team.active.currentHP=team.active.currentHP+1">+</button>
-          </div>
-          <div class="row">
-            <h3 style="padding:3px;text-align:center;">Held Item</h3>
-            <button *ngIf="team.active.item" class="btn btn-success col-12" (click)="chooseNewItem()">
-                <span style="text-align:left;font-weight:bold;">{{team.active.item.name}}</span>
-                <span style="padding-left:5px;text-align:right;">{{team.active.item.text}}</span>
+        </div>
+      </div>
+      
+      <!-- HP Controls with Card-Style Design -->
+      <div class="hp-section">
+        <div class="hp-label">HP</div>
+        <div class="hp-controls">
+          <button class="btn btn-outline-danger hp-btn" (click)="team.active.currentHP=team.active.currentHP-1">-</button>
+          <div class="hp-display">
+            <span class="current-hp" [ngClass]="{
+              'text-success': team.active.currentHP >= team.active.maxHP,
+              'text-warning': team.active.currentHP < team.active.maxHP && team.active.currentHP > 0,
+              'text-danger': team.active.currentHP <= 0
+            }">{{team.active.currentHP}}</span>
+            <span class="hp-separator">/</span>
+            <button 
+              [ngClass]="{
+                'btn-success': team.active.currentHP >= team.active.maxHP,
+                'btn-warning': team.active.currentHP < team.active.maxHP && team.active.currentHP > 0,
+                'btn-danger': team.active.currentHP <= 0
+              }"
+              class="btn max-hp-btn" 
+              (click)="team.active.currentHP=team.active.maxHP"
+            >
+              {{team.active.maxHP}}
             </button>
-            <button *ngIf="!team.active.item" class="btn btn-secondary col-12" (click)="chooseNewItem()">
-                Held Item Empty
-            </button>
           </div>
+          <button class="btn btn-outline-success hp-btn" (click)="team.active.currentHP=team.active.currentHP+1">+</button>
         </div>
-        <div class="row">
-            <span class="{{type}} col" *ngFor="let type of team.active.pokemon!.base.types">{{type}}</span>
-        </div>
+      </div>
+      
+      <!-- Held Item Section with Card-Style Design -->
+      <div class="held-item-section">
+        <h5 class="held-item-label">Held Item</h5>
+        <button 
+          [ngClass]="team.active.item ? 'btn-item-filled' : 'btn-item-empty'" 
+          class="btn held-item-btn" 
+          (click)="chooseNewItem()"
+        >
+          <ng-container *ngIf="team.active.item; else emptyItem">
+            <span class="item-name">{{team.active.item.name}}</span>
+            <span class="item-text">{{team.active.item.text}}</span>
+          </ng-container>
+          <ng-template #emptyItem>
+            <span class="empty-item-text">No Item</span>
+          </ng-template>
+        </button>
+      </div>
     </div>
+  </div>
 </div>
-<div class="row" style="padding-top:10px">
-  <div class="col">
-      <button class="btn btn-primary col-12" (click)="setBenchOne()">
-        {{team.benchOne.pokemon?.base?.name || "Empty Slot"}}
+
+<!-- Bench Pokemon Selector - Styled as "Pokeballs" -->
+<div class="bench-selector">
+  <div class="row g-2">
+    <div class="col-6">
+      <button class="btn pokeball-btn" [ngClass]="{'has-pokemon': team.benchOne.pokemon}" (click)="setBenchOne()">
+        <div class="pokeball-icon">
+          <i class="fa-solid fa-circle"></i>
+        </div>
+        <span class="bench-pokemon-name">{{team.benchOne.pokemon?.base?.name || "Empty Slot"}}</span>
       </button>
     </div>
-    <div class="col">
-      <button class="btn btn-primary col-12" (click)="setBenchTwo()">
-        {{team.benchTwo.pokemon?.base?.name || "Empty Slot"}}
+    <div class="col-6">
+      <button class="btn pokeball-btn" [ngClass]="{'has-pokemon': team.benchTwo.pokemon}" (click)="setBenchTwo()">
+        <div class="pokeball-icon">
+          <i class="fa-solid fa-circle"></i>
+        </div>
+        <span class="bench-pokemon-name">{{team.benchTwo.pokemon?.base?.name || "Empty Slot"}}</span>
       </button>
     </div>
+  </div>
 </div>
