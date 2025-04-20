@@ -18,6 +18,7 @@ export class BackpackComponent implements OnInit {
   @Input() menuService: MenuService;
   
   public trainer: PokemonMaster;
+  public activeTab: 'held' | 'ball' | 'other' = 'held';
   public itemList: Map<string, {id: number, name: string, count: number, text: string, item: PokeItemsTemplate}>;
 
   async ngOnInit(): Promise<void> {
@@ -81,6 +82,29 @@ export class BackpackComponent implements OnInit {
         console.error(err);
       }
     }
+  }
+
+  getItemsByCategory(category: 'held' | 'ball' | 'other'): Array<[string, {id: number, name: string, count: number, text: string, item: PokeItemsTemplate}]> {
+    // Create new array to store filtered items
+    const filteredItems: Array<[string, {id: number, name: string, count: number, text: string, item: PokeItemsTemplate}]> = [];
+    
+    // Convert Map to array of entries and filter
+    this.itemList.forEach((item, key) => {
+      const itemName = item.name.toLowerCase();
+      const itemText = item.text.toLowerCase();
+      
+      if (category === 'held' && (itemText.includes('held item'))) {
+        filteredItems.push([key, item]);
+      } else if (category === 'ball' && itemName.includes('ball')) {
+        filteredItems.push([key, item]);
+      } else if (category === 'other' && 
+                !itemText.includes('held') &&
+                !itemName.includes('ball')) {
+        filteredItems.push([key, item]);
+      }
+    });
+    
+    return filteredItems;
   }
 
   exitBackpack(): void {

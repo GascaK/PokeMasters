@@ -76,3 +76,43 @@
         white-space: nowrap;
     }
 }
+
+
+ /* Card styling improvements */
+ .card {
+    transition: transform 0.2s;
+    border-radius: 8px;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* Table improvements */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* Badge styling */
+.badge {
+    font-size: 85%;
+    font-weight: 500;
+    padding: 5px 8px;
+    border-radius: 6px;
+}
+
+/* Button hover effect */
+.btn-primary {
+    transition: all 0.2s;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+}
+
+/* Additional spacing for mobile */
+@media (max-width: 576px) {
+    .card-body {
+        padding: 12px;
+    }
+}

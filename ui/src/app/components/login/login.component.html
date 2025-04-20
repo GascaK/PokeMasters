@@ -1,36 +1,61 @@
-<div class="d-flex align-items-center justify-content-center vh-100">
-    <div class="text-center">
-        <img src="assets/imgs/pokemon_title_logo.jpg" alt="Pokemon Logo" class="img-fluid mb-4">
+<div class="login-container d-flex align-items-center justify-content-center vh-100 bg-gradient">
+    <div class="login-card shadow-lg rounded-4 p-4 text-center">
+        <!-- Logo with subtle animation -->
+        <div class="logo-container mb-4">
+            <img src="assets/imgs/pokemon_title_logo.jpg" alt="Pokemon Logo" class="img-fluid pokemon-logo">
+        </div>
 
-        <input 
-            [(ngModel)]="username" 
-            type="text" 
-            id="username" 
-            placeholder="Enter your username" 
-            class="form-control mb-3"
-        />
-
-        <ng-container *ngIf="!newPlayerMenu; else newPlayerTemplate">
-            <button id="submitBtn" class="btn btn-primary mb-2" (click)="login()">
-                Submit
-            </button>
-            <button id="newPlayerBtn" class="btn btn-secondary" (click)="newPlayer()">
-                New Player
-            </button>
-        </ng-container>
-
-        <ng-template #newPlayerTemplate>
-            <div *ngFor="let starter of starters" class="my-3">
-                <div>{{starter.base.name}}</div>
-                <img [src]="starter.sprite.sprite_url" alt="{{starter.base.name}} Image" class="starter-image img-fluid">
-                <button 
-                    id="chosenStarter" 
-                    class="btn btn-primary mt-2" 
-                    (click)="createPlayer(starter)"
-                >
-                    Choose
-                </button>
+        <!-- Login Form -->
+        <div class="login-form">
+            <div class="input-group mb-4">
+                <span class="input-group-text bg-transparent border-end-0">
+                    <i class="bi bi-person-fill text-primary"></i>
+                </span>
+                <input 
+                    [(ngModel)]="username" 
+                    type="text" 
+                    id="username" 
+                    placeholder="Enter your username" 
+                    class="form-control border-start-0 shadow-none"
+                    autocomplete="off">
             </div>
-        </ng-template>
+
+            <ng-container *ngIf="!newPlayerMenu; else newPlayerTemplate">
+                <div class="d-grid gap-3">
+                    <button id="submitBtn" class="btn btn-primary btn-lg btn-block ripple-effect" (click)="login()">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                    </button>
+                    <button id="newPlayerBtn" class="btn btn-outline-primary btn-lg btn-block ripple-effect" (click)="newPlayer()">
+                        <i class="bi bi-plus-circle me-2"></i>New Player
+                    </button>
+                </div>
+            </ng-container>
+
+            <ng-template #newPlayerTemplate>
+                <h4 class="text-center mb-4">Choose Your Starter</h4>
+                <div class="starter-selection row row-cols-1 row-cols-md-3 g-4">
+                    <div *ngFor="let starter of starters" class="col starter-card">
+                        <div class="card h-100 border-0 shadow-sm hover-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{starter.base.name}}</h5>
+                                <div class="starter-image-container mb-3">
+                                    <img [src]="starter.sprite.sprite_url" alt="{{starter.base.name}}" class="starter-image img-fluid">
+                                </div>
+                                <button 
+                                    id="chosenStarter" 
+                                    class="btn btn-primary w-100 ripple-effect" 
+                                    (click)="createPlayer(starter)"
+                                >
+                                    Choose {{starter.base.name}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-link mt-4" (click)="newPlayerMenu = false">
+                    <i class="bi bi-arrow-left me-2"></i>Back to Login
+                </button>
+            </ng-template>
+        </div>
     </div>
 </div>

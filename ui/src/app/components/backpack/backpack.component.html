@@ -1,33 +1,121 @@
-<div>
-    <div class="card">
+<div class="container">
+    <div class="card shadow-sm mb-3">
         <div class="card-body">
-            <div class="card-title" style="text-align:center">
+            <div class="card-title text-center mb-4">
                 <h3>Items</h3>
             </div>
-            <div *ngFor="let item of itemList | keyvalue">
-                <!-- Item Details Row -->
-                <div class="row" style="padding:3px; margin-bottom: 10px;">
-                    <div class="col">{{item.value.name}}</div>
-                    <div class="col">{{item.value.count}}</div>
-                    <div class="col">{{item.value.text}}</div>
+            
+            <!-- Tabs Navigation -->
+            <ul class="nav nav-tabs mb-3" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" [class.active]="activeTab === 'held'" (click)="activeTab = 'held'" href="javascript:void(0)">
+                        Held Items
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.active]="activeTab === 'ball'" (click)="activeTab = 'ball'" href="javascript:void(0)">
+                        Poké Balls
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.active]="activeTab === 'other'" (click)="activeTab = 'other'" href="javascript:void(0)">
+                        Other Items
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- Tabs Content -->
+            <div class="tab-content">
+                <!-- Held Items Tab -->
+                <div [hidden]="activeTab !== 'held'">
+                    <div *ngFor="let itemEntry of getItemsByCategory('held')" class="item-entry">
+                        <div class="card mb-3 border-0 bg-light">
+                            <div class="card-body p-3">
+                                <div class="row align-items-center mb-2">
+                                    <div class="col-4 col-md-3 fw-bold">{{itemEntry[1].name}}</div>
+                                    <div class="col-3 col-md-2">
+                                        <span class="badge bg-secondary">x{{itemEntry[1].count}}</span>
+                                    </div>
+                                    <div class="col-5 col-md-7 text-muted small">{{itemEntry[1].text}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button class="btn btn-primary btn-sm w-100" (click)="useItem(itemEntry[1].item)">Use</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn btn-outline-secondary btn-sm w-100" (click)="sellItem(itemEntry[1].id)">Sell</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="getItemsByCategory('held').length === 0" class="text-center py-4 text-muted">
+                        No held items in your inventory
+                    </div>
                 </div>
                 
-                <!-- Action Buttons Row -->
-                <div class="row" style="padding:3px;">
-                    <div class="col">
-                        <button class="btn btn-primary" (click)="useItem(item.value.item)">Use</button>
+                <!-- Pokeballs Tab -->
+                <div [hidden]="activeTab !== 'ball'">
+                    <div *ngFor="let itemEntry of getItemsByCategory('ball')" class="item-entry">
+                        <div class="card mb-3 border-0 bg-light">
+                            <div class="card-body p-3">
+                                <div class="row align-items-center mb-2">
+                                    <div class="col-4 col-md-3 fw-bold">{{itemEntry[1].name}}</div>
+                                    <div class="col-3 col-md-2">
+                                        <span class="badge bg-secondary">x{{itemEntry[1].count}}</span>
+                                    </div>
+                                    <div class="col-5 col-md-7 text-muted small">{{itemEntry[1].text}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button class="btn btn-primary btn-sm w-100" (click)="useItem(itemEntry[1].item)">Use</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn btn-outline-secondary btn-sm w-100" (click)="sellItem(itemEntry[1].id)">Sell</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col">
-                        <button class="btn btn-secondary" (click)="sellItem(item.value.id)">Sell</button>
+                    <div *ngIf="getItemsByCategory('ball').length === 0" class="text-center py-4 text-muted">
+                        No Poké Balls in your inventory
                     </div>
                 </div>
                 
-                <!-- Separator between items -->
-                <hr />
+                <!-- Other Items Tab -->
+                <div [hidden]="activeTab !== 'other'">
+                    <div *ngFor="let itemEntry of getItemsByCategory('other')" class="item-entry">
+                        <div class="card mb-3 border-0 bg-light">
+                            <div class="card-body p-3">
+                                <div class="row align-items-center mb-2">
+                                    <div class="col-4 col-md-3 fw-bold">{{itemEntry[1].name}}</div>
+                                    <div class="col-3 col-md-2">
+                                        <span class="badge bg-secondary">x{{itemEntry[1].count}}</span>
+                                    </div>
+                                    <div class="col-5 col-md-7 text-muted small">{{itemEntry[1].text}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button class="btn btn-primary btn-sm w-100" (click)="useItem(itemEntry[1].item)">Use</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn btn-outline-secondary btn-sm w-100" (click)="sellItem(itemEntry[1].id)">Sell</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="getItemsByCategory('other').length === 0" class="text-center py-4 text-muted">
+                        No other items in your inventory
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    
     <div class="row">
-        <button class="btn btn-danger col" (click)="exitBackpack()">Exit</button>
+        <div class="col-12">
+            <button class="btn btn-danger w-100" (click)="exitBackpack()">Exit</button>
+        </div>
     </div>
 </div>

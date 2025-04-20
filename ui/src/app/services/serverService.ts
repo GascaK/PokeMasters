@@ -1,12 +1,15 @@
-import axios, { Axios } from 'axios';
+import axios from 'axios';
 
 import { PokeItemsTemplate } from '../interfaces/pokeItems';
 import { Trainer } from '../interfaces/trainer';
 import { PokemonTemplate } from '../interfaces/pokemon';
+import { CONFIGS } from '../env';
+
 
 export class ServerService {
+    
     instance = axios.create({
-        baseURL: 'http://192.168.1.28:80/api/v1',
+        baseURL: `http://${CONFIGS.hostIP}/api/v1`,
         timeout: 10000,
         withCredentials: false,
         headers: {
