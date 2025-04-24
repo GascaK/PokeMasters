@@ -287,6 +287,42 @@
                 "name": "disarming voice",
                 "hit": "6"
             }
+        ],
+        "dark": [
+            {
+                "name": "bite",
+                "hit": "4"
+            },
+            {
+                "name": "snarl",
+                "hit": "4"
+            },
+            {
+                "name": "pursuit",
+                "hit": "4"
+            },
+            {
+                "name": "dark pulse",
+                "hit": "6"
+            }
+        ],
+        "steel": [
+            {
+                "name": "metal claw",
+                "hit": "4"
+            },
+            {
+                "name": "iron defense",
+                "hit": "4"
+            },
+            {
+                "name": "steel wing",
+                "hit": "4"
+            },
+            {
+                "name": "bullet punch",
+                "hit": "6"
+            }
         ]
     },
     "tier_2": {
@@ -575,6 +611,42 @@
             },
             {
                 "name": "play rough",
+                "hit": "8"
+            }
+        ],
+        "dark": [
+            {
+                "name": "night slash",
+                "hit": "4"
+            },
+            {
+                "name": "knock off",
+                "hit": "6"
+            },
+            {
+                "name": "foul play",
+                "hit": "8"
+            },
+            {
+                "name": "crunch",
+                "hit": "8"
+            }
+        ],
+        "steel": [
+            {
+                "name": "iron head",
+                "hit": "6"
+            },
+            {
+                "name": "flash cannon",
+                "hit": "6"
+            },
+            {
+                "name": "metal sound",
+                "hit": "6"
+            },
+            {
+                "name": "steel beam",
                 "hit": "8"
             }
         ]
@@ -867,6 +939,42 @@
                 "name": "twinkle tackle",
                 "hit": "10"
             }
+        ],
+        "dark": [
+            {
+                "name": "dark pulse",
+                "hit": "6"
+            },
+            {
+                "name": "sucker punch",
+                "hit": "8"
+            },
+            {
+                "name": "night daze",
+                "hit": "8"
+            },
+            {
+                "name": "black hole eclipse",
+                "hit": "10"
+            }
+        ],
+        "steel": [
+            {
+                "name": "iron tail",
+                "hit": "6"
+            },
+            {
+                "name": "meteor mash",
+                "hit": "8"
+            },
+            {
+                "name": "doom desire",
+                "hit": "8"
+            },
+            {
+                "name": "steel roller",
+                "hit": "10"
+            }
         ]
     },
     "tier_4": {
@@ -975,6 +1083,222 @@
             },
             {
                 "name": "sparkly swirl",
+                "hit": "12"
+            }
+        ],
+        "water": [
+            {
+                "name": "max geyser",
+                "hit": "10"
+            },
+            {
+                "name": "hydro vortex",
+                "hit": "10"
+            },
+            {
+                "name": "oceanic operetta",
+                "hit": "8"
+            },
+            {
+                "name": "hydro pump",
+                "hit": "12"
+            }
+        ],
+        "rock": [
+            {
+                "name": "max rockfall",
+                "hit": "10"
+            },
+            {
+                "name": "continental crush",
+                "hit": "10"
+            },
+            {
+                "name": "stone edge",
+                "hit": "8"
+            },
+            {
+                "name": "rock wrecker",
+                "hit": "12"
+            }
+        ],
+        "grass": [
+            {
+                "name": "max overgrowth",
+                "hit": "10"
+            },
+            {
+                "name": "bloom doom",
+                "hit": "10"
+            },
+            {
+                "name": "solar blade",
+                "hit": "8"
+            },
+            {
+                "name": "frenzy plant",
+                "hit": "12"
+            }
+        ],
+        "normal": [
+            {
+                "name": "max strike",
+                "hit": "10"
+            },
+            {
+                "name": "breakneck blitz",
+                "hit": "10"
+            },
+            {
+                "name": "giga impact",
+                "hit": "8"
+            },
+            {
+                "name": "hyper beam",
+                "hit": "12"
+            }
+        ],
+        "poison": [
+            {
+                "name": "max ooze",
+                "hit": "10"
+            },
+            {
+                "name": "acid downpour",
+                "hit": "10"
+            },
+            {
+                "name": "venom drench",
+                "hit": "8"
+            },
+            {
+                "name": "gunk shot",
+                "hit": "12"
+            }
+        ],
+        "bug": [
+            {
+                "name": "max flutterby",
+                "hit": "10"
+            },
+            {
+                "name": "savage spin-out",
+                "hit": "10"
+            },
+            {
+                "name": "megahorn",
+                "hit": "8"
+            },
+            {
+                "name": "bug buzz",
+                "hit": "12"
+            }
+        ],
+        "ground": [
+            {
+                "name": "max quake",
+                "hit": "10"
+            },
+            {
+                "name": "tectonic rage",
+                "hit": "10"
+            },
+            {
+                "name": "precipice blades",
+                "hit": "8"
+            },
+            {
+                "name": "earthquake",
+                "hit": "12"
+            }
+        ],
+        "fighting": [
+            {
+                "name": "max knuckle",
+                "hit": "10"
+            },
+            {
+                "name": "all-out pummeling",
+                "hit": "10"
+            },
+            {
+                "name": "focus blast",
+                "hit": "8"
+            },
+            {
+                "name": "focus punch",
+                "hit": "12"
+            }
+        ],
+        "ghost": [
+            {
+                "name": "max phantasm",
+                "hit": "10"
+            },
+            {
+                "name": "never-ending nightmare",
+                "hit": "10"
+            },
+            {
+                "name": "shadow force",
+                "hit": "8"
+            },
+            {
+                "name": "shadow ball",
+                "hit": "12"
+            }
+        ],
+        "dragon": [
+            {
+                "name": "max wyrmwind",
+                "hit": "10"
+            },
+            {
+                "name": "devastating drake",
+                "hit": "10"
+            },
+            {
+                "name": "dragon pulse",
+                "hit": "8"
+            },
+            {
+                "name": "draco meteor",
+                "hit": "12"
+            }
+        ],
+        "dark": [
+            {
+                "name": "max darkness",
+                "hit": "10"
+            },
+            {
+                "name": "black hole eclipse",
+                "hit": "10"
+            },
+            {
+                "name": "dark pulse",
+                "hit": "8"
+            },
+            {
+                "name": "wicked blow",
+                "hit": "12"
+            }
+        ],
+        "steel": [
+            {
+                "name": "max steelspike",
+                "hit": "10"
+            },
+            {
+                "name": "corkscrew crash",
+                "hit": "10"
+            },
+            {
+                "name": "steel beam",
+                "hit": "8"
+            },
+            {
+                "name": "meteor mash",
                 "hit": "12"
             }
         ]

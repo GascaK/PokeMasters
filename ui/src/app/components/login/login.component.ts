@@ -15,17 +15,20 @@ export class LoginComponent{
     public username: string;
     public newPlayerMenu = false;
     public starters: Array<PokemonTemplate> = [];
+    public errorMessage: string = '';
 
     public async login() {
-        console.log(this.username);
+        this.errorMessage = ''; // Clear any previous error messages
         if (!this.username) {
-            console.error("No username sent.")
+            this.errorMessage = "Please enter a username";
+            return;
         }
         await this.serverService.findPlayerByName(this.username)
             .then( (res) => {
                 this.trainerTracker.setTrainer(res.id!, this.serverService!)
             }).catch( (err) => {
                 console.error(err);
+                this.errorMessage = "Username not found. Please try again or create a new account.";
             });
     }
 
@@ -42,18 +45,29 @@ export class LoginComponent{
 
     public async createPlayer(chosen: PokemonTemplate) {
         if (!this.username) {
+            this.errorMessage = "Please enter a username";
             return;
         }
-        console.log(`Choosing ${chosen.base.name}`);
-        await this.serverService.createPlayer(this.username)
-            .then( (res) => {
-                console.log(res);
-                this.trainerTracker.setTrainer(res.id!, this.serverService!);
-                chosen.owner = res.id!;
-                this.serverService.catchStarters(res.id!, chosen);
-                this.serverService.starterItems(res.id!);
-            }).catch( (err) => {
-                console.error(err);
-            });
+
+        // First check if username exists
+        try {
+            await this.serverService.findPlayerByName(this.username);
+            this.errorMessage = "Username is already in use. Please choose a different username.";
+            return;
+        } catch (err) {
+            // Username doesn't exist, we can proceed with creation
+            console.log(`Choosing ${chosen.base.name}`);
+            await this.serverService.createPlayer(this.username)
+                .then( (res) => {
+                    console.log(res);
+                    this.trainerTracker.setTrainer(res.id!, this.serverService!);
+                    chosen.owner = res.id!;
+                    this.serverService.catchStarters(res.id!, chosen);
+                    this.serverService.starterItems(res.id!);
+                }).catch( (err) => {
+                    console.error(err);
+                    this.errorMessage = "An error occurred while creating your account. Please try again.";
+                });
+        }
     }
 }

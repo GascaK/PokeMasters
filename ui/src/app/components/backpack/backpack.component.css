@@ -2,18 +2,43 @@
     margin-bottom: 0 !important;
 }
 
+.nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+}
+
 .nav-tabs .nav-link {
-    color: #495057;
+    color: #6c757d;
     border: none;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s ease;
-    cursor: pointer;
+    padding: 0.75rem 1.25rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    margin-right: 0.5rem;
+}
+
+.nav-tabs .nav-link:hover {
+    color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.05);
+    border-radius: 0.375rem 0.375rem 0 0;
 }
 
 .nav-tabs .nav-link.active {
     color: #0d6efd;
-    border-bottom-color: #0d6efd;
     background-color: transparent;
+    border: none;
+    border-bottom: 3px solid #0d6efd;
+    font-weight: 600;
+}
+
+.nav-tabs .nav-link i {
+    font-size: 0.9rem;
+}
+
+.nav-tabs .badge {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+    margin-left: -0.5rem;
+    margin-top: -0.5rem;
 }
 
 .badge {
@@ -26,12 +51,86 @@
 }
 
 @media (max-width: 576px) {
-    .card-body {
-        padding: 0.75rem;
+    .nav-tabs {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding-bottom: 0.5rem;
+        position: relative;
     }
-    
+
+    .nav-tabs::before,
+    .nav-tabs::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 20px;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .nav-tabs::before {
+        left: 0;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
+    }
+
+    .nav-tabs::after {
+        right: 0;
+        background: linear-gradient(to left, rgba(255, 255, 255, 0.8), transparent);
+    }
+
+    .nav-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
     .nav-tabs .nav-link {
         padding: 0.5rem 0.75rem;
         font-size: 0.9rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+        position: relative;
+    }
+
+    .nav-tabs .nav-link:not(:last-child)::after {
+        content: '→';
+        position: absolute;
+        right: -5px;
+        color: #dee2e6;
+        font-size: 0.8rem;
+    }
+
+    .nav-tabs .nav-link i {
+        font-size: 0.8rem;
+        margin-right: 0.25rem;
+    }
+
+    .nav-tabs .badge {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.4rem;
+        margin-left: -0.4rem;
+        margin-top: -0.4rem;
+    }
+
+    .card-body {
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .nav-tabs .nav-link {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.85rem;
+    }
+
+    .nav-tabs .nav-link i {
+        display: none;
+    }
+
+    .nav-tabs .nav-link:not(:last-child)::after {
+        right: -3px;
+        font-size: 0.7rem;
     }
 }

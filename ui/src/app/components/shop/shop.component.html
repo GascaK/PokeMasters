@@ -1,36 +1,230 @@
-<div>
-    <div style="text-align: center;"><h3>Poké Mart</h3></div>
-    <div class="trainer-balance">Balance: {{trainer?.dollars}} $</div>
-    <div>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Text</th>
-            <th scope="col">Cost</th>
-            <th scope="col">Buy</th>
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let group of groupedShop; let isLast = last">
-            <tr>
-              <th colspan="4" class="group-header">{{group.name}} ({{group.count}})</th>
-            </tr>
-            <tr *ngFor="let item of group.items">
-              <th>{{item.name}}</th>
-              <td>{{item.text}}</td>
-              <td>{{item.cost}}</td>
-              <td><button class="btn btn-primary" (click)="purchaseItem(item)">Buy</button></td>
-            </tr>
-            <!-- Add a separator row unless it's the last group -->
-            <tr *ngIf="!isLast" class="group-separator"><td colspan="4"></td></tr>
-          </ng-container>
-        </tbody>
-      </table>
+<div class="container-fluid p-2">
+    <div class="text-center mb-2">
+        <h4 class="mb-1">Poké Mart</h4>
+        <div class="trainer-balance h6">Balance: ¥{{trainer?.dollars}}</div>
     </div>
-    <div class="row mt-3">
-      <div class="col">
-        <button class="btn btn-primary" style="display:block;width:100%" (click)="returnView()">Exit</button>
-      </div>
+
+    <!-- Shopping Cart Modal -->
+    <div class="modal-overlay" *ngIf="cart.length > 0">
+        <div class="modal-content">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Shopping Cart</h5>
+                    <button class="btn btn-outline-secondary btn-sm" (click)="cart = []; cartTotal = 0">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-sm mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th class="text-end">Price</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-end">Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let cartItem of cart">
+                                    <td>
+                                        {{cartItem.item.name}}
+                                        <small class="text-muted d-block">Available: {{cartItem.availableStock}}</small>
+                                    </td>
+                                    <td class="text-end">¥{{cartItem.item.cost}}</td>
+                                    <td class="text-center">
+                                        <div class="input-group input-group-sm justify-content-center">
+                                            <button class="btn btn-outline-secondary btn-sm" 
+                                                    [disabled]="cartItem.quantity <= 0"
+                                                    (click)="updateCartQuantity(cartItem, cartItem.quantity - 1)">-</button>
+                                            <input type="number" class="form-control form-control-sm text-center" style="width: 50px;" 
+                                                   [(ngModel)]="cartItem.quantity" 
+                                                   [max]="cartItem.availableStock"
+                                                   (change)="updateCartQuantity(cartItem, cartItem.quantity)">
+                                            <button class="btn btn-outline-secondary btn-sm" 
+                                                    [disabled]="cartItem.quantity >= cartItem.availableStock"
+                                                    (click)="updateCartQuantity(cartItem, cartItem.quantity + 1)">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="text-end">¥{{cartItem.item.cost * cartItem.quantity}}</td>
+                                    <td class="text-end">
+                                        <button class="btn btn-danger btn-sm" (click)="removeFromCart(cartItem.item)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                                    <td class="text-end"><strong>¥{{cartTotal}}</strong></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-success w-100" 
+                            [class.btn-success]="!isPurchasing"
+                            [class.btn-primary]="isPurchasing"
+                            [disabled]="!canAffordCart() || isPurchasing"
+                            (click)="checkout()">
+                        <span *ngIf="!isPurchasing">Checkout (¥{{cartTotal}})</span>
+                        <span *ngIf="isPurchasing">
+                            <i class="fas fa-spinner fa-spin me-2"></i>
+                            ...purchasing
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+
+    <!-- Shop Items -->
+    <div class="table-responsive">
+        <ul class="nav nav-tabs mb-3" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" 
+                        [class.active]="activeTab === 'balls'"
+                        (click)="activeTab = 'balls'">
+                    <i class="fas fa-circle me-1"></i> Poké Balls
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" 
+                        [class.active]="activeTab === 'held'"
+                        (click)="activeTab = 'held'">
+                    <i class="fas fa-gem me-1"></i> Held Items
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" 
+                        [class.active]="activeTab === 'other'"
+                        (click)="activeTab = 'other'">
+                    <i class="fas fa-box me-1"></i> Other Items
+                </button>
+            </li>
+        </ul>
+
+        <!-- Balls Tab -->
+        <div *ngIf="activeTab === 'balls'">
+            <table class="table table-sm table-hover mb-2">
+                <thead>
+                    <tr>
+                        <th scope="col" class="w-45">Item</th>
+                        <th scope="col" class="w-15 text-end">Cost</th>
+                        <th scope="col" class="w-10 text-center">Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let group of groupedShop">
+                        <ng-container *ngIf="group.name.toLowerCase().includes('ball')">
+                            <tr class="item-row">
+                                <td>
+                                    {{group.name}}
+                                    <small class="text-muted d-block">{{group.items[0].text}}</small>
+                                </td>
+                                <td class="text-end">¥{{group.items[0].cost}}</td>
+                                <td class="text-center">{{group.count}}</td>
+                            </tr>
+                            <tr class="button-row">
+                                <td colspan="3" class="p-0">
+                                    <button class="btn btn-sm w-100" 
+                                            [class.btn-primary]="canAffordItem(group.items[0])"
+                                            [class.btn-secondary]="!canAffordItem(group.items[0])"
+                                            [disabled]="!canAffordItem(group.items[0])"
+                                            (click)="addToCart(group)">
+                                        Add to Cart
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Held Items Tab -->
+        <div *ngIf="activeTab === 'held'">
+            <table class="table table-sm table-hover mb-2">
+                <thead>
+                    <tr>
+                        <th scope="col" class="w-45">Item</th>
+                        <th scope="col" class="w-15 text-end">Cost</th>
+                        <th scope="col" class="w-10 text-center">Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let group of groupedShop">
+                        <ng-container *ngIf="group.items[0].text.toLowerCase().includes('held item')">
+                            <tr class="item-row">
+                                <td>
+                                    {{group.name}}
+                                    <small class="text-muted d-block">{{group.items[0].text}}</small>
+                                </td>
+                                <td class="text-end">¥{{group.items[0].cost}}</td>
+                                <td class="text-center">{{group.count}}</td>
+                            </tr>
+                            <tr class="button-row">
+                                <td colspan="3" class="p-0">
+                                    <button class="btn btn-sm w-100" 
+                                            [class.btn-primary]="canAffordItem(group.items[0])"
+                                            [class.btn-secondary]="!canAffordItem(group.items[0])"
+                                            [disabled]="!canAffordItem(group.items[0])"
+                                            (click)="addToCart(group)">
+                                        Add to Cart
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Other Items Tab -->
+        <div *ngIf="activeTab === 'other'">
+            <table class="table table-sm table-hover mb-2">
+                <thead>
+                    <tr>
+                        <th scope="col" class="w-45">Item</th>
+                        <th scope="col" class="w-15 text-end">Cost</th>
+                        <th scope="col" class="w-10 text-center">Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let group of groupedShop">
+                        <ng-container *ngIf="!group.name.toLowerCase().includes('ball') && !group.items[0].text.toLowerCase().includes('held item')">
+                            <tr class="item-row">
+                                <td>
+                                    {{group.name}}
+                                    <small class="text-muted d-block">{{group.items[0].text}}</small>
+                                </td>
+                                <td class="text-end">¥{{group.items[0].cost}}</td>
+                                <td class="text-center">{{group.count}}</td>
+                            </tr>
+                            <tr class="button-row">
+                                <td colspan="3" class="p-0">
+                                    <button class="btn btn-sm w-100" 
+                                            [class.btn-primary]="canAffordItem(group.items[0])"
+                                            [class.btn-secondary]="!canAffordItem(group.items[0])"
+                                            [disabled]="!canAffordItem(group.items[0])"
+                                            (click)="addToCart(group)">
+                                        Add to Cart
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-danger btn-sm w-100" (click)="returnView()">Exit</button>
+        </div>
+    </div>
+</div>

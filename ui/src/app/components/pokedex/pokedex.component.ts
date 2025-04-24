@@ -23,7 +23,67 @@ export class PokedexComponent implements OnInit, OnDestroy {
     public sortedPokemon: Map<number, {name: string, count: number}> = new Map;
     public finalPokedex: Map<number, {name: string, count: number}>;
     public minRequiredForEvolution = 3; // Minimum number of Pokémon needed for evolution
+    public showMissingPokemon = false;
+    public missingPokemon: Map<number, {name: string, count: number}> = new Map();
+    public combinedPokedex: Map<number, {name: string, count: number, isMissing: boolean}> = new Map();
     interval: any;
+
+    getPokemonSprite(dexId: number): string {
+        const pokemon = this.trainer.pokemon.find(p => p.base.dex_id === dexId);
+        return pokemon ? pokemon.sprite.sprite_url : '';
+    }
+
+    toggleMissingPokemon() {
+        this.showMissingPokemon = !this.showMissingPokemon;
+        if (this.showMissingPokemon && this.missingPokemon.size === 0) {
+            this.loadMissingPokemon();
+        }
+        this.updateCombinedPokedex();
+    }
+
+    private updateCombinedPokedex() {
+        this.combinedPokedex.clear();
+        
+        // Add caught Pokemon
+        this.finalPokedex.forEach((value, key) => {
+            this.combinedPokedex.set(key, {
+                name: value.name,
+                count: value.count,
+                isMissing: false
+            });
+        });
+
+        // Add missing Pokemon if showing
+        if (this.showMissingPokemon) {
+            this.missingPokemon.forEach((value, key) => {
+                this.combinedPokedex.set(key, {
+                    name: value.name,
+                    count: value.count,
+                    isMissing: true
+                });
+            });
+        }
+    }
+
+    private loadMissingPokemon() {
+        this.missingPokemon.clear();
+        // Generation 1 Pokemon IDs range from 1 to 151
+        for (let i = 1; i <= 151; i++) {
+            if (!this.finalPokedex.has(i)) {
+                this.missingPokemon.set(i, {
+                    name: this.getPokemonName(i),
+                    count: 0
+                });
+            }
+        }
+        this.updateCombinedPokedex();
+    }
+
+    private getPokemonName(dexId: number): string {
+        // This is a placeholder - you'll need to implement this based on your Pokemon data
+        // You might want to create a service that maps Pokemon IDs to names
+        return `Pokemon #${dexId}`;
+    }
 
     async ngOnInit() {
         this.trainer = await this.trainerTracker.getTrainer();
@@ -41,6 +101,7 @@ export class PokedexComponent implements OnInit, OnDestroy {
                     });
                 });
                 this.finalPokedex = new Map([...this.sortedPokemon.entries()].sort());
+                this.updateCombinedPokedex();
                 console.log(this.finalPokedex);
             }
 

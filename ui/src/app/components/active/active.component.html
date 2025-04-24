@@ -1,29 +1,32 @@
 <!-- Item Selection View -->
 <div *ngIf="choosingItemStatus" class="item-selection">
-  <div class="row">
-    <h3>Items:</h3>
+  <div class="row mb-3">
+    <div class="col-12">
+      <h3>Items</h3>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search items..." [(ngModel)]="itemSearchText">
+        <button class="btn btn-outline-secondary" type="button">
+          <i class="fa-solid fa-search"></i>
+        </button>
+      </div>
+    </div>
   </div>
   
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Text</th>
-        <th scope="col">Cost</th>
-        <th scope="col">Buy</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of items">
-        <th>{{item.name}}</th>
-        <td>{{item.text}}</td>
-        <td>{{item.cost}}</td>
-        <td><button class="btn btn-primary" (click)="holdItem(item)">Select</button></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="items-container">
+    <div *ngFor="let item of items | filterItems:itemSearchText" [ngClass]="{'category-header': item.isCategoryHeader, 'item-card': !item.isCategoryHeader}">
+      <div *ngIf="!item.isCategoryHeader" class="item-content">
+        <div class="item-name">{{item.name}}</div>
+        <div class="item-text">{{item.text}}</div>
+        <div class="item-count">Count: {{item.count}}</div>
+        <button class="btn btn-primary btn-block" (click)="holdItem(item)">Select</button>
+      </div>
+      <div *ngIf="item.isCategoryHeader" class="category-header-content">
+        <strong>{{item.name}}</strong>
+      </div>
+    </div>
+  </div>
   
-  <div class="action-buttons">
+  <div class="action-buttons mt-3">
     <div class="mb-2">
       <button class="btn btn-danger col-12" (click)="dropActiveHeldItem()">Drop Held Item</button>
     </div>

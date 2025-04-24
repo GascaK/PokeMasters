@@ -25,9 +25,11 @@ export class BattleComponent{
     }
 
     randomMoney(): void {
-        const atm = this.randomInt(200, 500);
+        const baseAmount = this.randomInt(300, 700);
         const tier = this.trainer.getCurrentTier();
-        const deposit = atm * tier;
+        const tierMultiplier = Math.pow(1.75, tier - 1);
+        const tierBonus = tier * 150;
+        const deposit = Math.floor((baseAmount * tierMultiplier) + tierBonus);
 
         this.trainer.getDollars(deposit);
         alert(`Got $${deposit}`);
@@ -35,9 +37,12 @@ export class BattleComponent{
     }
 
     beatGymLeader(): void {
-        const atm = this.randomInt(500, 1000);
-        const tier = this.trainer.getCurrentTier()
-        const deposit = atm * tier;
+        const baseAmount = this.randomInt(500, 1000);
+        const tier = this.trainer.getCurrentTier();
+        // More aggressive scaling for gym leaders
+        const tierMultiplier = Math.pow(2, tier - 1);
+        const tierBonus = tier * 250; // Higher bonus for gym leaders
+        const deposit = Math.floor((baseAmount * tierMultiplier) + tierBonus);
 
         this.trainer.getDollars(deposit);
         alert(`Got $${deposit}`);
@@ -45,9 +50,12 @@ export class BattleComponent{
     }
 
     beatTrainer(): void {
-        const atm = this.randomInt(400, 800);
-        const tier = this.trainer.getCurrentTier()
-        const deposit = atm * tier;
+        const baseAmount = this.randomInt(400, 800);
+        const tier = this.trainer.getCurrentTier();
+        // Moderate scaling for regular trainers
+        const tierMultiplier = Math.pow(1.75, tier - 1);
+        const tierBonus = tier * 150; // Moderate bonus for trainers
+        const deposit = Math.floor((baseAmount * tierMultiplier) + tierBonus);
 
         this.trainer.getDollars(deposit);
         alert(`Got $${deposit}`);

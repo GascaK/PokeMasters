@@ -1,4 +1,4 @@
-<div class="login-container d-flex align-items-center justify-content-center vh-100 bg-gradient">
+<div class="login-container bg-gradient">
     <div class="login-card shadow-lg rounded-4 p-4 text-center">
         <!-- Logo with subtle animation -->
         <div class="logo-container mb-4">
@@ -20,6 +20,10 @@
                     autocomplete="off">
             </div>
 
+            <div *ngIf="errorMessage" class="alert alert-danger mb-3" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ errorMessage }}
+            </div>
+
             <ng-container *ngIf="!newPlayerMenu; else newPlayerTemplate">
                 <div class="d-grid gap-3">
                     <button id="submitBtn" class="btn btn-primary btn-lg btn-block ripple-effect" (click)="login()">
@@ -37,13 +41,25 @@
                     <div *ngFor="let starter of starters" class="col starter-card">
                         <div class="card h-100 border-0 shadow-sm hover-card">
                             <div class="card-body text-center">
-                                <h5 class="card-title">{{starter.base.name}}</h5>
-                                <div class="starter-image-container mb-3">
+                                <h5 class="card-title mb-3">{{starter.base.name}}</h5>
+                                <div class="starter-image-container">
                                     <img [src]="starter.sprite.sprite_url" alt="{{starter.base.name}}" class="starter-image img-fluid">
+                                </div>
+                                <div class="stats-container">
+                                    <div class="pokemon-stats">
+                                        <div class="row g-2">
+                                            <div class="col-6" *ngFor="let stat of starter.stats">
+                                                <div class="stat-item">
+                                                    <span class="stat-label">{{stat.name | titlecase}}</span>
+                                                    <span class="stat-value">{{stat.value}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <button 
                                     id="chosenStarter" 
-                                    class="btn btn-primary w-100 ripple-effect" 
+                                    class="btn btn-primary w-100 ripple-effect mt-3" 
                                     (click)="createPlayer(starter)"
                                 >
                                     Choose {{starter.base.name}}
@@ -58,4 +74,8 @@
             </ng-template>
         </div>
     </div>
+    <footer class="login-footer text-center text-white-50 mt-4">
+        <p class="mb-1">© 2024 Pokémon Masters. Pokémon and Pokémon character names are trademarks of Nintendo.</p>
+        <p class="mb-0">Designed by Kevin Gasca</p>
+    </footer>
 </div>

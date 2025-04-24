@@ -13,7 +13,8 @@ import { EncounterComponent } from './components/encounter/encounter.component';
 import { ShopComponent } from './components/shop/shop.component';
 import { BackpackComponent } from './components/backpack/backpack.component';
 import { BattleComponent } from './components/battle/battle.component';
-
+import { FilterItemsPipe } from './pipes/filter-items.pipe';
+import { FilterByGroupPipe } from './pipes/filter-by-group.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,8 @@ import { BattleComponent } from './components/battle/battle.component';
     ShopComponent,
     BackpackComponent,
     BattleComponent,
+    FilterItemsPipe,
+    FilterByGroupPipe
   ],
   imports: [
     BrowserModule,

@@ -54,7 +54,7 @@ def delete_items(username: int, id: int) -> None:
         raise HTTPException(status_code=400, detail="Your ID does not match this item.")
 
 @router.post("/starter", tags=["items"])
-def post_items_starter(username: int, amount=5) -> None:
+def post_items_starter(username: int, amount=23) -> None:
     for _ in range(amount):
         item = item_builder.get_item_by_name("Poke Ball")
         item.owner = username

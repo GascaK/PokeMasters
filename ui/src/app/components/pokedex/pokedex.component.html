@@ -1,4 +1,12 @@
 <div *ngIf="!moreInformation">
+    <!-- Toggle Button for Missing Pokemon -->
+    <div class="d-flex justify-content-end mb-3">
+        <button class="btn btn-outline-secondary" (click)="toggleMissingPokemon()">
+            <i class="fas" [ngClass]="{'fa-eye': !showMissingPokemon, 'fa-eye-slash': showMissingPokemon}"></i>
+            {{showMissingPokemon ? 'Hide Missing' : 'Show Missing'}} Pokemon
+        </button>
+    </div>
+
     <!-- Large screens - Table view -->
     <div class="d-none d-md-block">
         <div class="table-responsive">
@@ -12,13 +20,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let pokemon of finalPokedex | keyvalue">
+                    <tr *ngFor="let pokemon of combinedPokedex | keyvalue" [ngClass]="{'table-secondary': pokemon.value.isMissing}">
                         <td class="text-center">{{pokemon.key}}</td>
                         <td>{{pokemon.value.name | uppercase}}</td>
                         <td class="text-center">{{pokemon.value.count}}</td>
                         <td class="text-center">
-                            <button class="btn btn-primary btn-sm" (click)="moreInfo(pokemon.key)">
+                            <button *ngIf="!pokemon.value.isMissing" 
+                                    class="btn btn-primary btn-sm" 
+                                    (click)="moreInfo(pokemon.key)">
                                 Select
+                            </button>
+                            <button *ngIf="pokemon.value.isMissing" 
+                                    class="btn btn-secondary btn-sm" 
+                                    disabled>
+                                Not Owned
                             </button>
                         </td>
                     </tr>
@@ -30,22 +45,48 @@
     <!-- Small screens - Card view -->
     <div class="d-md-none">
         <div class="row g-3">
-            <div class="col-12 col-sm-6" *ngFor="let pokemon of finalPokedex | keyvalue">
-                <div class="card h-100 shadow-sm">
+            <div class="col-12 col-sm-6" *ngFor="let pokemon of combinedPokedex | keyvalue">
+                <div class="card h-100 shadow-sm" [ngClass]="{'bg-light': pokemon.value.isMissing}">
                     <div class="card-body p-3">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <span class="badge bg-secondary">#{{pokemon.key}}</span>
-                            <span class="badge bg-light text-dark">Count: {{pokemon.value.count}}</span>
+                            <span class="badge" [ngClass]="{'bg-light text-dark': !pokemon.value.isMissing, 'bg-secondary': pokemon.value.isMissing}">
+                                {{pokemon.value.isMissing ? 'Not Owned' : 'Count: ' + pokemon.value.count}}
+                            </span>
                         </div>
-                        <h5 class="card-title mb-3">{{pokemon.value.name | uppercase}}</h5>
-                        <button class="btn btn-primary btn-sm w-100" (click)="moreInfo(pokemon.key)">
+                        <div class="d-flex align-items-center mb-3">
+                            <div *ngIf="!pokemon.value.isMissing">
+                                <img [src]="getPokemonSprite(pokemon.key)" 
+                                     alt="{{pokemon.value.name}}" 
+                                     class="pokemon-sprite me-2">
+                            </div>
+                            <div *ngIf="pokemon.value.isMissing" 
+                                 class="pokemon-sprite me-2 d-flex align-items-center justify-content-center bg-white rounded">
+                                <i class="fas fa-question text-muted"></i>
+                            </div>
+                            <h5 class="card-title mb-0">{{pokemon.value.name | uppercase}}</h5>
+                        </div>
+                        <button *ngIf="!pokemon.value.isMissing" 
+                                class="btn btn-primary btn-sm w-100" 
+                                (click)="moreInfo(pokemon.key)">
                             Select
+                        </button>
+                        <button *ngIf="pokemon.value.isMissing" 
+                                class="btn btn-secondary btn-sm w-100" 
+                                disabled>
+                            Not Available
                         </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Floating Exit Button -->
+    <button class="floating-exit-btn" (click)="exitView()">
+        <i class="fas fa-times me-2"></i>
+        Exit
+    </button>
 </div>
 
 <div *ngIf="moreInformation" class="pokemon-details">

@@ -116,3 +116,64 @@
         padding: 12px;
     }
 }
+
+.pokemon-sprite {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* Missing Pokemon Styles */
+.card.bg-light {
+    opacity: 0.8;
+}
+
+.card.bg-light:hover {
+    opacity: 1;
+}
+
+.pokemon-sprite i {
+    font-size: 24px;
+}
+
+/* Table styles for missing Pokemon */
+.table-secondary {
+    opacity: 0.8;
+}
+
+.table-secondary:hover {
+    opacity: 1;
+}
+
+/* Floating Exit Button */
+.floating-exit-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    min-width: 120px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    padding: 0 20px;
+    font-weight: 500;
+}
+
+.floating-exit-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.floating-exit-btn i {
+    font-size: 1.2rem;
+}

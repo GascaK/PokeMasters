@@ -5,42 +5,85 @@
             <h5 class="card-title mb-0">Encounter Result</h5>
         </div>
         <div class="card-body">
-            <p class="lead mb-2">{{encounterMsg}}</p>
-            <p class="text-muted mb-2">You rolled a {{encounterRoll}} with a modifier of {{encounterMod}}.</p>
-            
-            <div *ngIf="encounterItem" class="alert alert-success mt-3">
-                <i class="fa-solid fa-gift me-2"></i> You found: <strong>{{encounterItem.name}}</strong>
+            <div class="encounter-result">
+                <p class="result-message">{{encounterMsg}}</p>
+                <p class="result-roll">You rolled a <span class="roll-value">{{encounterRoll}}</span> with a modifier of <span class="mod-value">{{encounterMod}}</span>.</p>
+                
+                <div *ngIf="encounterItem" class="encounter-reward mt-3">
+                    <i class="fa-solid fa-gift me-2"></i>
+                    <span>You found: <strong>{{encounterItem.name}}</strong></span>
+                </div>
             </div>
         </div>
         <div class="card-footer text-center">
-            <button class="btn btn-primary px-4" (click)="fleePokemon(encounterRetry)">Close</button>
+            <button class="btn btn-primary px-4" (click)="fleePokemon(encounterRetry)">
+                <i class="fa-solid fa-check me-2"></i>
+                Close
+            </button>
         </div>
     </div>
 </div>
 
 <!-- Loading Animation -->
-<div *ngIf="!showPokemon && !encounterView" class="pokemon-loader my-3">
+<div *ngIf="!showPokemon && !encounterView && !showCatchAnimation" class="pokemon-loader my-3">
     <iframe src="https://giphy.com/embed/DRfu7BT8ZK1uo" 
             class="giphy-embed" 
             frameBorder="0" 
             allowFullScreen></iframe>
 </div>
 
+<!-- Pokemon Catch Animation View -->
+<div *ngIf="showCatchAnimation" class="container my-3">
+    <div class="card shadow-sm mb-3">
+        <div class="card-header bg-light">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Catching {{pokemon?.base?.name | uppercase}}...</h5>
+                <div *ngIf="usedItem" class="item-badge">
+                    <small class="badge bg-info text-wrap">{{usedItem.name}}</small>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <!-- Catch animation container with ViewChild reference -->
+            <div class="catch-animation-container" #catchAnimationContainer>
+                <img [src]="getPokemonImageUrl()" 
+                     [alt]="pokemon?.base?.name || 'Pokemon'" 
+                     class="pokemon-sprite">
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row g-2 justify-content-center">
+                <div [ngClass]="(!catchResult && encounterRetry) ? 'col-6' : 'col-12'">
+                    <button class="btn btn-primary w-100" (click)="encounterView = true; showCatchAnimation = false;">
+                        <i [ngClass]="catchResult ? 'fa-solid fa-check-circle me-2' : 'fa-solid fa-arrow-right me-2'"></i>
+                        {{catchResult ? 'Add to Collection' : 'Continue'}}
+                    </button>
+                </div>
+                <div *ngIf="!catchResult && encounterRetry" class="col-6">
+                    <button class="btn btn-secondary w-100" (click)="fleePokemon(true)">
+                        <i class="fa-solid fa-rotate me-2"></i>
+                        Try Again
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Pokemon Encounter View -->
-<div *ngIf="showPokemon && !encounterView" class="container my-3">
+<div *ngIf="showPokemon && !encounterView && !showCatchAnimation" class="container my-3">
     <!-- Pokemon Info Card -->
     <div class="card mb-3 shadow-sm">
         <div class="card-header bg-light">
             <div class="d-flex justify-content-between align-items-center">
-                <div>
+                <div class="pokemon-header">
                     <img *ngIf="inCollection" src="assets/imgs/pokeball.png" alt="In Collection" class="pokeball-icon me-2">
-                    <h3 class="d-inline-block mb-0">{{pokemon!.base.name | uppercase}}</h3>
+                    <h3 class="d-inline-block mb-0 pokemon-name">{{pokemon!.base.name | uppercase}}</h3>
                     <i *ngIf="pokemon!.sprite.shiny" class="fa-regular fa-star ms-2 text-warning"></i>
                 </div>
-                <div>
-                    <h4 class="mb-0">
-                        <i class="fa-solid fa-bolt me-2 text-warning"></i>{{statBlock.get("speed")}}
-                    </h4>
+                <div class="speed-badge">
+                    <span class="speed-icon"><i class="fa-solid fa-bolt text-warning"></i></span>
+                    <span class="speed-value">{{statBlock.get("speed")}}</span>
                 </div>
             </div>
         </div>
@@ -52,39 +95,52 @@
                 class="pokemon-image">
         </div>
         
-        <div class="pokemon-stats p-3 bg-light">
-            <div class="d-flex justify-content-center mb-3">
-                <h4 class="mb-0">HP: <span class="text-danger">{{statBlock.get("hp")}}</span></h4>
-            </div>
-            
-            <!-- Move 1 -->
-            <div class="move-card mb-2 {{pokemon!.moves[0].move_type}}">
-                <div class="d-flex justify-content-between align-items-center">
-                    <span class="move-name">{{pokemon!.moves[0].name | titlecase}}</span>
-                    <span class="move-power">d{{pokemon!.moves[0].hit}}</span>
-                </div>
-                <div *ngIf="pokemon.moves[0].special?.text" class="move-special">
-                    {{pokemon.moves[0].special?.text}}
+        <div class="pokemon-card-content">
+            <!-- Stats Section -->
+            <div class="pokemon-stats">
+                <div class="d-flex justify-content-center">
+                    <div class="hp-display">
+                        <span class="hp-label">HP:</span>
+                        <span class="hp-value">{{statBlock.get("hp")}}</span>
+                    </div>
                 </div>
             </div>
             
-            <!-- Move 2 -->
-            <div class="move-card {{pokemon!.moves[1].move_type}}">
-                <div class="d-flex justify-content-between align-items-center">
-                    <span class="move-name">{{pokemon!.moves[1].name | titlecase}}</span>
-                    <span class="move-power">d{{pokemon!.moves[1].hit}}</span>
+            <!-- Moves Section -->
+            <div class="moves-section">
+                <!-- Move 1 -->
+                <div class="move-card mb-2 {{pokemon!.moves[0].move_type}}">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="move-name">{{pokemon!.moves[0].name | titlecase}}</span>
+                        <span class="move-power">d{{pokemon!.moves[0].hit}}</span>
+                    </div>
+                    <div *ngIf="pokemon.moves[0].special?.text" class="move-special">
+                        {{pokemon.moves[0].special?.text}}
+                    </div>
                 </div>
-                <div *ngIf="pokemon.moves[1].special?.text" class="move-special">
-                    {{pokemon.moves[1].special?.text}}
+                
+                <!-- Move 2 -->
+                <div class="move-card {{pokemon!.moves[1].move_type}}">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="move-name">{{pokemon!.moves[1].name | titlecase}}</span>
+                        <span class="move-power">d{{pokemon!.moves[1].hit}}</span>
+                    </div>
+                    <div *ngIf="pokemon.moves[1].special?.text" class="move-special">
+                        {{pokemon.moves[1].special?.text}}
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="card-footer text-center">
-            <h4 class="mb-3">Catch Rate: +{{pokemon.base.catch_rate}}</h4>
-            <button class="btn btn-danger btn-lg w-100" (click)="fleePokemon()">
-                <i class="fa-solid fa-person-running me-2"></i>Escape
-            </button>
+
+            <!-- Catch Info Section -->
+            <div class="catch-info-section">
+                <div class="catch-rate">
+                    <span class="catch-rate-label">Catch Rate:</span>
+                    <span class="catch-rate-value">+{{pokemon.base.catch_rate}}</span>
+                </div>
+                <button class="btn btn-danger btn-lg escape-btn" (click)="fleePokemon(false)">
+                    <i class="fa-solid fa-person-running me-2"></i>Escape
+                </button>
+            </div>
         </div>
     </div>
     
@@ -94,16 +150,18 @@
             <h4 class="card-title text-center mb-0">Available Items</h4>
         </div>
         <div class="card-body p-0">
-            <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-flush items-list">
                 <li *ngFor="let item of itemList | keyvalue" class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col-3 fw-bold">{{item.value.name}}</div>
-                        <div class="col-2 text-center">
-                            <span class="badge bg-secondary">×{{item.value.count}}</span>
+                    <div class="item-row">
+                        <div class="item-info">
+                            <div class="item-name-count">
+                                <span class="item-name">{{item.value.name}}</span>
+                                <span class="item-count badge bg-secondary">×{{item.value.count}}</span>
+                            </div>
+                            <div class="item-description">{{item.value.text}}</div>
                         </div>
-                        <div class="col-4">{{item.value.text}}</div>
-                        <div class="col-3">
-                            <button class="btn btn-primary w-100" 
+                        <div class="item-action">
+                            <button class="btn btn-primary use-btn" 
                                     [disabled]="item.value.count <= 0"
                                     (click)="catchPokemon(item.value.item)">
                                 Use

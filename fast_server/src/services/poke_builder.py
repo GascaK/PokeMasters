@@ -58,16 +58,20 @@ class PokemonBuilder():
         match base.tier:
             case 4:
                 hp_min = 20
+                hp_max = 30
             case 3:
                 hp_min = 12
+                hp_max = 25
             case 2:
                 hp_min = 8
+                hp_max = 18
             case 1:
                 hp_min = 4
+                hp_max = 12
             case _:
                 raise Exception(msg="No valid tier found.")
 
-        hp = max(hp_min, base.hp + random.randint(-10, 10))
+        hp = random.randint(hp_min, hp_max)
         hp_mod = hp-base.hp
 
         # Speed
@@ -117,7 +121,6 @@ class PokemonBuilder():
             if item.name == "Shiny Charm":
                 chance = self.SHINY_CHARM_CHANCE
 
-        print("SHINY CHANCE", chance)
         # Sprite
         if random.random() <= chance:
             shiny = True

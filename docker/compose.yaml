@@ -11,6 +11,12 @@ services:
       - pokeNetwork
     depends_on:
       - poke-db
+    develop:
+      watch:
+        - path: ./server
+          action: rebuild
+        - path: ./docker/server.Dockerfile
+          action: rebuild
 
   poke-db:
     build:
@@ -24,6 +30,12 @@ services:
       - //d/Projects/PokeMasters/db_server/database:/app/database
     networks:
       - pokeNetwork
+    develop:
+      watch:
+        - path: ./db_server
+          action: rebuild
+        - path: ./docker/database.Dockerfile
+          action: rebuild
 
 networks:
   pokeNetwork:
