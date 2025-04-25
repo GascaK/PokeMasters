@@ -5,34 +5,79 @@ import { Trainer } from '../interfaces/trainer';
 import { PokemonTemplate } from '../interfaces/pokemon';
 import { CONFIGS } from '../env';
 
+interface CacheItem<T> {
+    data: T;
+    timestamp: number;
+    expiresIn: number;
+}
 
 export class ServerService {
+    private cache: Map<string, CacheItem<any>> = new Map();
+    private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
     
     instance = axios.create({
         baseURL: `http://${CONFIGS.hostIP}/api/v1`,
         timeout: 10000,
         withCredentials: false,
         headers: {
-        'Content-Type': 'application/json'
+            'Content-Type': 'application/json'
         }
     });
 
-    ////// Player Functions //////
-    async findPlayerByName(name: string): Promise<Trainer>{
-        return await this.instance.get<Trainer>(`0/player/find?name=${name}`)
-            .then(async (res) => {
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            })
+    private getCacheKey(endpoint: string, params?: any): string {
+        return `${endpoint}${params ? JSON.stringify(params) : ''}`;
     }
 
-    async getPlayer(username: number): Promise<Trainer>{
+    private getFromCache<T>(key: string): T | null {
+        const cached = this.cache.get(key);
+        if (!cached) return null;
+        
+        if (Date.now() - cached.timestamp > cached.expiresIn) {
+            this.cache.delete(key);
+            return null;
+        }
+        
+        return cached.data;
+    }
+
+    private setCache<T>(key: string, data: T, expiresIn: number = this.CACHE_DURATION): void {
+        this.cache.set(key, {
+            data,
+            timestamp: Date.now(),
+            expiresIn
+        });
+    }
+
+    private clearCache(): void {
+        this.cache.clear();
+    }
+
+    ////// Player Functions //////
+    async findPlayerByName(name: string): Promise<Trainer> {
+        const cacheKey = this.getCacheKey('player/find', { name });
+        const cached = this.getFromCache<Trainer>(cacheKey);
+        if (cached) return cached;
+
+        return await this.instance.get<Trainer>(`0/player/find?name=${name}`)
+            .then(async (res) => {
+                this.setCache(cacheKey, res.data);
+                return res.data;
+            }).catch((err) => {
+                console.error(err);
+                throw err;
+            });
+    }
+
+    async getPlayer(username: number): Promise<Trainer> {
+        const cacheKey = this.getCacheKey(`player/${username}`);
+        const cached = this.getFromCache<Trainer>(cacheKey);
+        if (cached) return cached;
+
         return await this.instance.get<Trainer>(`${username}/player/`)
             .then(async (res) => {
+                this.setCache(cacheKey, res.data);
                 return res.data;
-            }).catch( (err) => {
+            }).catch((err) => {
                 console.error(err);
                 throw err;
             });
@@ -49,47 +94,55 @@ export class ServerService {
             });
     }
 
-    async patchPlayer(username: number, player: Trainer): Promise<Trainer>{
+    async patchPlayer(username: number, player: Trainer): Promise<Trainer> {
         const body = player;
+        this.clearCache(); // Clear cache as player data is modified
 
         return await this.instance.patch<Trainer>(`${username}/player/`, body)
             .then(async (res) => {
-                console.log(res.data);
                 return res.data;
-            }).catch( (err) => {
+            }).catch((err) => {
                 console.error(err);
                 throw err;
             });
     }
 
-    async getTrainerPokemon(username: number): Promise<Array<PokemonTemplate>>{
+    async getTrainerPokemon(username: number): Promise<Array<PokemonTemplate>> {
+        const cacheKey = this.getCacheKey(`player/pokemon/${username}`);
+        const cached = this.getFromCache<Array<PokemonTemplate>>(cacheKey);
+        if (cached) return cached;
+
         return await this.instance.get<Array<PokemonTemplate>>(`${username}/player/pokemon`)
             .then(async (res) => {
-                console.log(res.data);
+                this.setCache(cacheKey, res.data);
                 return res.data;
-            }).catch( (err) => {
+            }).catch((err) => {
                 console.error(err);
                 throw err;
             });
     }
 
-    async getTrainerItems(username: number): Promise<Array<PokeItemsTemplate>>{
+    async getTrainerItems(username: number): Promise<Array<PokeItemsTemplate>> {
+        const cacheKey = this.getCacheKey(`player/items/${username}`);
+        const cached = this.getFromCache<Array<PokeItemsTemplate>>(cacheKey);
+        if (cached) return cached;
+
         return await this.instance.get<Array<PokeItemsTemplate>>(`${username}/player/items`)
             .then(async(res) => {
-                console.log(res.data);
+                this.setCache(cacheKey, res.data);
                 return res.data;
-            }).catch( (err) => {
+            }).catch((err) => {
                 console.error(err);
                 throw err;
             });
     }
 
-    async deleteTrainerItems(username: number, item: PokeItemsTemplate): Promise<void>{
+    async deleteTrainerItems(username: number, item: PokeItemsTemplate): Promise<void> {
+        this.clearCache(); // Clear cache as items are modified
         return await this.instance.delete<void>(`${username}/player/items?id=${item.id}`)
             .then(async(res) => {
-                console.log(res.data);
                 return res.data;
-            }).catch( (err) => {
+            }).catch((err) => {
                 console.error(err);
                 throw err;
             });
