@@ -2,10 +2,8 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
-import answers
 from src.routers import route_player, route_pokemon, route_items
-from src.services.base_loader import BaseLoader
-from src.routers import index
+from src.assets.compile import Composer
 
 
 app = FastAPI(title="PokeMasters", version="0.1.0")
@@ -19,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-_ = BaseLoader(generations=answers.POKEMON_GENERATIONS)
+app.state.composer = Composer()
 
 app.include_router(route_pokemon.router)
 app.include_router(route_items.router)

@@ -123,7 +123,7 @@
         {
             "name": "Joker's Ball",
             "cost": 750,
-            "text": "Possibly add +5 to your next attempt at catching a Pokemon. Possibly subtract -5 from your attempt at catching a Pokemon.",
+            "text": "Randomly add or subtract 5 from your next attempt at catching a Pokemon.",
             "tier": 2
         },
         {

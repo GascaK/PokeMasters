@@ -236,7 +236,7 @@ class PokemonBuilder():
                 moves=moves
             )
         except Exception as e:
-            print(e)
+            print("now here", e)
             raise e
 
     def get_random_move(self, tier, _type) -> MoveModel:
@@ -249,22 +249,26 @@ class PokemonBuilder():
         try:
             r = requests.get(f"{self.db_uri}/moves/{id}",
                 headers=self.headers,
-                timeout=30)
+                timeout=5)
             move: dict = r.json()
+
+
+            special = None
+            if move.get("special"):
+                r = requests.get(f"{self.db_uri}/specials/{move["special"]}",
+                    headers=self.headers,
+                    timeout=5)
+                special: dict = r.json()
+
             return MoveModel(
                 id=move["id"],
                 name=move["name"],
                 tier=move["tier"],
                 move_type=move["move_type"],
-                special=None if not move.get("special") else SpecialModel(
-                            id = 0,
-                            name = "special",
-                            text = move["special"]
-                        ),
+                special=special,
                 hit=move["hit"]
             )
         except Exception as e:
-            print("get_move", e)
             raise e
 
     def _get_valid_moves(self, base: PokemonBaseModel) -> list[MoveModel]:
@@ -294,6 +298,7 @@ class PokemonBuilder():
                 # Add random special
                 if random.randint(1, 400) <= base.special:
                     special: SpecialModel = random.choice(self.spatk_db)
+                    print("SPecial", special)
                 # Add random physical
                 if random.randint(1, 400) <= base.physical:
                     hit = f"{temp_move.hit}+{base.tier}"
@@ -303,11 +308,7 @@ class PokemonBuilder():
                     move_type=temp_move.move_type,
                     name=temp_move.name,
                     hit=hit or temp_move.hit,
-                    special=None if not special else SpecialModel(
-                        id=special.id,
-                        name=special.name,
-                        text=special.text,
-                    )
+                    special=special
                 )
 
                 # Save Move
@@ -341,13 +342,13 @@ class PokemonBuilder():
         }.get(item.name, 0)
 
     def save_pokemon(self, pokemon: PokemonModel, owner: int=0) -> PokemonModel:
-        print("saving")
         try:
             r = requests.put(f"{self.db_uri}/pokemon/{owner}",
                 json=pokemon.model_dump_json(),
                 headers=self.headers,
                 timeout=30)
             r.raise_for_status()
+            print("saved", r.json())
             return self.build_pokemon(r.json())
         except Exception as e:
             print(e)

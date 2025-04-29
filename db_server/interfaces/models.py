@@ -73,6 +73,17 @@ class Pokemon(Base):
         return (f"Pokemon(id={self.id}, name={self.name}, dex_id={self.dex_id}, "
                 f"types={self.type1}/{self.type2}, tier={self.tier})")
 
+class Specials(Base):
+    __tablename__ = "specials"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50))
+    text = Column(String(100))
+
+    def __init__(self, id, name, text):
+        self.id = id
+        self.name = name
+        self.text = text
 
 class Move(Base):
     __tablename__ = "moves"
@@ -80,7 +91,7 @@ class Move(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(50))
     move_type = Column("type", String(10))
-    special = Column(String(100))
+    special = Column(Integer)
     tier = Column(Integer)
     hit = Column(String(10))
 
@@ -95,7 +106,7 @@ class Move(Base):
         return {
             "id": self.id,
             "name": self.name,
-            "type": self.move_type,
+            "move_type": self.move_type,
             "special": self.special,
             "tier": self.tier,
             "hit": self.hit
@@ -103,7 +114,6 @@ class Move(Base):
 
     def __repr__(self):
         return f"Move(id={self.id}, name={self.name}, type={self.move_type}, tier={self.tier})"
-
 
 class Items(Base):
     __tablename__ = "items"
@@ -134,7 +144,6 @@ class Items(Base):
 
     def __repr__(self):
         return f"Item(id={self.id}, name={self.name}, tier={self.tier}, owner={self.owner})"
-
 
 class Player(Base):
     __tablename__ = "players"

@@ -45,7 +45,7 @@ Before getting started, ensure you have the following installed:
    ```
 3. Start the development server:
    ```bash
-   uvicorn main:app --reload --port 8000
+   python3 -m uvicorn main:app --reload --port 8000
    ```
 
 ### Database Server
@@ -92,7 +92,7 @@ To run the application using Docker:
 
 6. Compose:
    ```bash
-   docker compose -f docker/compose.yaml up
+   docker compose -f compose.yaml up --watch
    ```
 
 ## Contributing

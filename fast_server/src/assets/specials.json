@@ -1,11 +1,6 @@
 {
     "specials": [
         {
-            "id": 0,
-            "name": "Poison",
-            "text": "Your Opponents pokemon takes 1 damage in between both turns."
-        },
-        {
             "id": 1,
             "name": "Bad Execution",
             "text": "This attack is not affected by weakness or resistance."
@@ -194,6 +189,11 @@
             "id": 38,
             "name": "Crippling Bite",
             "text": "If this ATK does more than 5 damage, your next ATK does +2 damage."
+        },
+        {
+            "id": 39,
+            "name": "Poison",
+            "text": "Your Opponents pokemon takes 1 damage in between both turns."
         }
     ]
 }

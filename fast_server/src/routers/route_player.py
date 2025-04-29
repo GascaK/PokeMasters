@@ -3,21 +3,14 @@ import random
 import requests
 from typing import Annotated
 
-from fastapi import APIRouter, HTTPException, Body
+from fastapi import APIRouter, HTTPException, Body, Request, Depends
 
-import answers
-from src.services.base_loader import BaseLoader
-from src.services.item_builder import ItemBuilder
-from src.services.poke_builder import PokemonBuilder
-from src.services.player_builder import PlayerBuilder
-
+from src.assets.compile import Composer
 from src.interfaces.models import PlayerModel, PokemonModel, ItemModel
 
-base_loader = BaseLoader(generations=answers.POKEMON_GENERATIONS)
-poke_builder = PokemonBuilder(base_loader)
-item_builder = ItemBuilder(base_loader)
 
-player_builder = PlayerBuilder(base_loader, poke_builder)
+def get_composer(request: Request):
+    return request.app.state.composer
 
 router = APIRouter(
     prefix="/api/v1/{username}/player",
@@ -26,18 +19,18 @@ router = APIRouter(
 )
 
 @router.get("/find", tags=["player"])
-def get_player_find(username: int, name: str) -> PlayerModel:
+def get_player_find(username: int, name: str, composer: Composer = Depends(get_composer)) -> PlayerModel:
     try:
-        player: PlayerModel = player_builder.get_player_by_name(name)
+        player: PlayerModel = composer.get_player_builder().get_player_by_name(name)
         print(player)
         return player
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error grabbing player: {e}")
 
 @router.get("/starters", tags=["player", "pokemon"])
-def get_player_starters(username: int) -> list[PokemonModel]:
+def get_player_starters(username: int, composer: Composer = Depends(get_composer)) -> list[PokemonModel]:
     starters = []
-    for generation in base_loader.get_generations():
+    for generation in composer.get_base_loader().get_generations():
         starters = {
             1: [1, 4, 7],
             2: [152, 155, 159]
@@ -46,7 +39,7 @@ def get_player_starters(username: int) -> list[PokemonModel]:
     try:
         saved: list[PokemonModel] = []
         for starter in starters:
-            pokemon = poke_builder.random_encounter(dex_id=starter)
+            pokemon = composer.get_poke_builder().random_encounter(dex_id=starter)
             saved.append(pokemon)
 
         if not saved:
@@ -57,31 +50,31 @@ def get_player_starters(username: int) -> list[PokemonModel]:
         raise HTTPException(status_code=500, detail="Unable to encounter starters.")
 
 @router.post("/starters", tags=["player", "pokemon"])
-def post_player_starters(username: int, pokemon: PokemonModel) -> PokemonModel:
+def post_player_starters(username: int, pokemon: PokemonModel, composer: Composer = Depends(get_composer)) -> PokemonModel:
     try:
-        return poke_builder.save_pokemon(pokemon, owner=username)
+        return composer.get_poke_builder().save_pokemon(pokemon, owner=username)
     except Exception as e:
         raise HTTPException(status_code=500, detail="Unable to save pokemon.")
 
 @router.get("/", tags=["player"])
-def get_player(username: int) -> PlayerModel:
+def get_player(username: int, composer: Composer = Depends(get_composer)) -> PlayerModel:
     # Get a current player
     try:
-        player: PlayerModel = player_builder.get_player(username)
+        player: PlayerModel = composer.get_player_builder().get_player(username)
         print(player)
         return player
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error grabbing player: {e}")
 
 @router.post("/", tags=["player"])
-def post_player(username: int, name: Annotated[str, Body()]) -> PlayerModel:
+def post_player(username: int, name: Annotated[str, Body()], composer: Composer = Depends(get_composer)) -> PlayerModel:
     # Create a new player
     try:
-        player = player_builder.new_player(
+        player = composer.get_player_builder().new_player(
             PlayerModel(
                 name=name,
                 badges=0,
-                dollars=500
+                dollars=1500
             )
         )
         return player
@@ -91,54 +84,55 @@ def post_player(username: int, name: Annotated[str, Body()]) -> PlayerModel:
 @router.patch("/", tags=["player"])
 def patch_player(
         username: int,
-        player: PlayerModel
+        player: PlayerModel,
+        composer: Composer = Depends(get_composer)
     ) -> PlayerModel:
 
     # Update a current player
     try:
-        temp = player_builder.get_player(player.id)
+        temp = composer.get_player_builder().get_player(player.id)
         temp.name = player.name or temp.name
         temp.dollars = player.dollars or temp.dollars
         temp.badges = player.badges or temp.badges
 
-        return player_builder.save_player(temp)
+        return composer.get_player_builder().save_player(temp)
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error saving player: {e}")
 
 @router.get("/pokemon", tags=["player"])
-def get_player_pokemon(username: int) -> list[PokemonModel]:
+def get_player_pokemon(username: int, composer: Composer = Depends(get_composer)) -> list[PokemonModel]:
     # Get player pokemon
     try:
-        pokemon: list[PokemonModel] = player_builder.get_pokemon(username)
+        pokemon: list[PokemonModel] = composer.get_player_builder().get_pokemon(username)
         return pokemon
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error grabbing player pokemon: {e}")
 
 @router.delete("/pokemon", tags=["player"])
-def delete_player_pokemon(username: int):
+def delete_player_pokemon(username: int, composer: Composer = Depends(get_composer)):
     # delete player pokemon
     # TODO: figure out why we would ever do this... release? Dumb
     pass
 
 @router.get("/items", tags=["player"])
-def get_player_items(username: int) -> list[ItemModel]:
+def get_player_items(username: int, composer: Composer = Depends(get_composer)) -> list[ItemModel]:
     # Get player items
     try:
-        items: list[ItemModel] = player_builder.get_items(username)
+        items: list[ItemModel] = composer.get_player_builder().get_items(username)
 
         return items
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error getting player items: {e}")
 
 @router.delete("/items", tags=["player"])
-def delete_player_items(username: int, id: int) -> None:
+def delete_player_items(username: int, id: int, composer: Composer = Depends(get_composer)) -> None:
     # delete player items
     try:
-        i = item_builder.get_item(id)
+        i = composer.get_item_builder().get_item(id)
         if i.owner != username:
             raise HTTPException(status_code=400, detail="This item does not belong to you.")
 
-        return item_builder.delete_item(i)
+        return composer.get_item_builder().delete_item(i)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error deleting player items: {e}")

@@ -9,11 +9,15 @@ from typing import List
 import pokebase as pb
 
 from ..interfaces.interface import PokemonBase, PokedexBase, Move, Moves, Special, Item, PokeCenter
-from ..interfaces.models import ItemModel, PokemonBaseModel
+from ..interfaces.models import ItemModel, PokemonBaseModel, SpecialModel
 
 
 class BaseLoader():
     FILE_LOC = os.path.join(os.path.abspath(os.path.join(__file__ ,"../..")), "assets")
+    headers={
+        'Content-type':'application/json', 
+        'Accept':'application/json'
+    }
 
     POKEDEX: PokedexBase = None
     MOVEDEX: Moves = None
@@ -37,9 +41,10 @@ class BaseLoader():
     SP_DIVISOR = 8
     SP_BASE_LN = 50
 
-    def __init__(self, generations: list[int]=[]):
+    def __init__(self, generations: list[int]=[], db_uri="http://poke-db:5000"):
         self.cache_loc = "cache/pokedex.json"
         self.generations = generations
+        self.db_uri = db_uri
         self.dex_list = self.update_generations(generations)
         self.load_moves()
         self.load_special_moves()
@@ -225,11 +230,19 @@ class BaseLoader():
             data = json.load(file)
 
         for special in data["specials"]:
-            self.SP_ATK.append(Special(
+            pending = SpecialModel(
                 id=special["id"],
                 name=special["name"],
                 text=special["text"]
-            ))
+            )
+            self.SP_ATK.append(pending)
+
+            try:
+                resp = requests.put(f"{self.db_uri}/specials/{pending.id}", json=pending.model_dump_json(), timeout=5)
+                resp.raise_for_status()
+            except Exception as e:
+                print(e)
+                raise e
     
     def load_moves(self):
         data = None

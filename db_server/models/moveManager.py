@@ -1,47 +1,65 @@
 import random
 import json
 
-from flask_restful import abort, Resource, marshal_with, fields
-
+from flask_restful import abort, Resource, marshal_with, fields, request
+from interfaces.models import Move
 from services.alchemy_loader import Session
-from interfaces.models import Moves
 
+ 
+# Move resource fields for marshalling
 move_resource = {
-    "_id": fields.Integer,
-    "name": fields.String,
-    "mType": fields.String,
-    "tier": fields.Integer,
-    "hit": fields.Integer,
-    "special": fields.String
+    'id': fields.Integer,
+    'name': fields.String,
+    'tier': fields.Integer,
+    'move_type': fields.String,
+    'special': fields.Integer,
+    'hit': fields.String
 }
+
 class MoveLocator(Resource):
+    """Resource for handling Move CRUD operations at /moves/<id>."""
+
     @marshal_with(move_resource)
-    def get(self, moveID):
-        #chosen = PokeMoves.query.filter_by(_id=moveID).first()
+    def get(self, id):
+        """Retrieve a Move by ID."""
         with Session() as session:
-            chosen = session.query(Moves).filter_by(_id=moveID).first()
+            move = session.query(Move).filter_by(id=id).first()
 
-        if chosen:
-            return chosen
-        abort(404, message=f"Unable to locate pokemon with ID: {moveID}")
+        if not move:
+            abort(404, message=f"Unable to find move with ID: {id}")
 
-class MoveGenerator():
-    def __init__(self):
-        pass
+        return move
 
-    def get_random_move(self, tier, mType):
-        #chosen_type = PokeMoves.query.filter_by(tier=tier, mType=mType)
+    def delete(self, id):
+        """Delete a Move by ID."""
         with Session() as session:
-            chosen_type = session.query(Moves).filter_by(tier=tier, mType=mType)
+            move = session.query(Move).filter_by(id=id).first()
 
-        return random.choice(chosen_type.all())
+            if not move:
+                abort(404, message=f"Unable to find move with ID: {id}")
 
-    def get_move(self, _id):
-        #move = PokeMoves.query.filter_by(_id=_id).first()
-        with Session() as session:
-            move = session.query(Moves).filter_by(_id=_id).first()
+            session.delete(move)
+            session.commit()
 
-        if move:
-            move.name = move.name.title() # Capatalize from lowercase str.
+    @marshal_with(move_resource)
+    def put(self, id):
+        """Create or replace a Move with the given ID."""
+        try:
+            payload = json.loads(request.get_json())
+            if not payload:
+                abort(400, message="Invalid payload.")
+
+            with Session() as session:
+                move = Move(
+                    name=payload["name"],
+                    move_type=payload["move_type"],
+                    special=None if not payload.get("special") else payload["special"]["id"],
+                    tier=payload["tier"],
+                    hit=payload["hit"]
+                )
+                session.add(move)
+                session.commit()
+
             return move
-        return {"404": f"Move with id: {_id} not found."}
+        except Exception as e:
+            abort(503, message=f"Error creating move: {str(e)}")

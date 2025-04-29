@@ -2,20 +2,17 @@ import random
 import requests
 from typing import List, Annotated
 
-from fastapi import APIRouter, HTTPException, Body
+from fastapi import APIRouter, HTTPException, Body, Request, Depends
 from pydantic import BaseModel
 
 import answers
-from src.services.base_loader import BaseLoader
-from src.services.item_builder import ItemBuilder
-from src.services.poke_builder import PokemonBuilder
-
+from src.assets.compile import Composer
 from src.interfaces.models import PokemonModel, ItemModel
 
 
-base_loader = BaseLoader(generations=answers.POKEMON_GENERATIONS)
-poke_builder = PokemonBuilder(base_loader)
-item_builder = ItemBuilder(base_loader)
+def get_composer(request: Request):
+    return request.app.state.composer
+
 router = APIRouter(
     prefix="/api/v1/{username}/pokemon",
     tags=["index"],
@@ -28,14 +25,15 @@ def post_pokemon_encounter(
         tier: Annotated[int | None, Body()]=1,
         items: list[ItemModel]=None,
         encounter_type: Annotated[str | None, Body()]=None,
+        composer: Composer = Depends(get_composer)
     ) -> PokemonModel:
     # Encounter a wild Pokemon.
 
     try:
         encounter_tier = random.randint(1 if tier!=4 else 4, tier)
         print("items.", items)
-        pokemon = poke_builder.random_encounter(tier=encounter_tier, _type=encounter_type, items=items)
-        saved: PokemonModel = poke_builder.save_pokemon(pokemon, owner=0)
+        pokemon = composer.get_poke_builder().random_encounter(tier=encounter_tier, _type=encounter_type, items=items)
+        saved: PokemonModel = composer.get_poke_builder().save_pokemon(pokemon, owner=0)
         return saved
 
     except Exception as e:
@@ -47,7 +45,8 @@ def put_pokemon_encounter_id(
         username: int,
         pokemon_id: Annotated[int, Body()],
         items: list[ItemModel]=None,
-        escape: Annotated[float | None, Body()]=answers.POKEMON_ESCAPE_CHANCE
+        escape: Annotated[float | None, Body()]=answers.POKEMON_ESCAPE_CHANCE,
+        composer: Composer = Depends(get_composer)
     ):
     # Attempt to catch a wild pokemon.
 
@@ -58,7 +57,7 @@ def put_pokemon_encounter_id(
 
     # Encounter a specific already created Pokemon
     try:
-        pokemon: PokemonModel = poke_builder.get_pokemon(pokemon_id)
+        pokemon: PokemonModel = composer.get_poke_builder().get_pokemon(pokemon_id)
     except requests.HTTPError as e:
         raise HTTPException(status_code=400, detail=f"Unable to locate pokemon: {e}")
     except Exception as e:
@@ -78,12 +77,12 @@ def put_pokemon_encounter_id(
     for item in items:
         try:
             # Verify Item exists in db.
-            item_validation = item_builder.get_item(item.id)
+            item_validation = composer.get_item_builder().get_item(item.id)
             if item_validation.name != item.name:
                 raise ValueError
 
-            modifiers += poke_builder.modifiers(pokemon, item=item) # Add item modifier
-            item_builder.delete_item(item) # Delete item after use.
+            modifiers += composer.get_poke_builder().modifiers(pokemon, item=item) # Add item modifier
+            composer.get_item_builder().delete_item(item) # Delete item after use.
         except requests.HTTPError as e:
             raise HTTPException(status_code=500, detail=f"Item was unable to be deleted: {e}")
         except ValueError:
@@ -96,16 +95,16 @@ def put_pokemon_encounter_id(
     if (die + modifiers) >= pokemon.base.catch_rate:
         print("Caught!")
         try:
-            poke_builder.modify_pokemon(pokemon.id, payload={"owner": username})
+            composer.get_poke_builder().modify_pokemon(pokemon.id, payload={"owner": username})
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Failed saving pokemon to pokedex. {e}")
 
         got_item = None
         if random.random() <= answers.ITEM_RANDOM_CHANCE:
-            item: ItemModel = item_builder.random_item(tier=1)
+            item: ItemModel = composer.get_item_builder().random_item(tier=1)
             try:
                 item.owner = username
-                got_item = item_builder.save_item(item)
+                got_item = composer.get_item_builder().save_item(item)
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Failed to save got item. {e}")
 
@@ -119,7 +118,7 @@ def put_pokemon_encounter_id(
         # Escape chance was modified to be less than lowest percent OR
         # User rolled a NAT 1 RIP
         try:
-            poke_builder.delete_pokemon(pokemon.id)
+            composer.get_poke_builder().delete_pokemon(pokemon.id)
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Unable to delete pokemon?.. {e}")
 
@@ -135,13 +134,14 @@ def put_pokemon_encounter_id(
 def put_pokemon_evolve(
         username: int, 
         ids: Annotated[list[int], Body()],
+        composer: Composer = Depends(get_composer)
     ) -> PokemonModel:
 
     # Get list of pokemon
     staged: List[PokemonModel] = []
     try:
         for id in ids:
-            staged.append(poke_builder.get_pokemon(id))
+            staged.append(composer.get_poke_builder().get_pokemon(id))
     except requests.HTTPError as e:
         print(str(e))
         raise HTTPException(status_code=500, detail=f"Unable to locate Pokemon: {e}")
@@ -165,12 +165,12 @@ def put_pokemon_evolve(
         # Choose the shiny one.
         if each.sprite.shiny:
             chosen = each
-    pokemon = poke_builder.evolve(chosen if chosen else staged[0]) # Evolve chosen OR first pokemon.
+    pokemon = composer.get_poke_builder().evolve(chosen if chosen else staged[0]) # Evolve chosen OR first pokemon.
 
     # Release evolved pokemon.
     released = []
     for each in staged:
-        poke_builder.delete_pokemon(each.id)
+        composer.get_poke_builder().delete_pokemon(each.id)
         released.append(each.id)
 
     return pokemon
@@ -180,6 +180,7 @@ def post_pokemon_upgrade(
         username: int,
         pokemon_id: Annotated[int, Body()],
         items: list[ItemModel]=None,
+        composer: Composer = Depends(get_composer)
     ):
     
     # Exit if no item was used.
@@ -188,7 +189,7 @@ def post_pokemon_upgrade(
     
     # Encounter a specific already created Pokemon
     try:
-        pokemon: PokemonModel = poke_builder.get_pokemon(pokemon_id)
+        pokemon: PokemonModel = composer.get_poke_builder().get_pokemon(pokemon_id)
     except requests.HTTPError as e:
         raise HTTPException(status_code=400, detail=f"Unable to locate pokemon: {e}")
     except Exception as e:
@@ -200,13 +201,13 @@ def post_pokemon_upgrade(
 
     for item in items:
         if item.name == "X Speed":
-            poke_builder.modify_pokemon(pokemon_id, payload={"speed": [x.value for x in pokemon.stats if x.name == "speed"][0] + 1})
+            composer.get_poke_builder().modify_pokemon(pokemon_id, payload={"speed": [x.value for x in pokemon.stats if x.name == "speed"][0] + 1})
         elif item.name == "HP Up":
-            poke_builder.modify_pokemon(pokemon_id, payload={"hp": [x.value for x in pokemon.stats if x.name == "hp"][0] + 1})
+            composer.get_poke_builder().modify_pokemon(pokemon_id, payload={"hp": [x.value for x in pokemon.stats if x.name == "hp"][0] + 1})
         elif item.name == "TM Machine":
             kept_move = random.choice(pokemon.moves)
-            new_moves = poke_builder._get_valid_moves(pokemon.base)
+            new_moves = composer.get_poke_builder()._get_valid_moves(pokemon.base)
 
-            poke_builder.modify_pokemon(pokemon_id, payload={"moves": [kept_move.id, random.choice(new_moves).id]})
+            composer.get_poke_builder().modify_pokemon(pokemon_id, payload={"moves": [kept_move.id, random.choice(new_moves).id]})
         else:
             pass

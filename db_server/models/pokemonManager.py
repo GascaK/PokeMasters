@@ -1,6 +1,7 @@
 import json
 from flask import request
 from flask_restful import abort, fields, marshal_with, Resource
+
 from services.alchemy_loader import Session
 from interfaces.models import Pokemon, Move
 
@@ -57,7 +58,7 @@ class PokemonLocator(Resource):
 
             # Extract stats from payload
             stats_map = {stat["name"]: stat for stat in payload.get("stats", [])}
-            
+
             # Create Pokemon instance with data from payload
             pokemon = Pokemon(
                 dex_id=payload["base"]["dex_id"],
@@ -103,52 +104,3 @@ class PokemonLocator(Resource):
             return {"message": f"Pokemon {id} deleted successfully"}, 200
         except Exception as e:
             abort(500, message=f"Error deleting Pokemon: {str(e)}")
-
-
-# Move resource fields for marshalling
-move_resource = {
-    'id': fields.Integer,
-    'name': fields.String,
-    'tier': fields.Integer,
-    'move_type': fields.String,
-    'special': fields.String,
-    'hit': fields.String
-}
-
-
-class MoveLocator(Resource):
-    """Resource for handling Move CRUD operations at /moves/<id>."""
-
-    @marshal_with(move_resource)
-    def get(self, id):
-        """Retrieve a Move by ID."""
-        with Session() as session:
-            move = session.query(Move).filter_by(id=id).first()
-
-        if not move:
-            abort(404, message=f"Unable to find move with ID: {id}")
-
-        return move
-
-    @marshal_with(move_resource)
-    def put(self, id):
-        """Create or replace a Move with the given ID."""
-        try:
-            payload = json.loads(request.get_json())
-            if not payload:
-                abort(400, message="Invalid payload.")
-
-            with Session() as session:
-                move = Move(
-                    name=payload["name"],
-                    move_type=payload["move_type"],
-                    special=None if not payload.get("special") else payload["special"]["text"],
-                    tier=payload["tier"],
-                    hit=payload["hit"]
-                )
-                session.add(move)
-                session.commit()
-
-            return move
-        except Exception as e:
-            abort(503, message=f"Error creating move: {str(e)}")
