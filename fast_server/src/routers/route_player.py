@@ -19,10 +19,10 @@ router = APIRouter(
 )
 
 @router.get("/find", tags=["player"])
-def get_player_find(username: int, name: str, composer: Composer = Depends(get_composer)) -> PlayerModel:
+def get_player_login(username: int, name: str, composer: Composer = Depends(get_composer)) -> PlayerModel:
     try:
         player: PlayerModel = composer.get_player_builder().get_player_by_name(name)
-        print(player)
+
         return player
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error grabbing player: {e}")
@@ -33,7 +33,7 @@ def get_player_starters(username: int, composer: Composer = Depends(get_composer
     for generation in composer.get_base_loader().get_generations():
         starters = {
             1: [1, 4, 7],
-            2: [152, 155, 159]
+            2: [152, 155, 158]
         }.get(generation)
 
     try:

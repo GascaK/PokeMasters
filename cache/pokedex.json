@@ -6,7 +6,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 12,
-            "speed": -3,
+            "speed": 0,
             "special": 130,
             "physical": 98,
             "types": [
@@ -25,7 +25,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 15,
-            "speed": -2,
+            "speed": 2,
             "special": 160,
             "physical": 125,
             "types": [
@@ -44,7 +44,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 20,
-            "speed": 0,
+            "speed": 4,
             "special": 200,
             "physical": 165,
             "types": [
@@ -61,7 +61,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 10,
-            "speed": -1,
+            "speed": 2,
             "special": 110,
             "physical": 95,
             "types": [
@@ -79,7 +79,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 15,
-            "speed": 0,
+            "speed": 4,
             "special": 145,
             "physical": 122,
             "types": [
@@ -97,7 +97,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 20,
-            "speed": 2,
+            "speed": 7,
             "special": 194,
             "physical": 162,
             "types": [
@@ -114,7 +114,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 11,
-            "speed": -3,
+            "speed": 0,
             "special": 114,
             "physical": 113,
             "types": [
@@ -132,7 +132,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 15,
-            "speed": -2,
+            "speed": 1,
             "special": 145,
             "physical": 143,
             "types": [
@@ -150,7 +150,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 20,
-            "speed": 0,
+            "speed": 4,
             "special": 190,
             "physical": 183,
             "types": [
@@ -166,7 +166,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 12,
-            "speed": -3,
+            "speed": 0,
             "special": 40,
             "physical": 65,
             "types": [
@@ -184,7 +184,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 13,
-            "speed": -5,
+            "speed": -2,
             "special": 50,
             "physical": 75,
             "types": [
@@ -202,7 +202,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 15,
-            "speed": -1,
+            "speed": 3,
             "special": 170,
             "physical": 95,
             "types": [
@@ -219,7 +219,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 10,
-            "speed": -3,
+            "speed": 0,
             "special": 40,
             "physical": 65,
             "types": [
@@ -238,7 +238,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 12,
-            "speed": -4,
+            "speed": -1,
             "special": 50,
             "physical": 75,
             "types": [
@@ -257,7 +257,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 17,
-            "speed": 0,
+            "speed": 4,
             "special": 125,
             "physical": 130,
             "types": [
@@ -274,7 +274,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 10,
-            "speed": -2,
+            "speed": 1,
             "special": 70,
             "physical": 85,
             "types": [
@@ -293,7 +293,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 16,
-            "speed": 0,
+            "speed": 3,
             "special": 100,
             "physical": 115,
             "types": [
@@ -312,7 +312,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 21,
-            "speed": 3,
+            "speed": 7,
             "special": 140,
             "physical": 155,
             "types": [
@@ -329,7 +329,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 8,
-            "speed": 0,
+            "speed": 3,
             "special": 60,
             "physical": 91,
             "types": [
@@ -347,7 +347,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 14,
-            "speed": 2,
+            "speed": 6,
             "special": 120,
             "physical": 141,
             "types": [
@@ -363,7 +363,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 10,
-            "speed": -1,
+            "speed": 3,
             "special": 62,
             "physical": 90,
             "types": [
@@ -382,7 +382,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 17,
-            "speed": 2,
+            "speed": 7,
             "special": 122,
             "physical": 155,
             "types": [
@@ -399,7 +399,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 9,
-            "speed": -2,
+            "speed": 1,
             "special": 94,
             "physical": 104,
             "types": [
@@ -417,7 +417,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 15,
-            "speed": 0,
+            "speed": 4,
             "special": 144,
             "physical": 164,
             "types": [
@@ -433,7 +433,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 9,
-            "speed": 1,
+            "speed": 5,
             "special": 100,
             "physical": 95,
             "types": [
@@ -451,7 +451,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 15,
-            "speed": 3,
+            "speed": 8,
             "special": 170,
             "physical": 145,
             "types": [
@@ -467,7 +467,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 13,
-            "speed": -4,
+            "speed": -1,
             "special": 50,
             "physical": 160,
             "types": [
@@ -485,7 +485,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 19,
-            "speed": -1,
+            "speed": 2,
             "special": 100,
             "physical": 210,
             "types": [
@@ -501,7 +501,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 14,
-            "speed": -3,
+            "speed": -1,
             "special": 80,
             "physical": 99,
             "types": [
@@ -519,7 +519,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 18,
-            "speed": -2,
+            "speed": 1,
             "special": 110,
             "physical": 129,
             "types": [
@@ -537,7 +537,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 23,
-            "speed": 0,
+            "speed": 4,
             "special": 160,
             "physical": 179,
             "types": [
@@ -554,7 +554,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 12,
-            "speed": -3,
+            "speed": 0,
             "special": 80,
             "physical": 97,
             "types": [
@@ -572,7 +572,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 16,
-            "speed": -1,
+            "speed": 2,
             "special": 110,
             "physical": 129,
             "types": [
@@ -590,7 +590,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 21,
-            "speed": 1,
+            "speed": 5,
             "special": 160,
             "physical": 179,
             "types": [
@@ -607,7 +607,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 18,
-            "speed": -4,
+            "speed": -1,
             "special": 125,
             "physical": 93,
             "types": [
@@ -625,7 +625,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 24,
-            "speed": -2,
+            "speed": 2,
             "special": 185,
             "physical": 143,
             "types": [
@@ -641,7 +641,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 10,
-            "speed": -1,
+            "speed": 2,
             "special": 115,
             "physical": 81,
             "types": [
@@ -659,7 +659,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 19,
-            "speed": 2,
+            "speed": 7,
             "special": 181,
             "physical": 151,
             "types": [
@@ -675,7 +675,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 29,
-            "speed": -6,
+            "speed": -3,
             "special": 70,
             "physical": 65,
             "types": [
@@ -694,7 +694,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 35,
-            "speed": -3,
+            "speed": 0,
             "special": 135,
             "physical": 115,
             "types": [
@@ -711,7 +711,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 10,
-            "speed": -2,
+            "speed": 1,
             "special": 70,
             "physical": 80,
             "types": [
@@ -730,7 +730,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 19,
-            "speed": 1,
+            "speed": 5,
             "special": 140,
             "physical": 150,
             "types": [
@@ -739,7 +739,9 @@
             ],
             "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/42.png",
             "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/42.png",
-            "evolutions": []
+            "evolutions": [
+                169
+            ]
         },
         {
             "dex_id": 43,
@@ -747,7 +749,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 12,
-            "speed": -5,
+            "speed": -2,
             "special": 140,
             "physical": 105,
             "types": [
@@ -766,7 +768,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 15,
-            "speed": -4,
+            "speed": -1,
             "special": 160,
             "physical": 135,
             "types": [
@@ -776,7 +778,8 @@
             "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/44.png",
             "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/44.png",
             "evolutions": [
-                45
+                45,
+                182
             ]
         },
         {
@@ -785,7 +788,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 19,
-            "speed": -3,
+            "speed": 0,
             "special": 200,
             "physical": 165,
             "types": [
@@ -802,7 +805,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 9,
-            "speed": -5,
+            "speed": -3,
             "special": 100,
             "physical": 125,
             "types": [
@@ -821,7 +824,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 15,
-            "speed": -5,
+            "speed": -2,
             "special": 140,
             "physical": 175,
             "types": [
@@ -838,7 +841,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 15,
-            "speed": -3,
+            "speed": 0,
             "special": 95,
             "physical": 105,
             "types": [
@@ -857,7 +860,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 18,
-            "speed": 1,
+            "speed": 5,
             "special": 165,
             "physical": 125,
             "types": [
@@ -874,7 +877,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 3,
-            "speed": 2,
+            "speed": 6,
             "special": 80,
             "physical": 80,
             "types": [
@@ -892,7 +895,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 9,
-            "speed": 4,
+            "speed": 9,
             "special": 120,
             "physical": 150,
             "types": [
@@ -908,7 +911,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 10,
-            "speed": 1,
+            "speed": 5,
             "special": 80,
             "physical": 80,
             "types": [
@@ -926,7 +929,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 17,
-            "speed": 4,
+            "speed": 9,
             "special": 130,
             "physical": 130,
             "types": [
@@ -942,7 +945,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 13,
-            "speed": -2,
+            "speed": 1,
             "special": 115,
             "physical": 100,
             "types": [
@@ -960,7 +963,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 20,
-            "speed": 1,
+            "speed": 5,
             "special": 175,
             "physical": 160,
             "types": [
@@ -976,7 +979,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 10,
-            "speed": -1,
+            "speed": 3,
             "special": 80,
             "physical": 115,
             "types": [
@@ -994,7 +997,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 17,
-            "speed": 2,
+            "speed": 6,
             "special": 130,
             "physical": 165,
             "types": [
@@ -1010,7 +1013,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 14,
-            "speed": -2,
+            "speed": 2,
             "special": 120,
             "physical": 115,
             "types": [
@@ -1028,7 +1031,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 23,
-            "speed": 2,
+            "speed": 6,
             "special": 180,
             "physical": 190,
             "types": [
@@ -1044,7 +1047,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 10,
-            "speed": 1,
+            "speed": 5,
             "special": 80,
             "physical": 90,
             "types": [
@@ -1062,7 +1065,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 17,
-            "speed": 1,
+            "speed": 5,
             "special": 100,
             "physical": 130,
             "types": [
@@ -1071,7 +1074,8 @@
             "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/61.png",
             "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/61.png",
             "evolutions": [
-                62
+                62,
+                186
             ]
         },
         {
@@ -1080,7 +1084,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 23,
-            "speed": -1,
+            "speed": 3,
             "special": 160,
             "physical": 190,
             "types": [
@@ -1097,7 +1101,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 7,
-            "speed": 1,
+            "speed": 5,
             "special": 160,
             "physical": 35,
             "types": [
@@ -1115,7 +1119,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 10,
-            "speed": 3,
+            "speed": 7,
             "special": 190,
             "physical": 65,
             "types": [
@@ -1133,7 +1137,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 14,
-            "speed": 4,
+            "speed": 9,
             "special": 230,
             "physical": 95,
             "types": [
@@ -1149,7 +1153,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 18,
-            "speed": -4,
+            "speed": -1,
             "special": 70,
             "physical": 130,
             "types": [
@@ -1167,7 +1171,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 20,
-            "speed": -3,
+            "speed": 0,
             "special": 110,
             "physical": 170,
             "types": [
@@ -1185,7 +1189,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 23,
-            "speed": -2,
+            "speed": 1,
             "special": 150,
             "physical": 210,
             "types": [
@@ -1201,7 +1205,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 13,
-            "speed": -4,
+            "speed": -1,
             "special": 100,
             "physical": 110,
             "types": [
@@ -1220,7 +1224,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 17,
-            "speed": -2,
+            "speed": 1,
             "special": 130,
             "physical": 140,
             "types": [
@@ -1239,7 +1243,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 20,
-            "speed": -1,
+            "speed": 3,
             "special": 170,
             "physical": 170,
             "types": [
@@ -1256,7 +1260,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 10,
-            "speed": -1,
+            "speed": 3,
             "special": 150,
             "physical": 75,
             "types": [
@@ -1275,7 +1279,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 20,
-            "speed": 2,
+            "speed": 7,
             "special": 200,
             "physical": 135,
             "types": [
@@ -1292,7 +1296,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 10,
-            "speed": -6,
+            "speed": -3,
             "special": 60,
             "physical": 180,
             "types": [
@@ -1311,7 +1315,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 14,
-            "speed": -4,
+            "speed": -1,
             "special": 90,
             "physical": 210,
             "types": [
@@ -1330,7 +1334,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 20,
-            "speed": -3,
+            "speed": 0,
             "special": 120,
             "physical": 250,
             "types": [
@@ -1347,7 +1351,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 13,
-            "speed": 1,
+            "speed": 5,
             "special": 130,
             "physical": 140,
             "types": [
@@ -1365,7 +1369,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 17,
-            "speed": 3,
+            "speed": 7,
             "special": 160,
             "physical": 170,
             "types": [
@@ -1381,7 +1385,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 23,
-            "speed": -6,
+            "speed": -4,
             "special": 80,
             "physical": 130,
             "types": [
@@ -1391,7 +1395,8 @@
             "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/79.png",
             "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/79.png",
             "evolutions": [
-                80
+                80,
+                199
             ]
         },
         {
@@ -1400,7 +1405,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 24,
-            "speed": -5,
+            "speed": -2,
             "special": 180,
             "physical": 185,
             "types": [
@@ -1417,7 +1422,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 7,
-            "speed": -3,
+            "speed": 0,
             "special": 150,
             "physical": 105,
             "types": [
@@ -1436,7 +1441,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 13,
-            "speed": -1,
+            "speed": 3,
             "special": 190,
             "physical": 155,
             "types": [
@@ -1453,7 +1458,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 13,
-            "speed": -2,
+            "speed": 2,
             "special": 120,
             "physical": 145,
             "types": [
@@ -1470,7 +1475,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 9,
-            "speed": 0,
+            "speed": 4,
             "special": 70,
             "physical": 130,
             "types": [
@@ -1489,7 +1494,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 15,
-            "speed": 3,
+            "speed": 8,
             "special": 120,
             "physical": 180,
             "types": [
@@ -1506,7 +1511,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 17,
-            "speed": -3,
+            "speed": 0,
             "special": 115,
             "physical": 100,
             "types": [
@@ -1524,7 +1529,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 23,
-            "speed": -1,
+            "speed": 3,
             "special": 165,
             "physical": 150,
             "types": [
@@ -1541,7 +1546,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 20,
-            "speed": -5,
+            "speed": -3,
             "special": 90,
             "physical": 130,
             "types": [
@@ -1559,7 +1564,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 27,
-            "speed": -3,
+            "speed": 0,
             "special": 165,
             "physical": 180,
             "types": [
@@ -1575,7 +1580,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 8,
-            "speed": -4,
+            "speed": -1,
             "special": 70,
             "physical": 165,
             "types": [
@@ -1593,7 +1598,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 13,
-            "speed": -1,
+            "speed": 3,
             "special": 130,
             "physical": 275,
             "types": [
@@ -1610,7 +1615,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 8,
-            "speed": 0,
+            "speed": 4,
             "special": 135,
             "physical": 65,
             "types": [
@@ -1629,7 +1634,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 12,
-            "speed": 2,
+            "speed": 6,
             "special": 170,
             "physical": 95,
             "types": [
@@ -1648,7 +1653,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 15,
-            "speed": 3,
+            "speed": 8,
             "special": 205,
             "physical": 125,
             "types": [
@@ -1665,7 +1670,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 9,
-            "speed": -1,
+            "speed": 3,
             "special": 75,
             "physical": 205,
             "types": [
@@ -1674,7 +1679,9 @@
             ],
             "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/95.png",
             "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/95.png",
-            "evolutions": []
+            "evolutions": [
+                208
+            ]
         },
         {
             "dex_id": 96,
@@ -1682,7 +1689,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 15,
-            "speed": -3,
+            "speed": -1,
             "special": 133,
             "physical": 93,
             "types": [
@@ -1700,7 +1707,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 22,
-            "speed": -1,
+            "speed": 3,
             "special": 188,
             "physical": 143,
             "types": [
@@ -1716,7 +1723,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 8,
-            "speed": -3,
+            "speed": 0,
             "special": 50,
             "physical": 195,
             "types": [
@@ -1734,7 +1741,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 14,
-            "speed": 0,
+            "speed": 4,
             "special": 100,
             "physical": 245,
             "types": [
@@ -1750,7 +1757,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 10,
-            "speed": 2,
+            "speed": 7,
             "special": 110,
             "physical": 80,
             "types": [
@@ -1768,7 +1775,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 15,
-            "speed": 7,
+            "speed": 13,
             "special": 160,
             "physical": 120,
             "types": [
@@ -1784,7 +1791,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 15,
-            "speed": -4,
+            "speed": -1,
             "special": 105,
             "physical": 120,
             "types": [
@@ -1803,7 +1810,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 24,
-            "speed": -2,
+            "speed": 1,
             "special": 200,
             "physical": 180,
             "types": [
@@ -1820,7 +1827,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 13,
-            "speed": -4,
+            "speed": -1,
             "special": 90,
             "physical": 145,
             "types": [
@@ -1838,7 +1845,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 15,
-            "speed": -3,
+            "speed": 0,
             "special": 130,
             "physical": 190,
             "types": [
@@ -1854,7 +1861,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 13,
-            "speed": 1,
+            "speed": 5,
             "special": 145,
             "physical": 173,
             "types": [
@@ -1870,7 +1877,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 13,
-            "speed": 0,
+            "speed": 4,
             "special": 145,
             "physical": 184,
             "types": [
@@ -1886,7 +1893,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 23,
-            "speed": -5,
+            "speed": -2,
             "special": 135,
             "physical": 130,
             "types": [
@@ -1902,7 +1909,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 10,
-            "speed": -4,
+            "speed": -1,
             "special": 105,
             "physical": 160,
             "types": [
@@ -1920,7 +1927,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 17,
-            "speed": -2,
+            "speed": 2,
             "special": 155,
             "physical": 210,
             "types": [
@@ -1936,7 +1943,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 20,
-            "speed": -5,
+            "speed": -3,
             "special": 60,
             "physical": 180,
             "types": [
@@ -1955,7 +1962,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 27,
-            "speed": -4,
+            "speed": -1,
             "special": 90,
             "physical": 250,
             "types": [
@@ -1972,7 +1979,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 63,
-            "speed": -3,
+            "speed": 0,
             "special": 140,
             "physical": 10,
             "types": [
@@ -1980,7 +1987,9 @@
             ],
             "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/113.png",
             "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/113.png",
-            "evolutions": []
+            "evolutions": [
+                242
+            ]
         },
         {
             "dex_id": 114,
@@ -1988,7 +1997,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 17,
-            "speed": -2,
+            "speed": 2,
             "special": 140,
             "physical": 170,
             "types": [
@@ -2004,7 +2013,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 27,
-            "speed": 1,
+            "speed": 5,
             "special": 120,
             "physical": 175,
             "types": [
@@ -2020,7 +2029,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 8,
-            "speed": -2,
+            "speed": 2,
             "special": 95,
             "physical": 110,
             "types": [
@@ -2038,7 +2047,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 14,
-            "speed": 1,
+            "speed": 5,
             "special": 140,
             "physical": 160,
             "types": [
@@ -2046,7 +2055,9 @@
             ],
             "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/117.png",
             "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/117.png",
-            "evolutions": []
+            "evolutions": [
+                230
+            ]
         },
         {
             "dex_id": 118,
@@ -2054,7 +2065,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 12,
-            "speed": -1,
+            "speed": 2,
             "special": 85,
             "physical": 127,
             "types": [
@@ -2072,7 +2083,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 20,
-            "speed": -1,
+            "speed": 3,
             "special": 145,
             "physical": 157,
             "types": [
@@ -2088,7 +2099,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 8,
-            "speed": 1,
+            "speed": 5,
             "special": 125,
             "physical": 100,
             "types": [
@@ -2106,7 +2117,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 15,
-            "speed": 4,
+            "speed": 9,
             "special": 185,
             "physical": 160,
             "types": [
@@ -2123,7 +2134,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 10,
-            "speed": 1,
+            "speed": 5,
             "special": 220,
             "physical": 110,
             "types": [
@@ -2140,7 +2151,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 18,
-            "speed": 3,
+            "speed": 7,
             "special": 135,
             "physical": 190,
             "types": [
@@ -2149,7 +2160,9 @@
             ],
             "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/123.png",
             "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/123.png",
-            "evolutions": []
+            "evolutions": [
+                212
+            ]
         },
         {
             "dex_id": 124,
@@ -2157,7 +2170,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 17,
-            "speed": 2,
+            "speed": 6,
             "special": 210,
             "physical": 85,
             "types": [
@@ -2174,7 +2187,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 17,
-            "speed": 3,
+            "speed": 7,
             "special": 180,
             "physical": 140,
             "types": [
@@ -2190,7 +2203,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 17,
-            "speed": 2,
+            "speed": 6,
             "special": 185,
             "physical": 152,
             "types": [
@@ -2206,7 +2219,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 17,
-            "speed": 1,
+            "speed": 5,
             "special": 125,
             "physical": 225,
             "types": [
@@ -2222,7 +2235,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 19,
-            "speed": 3,
+            "speed": 8,
             "special": 110,
             "physical": 195,
             "types": [
@@ -2238,7 +2251,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 5,
-            "speed": 0,
+            "speed": 4,
             "special": 35,
             "physical": 65,
             "types": [
@@ -2256,7 +2269,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 24,
-            "speed": 1,
+            "speed": 4,
             "special": 160,
             "physical": 204,
             "types": [
@@ -2273,7 +2286,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 33,
-            "speed": -2,
+            "speed": 2,
             "special": 180,
             "physical": 165,
             "types": [
@@ -2290,7 +2303,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 12,
-            "speed": -3,
+            "speed": 0,
             "special": 96,
             "physical": 96,
             "types": [
@@ -2306,7 +2319,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 14,
-            "speed": -2,
+            "speed": 1,
             "special": 110,
             "physical": 105,
             "types": [
@@ -2317,7 +2330,9 @@
             "evolutions": [
                 134,
                 135,
-                136
+                136,
+                196,
+                197
             ]
         },
         {
@@ -2326,7 +2341,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 33,
-            "speed": -1,
+            "speed": 2,
             "special": 205,
             "physical": 125,
             "types": [
@@ -2342,7 +2357,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 17,
-            "speed": 5,
+            "speed": 10,
             "special": 205,
             "physical": 125,
             "types": [
@@ -2358,7 +2373,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 17,
-            "speed": -1,
+            "speed": 2,
             "special": 205,
             "physical": 190,
             "types": [
@@ -2374,7 +2389,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 17,
-            "speed": -4,
+            "speed": -1,
             "special": 160,
             "physical": 130,
             "types": [
@@ -2382,7 +2397,9 @@
             ],
             "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/137.png",
             "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/137.png",
-            "evolutions": []
+            "evolutions": [
+                233
+            ]
         },
         {
             "dex_id": 138,
@@ -2390,7 +2407,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 9,
-            "speed": -4,
+            "speed": -1,
             "special": 145,
             "physical": 140,
             "types": [
@@ -2409,7 +2426,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 18,
-            "speed": -2,
+            "speed": 1,
             "special": 185,
             "physical": 185,
             "types": [
@@ -2426,7 +2443,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 8,
-            "speed": -2,
+            "speed": 1,
             "special": 100,
             "physical": 170,
             "types": [
@@ -2445,7 +2462,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 15,
-            "speed": 0,
+            "speed": 4,
             "special": 135,
             "physical": 220,
             "types": [
@@ -2462,7 +2479,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 20,
-            "speed": 5,
+            "speed": 10,
             "special": 135,
             "physical": 170,
             "types": [
@@ -2479,7 +2496,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 40,
-            "speed": -5,
+            "speed": -2,
             "special": 175,
             "physical": 175,
             "types": [
@@ -2495,7 +2512,7 @@
             "tier": 4,
             "catch_rate": 20,
             "hp": 23,
-            "speed": 1,
+            "speed": 5,
             "special": 220,
             "physical": 185,
             "types": [
@@ -2512,7 +2529,7 @@
             "tier": 4,
             "catch_rate": 20,
             "hp": 23,
-            "speed": 2,
+            "speed": 7,
             "special": 215,
             "physical": 175,
             "types": [
@@ -2529,7 +2546,7 @@
             "tier": 4,
             "catch_rate": 20,
             "hp": 23,
-            "speed": 1,
+            "speed": 5,
             "special": 210,
             "physical": 190,
             "types": [
@@ -2546,7 +2563,7 @@
             "tier": 1,
             "catch_rate": 7,
             "hp": 11,
-            "speed": -3,
+            "speed": 0,
             "special": 100,
             "physical": 109,
             "types": [
@@ -2564,7 +2581,7 @@
             "tier": 2,
             "catch_rate": 11,
             "hp": 16,
-            "speed": -1,
+            "speed": 3,
             "special": 140,
             "physical": 149,
             "types": [
@@ -2582,7 +2599,7 @@
             "tier": 3,
             "catch_rate": 16,
             "hp": 23,
-            "speed": 0,
+            "speed": 4,
             "special": 200,
             "physical": 229,
             "types": [
@@ -2599,7 +2616,7 @@
             "tier": 4,
             "catch_rate": 20,
             "hp": 27,
-            "speed": 5,
+            "speed": 10,
             "special": 244,
             "physical": 200,
             "types": [
@@ -2615,7 +2632,7 @@
             "tier": 4,
             "catch_rate": 20,
             "hp": 25,
-            "speed": 2,
+            "speed": 7,
             "special": 200,
             "physical": 200,
             "types": [
@@ -2623,6 +2640,1714 @@
             ],
             "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/151.png",
             "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 152,
+            "name": "chikorita",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 12,
+            "speed": 0,
+            "special": 114,
+            "physical": 114,
+            "types": [
+                "grass"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/152.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/152.png",
+            "evolutions": [
+                153
+            ]
+        },
+        {
+            "dex_id": 153,
+            "name": "bayleef",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 15,
+            "speed": 2,
+            "special": 143,
+            "physical": 142,
+            "types": [
+                "grass"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/153.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/153.png",
+            "evolutions": [
+                154
+            ]
+        },
+        {
+            "dex_id": 154,
+            "name": "meganium",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 20,
+            "speed": 4,
+            "special": 183,
+            "physical": 182,
+            "types": [
+                "grass"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/154.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/154.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 155,
+            "name": "cyndaquil",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 10,
+            "speed": 2,
+            "special": 110,
+            "physical": 95,
+            "types": [
+                "fire"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/155.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/155.png",
+            "evolutions": [
+                156
+            ]
+        },
+        {
+            "dex_id": 156,
+            "name": "quilava",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 15,
+            "speed": 4,
+            "special": 145,
+            "physical": 122,
+            "types": [
+                "fire"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/156.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/156.png",
+            "evolutions": [
+                157
+            ]
+        },
+        {
+            "dex_id": 157,
+            "name": "typhlosion",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 20,
+            "speed": 7,
+            "special": 194,
+            "physical": 162,
+            "types": [
+                "fire"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/157.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/157.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 158,
+            "name": "totodile",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 13,
+            "speed": 0,
+            "special": 92,
+            "physical": 129,
+            "types": [
+                "water"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/158.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/158.png",
+            "evolutions": [
+                159
+            ]
+        },
+        {
+            "dex_id": 159,
+            "name": "croconaw",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 17,
+            "speed": 1,
+            "special": 122,
+            "physical": 160,
+            "types": [
+                "water"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/159.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/159.png",
+            "evolutions": [
+                160
+            ]
+        },
+        {
+            "dex_id": 160,
+            "name": "feraligatr",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 22,
+            "speed": 4,
+            "special": 162,
+            "physical": 205,
+            "types": [
+                "water"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/160.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/160.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 161,
+            "name": "sentret",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 9,
+            "speed": -3,
+            "special": 80,
+            "physical": 80,
+            "types": [
+                "normal"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/161.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/161.png",
+            "evolutions": [
+                162
+            ]
+        },
+        {
+            "dex_id": 162,
+            "name": "furret",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 22,
+            "speed": 5,
+            "special": 100,
+            "physical": 140,
+            "types": [
+                "normal"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/162.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/162.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 163,
+            "name": "hoothoot",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 15,
+            "speed": 0,
+            "special": 92,
+            "physical": 60,
+            "types": [
+                "normal",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/163.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/163.png",
+            "evolutions": [
+                164
+            ]
+        },
+        {
+            "dex_id": 164,
+            "name": "noctowl",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 25,
+            "speed": 3,
+            "special": 182,
+            "physical": 100,
+            "types": [
+                "normal",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/164.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/164.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 165,
+            "name": "ledyba",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 10,
+            "speed": 1,
+            "special": 120,
+            "physical": 50,
+            "types": [
+                "bug",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/165.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/165.png",
+            "evolutions": [
+                166
+            ]
+        },
+        {
+            "dex_id": 166,
+            "name": "ledian",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 14,
+            "speed": 5,
+            "special": 165,
+            "physical": 85,
+            "types": [
+                "bug",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/166.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/166.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 167,
+            "name": "spinarak",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 10,
+            "speed": -2,
+            "special": 80,
+            "physical": 100,
+            "types": [
+                "bug",
+                "poison"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/167.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/167.png",
+            "evolutions": [
+                168
+            ]
+        },
+        {
+            "dex_id": 168,
+            "name": "ariados",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 18,
+            "speed": -1,
+            "special": 130,
+            "physical": 160,
+            "types": [
+                "bug",
+                "poison"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/168.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/168.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 169,
+            "name": "crobat",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 22,
+            "speed": 10,
+            "special": 150,
+            "physical": 170,
+            "types": [
+                "poison",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/169.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/169.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 170,
+            "name": "chinchou",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 19,
+            "speed": 3,
+            "special": 112,
+            "physical": 76,
+            "types": [
+                "water",
+                "electric"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/170.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/170.png",
+            "evolutions": [
+                171
+            ]
+        },
+        {
+            "dex_id": 171,
+            "name": "lanturn",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 32,
+            "speed": 3,
+            "special": 152,
+            "physical": 116,
+            "types": [
+                "water",
+                "electric"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/171.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/171.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 172,
+            "name": "pichu",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 5,
+            "speed": 2,
+            "special": 70,
+            "physical": 55,
+            "types": [
+                "electric"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/172.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/172.png",
+            "evolutions": [
+                25
+            ]
+        },
+        {
+            "dex_id": 173,
+            "name": "cleffa",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 13,
+            "speed": -4,
+            "special": 100,
+            "physical": 53,
+            "types": [
+                "fairy"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/173.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/173.png",
+            "evolutions": [
+                35
+            ]
+        },
+        {
+            "dex_id": 174,
+            "name": "igglybuff",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 23,
+            "speed": -4,
+            "special": 60,
+            "physical": 45,
+            "types": [
+                "normal",
+                "fairy"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/174.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/174.png",
+            "evolutions": [
+                39
+            ]
+        },
+        {
+            "dex_id": 175,
+            "name": "togepi",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 9,
+            "speed": -3,
+            "special": 105,
+            "physical": 85,
+            "types": [
+                "fairy"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/175.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/175.png",
+            "evolutions": [
+                176
+            ]
+        },
+        {
+            "dex_id": 176,
+            "name": "togetic",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 14,
+            "speed": -1,
+            "special": 185,
+            "physical": 125,
+            "types": [
+                "fairy",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/176.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/176.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 177,
+            "name": "natu",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 10,
+            "speed": 3,
+            "special": 115,
+            "physical": 95,
+            "types": [
+                "psychic",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/177.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/177.png",
+            "evolutions": [
+                178
+            ]
+        },
+        {
+            "dex_id": 178,
+            "name": "xatu",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 17,
+            "speed": 6,
+            "special": 165,
+            "physical": 145,
+            "types": [
+                "psychic",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/178.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/178.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 179,
+            "name": "mareep",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 14,
+            "speed": -1,
+            "special": 110,
+            "physical": 80,
+            "types": [
+                "electric"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/179.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/179.png",
+            "evolutions": [
+                180
+            ]
+        },
+        {
+            "dex_id": 180,
+            "name": "flaaffy",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 18,
+            "speed": 0,
+            "special": 140,
+            "physical": 110,
+            "types": [
+                "electric"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/180.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/180.png",
+            "evolutions": [
+                181
+            ]
+        },
+        {
+            "dex_id": 181,
+            "name": "ampharos",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 23,
+            "speed": 1,
+            "special": 205,
+            "physical": 160,
+            "types": [
+                "electric"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/181.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/181.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 182,
+            "name": "bellossom",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 19,
+            "speed": 0,
+            "special": 190,
+            "physical": 175,
+            "types": [
+                "grass"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/182.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/182.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 183,
+            "name": "marill",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 18,
+            "speed": -1,
+            "special": 70,
+            "physical": 70,
+            "types": [
+                "water",
+                "fairy"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/183.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/183.png",
+            "evolutions": [
+                184
+            ]
+        },
+        {
+            "dex_id": 184,
+            "name": "azumarill",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 25,
+            "speed": 0,
+            "special": 140,
+            "physical": 130,
+            "types": [
+                "water",
+                "fairy"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/184.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/184.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 185,
+            "name": "sudowoodo",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 18,
+            "speed": -2,
+            "special": 95,
+            "physical": 215,
+            "types": [
+                "rock"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/185.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/185.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 186,
+            "name": "politoed",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 23,
+            "speed": 3,
+            "special": 190,
+            "physical": 150,
+            "types": [
+                "water"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/186.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/186.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 187,
+            "name": "hoppip",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 9,
+            "speed": 0,
+            "special": 90,
+            "physical": 75,
+            "types": [
+                "grass",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/187.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/187.png",
+            "evolutions": [
+                188
+            ]
+        },
+        {
+            "dex_id": 188,
+            "name": "skiploom",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 14,
+            "speed": 4,
+            "special": 110,
+            "physical": 95,
+            "types": [
+                "grass",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/188.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/188.png",
+            "evolutions": [
+                189
+            ]
+        },
+        {
+            "dex_id": 189,
+            "name": "jumpluff",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 19,
+            "speed": 8,
+            "special": 150,
+            "physical": 125,
+            "types": [
+                "grass",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/189.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/189.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 190,
+            "name": "aipom",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 14,
+            "speed": 5,
+            "special": 95,
+            "physical": 125,
+            "types": [
+                "normal"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/190.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/190.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 191,
+            "name": "sunkern",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 8,
+            "speed": -2,
+            "special": 60,
+            "physical": 60,
+            "types": [
+                "grass"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/191.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/191.png",
+            "evolutions": [
+                192
+            ]
+        },
+        {
+            "dex_id": 192,
+            "name": "sunflora",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 19,
+            "speed": -2,
+            "special": 190,
+            "physical": 130,
+            "types": [
+                "grass"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/192.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/192.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 193,
+            "name": "yanma",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 17,
+            "speed": 6,
+            "special": 120,
+            "physical": 110,
+            "types": [
+                "bug",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/193.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/193.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 194,
+            "name": "wooper",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 14,
+            "speed": -4,
+            "special": 50,
+            "physical": 90,
+            "types": [
+                "water",
+                "ground"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/194.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/194.png",
+            "evolutions": [
+                195
+            ]
+        },
+        {
+            "dex_id": 195,
+            "name": "quagsire",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 24,
+            "speed": -1,
+            "special": 130,
+            "physical": 170,
+            "types": [
+                "water",
+                "ground"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/195.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/195.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 196,
+            "name": "espeon",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 17,
+            "speed": 8,
+            "special": 225,
+            "physical": 125,
+            "types": [
+                "psychic"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/196.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/196.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 197,
+            "name": "umbreon",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 24,
+            "speed": 2,
+            "special": 190,
+            "physical": 175,
+            "types": [
+                "dark"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/197.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/197.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 198,
+            "name": "murkrow",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 15,
+            "speed": 6,
+            "special": 127,
+            "physical": 127,
+            "types": [
+                "dark",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/198.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/198.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 199,
+            "name": "slowking",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 24,
+            "speed": -2,
+            "special": 210,
+            "physical": 155,
+            "types": [
+                "water",
+                "psychic"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/199.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/199.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 200,
+            "name": "misdreavus",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 15,
+            "speed": 5,
+            "special": 170,
+            "physical": 120,
+            "types": [
+                "ghost"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/200.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/200.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 201,
+            "name": "unown",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 12,
+            "speed": 0,
+            "special": 120,
+            "physical": 120,
+            "types": [
+                "psychic"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/201.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/201.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 202,
+            "name": "wobbuffet",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 48,
+            "speed": -2,
+            "special": 91,
+            "physical": 91,
+            "types": [
+                "psychic"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/202.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/202.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 203,
+            "name": "girafarig",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 18,
+            "speed": 5,
+            "special": 155,
+            "physical": 145,
+            "types": [
+                "normal",
+                "psychic"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/203.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/203.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 204,
+            "name": "pineco",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 13,
+            "speed": -4,
+            "special": 70,
+            "physical": 155,
+            "types": [
+                "bug"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/204.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/204.png",
+            "evolutions": [
+                205
+            ]
+        },
+        {
+            "dex_id": 205,
+            "name": "forretress",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 19,
+            "speed": -1,
+            "special": 120,
+            "physical": 230,
+            "types": [
+                "bug",
+                "steel"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/205.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/205.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 206,
+            "name": "dunsparce",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 25,
+            "speed": 0,
+            "special": 130,
+            "physical": 140,
+            "types": [
+                "normal"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/206.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/206.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 207,
+            "name": "gligar",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 17,
+            "speed": 5,
+            "special": 100,
+            "physical": 180,
+            "types": [
+                "ground",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/207.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/207.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 208,
+            "name": "steelix",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 19,
+            "speed": -2,
+            "special": 120,
+            "physical": 285,
+            "types": [
+                "steel",
+                "ground"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/208.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/208.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 209,
+            "name": "snubbull",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 15,
+            "speed": -2,
+            "special": 80,
+            "physical": 130,
+            "types": [
+                "fairy"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/209.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/209.png",
+            "evolutions": [
+                210
+            ]
+        },
+        {
+            "dex_id": 210,
+            "name": "granbull",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 23,
+            "speed": 0,
+            "special": 120,
+            "physical": 195,
+            "types": [
+                "fairy"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/210.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/210.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 211,
+            "name": "qwilfish",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 17,
+            "speed": 5,
+            "special": 110,
+            "physical": 180,
+            "types": [
+                "water",
+                "poison"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/211.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/211.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 212,
+            "name": "scizor",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 18,
+            "speed": 2,
+            "special": 135,
+            "physical": 230,
+            "types": [
+                "bug",
+                "steel"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/212.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/212.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 213,
+            "name": "shuckle",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 5,
+            "speed": -5,
+            "special": 240,
+            "physical": 240,
+            "types": [
+                "bug",
+                "rock"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/213.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/213.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 214,
+            "name": "heracross",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 20,
+            "speed": 5,
+            "special": 135,
+            "physical": 200,
+            "types": [
+                "bug",
+                "fighting"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/214.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/214.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 215,
+            "name": "sneasel",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 14,
+            "speed": 9,
+            "special": 110,
+            "physical": 150,
+            "types": [
+                "dark",
+                "ice"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/215.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/215.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 216,
+            "name": "teddiursa",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 15,
+            "speed": -1,
+            "special": 100,
+            "physical": 130,
+            "types": [
+                "normal"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/216.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/216.png",
+            "evolutions": [
+                217
+            ]
+        },
+        {
+            "dex_id": 217,
+            "name": "ursaring",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 23,
+            "speed": 1,
+            "special": 150,
+            "physical": 205,
+            "types": [
+                "normal"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/217.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/217.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 218,
+            "name": "slugma",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 10,
+            "speed": -3,
+            "special": 110,
+            "physical": 80,
+            "types": [
+                "fire"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/218.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/218.png",
+            "evolutions": [
+                219
+            ]
+        },
+        {
+            "dex_id": 219,
+            "name": "magcargo",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 15,
+            "speed": -2,
+            "special": 170,
+            "physical": 170,
+            "types": [
+                "fire",
+                "rock"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/219.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/219.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 220,
+            "name": "swinub",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 13,
+            "speed": 0,
+            "special": 60,
+            "physical": 90,
+            "types": [
+                "ice",
+                "ground"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/220.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/220.png",
+            "evolutions": [
+                221
+            ]
+        },
+        {
+            "dex_id": 221,
+            "name": "piloswine",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 25,
+            "speed": 0,
+            "special": 120,
+            "physical": 180,
+            "types": [
+                "ice",
+                "ground"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/221.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/221.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 222,
+            "name": "corsola",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 17,
+            "speed": -1,
+            "special": 160,
+            "physical": 150,
+            "types": [
+                "water",
+                "rock"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/222.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/222.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 223,
+            "name": "remoraid",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 9,
+            "speed": 2,
+            "special": 100,
+            "physical": 100,
+            "types": [
+                "water"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/223.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/223.png",
+            "evolutions": [
+                224
+            ]
+        },
+        {
+            "dex_id": 224,
+            "name": "octillery",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 19,
+            "speed": 0,
+            "special": 180,
+            "physical": 180,
+            "types": [
+                "water"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/224.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/224.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 225,
+            "name": "delibird",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 12,
+            "speed": 4,
+            "special": 110,
+            "physical": 100,
+            "types": [
+                "ice",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/225.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/225.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 226,
+            "name": "mantine",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 22,
+            "speed": 3,
+            "special": 220,
+            "physical": 110,
+            "types": [
+                "water",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/226.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/226.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 227,
+            "name": "skarmory",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 17,
+            "speed": 3,
+            "special": 110,
+            "physical": 220,
+            "types": [
+                "steel",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/227.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/227.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 228,
+            "name": "houndour",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 12,
+            "speed": 2,
+            "special": 130,
+            "physical": 90,
+            "types": [
+                "dark",
+                "fire"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/228.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/228.png",
+            "evolutions": [
+                229
+            ]
+        },
+        {
+            "dex_id": 229,
+            "name": "houndoom",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 19,
+            "speed": 6,
+            "special": 190,
+            "physical": 140,
+            "types": [
+                "dark",
+                "fire"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/229.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/229.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 230,
+            "name": "kingdra",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 19,
+            "speed": 5,
+            "special": 190,
+            "physical": 190,
+            "types": [
+                "water",
+                "dragon"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/230.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/230.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 231,
+            "name": "phanpy",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 23,
+            "speed": -1,
+            "special": 80,
+            "physical": 120,
+            "types": [
+                "ground"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/231.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/231.png",
+            "evolutions": [
+                232
+            ]
+        },
+        {
+            "dex_id": 232,
+            "name": "donphan",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 23,
+            "speed": 0,
+            "special": 120,
+            "physical": 240,
+            "types": [
+                "ground"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/232.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/232.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 233,
+            "name": "porygon2",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 22,
+            "speed": 2,
+            "special": 200,
+            "physical": 170,
+            "types": [
+                "normal"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/233.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/233.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 234,
+            "name": "stantler",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 19,
+            "speed": 5,
+            "special": 150,
+            "physical": 157,
+            "types": [
+                "normal"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/234.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/234.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 235,
+            "name": "smeargle",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 14,
+            "speed": 4,
+            "special": 65,
+            "physical": 55,
+            "types": [
+                "normal"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/235.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/235.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 236,
+            "name": "tyrogue",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 9,
+            "speed": -1,
+            "special": 70,
+            "physical": 70,
+            "types": [
+                "fighting"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/236.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/236.png",
+            "evolutions": [
+                106,
+                107,
+                237
+            ]
+        },
+        {
+            "dex_id": 237,
+            "name": "hitmontop",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 13,
+            "speed": 3,
+            "special": 145,
+            "physical": 190,
+            "types": [
+                "fighting"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/237.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/237.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 238,
+            "name": "smoochum",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 12,
+            "speed": 2,
+            "special": 150,
+            "physical": 45,
+            "types": [
+                "ice",
+                "psychic"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/238.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/238.png",
+            "evolutions": [
+                124
+            ]
+        },
+        {
+            "dex_id": 239,
+            "name": "elekid",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 12,
+            "speed": 6,
+            "special": 120,
+            "physical": 100,
+            "types": [
+                "electric"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/239.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/239.png",
+            "evolutions": [
+                125
+            ]
+        },
+        {
+            "dex_id": 240,
+            "name": "magby",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 12,
+            "speed": 5,
+            "special": 125,
+            "physical": 112,
+            "types": [
+                "fire"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/240.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/240.png",
+            "evolutions": [
+                126
+            ]
+        },
+        {
+            "dex_id": 241,
+            "name": "miltank",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 24,
+            "speed": 7,
+            "special": 110,
+            "physical": 185,
+            "types": [
+                "normal"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/241.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/241.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 242,
+            "name": "blissey",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 64,
+            "speed": 1,
+            "special": 210,
+            "physical": 20,
+            "types": [
+                "normal"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/242.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/242.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 243,
+            "name": "raikou",
+            "tier": 4,
+            "catch_rate": 20,
+            "hp": 23,
+            "speed": 9,
+            "special": 215,
+            "physical": 160,
+            "types": [
+                "electric"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/243.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/243.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 244,
+            "name": "entei",
+            "tier": 4,
+            "catch_rate": 20,
+            "hp": 29,
+            "speed": 7,
+            "special": 165,
+            "physical": 200,
+            "types": [
+                "fire"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/244.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/244.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 245,
+            "name": "suicune",
+            "tier": 4,
+            "catch_rate": 20,
+            "hp": 25,
+            "speed": 5,
+            "special": 205,
+            "physical": 190,
+            "types": [
+                "water"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/245.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/245.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 246,
+            "name": "larvitar",
+            "tier": 1,
+            "catch_rate": 7,
+            "hp": 13,
+            "speed": -1,
+            "special": 95,
+            "physical": 114,
+            "types": [
+                "rock",
+                "ground"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/246.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/246.png",
+            "evolutions": [
+                247
+            ]
+        },
+        {
+            "dex_id": 247,
+            "name": "pupitar",
+            "tier": 2,
+            "catch_rate": 11,
+            "hp": 18,
+            "speed": 1,
+            "special": 135,
+            "physical": 154,
+            "types": [
+                "rock",
+                "ground"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/247.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/247.png",
+            "evolutions": [
+                248
+            ]
+        },
+        {
+            "dex_id": 248,
+            "name": "tyranitar",
+            "tier": 3,
+            "catch_rate": 16,
+            "hp": 25,
+            "speed": 2,
+            "special": 195,
+            "physical": 244,
+            "types": [
+                "rock",
+                "dark"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/248.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 249,
+            "name": "lugia",
+            "tier": 4,
+            "catch_rate": 20,
+            "hp": 27,
+            "speed": 8,
+            "special": 244,
+            "physical": 220,
+            "types": [
+                "psychic",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/249.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/249.png",
+            "evolutions": []
+        },
+        {
+            "dex_id": 250,
+            "name": "ho-oh",
+            "tier": 4,
+            "catch_rate": 20,
+            "hp": 27,
+            "speed": 5,
+            "special": 264,
+            "physical": 220,
+            "types": [
+                "fire",
+                "flying"
+            ],
+            "url_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/250.png",
+            "url_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/250.png",
             "evolutions": []
         }
     ]

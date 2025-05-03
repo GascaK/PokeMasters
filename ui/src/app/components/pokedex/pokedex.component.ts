@@ -210,6 +210,7 @@ export class PokedexComponent implements OnInit, OnDestroy {
     }
 
     setActive(pokemon: PokemonTemplate) {
+
         this.trainer.team.active.pokemon = pokemon;
         pokemon.stats.forEach((stat) => {
             if (stat.name == "hp") {

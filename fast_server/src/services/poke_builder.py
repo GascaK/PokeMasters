@@ -296,11 +296,10 @@ class PokemonBuilder():
                 special = None
 
                 # Add random special
-                if random.randint(1, 400) <= base.special:
+                if random.randint(1, 500) <= base.special:
                     special: SpecialModel = random.choice(self.spatk_db)
-                    print("SPecial", special)
                 # Add random physical
-                if random.randint(1, 400) <= base.physical:
+                if random.randint(1, 500) <= base.physical:
                     hit = f"{temp_move.hit}+{base.tier}"
 
                 m = MoveModel(

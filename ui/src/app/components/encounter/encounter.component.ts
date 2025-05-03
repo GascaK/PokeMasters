@@ -18,6 +18,7 @@ import { TrainerTracker } from 'src/app/services/trainerTracker';
  * - Generating random Pokemon encounters
  * - Animating catch attempts with visual and audio feedback
  * - Processing catch results from the server
+ * - Managing inventory items used during catches
  */
 export class EncounterComponent implements OnInit, AfterViewInit {
     @Input() trainerTracker: TrainerTracker;
@@ -30,7 +31,7 @@ export class EncounterComponent implements OnInit, AfterViewInit {
     public pokemon: PokemonTemplate;
     public showPokemon = false;
     public statBlock = new Map<string, number>;
-    public itemList = new Map<string, { name: string, count: number, text: string, item: PokeItemsTemplate }>;
+    public itemList = new Map<string, { name: string, count: number, text: string, item: PokeItemsTemplate }>();
     public imgLoc: string;
     interval: any;
 
@@ -122,9 +123,37 @@ export class EncounterComponent implements OnInit, AfterViewInit {
             });
     }
 
+    /**
+     * Removes a used item from the trainer's inventory and updates the UI
+     * @param item The item that was used in the catch attempt
+     */
+    removeUsedItem(item: PokeItemsTemplate): void {
+        // Find the item in the itemList Map and decrement its count
+        if (this.itemList.has(item.name)) {
+            const itemEntry = this.itemList.get(item.name);
+            if (itemEntry && itemEntry.count > 0) {
+                itemEntry.count--;
+                
+                // If count reaches zero, remove the item from the list
+                if (itemEntry.count <= 0) {
+                    this.itemList.delete(item.name);
+                }
+            }
+        }
+        
+        // Remove the actual item from the trainer's inventory
+        const itemIndex = this.trainer.items.findIndex(i => i.id === item.id);
+        if (itemIndex !== -1) {
+            this.trainer.items.splice(itemIndex, 1);
+        }
+    }
+
     async catchPokemon(item: PokeItemsTemplate): Promise<void> {
         // Store the used item for the animation
         this.usedItem = item;
+
+        // Remove the used item from inventory immediately
+        this.removeUsedItem(item);
 
         // Start the catch animation sequence
         this.showCatchAnimation = true;
@@ -217,7 +246,6 @@ export class EncounterComponent implements OnInit, AfterViewInit {
         // Play appropriate sound
         this.playSound(success ? 'success' : 'failure');
     }
-
 
     // Process the catch result from the server
     async processCatchResult(): Promise<void> {

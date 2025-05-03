@@ -3,17 +3,17 @@
         {
             "id": 1,
             "name": "Bad Execution",
-            "text": "This attack is not affected by weakness or resistance."
+            "text": "This ATK is not affected by weakness or resistance."
         },
         {
             "id": 2,
             "name": "Confusion",
-            "text": "Before your Opponents next attack they flip a coin. If Heads their active pokemon takes 2 damage before attacking."
+            "text": "Before your Opponents next ATK they flip a coin. If Heads their active pokemon takes 2 damage before ATKing."
         },
         {
             "id": 3,
             "name": "Paralyzed",
-            "text": "Before your Opponents next attack they flip a coin. If tails their attack does nothing."
+            "text": "Before your Opponents next ATK they flip a coin. If tails their ATK does nothing."
         },
         {
             "id": 4,
@@ -23,32 +23,32 @@
         {
             "id": 5,
             "name": "Recharging",
-            "text": "Your Pokemon does nothing on your next turn."
+            "text": "This ATK does +3 damage.Your Pokemon does nothing on your next turn."
         },
         {
             "id": 6,
             "name": "Perish Song",
-            "text": "Your Opponents Pokemon is cursed and will faint in 5 turns from this attack. Your Pokemon cannot switch out or attack until this effect ends."
+            "text": "Your Opponents Pokemon is cursed and will faint in 5 turns from this ATK. Your Pokemon cannot switch out or ATK until this effect ends."
         },
         {
             "id": 7,
             "name": "Infatuation",
-            "text": "Your Opponents Pokemon's next attack does -1 damage."
+            "text": "Your Opponents Pokemon's next ATK does -1 damage."
         },
         {
             "id": 8,
             "name": "Power Boost",
-            "text": "This attack does +2 damage. Your Opponents Pokemon's next attack does +3 damage."
+            "text": "This ATK does +2 damage. Your Opponents Pokemon's next ATK does +3 damage."
         },
         {
             "id": 9,
             "name": "Splash",
-            "text": "Flip a coin. If tails, this attack does nothing."
+            "text": "Flip a coin. If Heads, this ATK does +2 damageIf tails, this ATK does nothing."
         },
         {
             "id": 10,
             "name": "Primed",
-            "text": "This attack does +1 damage."
+            "text": "This ATK does +1 damage."
         },
         {
             "id": 11,
@@ -57,13 +57,13 @@
         },
         {
             "id": 12,
-            "name": "Getting Pumped",
-            "text": "For every consecutive attack with 'Getting Pumped' add +1 damage to your next attack."
+            "name": "Roll-Out",
+            "text": "For every consecutive ATK with 'Roll-Out' add +1 damage to your next ATK."
         },
         {
             "id": 13,
             "name": "Self Destructive",
-            "text": "This ATK does +2 damage. Your Pokemon takes 3 damage."
+            "text": "This ATK does +2 damage. Your Pokemon takes 1 damage."
         },
         {
             "id": 14,
@@ -73,7 +73,7 @@
         {
             "id": 15,
             "name": "Reversal",
-            "text": "On this battles first attack, if your speed is slower than your opponent this attack does +5 damage."
+            "text": "On this battles first ATK, if your speed is slower than your opponent this ATK does +5 damage."
         },
         {
             "id": 16,
@@ -83,12 +83,12 @@
         {
             "id": 17,
             "name": "Rest",
-            "text": "Flip a coin, If Tails, this Pokemon is now asleep."
+            "text": "This ATK does +2 damage. Flip a coin, If Tails, this Pokemon is now asleep."
         },
         {
             "id": 18,
             "name": "Lackluster",
-            "text": "This ATK does -1 damage. This Pokemon heals for 1 HP."
+            "text": "This ATK does -2 damage. This Pokemon heals for 3 HP."
         },
         {
             "id": 19,
@@ -98,52 +98,52 @@
         {
             "id": 20,
             "name": "Froggy",
-            "text": "After this attack does damage. Switch out this pokemon."
+            "text": "After this ATK does damage. Switch out this pokemon."
         },
         {
             "id": 21,
             "name": "Oblivious Rage",
-            "text": "If this Pokemon took damage last turn this attack does nothing."
+            "text": "If this Pokemon took damage last turn this ATK does nothing. Otherwise this ATK does +3 damage."
         },
         {
             "id": 22,
             "name": "Payback",
-            "text": "If this Pokemon took damage last turn this attack does +2 damage."
+            "text": "If this Pokemon took damage last turn this ATK does +2 damage."
         },
         {
             "id": 23,
             "name": "Glass Cannon",
-            "text": "If this Pokemon took damage last turn this attack does -2 damage."
+            "text": "This ATK does +4 damage. If this Pokemon took damage last turn this ATK does -2 damage."
         },
         {
             "id": 24,
             "name": "Strong Affliction",
-            "text": "If this Pokemon is affected by a status condition, this attack does +2 damage."
+            "text": "If this Pokemon is affected by a status condition, this ATK does +2 damage."
         },
         {
             "id": 25,
             "name": "Down But Not Out",
-            "text": "If this Pokemon has 5 or less HP left this attack does +3 damage."
+            "text": "If this Pokemon has 5 or less HP left this ATK does +4 damage."
         },
         {
             "id": 26,
             "name": "Execute",
-            "text": "If your Opponents Pokemon has 3 or less HP left, this Atk Defeats that Pokemon."
+            "text": "If your Opponents Pokemon has 4 or less HP left, this ATK Defeats that Pokemon."
         },
         {
             "id": 27,
             "name": "Biding Time",
-            "text": "This ATK cannot be used if your Opponents Pokemon has 10 or more HP left."
+            "text": "This ATK does +2 damage. This ATK cannot be used if your Opponents Pokemon has 10 or more HP left."
         },
         {
             "id": 28,
             "name": "First Strike",
-            "text": "If your Opponents Pokemon has no damage, this ATK does +2 damage."
+            "text": "If your Opponents Pokemon has no damage, this ATK does +4 damage."
         },
         {
             "id": 29,
             "name": "Watcher",
-            "text": "If your Opponents Pokemon has no damage, this Pokemon cannot use this ATK."
+            "text": "This ATK does +2 damage. If your Opponents Pokemon has no damage, this Pokemon cannot use this ATK."
         },
         {
             "id": 30,
@@ -163,12 +163,12 @@
         {
             "id": 33,
             "name": "Greedy",
-            "text": "If this Pokemon has a Held Item, this ATK does -2 damage."
+            "text": "If this Pokemon has a Held Item, this ATK does -2 damage. Otherwise this ATK does +2 damage."
         },
         {
             "id": 34,
             "name": "Shadow Strike",
-            "text": "This attack does +3 damage if your opponent's Pokemon is affected by a status condition."
+            "text": "This ATK does +3 damage if your opponent's Pokemon is affected by a status condition."
         },
         {
             "id": 35,
@@ -178,17 +178,17 @@
         {
             "id": 36,
             "name": "Vengeful Spirit",
-            "text": "If your Benched Pokemon were damaged during the last turn, this attack does +3 damage."
+            "text": "If your Benched Pokemon were damaged during the last turn, this ATK does +3 damage."
         },
         {
             "id": 37,
             "name": "Thunderclap",
-            "text": "Flip a coin. If Heads, this attack does +3 damage and your opponent's Pokemon is paralyzed. If Tails, this attack does 1 damage."
+            "text": "Flip a coin. If Heads, this ATK does +2 damage and your opponent's Pokemon is paralyzed. If Tails, this ATK does 1 damage."
         },
         {
             "id": 38,
             "name": "Crippling Bite",
-            "text": "If this ATK does more than 5 damage, your next ATK does +2 damage."
+            "text": "If this ATK does more than 5 damage, your next ATK does -2 damage."
         },
         {
             "id": 39,

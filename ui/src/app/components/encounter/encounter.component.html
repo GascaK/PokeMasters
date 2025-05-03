@@ -97,7 +97,7 @@
         
         <div class="pokemon-card-content">
             <!-- Stats Section -->
-            <div class="pokemon-stats">
+            <div class="pokemon-stats mb-3">
                 <div class="d-flex justify-content-center">
                     <div class="hp-display">
                         <span class="hp-label">HP:</span>
@@ -107,7 +107,7 @@
             </div>
             
             <!-- Moves Section -->
-            <div class="moves-section">
+            <div class="moves-section mb-3">
                 <!-- Move 1 -->
                 <div class="move-card mb-2 {{pokemon!.moves[0].move_type}}">
                     <div class="d-flex justify-content-between align-items-center">
@@ -115,6 +115,7 @@
                         <span class="move-power">d{{pokemon!.moves[0].hit}}</span>
                     </div>
                     <div *ngIf="pokemon.moves[0].special?.text" class="move-special">
+                        <div *ngIf="pokemon.moves[0].special?.name" class="special-name">{{pokemon.moves[0].special?.name}}</div>
                         {{pokemon.moves[0].special?.text}}
                     </div>
                 </div>
@@ -126,14 +127,15 @@
                         <span class="move-power">d{{pokemon!.moves[1].hit}}</span>
                     </div>
                     <div *ngIf="pokemon.moves[1].special?.text" class="move-special">
+                        <div *ngIf="pokemon.moves[1].special?.name" class="special-name">{{pokemon.moves[1].special?.name}}</div>
                         {{pokemon.moves[1].special?.text}}
                     </div>
                 </div>
             </div>
 
             <!-- Catch Info Section -->
-            <div class="catch-info-section">
-                <div class="catch-rate">
+            <div class="catch-info-section mt-3">
+                <div class="catch-rate mb-2">
                     <span class="catch-rate-label">Catch Rate:</span>
                     <span class="catch-rate-value">+{{pokemon.base.catch_rate}}</span>
                 </div>
