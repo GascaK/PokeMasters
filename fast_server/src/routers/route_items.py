@@ -5,7 +5,7 @@ from typing import List, Annotated
 from fastapi import APIRouter, HTTPException, Body, Request, Depends
 
 from src.assets.compile import Composer
-from src.interfaces.models import ItemModel
+from src.interfaces.models import ItemModel, PlayerModel
 
 
 def get_composer(request: Request):
@@ -56,7 +56,11 @@ def post_items_starter(username: int, amount=20, composer: Composer = Depends(ge
 
 @router.post("/random", tags=["items"])
 def post_items_random(username: int, tier: Annotated[int | None, Body()]=1, composer: Composer = Depends(get_composer)) -> ItemModel:
-    item: ItemModel = composer.get_item_builder().random_item(tier=random.randint(1, tier))
+    
+    if random.random() <= 0.25:
+        item: ItemModel = composer.get_item_builder().get_item_by_text(text="sell", tier=random.randint(1, tier))
+    else:
+        item: ItemModel = composer.get_item_builder().random_item(tier=random.randint(1, tier))
 
     if item:
         item.owner = username
@@ -120,7 +124,7 @@ def post_items_shop_sell(
         username: int,
         item: ItemModel,
         composer: Composer = Depends(get_composer)
-    ) -> ItemModel:
+    ) -> PlayerModel:
     try:
         player = composer.get_player_builder().get_player(username)
         if item.owner != username:

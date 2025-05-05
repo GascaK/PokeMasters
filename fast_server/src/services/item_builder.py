@@ -22,6 +22,18 @@ class ItemBuilder():
         item = self.poke_center.randomize(pending_items)
         return item
 
+    def get_item_by_text(self, text="", tier=1) -> ItemModel:
+        pending_items = self.poke_center.get_all()
+        pending_items = self.poke_center.get_by_tier(pending_items, tier=tier)
+
+        items = []
+        if text:
+            for item in pending_items:
+                if text.lower() in item.text.lower():
+                    items.append(item)
+        
+        return self.poke_center.randomize(items)
+
     def get_item_by_name(self, name: str) -> ItemModel:
         item = self.poke_center.get_by_name(name)
 

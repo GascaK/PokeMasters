@@ -284,6 +284,7 @@ export class EncounterComponent implements OnInit, AfterViewInit {
             this.showPokemon = true;
             this.encounterView = false;
         } else {
+            this.serverService.deletePokemon(this.trainer.id, this.pokemon.id);
             this.menuService.setNewView("defaultView");
         }
     }

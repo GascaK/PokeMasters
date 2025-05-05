@@ -182,6 +182,21 @@ export class ServerService {
             });
     }
 
+    async deletePokemon(
+        username: number,
+        id: number
+    ): Promise<void>{
+
+        return await this.instance.delete<void>(`${username}/pokemon/flee?id=${id}`)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
+            });
+    }
+
     ////// Item Functions //////
     async getItems(username: number, id: number): Promise<PokeItemsTemplate>{
         return await this.instance.get<PokeItemsTemplate>(`${username}/items?id=${id}`)

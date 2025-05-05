@@ -103,66 +103,77 @@
         </div>
         
         <div class="card-body">
-            <div class="table-responsive">
+            <!-- Responsive table implementation -->
+            <div class="pokemon-table-responsive">
                 <table class="table table-hover align-middle">
                     <thead class="table-dark">
                         <tr>
-                            <th style="width: 10%">ID</th>
-                            <th style="width: 10%">Stats</th>
-                            <th style="width: 30%">Moves</th>
-                            <th style="width: 20%">Team</th>
-                            <th style="width: 5%">Sel</th>
+                            <th>ID</th>
+                            <th>Stats</th>
+                            <th>Moves</th>
+                            <th>Team</th>
+                            <th>Sel</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let pokemon of infoList">
-                            <td class="text-center">{{pokemon.data.id}}</td>
-                            <td>
-                                <div class="d-flex flex-column">
-                                    <div *ngFor="let stat of pokemon.data.stats">
-                                        <span *ngIf="stat.name == 'hp'" class="badge bg-success mb-1">HP: {{stat.value}}</span>
-                                    </div>
-                                    <div *ngFor="let stat of pokemon.data.stats">
-                                        <span *ngIf="stat.name == 'speed'" class="badge bg-info">SPD: {{stat.value}}</span>
-                                    </div>
-                                </div>
+                            <td data-label="ID">
+                                <div class="td-content">{{pokemon.data.id}}</div>
                             </td>
-                            <td *ngIf="pokemon.data.moves">
-                                <div class="moves-container">
-                                    <div class="move-box">
-                                        <div class="move-name">{{pokemon.data.moves[0].name}}</div>
-                                        <div class="move-details">
-                                            <span class="hit-value">Hit: {{pokemon.data.moves[0].hit}}</span>
-                                            <span *ngIf="pokemon.data.moves[0].special" class="special-indicator">Special</span>
+                            <td data-label="Stats">
+                                <div class="td-content">
+                                    <div class="d-flex flex-column align-items-end">
+                                        <div *ngFor="let stat of pokemon.data.stats">
+                                            <span *ngIf="stat.name == 'hp'" class="badge bg-success">HP: {{stat.value}}</span>
                                         </div>
-                                    </div>
-                                    <div class="move-divider"></div>
-                                    <div class="move-box">
-                                        <div class="move-name">{{pokemon.data.moves[1].name}}</div>
-                                        <div class="move-details">
-                                            <span class="hit-value">Hit: {{pokemon.data.moves[1].hit}}</span>
-                                            <span *ngIf="pokemon.data.moves[1].special" class="special-indicator">Special</span>
+                                        <div *ngFor="let stat of pokemon.data.stats">
+                                            <span *ngIf="stat.name == 'speed'" class="badge bg-info">SPD: {{stat.value}}</span>
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                            <td>
-                                <button *ngIf="validateBenchCapacity(pokemon.data)" 
-                                        class="btn btn-primary w-100" 
-                                        (click)="setActive(pokemon.data)">
-                                    Set Active
-                                </button>
-                                <button *ngIf="!validateBenchCapacity(pokemon.data)" 
-                                        class="btn btn-secondary w-100" 
-                                        disabled>
-                                    Already on Team
-                                </button>
+                            <td data-label="Moves" *ngIf="pokemon.data.moves">
+                                <div class="td-content w-100">
+                                    <div class="moves-container w-100">
+                                        <div class="move-box">
+                                            <div class="move-name">{{pokemon.data.moves[0].name}}</div>
+                                            <div class="move-details">
+                                                <span class="hit-value">Hit: {{pokemon.data.moves[0].hit}}</span>
+                                                <span *ngIf="pokemon.data.moves[0].special" class="special-indicator">Special</span>
+                                            </div>
+                                        </div>
+                                        <div class="move-divider"></div>
+                                        <div class="move-box">
+                                            <div class="move-name">{{pokemon.data.moves[1].name}}</div>
+                                            <div class="move-details">
+                                                <span class="hit-value">Hit: {{pokemon.data.moves[1].hit}}</span>
+                                                <span *ngIf="pokemon.data.moves[1].special" class="special-indicator">Special</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
-                            <td class="text-center">
-                                <div class="form-check d-flex justify-content-center">
-                                    <input class="form-check-input" 
-                                        type="checkbox" 
-                                        [(ngModel)]="pokemon.checked">
+                            <td data-label="Team">
+                                <div class="td-content">
+                                    <button *ngIf="validateBenchCapacity(pokemon.data)" 
+                                            class="btn btn-primary" 
+                                            (click)="setActive(pokemon.data)">
+                                        Set Active
+                                    </button>
+                                    <button *ngIf="!validateBenchCapacity(pokemon.data)" 
+                                            class="btn btn-secondary" 
+                                            disabled>
+                                        On Team
+                                    </button>
+                                </div>
+                            </td>
+                            <td data-label="Sel">
+                                <div class="td-content">
+                                    <div class="form-check">
+                                        <input class="form-check-input" 
+                                            type="checkbox" 
+                                            [(ngModel)]="pokemon.checked">
+                                    </div>
                                 </div>
                             </td>
                         </tr>

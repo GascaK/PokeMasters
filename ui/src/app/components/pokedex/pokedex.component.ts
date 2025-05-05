@@ -189,7 +189,17 @@ export class PokedexComponent implements OnInit, OnDestroy {
             });
 
             await this.serverService.evolvePokemon(this.trainer.id, ids)
-                .then((res) => {
+                .then((pokemon) => {
+                    this.trainer.team.active.pokemon = pokemon;
+                    pokemon.stats.forEach((stat) => {
+                        if (stat.name == "hp") {
+                            this.trainer.team.active.currentHP = stat.value;
+                            this.trainer.team.active.maxHP = stat.value;
+                        } else if (stat.name == "speed") {
+                            this.trainer.team.active.speed = stat.value;
+                        }
+                    });
+
                     this.exitView();
                 }).catch((err) => {
                     console.error(err);
@@ -211,6 +221,28 @@ export class PokedexComponent implements OnInit, OnDestroy {
 
     setActive(pokemon: PokemonTemplate) {
 
+        if (this.trainer.team.benchOne.pokemon === undefined && this.trainer.team.active.pokemon) {
+            this.trainer.team.benchOne.pokemon = this.trainer.team.active.pokemon;
+            this.trainer.team.active.pokemon.stats.forEach((stat) => {
+                if (stat.name == "hp") {
+                    this.trainer.team.benchOne.currentHP = this.trainer.team.active.currentHP;
+                    this.trainer.team.benchOne.maxHP = stat.value;
+                } else if (stat.name == "speed") {
+                    this.trainer.team.benchOne.speed = stat.value;
+                }
+            });
+        } else if (this.trainer.team.benchTwo.pokemon === undefined && this.trainer.team.active.pokemon) {
+            this.trainer.team.benchTwo.pokemon = this.trainer.team.active.pokemon;
+            this.trainer.team.active.pokemon.stats.forEach((stat) => {
+                if (stat.name == "hp") {
+                    this.trainer.team.benchTwo.currentHP = this.trainer.team.active.currentHP;
+                    this.trainer.team.benchTwo.maxHP = stat.value;
+                } else if (stat.name == "speed") {
+                    this.trainer.team.benchTwo.speed = stat.value;
+                }
+            });
+        }
+
         this.trainer.team.active.pokemon = pokemon;
         pokemon.stats.forEach((stat) => {
             if (stat.name == "hp") {
@@ -221,7 +253,11 @@ export class PokedexComponent implements OnInit, OnDestroy {
             }
         });
 
-        this.exitView();
+        if (this.trainer.team.benchOne.pokemon && this.trainer.team.benchTwo.pokemon){
+            this.exitView();
+        } else {
+            this.exitInfoPanel();
+        }
     }
 
     exitInfoPanel() {

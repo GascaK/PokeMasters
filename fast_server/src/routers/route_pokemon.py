@@ -175,6 +175,25 @@ def put_pokemon_evolve(
 
     return pokemon
 
+@router.delete("/flee", tags=["pokemon", "flee"])
+def delete_pokemon_flee(
+    username: int,
+    id: int,
+    composer: Composer = Depends(get_composer)
+    ):
+
+    print(f"Fleeing pokemon {id}...")
+    try:
+        pokemon: PokemonModel = composer.get_poke_builder().get_pokemon(id)
+    except requests.HTTPError as e:
+        raise HTTPException(status_code=400, detail=f"Unable to locate pokemon: {e}")
+
+    if pokemon.owner == 0 or pokemon.owner == username:
+        composer.get_poke_builder().delete_pokemon(pokemon.id)
+    else:
+        raise HTTPException(status_code=400, detail="You do not own this pokemon.")
+
+
 @router.post("/upgrade", tags=["pokemon", "upgrade"])
 def post_pokemon_upgrade(
         username: int,
