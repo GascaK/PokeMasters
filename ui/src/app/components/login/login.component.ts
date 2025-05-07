@@ -59,7 +59,6 @@ export class LoginComponent{
             console.log(`Choosing ${chosen.base.name}`);
             await this.serverService.createPlayer(this.username)
                 .then( (res) => {
-                    console.log(res);
                     this.trainerTracker.setTrainer(res.id!, this.serverService!);
                     chosen.owner = res.id!;
                     this.serverService.catchStarters(res.id!, chosen);

@@ -201,11 +201,11 @@ def post_pokemon_upgrade(
         items: list[ItemModel]=None,
         composer: Composer = Depends(get_composer)
     ):
-    
+
     # Exit if no item was used.
     if not items:
         raise HTTPException(status_code=400, detail="An item must be used to attempt to upgrade a pokemon.")
-    
+
     # Encounter a specific already created Pokemon
     try:
         pokemon: PokemonModel = composer.get_poke_builder().get_pokemon(pokemon_id)
@@ -213,7 +213,7 @@ def post_pokemon_upgrade(
         raise HTTPException(status_code=400, detail=f"Unable to locate pokemon: {e}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Pokemon was lost to the void: {e}")
-    
+
     # Check valid Pokemon state. And valid item in payload.
     if pokemon.owner != username:
         raise HTTPException(status_code=400, detail="Pokemon does not belong to correct owner catalog.")
@@ -226,7 +226,20 @@ def post_pokemon_upgrade(
         elif item.name == "TM Machine":
             kept_move = random.choice(pokemon.moves)
             new_moves = composer.get_poke_builder()._get_valid_moves(pokemon.base)
-
             composer.get_poke_builder().modify_pokemon(pokemon_id, payload={"moves": [kept_move.id, random.choice(new_moves).id]})
-        else:
-            pass
+        
+
+        # Upgrade by XP only.
+        elif item.name == "XP: Hp Up":
+            value = item.cost
+            composer.get_poke_builder().modify_pokemon(pokemon_id, payload={"hp": [x.value for x in pokemon.stats if x.name == "hp"][0] + value})
+        elif item.name == "XP: Speed Up":
+            value = item.cost
+            composer.get_poke_builder().modify_pokemon(pokemon_id, payload={"speed": [x.value for x in pokemon.stats if x.name == "speed"][0] + value})
+        elif item.name == "XP: Special Up":
+            value = item.cost
+            composer.get_poke_builder().modify_pokemon(pokemon_id, payload={"special": [x.value for x in pokemon.stats if x.name == "special"][0] + value})
+        elif item.name == "XP: Physical Up":
+            value = item.cost
+            composer.get_poke_builder().modify_pokemon(pokemon_id, payload={"physical": [x.value for x in pokemon.stats if x.name == "physical"][0] + value})
+

@@ -12,6 +12,7 @@ export class PokemonMaster implements Trainer{
     badges: number = 0;
     pokemon: Array<PokemonTemplate> = [];
     items: Array<PokeItemsTemplate> = [];
+    xpItems: Array<string> = [];
 
     team: PokeTeam;
 
@@ -21,6 +22,7 @@ export class PokemonMaster implements Trainer{
         this.team.active = new Bench();
         this.team.benchOne = new Bench();
         this.team.benchTwo = new Bench();
+        this.xpItems = ['XP: Hp Up', 'XP: Speed Up', 'XP: Special Up', 'XP: Physical Up'];
     }
 
     async build(): Promise<void> {
@@ -197,4 +199,33 @@ export class PokemonMaster implements Trainer{
                 throw err;
             });
     }
+
+    async updateXp(): Promise<PokeItemsTemplate>{
+        if (this.team.active.pokemon === undefined){
+            throw new Error("No active pokemon");
+        }
+
+        let name = "";
+        if (Math.random() < .20) {
+            name = Math.random() < .5? this.xpItems[0] : this.xpItems[1];
+        } else {
+            name = Math.random() < .5? this.xpItems[2]: this.xpItems[3];
+        }
+        const cost = ( name.toLowerCase().includes("special") || name.toLowerCase().includes("physical") ) ? 5: 1;
+
+        const item: PokeItemsTemplate = {
+            id: 0,
+            owner: this.id,
+            name: name,
+            cost: cost,
+            text: "XP Only Item",
+            tier: 1
+        };
+        console.log('UpdateXP', item);
+
+        await this.instance.postItemsUpgrade(this.id, this.team.active.pokemon!.id, [item]);
+        return item;
+    }
+   
+    
 }

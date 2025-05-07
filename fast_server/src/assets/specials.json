@@ -113,7 +113,7 @@
         {
             "id": 23,
             "name": "Glass Cannon",
-            "text": "This ATK does +4 damage. If this Pokemon took damage last turn this ATK does -2 damage."
+            "text": "This ATK does +4 damage. If this Pokemon took damage last turn this ATK does -2 damage instead."
         },
         {
             "id": 24,

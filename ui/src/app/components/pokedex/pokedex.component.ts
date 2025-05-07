@@ -68,7 +68,7 @@ export class PokedexComponent implements OnInit, OnDestroy {
     private loadMissingPokemon() {
         this.missingPokemon.clear();
         // Generation 1 Pokemon IDs range from 1 to 151
-        for (let i = 1; i <= 151; i++) {
+        for (let i = 1; i <= 252; i++) {
             if (!this.finalPokedex.has(i)) {
                 this.missingPokemon.set(i, {
                     name: this.getPokemonName(i),
@@ -124,7 +124,6 @@ export class PokedexComponent implements OnInit, OnDestroy {
         this.infoList = []; // Clear previous list
         this.trainer.pokemon.forEach((pokemon: PokemonTemplate) => {
             if(pokemon.base.dex_id == id) {
-                console.log("special", pokemon.moves[0].special);
                 this.infoList.push({
                     data: pokemon,
                     checked: false

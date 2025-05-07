@@ -28,7 +28,6 @@ export class ActiveComponent implements OnInit{
     }
 
     loadActive() {
-        console.log(this.team.active);
         if (this.team.active.pokemon) {
             this.team.active.pokemon.stats.forEach((stat) => {
                 if (stat.name == "hp"){

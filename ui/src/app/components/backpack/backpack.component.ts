@@ -16,10 +16,10 @@ export class BackpackComponent implements OnInit {
   @Input() trainerTracker: TrainerTracker;
   @Input() serverService: ServerService;
   @Input() menuService: MenuService;
-  
+
   public trainer: PokemonMaster;
   public activeTab: 'held' | 'ball' | 'other' = 'held';
-  public itemList: Map<string, {id: number, name: string, count: number, text: string, item: PokeItemsTemplate}>;
+  public itemList: Map<string, { id: number, name: string, count: number, text: string, item: PokeItemsTemplate }>;
 
   async ngOnInit(): Promise<void> {
     if (this.trainerTracker?.isLoggedIn()) {
@@ -29,12 +29,12 @@ export class BackpackComponent implements OnInit {
   }
 
   updateItemList(): void {
-    this.itemList = new Map<string, {id: number, name: string, count: number, text: string, item: PokeItemsTemplate}>();
-    
+    this.itemList = new Map<string, { id: number, name: string, count: number, text: string, item: PokeItemsTemplate }>();
+
     this.trainer.items.forEach((item) => {
       const existingItem = this.itemList.get(item.name);
       const count = existingItem ? existingItem.count + 1 : 1;
-      
+
       this.itemList.set(item.name, {
         id: item.id,
         name: item.name,
@@ -52,17 +52,18 @@ export class BackpackComponent implements OnInit {
       alert("Warning: Please set an active pokemon before continuing.");
       return;
     }
-    
+
     try {
       await this.serverService.deleteItems(this.trainer.id, item);
       await this.serverService.postItemsUpgrade(this.trainer.id, active.id, [item]);
-      
+
       alert(`Used item ${item.name}`);
       await Promise.all([
         this.trainer.reloadItems().then(() => this.updateItemList()),
         this.trainer.reloadPokemon()
       ]);
-      
+
+      this.updateTeam();
       this.exitBackpack();
     } catch (err) {
       console.error(err);
@@ -71,7 +72,7 @@ export class BackpackComponent implements OnInit {
 
   async sellItem(itemID: number): Promise<void> {
     const itemToSell = this.trainer.items.find(item => item.id === itemID);
-    
+
     if (itemToSell) {
       try {
         await this.trainer.sellItem(itemToSell);
@@ -84,26 +85,36 @@ export class BackpackComponent implements OnInit {
     }
   }
 
-  getItemsByCategory(category: 'held' | 'ball' | 'other'): Array<[string, {id: number, name: string, count: number, text: string, item: PokeItemsTemplate}]> {
+  updateTeam(): void {
+    this.trainer.pokemon.forEach((pokemon) => {
+      if (pokemon.id === this.trainer.team.active?.pokemon?.id) {
+        this.trainer.team.active.pokemon = pokemon;
+        this.trainer.team.active.speed = pokemon.stats.find(stat => stat.name === 'speed')?.value || 0;
+        this.trainer.team.active.maxHP = pokemon.stats.find(stat => stat.name === 'hp')?.value || 0;
+      }
+    });
+  }
+
+  getItemsByCategory(category: 'held' | 'ball' | 'other'): Array<[string, { id: number, name: string, count: number, text: string, item: PokeItemsTemplate }]> {
     // Create new array to store filtered items
-    const filteredItems: Array<[string, {id: number, name: string, count: number, text: string, item: PokeItemsTemplate}]> = [];
-    
+    const filteredItems: Array<[string, { id: number, name: string, count: number, text: string, item: PokeItemsTemplate }]> = [];
+
     // Convert Map to array of entries and filter
     this.itemList.forEach((item, key) => {
       const itemName = item.name.toLowerCase();
       const itemText = item.text.toLowerCase();
-      
+
       if (category === 'held' && (itemText.includes('held item'))) {
         filteredItems.push([key, item]);
       } else if (category === 'ball' && itemName.includes('ball')) {
         filteredItems.push([key, item]);
-      } else if (category === 'other' && 
-                !itemText.includes('held') &&
-                !itemName.includes('ball')) {
+      } else if (category === 'other' &&
+        !itemText.includes('held') &&
+        !itemName.includes('ball')) {
         filteredItems.push([key, item]);
       }
     });
-    
+
     return filteredItems;
   }
 

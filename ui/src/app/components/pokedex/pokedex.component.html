@@ -129,6 +129,12 @@
                                         <div *ngFor="let stat of pokemon.data.stats">
                                             <span *ngIf="stat.name == 'speed'" class="badge bg-info">SPD: {{stat.value}}</span>
                                         </div>
+                                        <div *ngFor="let stat of pokemon.data.stats">
+                                            <span *ngIf="stat.name == 'physical'" class="badge bg-secondary">Phy: {{stat.value}}</span>
+                                        </div>
+                                        <div *ngFor="let stat of pokemon.data.stats">
+                                            <span *ngIf="stat.name == 'special'" class="badge bg-danger">Sp: {{stat.value}}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </td>

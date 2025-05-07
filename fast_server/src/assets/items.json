@@ -329,6 +329,12 @@
             "cost": 1875,
             "text": "Held Item: Choose a type. Your Pokemon's attacks of that type do +1 damage.",
             "tier": 3
+        },
+        {
+            "name": "HM02: Fly",
+            "cost": 1650,
+            "text": "Fly to Safron City.",
+            "tier": 3
         }
     ]
 }

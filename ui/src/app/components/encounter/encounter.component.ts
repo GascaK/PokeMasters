@@ -49,6 +49,7 @@ export class EncounterComponent implements OnInit, AfterViewInit {
     public showCatchAnimation = false;
     public catchResult = false;
     public usedItem: PokeItemsTemplate;
+    public xpMessage: string;
     private animationCleanupFn: (() => void) | null = null;
 
     async ngOnInit(): Promise<void> {
@@ -260,6 +261,25 @@ export class EncounterComponent implements OnInit, AfterViewInit {
                 this.catchResult = true;
                 this.encounterItem = res.data.item;
                 this.encounterMsg = "Caught!";
+
+
+                await this.trainer.updateXp().then( async (xpItem) => {
+                    await this.updateTeam();
+
+                    if (xpItem.name.toLowerCase().includes("hp up")) {
+                        this.xpMessage = `${this.trainer.team.active.pokemon?.base.name} gained ${xpItem.cost} HP! :${this.trainer.team.active.pokemon?.stats.find(stat => stat.name === 'hp')?.value}:`;
+                    } else if (xpItem.name.toLowerCase().includes("speed up")) {
+                        this.xpMessage = `${this.trainer.team.active.pokemon?.base.name} gained ${xpItem.cost} Speed! :${this.trainer.team.active.pokemon?.stats.find(stat => stat.name === 'speed')?.value}:`;
+                    } else if (xpItem.name.toLowerCase().includes("physical up")) {
+                        this.xpMessage = `${this.trainer.team.active.pokemon?.base.name} gained ${xpItem.cost} Physical Attack! :${this.trainer.team.active.pokemon?.stats.find(stat => stat.name === 'physical')?.value}:`;
+                    } else if (xpItem.name.toLowerCase().includes("special up")) {
+                        this.xpMessage = `${this.trainer.team.active.pokemon?.base.name} gained ${xpItem.cost} Special Attack! :${this.trainer.team.active.pokemon?.stats.find(stat => stat.name === 'special')?.value}:`;
+                    }
+
+                }).catch(error => {
+                    console.error('Error updating XP:', error);
+                });
+
             } else if (res.msg == "retry") {
                 this.catchResult = false;
                 this.encounterMsg = "Try Again!";
@@ -276,7 +296,22 @@ export class EncounterComponent implements OnInit, AfterViewInit {
         }
     }
 
-    fleePokemon(retry: boolean = false): void {
+    async updateTeam(): Promise<void> {
+        await Promise.all([
+            this.trainer.reloadPokemon()
+          ]);
+
+        this.trainer.pokemon.forEach((pokemon) => {
+            if (pokemon.id === this.trainer.team.active?.pokemon?.id) {
+              this.trainer.team.active.pokemon = pokemon;
+              this.trainer.team.active.speed = pokemon.stats.find(stat => stat.name === 'speed')?.value || 0;
+              this.trainer.team.active.maxHP = pokemon.stats.find(stat => stat.name === 'hp')?.value || 0;
+            }
+          });
+    }
+
+
+    async fleePokemon(retry: boolean = false): Promise<void> {
         this.cleanupCatchAnimation();
         this.showCatchAnimation = false;
         if (retry) {
@@ -284,7 +319,10 @@ export class EncounterComponent implements OnInit, AfterViewInit {
             this.showPokemon = true;
             this.encounterView = false;
         } else {
-            this.serverService.deletePokemon(this.trainer.id, this.pokemon.id);
+            if (! this.catchResult ){
+                this.serverService.deletePokemon(this.trainer.id, this.pokemon.id);
+            }
+            //await this.updateTeam();
             this.menuService.setNewView("defaultView");
         }
     }

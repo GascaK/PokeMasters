@@ -21,7 +21,7 @@ router = APIRouter(
 def get_items(username: int, id: int, composer: Composer = Depends(get_composer)) -> ItemModel:
     # Return Item from db.
     try:
-        item: ItemModel = composer.get_item_builder()().get_item(id)
+        item: ItemModel = composer.get_item_builder().get_item(id)
     except requests.exceptions.HTTPError as e:
         raise HTTPException(status_code=400, detail=f"{e}")
     except Exception as e:
@@ -43,7 +43,7 @@ def delete_items(username: int, id: int, composer: Composer = Depends(get_compos
         raise HTTPException(status_code=500, detail=f"{e}")
 
     if item.owner == username:
-        return Composer.get_item_builder().delete_item(item)
+        return composer.get_item_builder().delete_item(item)
     else:
         raise HTTPException(status_code=400, detail="Your ID does not match this item.")
 

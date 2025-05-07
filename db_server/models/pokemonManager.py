@@ -38,6 +38,10 @@ class PokemonLocator(Resource):
                     pokemon.speed = payload["speed"]
                 if "hp" in payload:
                     pokemon.hp = payload["hp"]
+                if "special" in payload:
+                    pokemon.special = payload["special"]
+                if "physical" in payload:
+                    pokemon.physical = payload["physical"]
                 if "moves" in payload and len(payload["moves"]) >= 2:
                     pokemon.move1 = payload["moves"][0]
                     pokemon.move2 = payload["moves"][1]
