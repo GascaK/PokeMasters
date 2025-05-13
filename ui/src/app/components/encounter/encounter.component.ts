@@ -26,6 +26,7 @@ export class EncounterComponent implements OnInit, AfterViewInit {
     @Input() menuService: MenuService;
     @Input() legendary: boolean = false;
     @ViewChild('catchAnimationContainer') catchAnimationContainer: ElementRef;
+    public audio = new Audio();
 
     public trainer: PokemonMaster;
     public pokemon: PokemonTemplate;
@@ -50,7 +51,6 @@ export class EncounterComponent implements OnInit, AfterViewInit {
     public catchResult = false;
     public usedItem: PokeItemsTemplate;
     public xpMessage: string;
-    private animationCleanupFn: (() => void) | null = null;
 
     async ngOnInit(): Promise<void> {
         if (this.trainerTracker?.isLoggedIn()) {
@@ -60,6 +60,12 @@ export class EncounterComponent implements OnInit, AfterViewInit {
 
         this.inCollection = false;
         const encounterTier = this.legendary ? 4 : this.trainer.getCurrentTier();
+
+        this.audio.src = `assets/sounds/pokemon_encounter${this.legendary ? "_legendary": ""}.webm`;
+        this.audio.load();
+        this.audio.volume = 0.4;
+        this.audio.play();
+
 
         await this.serverService.encounterRandomPokemon(this.trainer.id, encounterTier, this.encounterItems, "")
             .then((res) => {
@@ -91,7 +97,7 @@ export class EncounterComponent implements OnInit, AfterViewInit {
 
     ngOnDestroy(): void {
         // Clean up animations when component is destroyed
-        this.cleanupCatchAnimation();
+        this.audio.pause();
     }
 
     async getInventory(): Promise<void> {
@@ -153,93 +159,73 @@ export class EncounterComponent implements OnInit, AfterViewInit {
         // Store the used item for the animation
         this.usedItem = item;
 
-        // Remove the used item from inventory immediately
-        this.removeUsedItem(item);
+        // Reset some screen states.
+        this.catchResult = false;
+        this.encounterRetry = false;
 
-        // Start the catch animation sequence
+        const audio = new Audio();
+        audio.src = 'assets/sounds/pokemon_encounter_wobble.webm';
+        audio.load();
+        audio.volume = 0.7;
+        audio.play();
+
+        // Start change in screen.
         this.showCatchAnimation = true;
         this.showPokemon = false;
         this.encounterView = false;
 
+        setTimeout(async () => {
+            // Remove the used item from inventory immediately
+            this.removeUsedItem(item);
+
+            await this.processCatchResult();
+            this.updateAnimationWithResult(this.catchResult);
+        }, 5000);
+
+        
+        
+
+        // Start the catch animation sequence
+        
+
         // Process catch result in background but don't wait for it to start animation
-        const catchResultPromise = this.processCatchResult();
+        // const catchResultPromise = this.processCatchResult();
 
-        // Wait for both server response and minimum animation time
-        await Promise.all([
-            catchResultPromise,
-            new Promise(resolve => setTimeout(resolve, 3500)) // Minimum animation time
-        ]);
+        // // Wait for both server response and minimum animation time
+        // await Promise.all([
+        //     catchResultPromise,
+        //     new Promise(resolve => setTimeout(resolve, 3500)) // Minimum animation time
+        // ]);
 
-        // Update animation with result after minimum time has passed
-        this.updateAnimationWithResult(this.catchResult);
-    }
-
-    /**
-     * Initialize the catch animation with proper integration into Angular component
-     * @param success Whether the catch attempt was successful
-     */
-    initCatchAnimation(): void {
-        // No animation initialization needed
+        // // Update animation with result after minimum time has passed
+        // this.updateAnimationWithResult(this.catchResult);
     }
 
     /**
      * Play sound effects for the animation
-     * @param type The type of sound to play (success/failure)
      */
     playSound(type: 'success' | 'failure'): void {
-        try {
-            const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
+        //
+        if (type === 'success') {
+            const audio = new Audio();
+            audio.src = 'assets/sounds/pokemon_success.m4a';
+            audio.load();
 
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-
-            if (type === 'success') {
-                // Create a short success jingle
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
-                oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
-                oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // G5
-                oscillator.frequency.setValueAtTime(1046.50, audioContext.currentTime + 0.3); // C6
-
-                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-
-                oscillator.start();
-                oscillator.stop(audioContext.currentTime + 0.5);
-            } else {
-                // Create a short failure sound
-                oscillator.type = 'triangle';
-                oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // A4
-                oscillator.frequency.setValueAtTime(349.23, audioContext.currentTime + 0.1); // F4
-                oscillator.frequency.setValueAtTime(293.66, audioContext.currentTime + 0.2); // D4
-
-                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-
-                oscillator.start();
-                oscillator.stop(audioContext.currentTime + 0.3);
-            }
-        } catch (error) {
-            // Silently fail if audio context isn't available
-            console.log('Audio context not available');
+            this.audio.pause(); // Pause background audio.
+            audio.play();
+        } else if (type === 'failure') {
+            const audio = new Audio();
+            audio.src = 'assets/sounds/pokemon_missed.webm';
+            audio.load();
+            audio.volume = 0.3;
+            audio.play();
         }
-    }
-
-    /**
-     * Helper method to clean up animation elements and timers
-     */
-    cleanupCatchAnimation(): void {
-        // No cleanup needed
     }
 
     /**
      * Helper method to get the Pokemon image URL
      */
     getPokemonImageUrl(): string {
-        // Return the appropriate image URL based on your application structure
-        // This is a placeholder - adjust according to your actual image path structure
         return this.pokemon?.sprite.sprite_url || '/assets/images/pokemon-silhouette.png';
     }
 
@@ -312,7 +298,6 @@ export class EncounterComponent implements OnInit, AfterViewInit {
 
 
     async fleePokemon(retry: boolean = false): Promise<void> {
-        this.cleanupCatchAnimation();
         this.showCatchAnimation = false;
         if (retry) {
             this.getInventory();
@@ -322,7 +307,6 @@ export class EncounterComponent implements OnInit, AfterViewInit {
             if (! this.catchResult ){
                 this.serverService.deletePokemon(this.trainer.id, this.pokemon.id);
             }
-            //await this.updateTeam();
             this.menuService.setNewView("defaultView");
         }
     }

@@ -28,6 +28,7 @@ export class ShopComponent implements OnInit {
   @Input() trainerTracker: TrainerTracker;
   @Input() serverService: ServerService;
   @Input() menuService: MenuService;
+  public audio = new Audio();
 
   public trainer: PokemonMaster;
   public shop: Array<PokeItemsTemplate>;
@@ -38,10 +39,24 @@ export class ShopComponent implements OnInit {
   public isPurchasing: boolean = false;
 
   async ngOnInit() {
+    const sources = ["assets/sounds/pokemon_center_0.webm", "assets/sounds/pokemon_center_1.webm"];
+    const ind: number = Math.floor(Math.random() * sources.length);
+
+    this.audio.src = sources[ind];
+    this.audio.load();
+    this.audio.volume = 0.2;
+    this.audio.loop = true;
+    this.audio.play();
+
     if (this.trainerTracker?.isLoggedIn()) {
       this.trainer = await this.trainerTracker.getTrainer();
       this.getNewShop(this.trainer.getCurrentTier() * 2);
     }
+  }
+
+  ngOnDestroy(): void {
+    // Clean up animations when component is destroyed
+      this.audio.pause();
   }
 
   async getNewShop(shelfSpace: number): Promise<void> {

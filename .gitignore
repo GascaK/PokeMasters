@@ -124,7 +124,6 @@ node_modules/
 
 # Database files
 db_server/database/*.sqlite3
-!db_server/database/.gitkeep
 
 # Other project specific ignores
 .DS_Store
