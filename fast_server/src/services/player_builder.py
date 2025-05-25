@@ -1,8 +1,9 @@
 import requests
 import json
+import logging
 
 from ..interfaces.interface import PokemonBase, Pokemon, Move, Item, Player
-from ..interfaces.models import PlayerModel, PokemonModel, ItemModel
+from ..interfaces.models import PlayerModel, PokemonModel, ItemModel, TradesModel
 from .poke_builder import PokemonBuilder
 from .item_builder import ItemBuilder
 from .base_loader import BaseLoader
@@ -101,3 +102,28 @@ class PlayerBuilder():
         except Exception as e:
             print(e)
             raise e
+        
+    def get_trades(self, id: int, trade_id: int=None) -> list[dict]:
+        try:
+            resp = requests.get(f"{self.db_uri}/trades/all", headers=self.headers, timeout=30)
+            resp.raise_for_status()
+
+            trades = resp.json()
+            if trade_id:
+                for trade in trades:
+                    if trade["id"] == trade_id:
+                        return trade
+
+            return trades
+        except Exception as ex:
+            print(ex)
+            raise ex
+    
+    def update_trades(self, username:int, trade: TradesModel):
+        try:
+            resp = requests.patch(f"{self.db_uri}/trades/{trade.id}", headers=self.headers, json=trade.model_dump_json(), timeout=30)
+            resp.raise_for_status()
+            return resp.json()
+        except Exception as ex:
+            print(ex)
+            raise ex

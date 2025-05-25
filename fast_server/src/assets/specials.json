@@ -48,7 +48,7 @@
         {
             "id": 10,
             "name": "Primed",
-            "text": "This ATK does +1 damage."
+            "text": "This ATK does +1 damage for every consecutive ATK with 'Primed'"
         },
         {
             "id": 11,
@@ -88,7 +88,7 @@
         {
             "id": 18,
             "name": "Lackluster",
-            "text": "This ATK does -2 damage. This Pokemon heals for 3 HP."
+            "text": "This ATK does -1 damage. This Pokemon heals for 2 HP."
         },
         {
             "id": 19,

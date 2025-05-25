@@ -168,3 +168,21 @@ class Player(Base):
 
     def __repr__(self):
         return f"Player(id={self.id}, name={self.name}, dollars={self.dollars}, badges={self.badges})"
+
+class Trades(Base):
+    __tablename__ = "trades"
+
+    id = Column(Integer, primary_key=True)
+    id_one = Column(Integer)
+    id_two = Column(Integer)
+    state_one = Column(Integer)
+    state_two = Column(Integer)
+
+    def __init__(self, id_one, id_two, state_one, state_two):
+        self.id_one = id_one
+        self.id_two = id_two
+        self.state_one = state_one
+        self.state_two = state_two
+    
+    def __repr__(self):
+        return f"Trade(id={self.id}, id1={self.id_one}, id2={self.id_two}, state1={self.state_one}, state2={self.state_two})"

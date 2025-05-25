@@ -59,3 +59,10 @@ class PlayerModel(BaseModel):
     name: str
     badges: int
     dollars: int
+
+class TradesModel(BaseModel):
+    id: int | None = None
+    id_one: int
+    id_two: int
+    state_one: int
+    state_two: int

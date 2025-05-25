@@ -5,7 +5,8 @@ export class TrainerTracker{
     private trainer: PokemonMaster;
     private loggedIn: boolean = false;
 
-    constructor() {}
+    constructor() {
+    }
 
     setTrainer(id: number, serverService: ServerService){
         this.trainer = new PokemonMaster(id, serverService);

@@ -17,12 +17,29 @@ export class InfoComponent implements OnInit {
 
     public trainer: PokemonMaster;
     public statuses: Array<{name: string, text: string}> = statusEffects.status_effects;
+    public nameString: string;
+    public randomNames = [
+        "Backpacker",
+        "Delinquent",
+        "Festival Goer",
+        "Hiker",
+        "Poke Maniac",
+        ":( Not Pokemon Master"
+    ]
 
     async ngOnInit() {
         if (this.trainerTracker?.isLoggedIn())
         {
             this.trainer = await this.trainerTracker.getTrainer();
         }
+
+        const randomIndex = Math.floor(Math.random() * this.randomNames.length);
+        let pre_name = this.randomNames[randomIndex];
+        
+        if (this.trainer.name === "Kevin") {
+            pre_name = "Pokemon Master";
+        }
+        this.nameString = `${pre_name} ${this.trainer.name}`;
     }
 
     onSubmit(badges: string, tier: string) {

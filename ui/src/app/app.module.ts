@@ -15,6 +15,7 @@ import { BackpackComponent } from './components/backpack/backpack.component';
 import { BattleComponent } from './components/battle/battle.component';
 import { FilterItemsPipe } from './pipes/filter-items.pipe';
 import { FilterByGroupPipe } from './pipes/filter-by-group.pipe';
+import { TradeComponent } from './components/trade/trade.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FilterByGroupPipe } from './pipes/filter-by-group.pipe';
     BackpackComponent,
     BattleComponent,
     FilterItemsPipe,
-    FilterByGroupPipe
+    FilterByGroupPipe,
+    TradeComponent
   ],
   imports: [
     BrowserModule,

@@ -25,7 +25,6 @@
       </div>
     </div>
   </div>
-  
   <div class="action-buttons mt-3">
     <div class="mb-2">
       <button class="btn btn-danger col-12" (click)="dropActiveHeldItem()">Drop Held Item</button>
@@ -36,6 +35,11 @@
   </div>
 </div>
 
+
+<!-- No Active Pokemon View -->
+<div *ngIf="!team.active.pokemon && !choosingItemStatus" class="no-active-pokemon">
+  <h3> Please set an active Pokemon! </h3>
+</div>
 <!-- Active Pokemon Card View -->
 <div *ngIf="team.active.pokemon && !choosingItemStatus" class="card pokemon-card">
   <div class="card-body p-0">

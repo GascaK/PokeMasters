@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { PokeItemsTemplate } from '../interfaces/pokeItems';
-import { Trainer } from '../interfaces/trainer';
+import { Trainer, Trades } from '../interfaces/trainer';
 import { PokemonTemplate } from '../interfaces/pokemon';
 import { CONFIGS } from '../env';
 
@@ -291,6 +291,18 @@ export class ServerService {
         }
 
         return await this.instance.post<Trainer>(`${username}/pokemon/upgrade`, body)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
+            })
+            .catch( (err) => {
+                console.error(err);
+                throw err;
+            });
+    }
+
+    async getTrades(username: number): Promise<Array<Trades>>{
+        return await this.instance.get<Array<Trades>>(`${username}/trades/all`)
             .then(async (res) => {
                 console.log(res.data);
                 return res.data;

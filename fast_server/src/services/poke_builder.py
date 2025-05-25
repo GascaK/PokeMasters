@@ -10,8 +10,8 @@ from .base_loader import BaseLoader
 
 class PokemonBuilder():
     MIN_MOVES = 2
-    ITEM_CHANCE = 1/5
-    SHINY_CHANCE = 1/2048
+    ITEM_CHANCE = 1/4
+    SHINY_CHANCE = 1/1024
     SHINY_CHARM_CHANCE = SHINY_CHANCE * 4
     MOD_MULTIPLYER = 1.150
 
@@ -333,11 +333,11 @@ class PokemonBuilder():
             "Ultra Ball": 2,
             "Master Ball": 99,
             "Repeat Ball": (escape / .15) - 1,
-            "Joker Ball": random.choice([5, -5]),
+            "Joker's Ball": random.choice([5, -5]),
             "Heavy Ball": 3 if speed < 0 else 0,
             "Quick Ball": 3 if speed >= 3 else 0,
             "Heal Ball":  3 if hp >= 15 else 0,
-            "Level Ball": 3 if pokemon.base.tier >= 2 else 0
+            "Level Ball": pokemon.base.tier
         }.get(item.name, 0)
 
     def save_pokemon(self, pokemon: PokemonModel, owner: int=0) -> PokemonModel:

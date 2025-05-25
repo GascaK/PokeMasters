@@ -181,24 +181,6 @@ export class EncounterComponent implements OnInit, AfterViewInit {
             await this.processCatchResult();
             this.updateAnimationWithResult(this.catchResult);
         }, 5000);
-
-        
-        
-
-        // Start the catch animation sequence
-        
-
-        // Process catch result in background but don't wait for it to start animation
-        // const catchResultPromise = this.processCatchResult();
-
-        // // Wait for both server response and minimum animation time
-        // await Promise.all([
-        //     catchResultPromise,
-        //     new Promise(resolve => setTimeout(resolve, 3500)) // Minimum animation time
-        // ]);
-
-        // // Update animation with result after minimum time has passed
-        // this.updateAnimationWithResult(this.catchResult);
     }
 
     /**

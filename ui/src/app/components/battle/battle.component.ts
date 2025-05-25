@@ -27,7 +27,7 @@ export class BattleComponent{
     randomMoney(): void {
         const baseAmount = this.randomInt(300, 700);
         const tier = this.trainer.getCurrentTier();
-        const tierMultiplier = Math.pow(1.75, tier - 1);
+        const tierMultiplier = Math.pow(1.75, tier);
         const tierBonus = tier * 150;
         const deposit = Math.floor((baseAmount * tierMultiplier) + tierBonus);
 
@@ -40,7 +40,7 @@ export class BattleComponent{
         const baseAmount = this.randomInt(500, 1000);
         const tier = this.trainer.getCurrentTier();
         // More aggressive scaling for gym leaders
-        const tierMultiplier = Math.pow(2, tier - 1);
+        const tierMultiplier = Math.pow(2, tier);
         const tierBonus = tier * 250; // Higher bonus for gym leaders
         const deposit = Math.floor((baseAmount * tierMultiplier) + tierBonus);
 
@@ -53,7 +53,7 @@ export class BattleComponent{
         const baseAmount = this.randomInt(400, 800);
         const tier = this.trainer.getCurrentTier();
         // Moderate scaling for regular trainers
-        const tierMultiplier = Math.pow(1.75, tier - 1);
+        const tierMultiplier = Math.pow(1.75, tier);
         const tierBonus = tier * 150; // Moderate bonus for trainers
         const deposit = Math.floor((baseAmount * tierMultiplier) + tierBonus);
 

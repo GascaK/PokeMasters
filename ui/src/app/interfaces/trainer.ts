@@ -10,3 +10,11 @@ export interface Trainer {
     pokemon?: Array<PokemonTemplate>;
     items?: Array<PokeItemsTemplate>
 }
+
+export interface Trades {
+    id?: number;
+    id_one: number;
+    id_two: number;
+    state_one: number;
+    state_two: number;
+}

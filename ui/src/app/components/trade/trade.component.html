@@ -1,0 +1,9 @@
+<div *ngFor="let trade of trades">
+    <h3>{{trade.id}}</h3>
+    <h3>{{trade.id_one}}</h3>
+    <h3>{{trade.id_two}}</h3>
+    <h3>{{trade.state_one}}</h3>
+    <h3>{{trade.state_two}}</h3>
+</div>
+<div>
+    <button (click)="menuService.setNewView('defaultView')">Exit</button>

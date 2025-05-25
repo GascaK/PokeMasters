@@ -5,6 +5,7 @@ from .base_loader import BaseLoader
 from ..interfaces.interface import PokeCenter
 from ..interfaces.models import ItemModel
 
+
 class ItemBuilder():
     headers={
         'Content-type':'application/json', 

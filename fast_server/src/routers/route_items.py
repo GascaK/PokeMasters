@@ -56,7 +56,6 @@ def post_items_starter(username: int, amount=20, composer: Composer = Depends(ge
 
 @router.post("/random", tags=["items"])
 def post_items_random(username: int, tier: Annotated[int | None, Body()]=1, composer: Composer = Depends(get_composer)) -> ItemModel:
-    
     if random.random() <= 0.25:
         item: ItemModel = composer.get_item_builder().get_item_by_text(text="sell", tier=random.randint(1, tier))
     else:
@@ -90,7 +89,9 @@ def get_items_shop(
     # Add random items.
     for _ in range(shop_size):
         item: ItemModel = composer.get_item_builder().random_item(tier=random.randint(1, tier))
-        items.append(item)
+        if item and "sell" not in item.text.lower():
+            items.append(item)
+
     return items
 
 @router.post("/shop/buy", tags=["items", "shop", "player"])

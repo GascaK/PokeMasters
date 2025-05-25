@@ -16,6 +16,11 @@
 <div *ngIf="menuService.views.get('battleView')">
   <app-battle [trainerTracker]="trainerTracker" [serverService]="serverService" [menuService]="menuService"></app-battle>
 </div>
+<div *ngIf="menuService.views.get('tradeView')">
+  <app-trade [trainerTracker]="trainerTracker" [serverService]="serverService" [menuService]="menuService"></app-trade>
+</div>
+
+
 <div class="row" *ngIf="menuService.views.get('defaultView')">
   <div>
     <app-active [trainerTracker]="trainerTracker" [team]="trainer.team" [menuService]="menuService"></app-active>
@@ -27,6 +32,7 @@
     <ul class="framed buttons">
       <li><button class="pokemon" (click)="setView('dexView')">PokeDEX</button></li>
       <li><button (click)="setView('backpackView')">BackPack</button></li>
+      <li><button (click)="setView('tradeView')">Wonder Trade</button></li>
       <li><button (click)="setView('infoView')">Settings</button></li>
     </ul>
   </section>
