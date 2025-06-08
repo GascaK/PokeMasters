@@ -18,3 +18,11 @@ export interface Trades {
     state_one: number;
     state_two: number;
 }
+
+export interface FullTradeObject {
+    id: number;
+    pkmn_one: PokemonTemplate | null;
+    pkmn_two: PokemonTemplate | null;
+    state_one: number;
+    state_two: number;
+}

@@ -19,6 +19,14 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
+@router.get("", response_model=PokemonModel, tags=["pokemon"])
+def get_pokemon(username: int, id: int, composer: Composer = Depends(get_composer)):
+    pkmn: PokemonModel = composer.get_poke_builder().get_pokemon(id)
+    if not pkmn:
+        raise HTTPException(status_code=400, detail="Pokemon not found.")
+
+    return pkmn
+
 @router.post("/encounter", response_model=PokemonModel, tags=["pokemon", "encounter"])
 def post_pokemon_encounter(
         username: int,

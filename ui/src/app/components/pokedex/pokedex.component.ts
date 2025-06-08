@@ -259,6 +259,10 @@ export class PokedexComponent implements OnInit, OnDestroy {
         }
     }
 
+    trade(trade: PokemonTemplate){
+        this.serverService.startTrade(this.trainer.id, trade)
+    }
+
     exitInfoPanel() {
         this.infoList = [];
         this.moreInformation = false;

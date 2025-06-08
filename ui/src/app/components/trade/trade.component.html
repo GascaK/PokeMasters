@@ -1,9 +1,21 @@
+<h5> Pending Trades </h5>
 <div *ngFor="let trade of trades">
     <h3>{{trade.id}}</h3>
-    <h3>{{trade.id_one}}</h3>
-    <h3>{{trade.id_two}}</h3>
     <h3>{{trade.state_one}}</h3>
+    <h3 *ngIf="trade.pkmn_one">{{trade.pkmn_one!.base.name}}</h3>
     <h3>{{trade.state_two}}</h3>
+    <h3 *ngIf="trade.pkmn_two">{{trade.pkmn_two?.base?.name}}</h3>
+    <button class="btn btn-primary" (click)="logs(trade)">Trade</button>
+</div>
+<h5>Your Trades</h5>
+<div *ngFor="let trade of yourTrades">
+    <h3>{{trade.id}}</h3>
+    <h3>{{trade.state_one}}</h3>
+    <h3 *ngIf="trade.pkmn_one">{{trade.pkmn_one!.base.name}}</h3>
+    <h3>{{trade.state_two}}</h3>
+    <h3 *ngIf="trade.pkmn_two">{{trade.pkmn_two?.base?.name}}</h3>
+    <button class="btn btn-primary" (click)="updateTrade(trade)">Trade</button>
 </div>
 <div>
-    <button (click)="menuService.setNewView('defaultView')">Exit</button>
+    <button class="btn btn-danger" (click)="menuService.setNewView('defaultView')">Exit</button>
+</div>

@@ -27,8 +27,8 @@ class TradesLocator(Resource):
         return trades
     
     @marshal_with(trade_resource)
-    def put(self, id):
-        payload = json.loads(request.get_json())
+    def post(self):
+        payload: dict = json.loads(request.get_json())
         if not payload:
             abort(400, message="No payload provided")
         
@@ -48,11 +48,13 @@ class TradesLocator(Resource):
             return trade
 
     @marshal_with(trade_resource)
-    def patch(self, id):
+    def patch(self):
         payload = json.loads(request.get_json())
+        if not payload:
+            abort(400, message="No payload provided")
 
         with Session() as session:
-            trade = session.query(Trades).filter_by(id=id).first()
+            trade = session.query(Trades).filter_by(id=payload["id"]).first()
 
             try:
                 trade.id_one = payload["id_one"]

@@ -118,6 +118,21 @@ export class ServerService {
             })
     }
 
+    async getPokemon(id: number): Promise<PokemonTemplate | null>{
+        if (id === -1) {
+            return null;
+        }
+
+        return await this.instance.get<PokemonTemplate>(`0/pokemon?id=${id}`)
+            .then(async (res) => {
+                console.log(res.data);
+                return res.data;
+            }).catch( (err) => {
+                console.error(err);
+                throw err;
+            })
+    }
+
     async encounterRandomPokemon(
         username: number, 
         tier: number, 
@@ -311,6 +326,38 @@ export class ServerService {
                 console.error(err);
                 throw err;
             });
+    }
+
+    async updateTrades(username: number, trade: Trades): Promise<Trades>{
+        const body = trade;
+        return await this.instance.patch<Trades>(`${username}/trades/update`, body)
+        .then(async (res) => {
+            console.log(res.data);
+            return res.data;
+        })
+        .catch( (err) => {
+            console.error(err);
+            throw err;
+        });
+    }
+
+    async startTrade(username: number, pokemon: PokemonTemplate): Promise<Trades>{
+        const body = {
+            "id_one": pokemon.id,
+            "id_two": -1,
+            "state_one": 1,
+            "state_two": 0,
+        };
+
+        return await this.instance.post<Trades>(`${username}/trades/create`, body)
+        .then(async (res) => {
+            console.log(res.data);
+            return res.data;
+        })
+        .catch( (err) => {
+            console.error(err);
+            throw err;
+        });
     }
 }
 

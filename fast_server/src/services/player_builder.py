@@ -103,9 +103,9 @@ class PlayerBuilder():
             print(e)
             raise e
         
-    def get_trades(self, id: int, trade_id: int=None) -> list[dict]:
+    def get_trade(self, id: int, trade_id: int=None) -> list[dict]:
         try:
-            resp = requests.get(f"{self.db_uri}/trades/all", headers=self.headers, timeout=30)
+            resp = requests.get(f"{self.db_uri}/trades", headers=self.headers, timeout=30)
             resp.raise_for_status()
 
             trades = resp.json()
@@ -119,10 +119,20 @@ class PlayerBuilder():
             print(ex)
             raise ex
     
-    def update_trades(self, username:int, trade: TradesModel):
+    def create_trade(self, trade: TradesModel):
         try:
-            resp = requests.patch(f"{self.db_uri}/trades/{trade.id}", headers=self.headers, json=trade.model_dump_json(), timeout=30)
+            resp = requests.post(f"{self.db_uri}/trades", headers=self.headers, json=trade.model_dump_json(), timeout=30)
             resp.raise_for_status()
+            return resp.json()
+        except Exception as ex:
+            print(ex)
+            raise ex
+
+    def update_trade(self, username: int, trade: TradesModel):
+        try:
+            resp = requests.patch(f"{self.db_uri}/trades", headers=self.headers, json=trade.model_dump_json(), timeout=30)
+            resp.raise_for_status()
+
             return resp.json()
         except Exception as ex:
             print(ex)
