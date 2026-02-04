@@ -1,7 +1,9 @@
-FROM python:alpine
-
+FROM python:3.13-slim
 
 WORKDIR /app
+
+RUN apt-get update && apt-get install -y build-essential cargo && rm -rf /var/lib/apt/lists/*
+
 COPY fast_server /app
 COPY cache /app/cache
 COPY dist /app/dist
