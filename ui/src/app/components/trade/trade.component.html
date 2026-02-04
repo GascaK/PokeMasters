@@ -1,21 +1,348 @@
-<h5> Pending Trades </h5>
-<div *ngFor="let trade of trades">
-    <h3>{{trade.id}}</h3>
-    <h3>{{trade.state_one}}</h3>
-    <h3 *ngIf="trade.pkmn_one">{{trade.pkmn_one!.base.name}}</h3>
-    <h3>{{trade.state_two}}</h3>
-    <h3 *ngIf="trade.pkmn_two">{{trade.pkmn_two?.base?.name}}</h3>
-    <button class="btn btn-primary" (click)="logs(trade)">Trade</button>
-</div>
-<h5>Your Trades</h5>
-<div *ngFor="let trade of yourTrades">
-    <h3>{{trade.id}}</h3>
-    <h3>{{trade.state_one}}</h3>
-    <h3 *ngIf="trade.pkmn_one">{{trade.pkmn_one!.base.name}}</h3>
-    <h3>{{trade.state_two}}</h3>
-    <h3 *ngIf="trade.pkmn_two">{{trade.pkmn_two?.base?.name}}</h3>
-    <button class="btn btn-primary" (click)="updateTrade(trade)">Trade</button>
-</div>
-<div>
-    <button class="btn btn-danger" (click)="menuService.setNewView('defaultView')">Exit</button>
+<div class="trade-container">
+  <!-- Header Section -->
+  <div class="trade-header">
+    <h2>Pokemon Trading Center</h2>
+    <div class="header-actions">
+      <button 
+        class="btn btn-create-trade"
+        (click)="toggleCreateTrade()"
+        [disabled]="isLoading"
+        title="Create new trade">
+        <span *ngIf="!showCreateTrade">+ Create Trade</span>
+        <span *ngIf="showCreateTrade">Cancel</span>
+      </button>
+      <button 
+        class="refresh-btn" 
+        (click)="refreshTrades()" 
+        [disabled]="isLoading"
+        title="Refresh trades">
+        <span *ngIf="!isLoading">🔄</span>
+        <span *ngIf="isLoading" class="spinner">⏳</span>
+        Refresh
+      </button>
+      <button 
+        class="btn btn-cancel"
+        (click)="exitToMenu()"
+        title="Return to menu">
+        ← Exit
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Loading trades...</p>
+  </div>
+
+  <!-- Create Trade Section -->
+  <div *ngIf="showCreateTrade && !isLoading" class="create-trade-section">
+    <div class="create-trade-card">
+      <h3>Create New Trade</h3>
+      <p>Select one of your Pokemon to put up for trade:</p>
+      
+      <div *ngIf="isLoadingUserPokemon" class="loading-pokemon">
+        <div class="small-spinner"></div>
+        <span>Loading your Pokemon...</span>
+      </div>
+
+      <div *ngIf="!isLoadingUserPokemon && userPokemon.length === 0" class="no-pokemon">
+        <p>You don't have any Pokemon available for trading.</p>
+      </div>
+
+      <div *ngIf="!isLoadingUserPokemon && userPokemon.length > 0" class="pokemon-selection">
+        <div class="pokemon-grid">
+          <div 
+            *ngFor="let pokemon of userPokemon" 
+            class="pokemon-card selectable"
+            [class.selected]="selectedPokemon?.id === pokemon.id"
+            (click)="selectPokemon(pokemon)">
+            <div class="pokemon-image">
+              <img [src]="pokemon.sprite.sprite_url || 'assets/pokemon-placeholder.png'" 
+                   [alt]="pokemon.base.name"
+                   class="pokemon-sprite">
+            </div>
+            <div class="pokemon-info-compact">
+              <h5>{{pokemon.base.name}}</h5>
+            </div>
+            <div *ngIf="selectedPokemon?.id === pokemon.id" class="selected-indicator">
+              ✓
+            </div>
+          </div>
+        </div>
+
+        <div class="create-trade-actions" *ngIf="selectedPokemon">
+          <button 
+            class="btn btn-confirm-trade"
+            (click)="createTrade()"
+            [disabled]="isCreatingTrade">
+            <span *ngIf="!isCreatingTrade">Create Trade Offer</span>
+            <span *ngIf="isCreatingTrade">Creating...</span>
+          </button>
+          <button 
+            class="btn btn-cancel-selection"
+            (click)="clearSelection()">
+            Clear Selection
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Your Active Trades Section -->
+  <div class="trades-section" *ngIf="!isLoading">
+    <h3>Your Trades ({{yourTrades.length}})</h3>
+    
+    <div *ngIf="yourTrades.length === 0" class="no-trades">
+      <p>You have no active trades.</p>
+    </div>
+
+    <div class="trades-grid" *ngIf="yourTrades.length > 0">
+      <div 
+        *ngFor="let trade of yourTrades" 
+        class="trade-card your-trade"
+        [class.completed]="getTradeStatus(trade) === 'Completed'"
+        [class.cancelled]="getTradeStatus(trade) === 'Cancelled'"
+        [class.ready]="getTradeStatus(trade) === 'Ready to Complete'">
+        
+        <!-- Trade Header -->
+        <div class="trade-header-info">
+          <span class="trade-id">Trade #{{trade.id}}</span>
+          <span class="trade-status" [class]="getTradeStatus(trade).toLowerCase().replace(' ', '-')">
+            {{getTradeStatus(trade)}}
+          </span>
+        </div>
+
+        <!-- Pokemon Display -->
+        <div class="pokemon-exchange">
+          <!-- Your Pokemon -->
+          <div class="pokemon-side your-pokemon">
+            <div class="pokemon-info" *ngIf="trade.pkmn_one">
+              <div class="pokemon-image">
+                <img [src]="trade.pkmn_one.sprite.sprite_url || 'assets/pokemon-placeholder.png'" 
+                     [alt]="trade.pkmn_one.base.name"
+                     class="pokemon-sprite">
+              </div>
+              <div class="pokemon-details">
+                <h4>{{trade.pkmn_one.base.name}}</h4>
+                <p class="pokemon-owner" *ngIf="trade.pkmn_one.owner === trainer.id">
+                  <strong>Your Pokemon</strong>
+                </p>
+              </div>
+              <!-- Your acceptance status -->
+              <div class="acceptance-status">
+                <span *ngIf="trade.pkmn_one.owner === trainer.id && trade.state_one === TradeState.PENDING" 
+                      class="status pending">Waiting for your acceptance</span>
+                <span *ngIf="trade.pkmn_one.owner === trainer.id && trade.state_one === TradeState.ACCEPTED" 
+                      class="status accepted">✓ You accepted</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exchange Arrow -->
+          <div class="exchange-arrow">
+            <span class="arrow">⇄</span>
+          </div>
+
+          <!-- Their Pokemon -->
+          <div class="pokemon-side their-pokemon">
+            <div class="pokemon-info" *ngIf="trade.pkmn_two">
+              <div class="pokemon-image">
+                <img [src]="trade.pkmn_two.sprite.sprite_url || 'assets/pokemon-placeholder.png'" 
+                     [alt]="trade.pkmn_two.base.name"
+                     class="pokemon-sprite">
+              </div>
+              <div class="pokemon-details">
+                <h4>{{trade.pkmn_two.base.name}}</h4>
+                <p class="pokemon-owner" *ngIf="trade.pkmn_two.owner === trainer.id">
+                  <strong>Your Pokemon</strong>
+                </p>
+              </div>
+              <!-- Their acceptance status -->
+              <div class="acceptance-status">
+                <span *ngIf="trade.pkmn_two.owner === trainer.id && trade.state_two === TradeState.PENDING" 
+                      class="status pending">Waiting for your acceptance</span>
+                <span *ngIf="trade.pkmn_two.owner === trainer.id && trade.state_two === TradeState.ACCEPTED" 
+                      class="status accepted">✓ You accepted</span>
+                <span *ngIf="trade.pkmn_two.owner !== trainer.id && trade.state_two === TradeState.PENDING" 
+                      class="status pending">Waiting for their acceptance</span>
+                <span *ngIf="trade.pkmn_two.owner !== trainer.id && trade.state_two === TradeState.ACCEPTED" 
+                      class="status accepted">✓ They accepted</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trade Actions -->
+        <div class="trade-actions">
+          <button 
+            *ngIf="canAcceptTrade(trade)"
+            class="btn btn-accept"
+            (click)="updateTrade(trade)"
+            [disabled]="isLoading">
+            Accept Trade
+          </button>
+
+          <button 
+            *ngIf="canCancelTrade(trade)"
+            class="btn btn-cancel"
+            (click)="cancelTrade(trade)"
+            [disabled]="isLoading">
+            Cancel Trade
+          </button>
+
+          <button 
+            class="btn btn-details"
+            (click)="logs(trade)"
+            title="View trade details">
+            Details
+          </button>
+
+          <div *ngIf="getTradeStatus(trade) === 'Completed'" class="completed-message">
+            <span class="success-icon">✅</span>
+            Trade completed successfully!
+          </div>
+
+          <div *ngIf="getTradeStatus(trade) === 'Ready to Complete'" class="ready-message">
+            <span class="ready-icon">⚡</span>
+            Trade will complete automatically!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Available Trades Section -->
+  <div class="trades-section" *ngIf="!isLoading">
+    <h3>Available Trades ({{trades.length}})</h3>
+    
+    <div *ngIf="trades.length === 0" class="no-trades">
+      <p>No other trades available at the moment.</p>
+    </div>
+
+
+    <div class="trades-grid" *ngIf="trades.length > 0">
+      <div 
+        *ngFor="let trade of trades" 
+        class="trade-card available-trade"
+        [class.completed]="getTradeStatus(trade) === 'Completed'"
+        [class.cancelled]="getTradeStatus(trade) === 'Cancelled'">
+        <!-- Trade Header -->
+        <div class="trade-header-info">
+          <span class="trade-id">Trade #{{trade.id}}</span>
+          <span class="trade-status" [class]="getTradeStatus(trade).toLowerCase().replace(' ', '-')">
+            {{getTradeStatus(trade)}}
+          </span>
+        </div>
+
+        <!-- Pokemon Display -->
+        <div class="pokemon-exchange">
+          <!-- Pokemon One -->
+          <div class="pokemon-side">
+            <div class="pokemon-info" *ngIf="trade.pkmn_one">
+              <div class="pokemon-image">
+                <img [src]="trade.pkmn_one.sprite?.sprite_url || 'assets/pokemon-placeholder.png'" 
+                     [alt]="trade.pkmn_one.base.name"
+                     class="pokemon-sprite">
+              </div>
+              <div class="pokemon-details">
+                <h4>{{trade.pkmn_one.base.name}}</h4>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exchange Arrow -->
+          <div class="exchange-arrow">
+            <span class="arrow">⇄</span>
+          </div>
+
+          <!-- Pokemon Two -->
+          <div class="pokemon-side">
+            <div class="pokemon-info" *ngIf="trade.pkmn_two">
+              <div class="pokemon-image">
+                <img [src]="trade.pkmn_two.sprite?.sprite_url || 'assets/pokemon-placeholder.png'" 
+                     [alt]="trade.pkmn_two.base.name"
+                     class="pokemon-sprite">
+              </div>
+              <div class="pokemon-details">
+                <h4>{{trade.pkmn_two.base.name}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trade Actions -->
+        <div class="trade-actions">
+          <button 
+            class="btn btn-details"
+            (click)="logs(trade)"
+            title="View trade details">
+            View Details
+          </button>
+
+          <!-- Add to Trade Button -->
+          <button *ngIf="canAddToTrade(trade) && !showAddToTrade[trade.id]" class="btn btn-accept" (click)="toggleAddToTrade(trade)">
+            Add Your Pokémon
+          </button>
+
+          <!-- Add to Trade Selection UI -->
+          <div *ngIf="showAddToTrade[trade.id]" class="add-to-trade-modal">
+            <h4>Select one of your Pokémon to add to this trade:</h4>
+            <div *ngIf="isLoadingUserPokemon" class="loading-pokemon">
+              <div class="small-spinner"></div>
+              <span>Loading your Pokémon...</span>
+            </div>
+            <div *ngIf="!isLoadingUserPokemon && userPokemon.length === 0" class="no-pokemon">
+              <p>You have no Pokémon available.</p>
+            </div>
+            <div *ngIf="!isLoadingUserPokemon && userPokemon.length > 0" class="pokemon-selection">
+              <div class="pokemon-grid">
+                <div 
+                  *ngFor="let pkmn of userPokemon"
+                  class="pokemon-card selectable"
+                  [class.selected]="addToTradeSelectedPokemon[trade.id]?.id === pkmn.id"
+                  (click)="selectAddToTradePokemon(trade.id, pkmn)">
+                  <div class="pokemon-image">
+                    <img [src]="pkmn.sprite?.sprite_url || 'assets/pokemon-placeholder.png'" 
+                         [alt]="pkmn.base.name"
+                         class="pokemon-sprite">
+                  </div>
+                  <div class="pokemon-info-compact">
+                    <h5>{{pkmn.base.name}}</h5>
+                  </div>
+                  <div *ngIf="addToTradeSelectedPokemon[trade.id]?.id === pkmn.id" class="selected-indicator">
+                    ✓
+                  </div>
+                </div>
+              </div>
+              <div class="create-trade-actions" *ngIf="addToTradeSelectedPokemon[trade.id]">
+                <button 
+                  class="btn btn-confirm-trade"
+                  [disabled]="isAddingToTrade[trade.id]"
+                  (click)="addPokemonToTrade(trade)">
+                  <span *ngIf="!isAddingToTrade[trade.id]">Confirm</span>
+                  <span *ngIf="isAddingToTrade[trade.id]">Adding...</span>
+                </button>
+                <button 
+                  class="btn btn-cancel-selection"
+                  (click)="toggleAddToTrade(trade)">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="trade-info">
+            <small>This trade involves other trainers</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Messages -->
+  <div class="error-container" *ngIf="false">
+    <!-- Add error handling display here if needed -->
+  </div>
+
 </div>

@@ -202,6 +202,24 @@ def delete_pokemon_flee(
         raise HTTPException(status_code=400, detail="You do not own this pokemon.")
 
 
+@router.patch("/trade", tags=["pokemon", "trade"])
+def patch_pokemon_trade(
+        username: int,
+        pokemon_id: Annotated[int, Body()],
+        owner: Annotated[int, Body()],
+        composer: Composer = Depends(get_composer)
+    ):
+    payload = {
+        "owner": owner
+    }
+    try:
+        composer.get_poke_builder().modify_pokemon(pokemon_id, payload=payload)
+    except KeyError as e:
+        raise HTTPException(status_code=400, detail=f"Invalid payload. Missing key: {e}")
+    except requests.HTTPError as e:
+        raise HTTPException(status_code=400, detail=f"Unable to locate pokemon: {e}")
+
+
 @router.post("/upgrade", tags=["pokemon", "upgrade"])
 def post_pokemon_upgrade(
         username: int,

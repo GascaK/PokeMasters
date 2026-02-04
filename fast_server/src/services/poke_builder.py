@@ -200,7 +200,11 @@ class PokemonBuilder():
 
     def build_pokemon(self, data: dict) -> PokemonModel:
         try:
-            print(data)
+            print("Building Pokemon:", data)
+            if "dex_id" in data:
+                print("Using provided dex data.")
+            else:
+                print(type(data))
             base_data = self.poke_db.get_by_dex_id(data.get("dex_id"))
             moves = [self.get_move(x) for x in data["moves"]]
 
@@ -255,7 +259,8 @@ class PokemonBuilder():
 
             special = None
             if move.get("special"):
-                r = requests.get(f"{self.db_uri}/specials/{move["special"]}",
+                special_id = move["special"]
+                r = requests.get(f"{self.db_uri}/specials/{special_id}",
                     headers=self.headers,
                     timeout=5)
                 special: dict = r.json()

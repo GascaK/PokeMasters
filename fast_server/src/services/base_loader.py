@@ -465,7 +465,8 @@ class BaseLoader():
             self.SP_ATK.append(pending)
 
             try:
-                resp = requests.put(f"{self.db_uri}/specials/{pending.id}", json=pending.model_dump_json(), timeout=5)
+                # Use a Python dict when sending via `json=` so requests encodes correctly
+                resp = requests.put(f"{self.db_uri}/specials/{pending.id}", json=pending.model_dump(), timeout=5)
                 resp.raise_for_status()
             except Exception as e:
                 print(e)

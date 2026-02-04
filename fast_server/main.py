@@ -6,7 +6,7 @@ from src.routers import route_player, route_pokemon, route_items, route_trades
 from src.assets.compile import Composer
 
 
-app = FastAPI(title="PokeMasters", version="0.1.0")
+app = FastAPI(title="PokeMastersAPI", version="0.1.0")
 
 origins = ['*']
 app.add_middleware(

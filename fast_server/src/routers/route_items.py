@@ -17,7 +17,7 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
-@router.get("/", tags=["items"])
+@router.get("", tags=["items"])
 def get_items(username: int, id: int, composer: Composer = Depends(get_composer)) -> ItemModel:
     # Return Item from db.
     try:

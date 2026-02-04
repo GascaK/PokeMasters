@@ -1,5 +1,7 @@
 export const CONFIGS = {
-    hostIP: "192.168.1.28",
+    // Use the browser's hostname so the UI (served to the host) calls the
+    // host-mapped `poke-server` service. Default to port 80 for HTTP.
+    hostIP: window.location.hostname,
     apiVersion: 'v1',
-    apiPort: location.port || (location.protocol === 'https:' ? '443' : '80')
+    apiPort: (location.protocol === 'https:' ? '443' : '80')
 }

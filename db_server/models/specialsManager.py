@@ -46,8 +46,8 @@ class SpecialLocator(Resource):
     
     @marshal_with(special_resource)
     def put(self, id):
-        payload = json.loads(request.get_json())
-        if not payload or type(payload) != dict:
+        payload = request.get_json()
+        if not payload or not isinstance(payload, dict):
             abort(400, message="Invalid payload.")
 
         specials_manager = SpecialsManager()

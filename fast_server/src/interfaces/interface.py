@@ -291,7 +291,8 @@ class Pokemon(PokemonBase):
             elif stat["name"] == "physical":
                 physical = stat["value"]
 
-        return f"{"**" if self.sprite.get("shiny") else ""}{self.dex_id}:{self.name} {self.base.types} - {self.evolutions}\n\t{hp_mod} hp:{hp} {speed_mod} sp:{speed} special:{special} physical:{physical}\n\t{self.moves}\n\t{self.items}"
+        shiny_prefix = "**" if self.sprite.get("shiny") else ""
+        return f'{shiny_prefix}{self.dex_id}:{self.name} {self.base.types} - {self.evolutions}\n\t{hp_mod} hp:{hp} {speed_mod} sp:{speed} special:{special} physical:{physical}\n\t{self.moves}\n\t{self.items}'
 
 class Player():
     def __init__(self, name: int, id: int=0, badges: int=0, dollars: int=0):

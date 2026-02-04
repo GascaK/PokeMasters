@@ -1,364 +1,402 @@
-import axios from 'axios';
+import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
 
 import { PokeItemsTemplate } from '../interfaces/pokeItems';
 import { Trainer, Trades } from '../interfaces/trainer';
 import { PokemonTemplate } from '../interfaces/pokemon';
 import { CONFIGS } from '../env';
 
+/** Normalized error response for consistent handling */
+interface ApiError {
+    status: number | null;
+    message: string;
+    originalError: AxiosError | Error;
+}
 
 export class ServerService {
-    
-    instance = axios.create({
-        baseURL: `http://${CONFIGS.hostIP}/api/v1`,
-        timeout: 10000,
-        withCredentials: false,
-        headers: {
-        'Content-Type': 'application/json'
+    private instance: AxiosInstance;
+    private logger = {
+        debug: (msg: string, data?: unknown) => console.debug(`[ServerService] ${msg}`, data),
+        error: (msg: string, data?: unknown) => console.error(`[ServerService] ${msg}`, data),
+        info: (msg: string, data?: unknown) => console.info(`[ServerService] ${msg}`, data),
+    };
+
+    constructor() {
+        const baseURL = `${window.location.protocol}//${CONFIGS.hostIP}:${CONFIGS.apiPort}/api/${CONFIGS.apiVersion}`;
+
+        this.instance = axios.create({
+            baseURL,
+            timeout: 10000,
+            withCredentials: false,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        this.setupInterceptors();
+    }
+
+    /**
+     * Setup axios interceptors for logging and error normalization
+     */
+    private setupInterceptors(): void {
+        this.instance.interceptors.request.use(
+            (config) => {
+                this.logger.debug(`→ ${config.method?.toUpperCase()} ${config.url}`);
+                return config;
+            },
+            (error) => Promise.reject(error)
+        );
+
+        this.instance.interceptors.response.use(
+            (response) => {
+                this.logger.debug(`← ${response.status} ${response.config.url}`);
+                return response;
+            },
+            (error: AxiosError) => {
+                const message = error.response?.statusText || error.message || 'Unknown error';
+                const status = error.response?.status || null;
+                this.logger.error(`✗ ${status || 'Network'} Error: ${message}`, error.response?.data);
+                return Promise.reject(error);
+            }
+        );
+    }
+
+    /**
+     * Normalize axios errors into a consistent ApiError shape
+     */
+    private normalizeError(error: AxiosError | Error): ApiError {
+        if (axios.isAxiosError(error)) {
+            return {
+                status: error.response?.status || null,
+                message: error.response?.statusText || error.message || 'API error',
+                originalError: error
+            };
         }
-    });
+        return {
+            status: null,
+            message: error.message || 'Unknown error',
+            originalError: error
+        };
+    }
+
+    /**
+     * Build URL path with consistent slash handling
+     */
+    private buildPath(...segments: (string | number)[]): string {
+        const parts = segments.map(s => String(s).replace(/^\/+|\/+$/g, ''));
+        if (parts.length === 0) return '/';
+        let path = '/' + parts[0];
+        for (let i = 1; i < parts.length; i++) {
+            const seg = parts[i];
+            if (seg.startsWith('?') || seg.startsWith('&')) {
+                path += seg;
+            } else {
+                path += '/' + seg;
+            }
+        }
+        return path;
+    }
+
+    /**
+     * Generic request helper to reduce boilerplate
+     */
+    private async request<T>(
+        promise: Promise<AxiosResponse<T>>
+    ): Promise<T> {
+        try {
+            const response = await promise;
+            return response.data;
+        } catch (error) {
+            const apiError = this.normalizeError(error as AxiosError | Error);
+            throw apiError;
+        }
+    }
+
+    /**
+     * Validate that username is a positive integer
+     */
+    private validateUsername(username: number): void {
+        if (!Number.isInteger(username) || username < 0) {
+            throw new Error(`Invalid username: ${username}`);
+        }
+    }
 
     ////// Player Functions //////
-    async findPlayerByName(name: string): Promise<Trainer>{
-        return await this.instance.get<Trainer>(`0/player/find?name=${name}`)
-            .then(async (res) => {
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            })
+    async findPlayerByName(name: string): Promise<Trainer> {
+        if (!name || name.trim().length === 0) {
+            throw new Error('Player name cannot be empty');
+        }
+        const path = this.buildPath('0/player/find', `?name=${encodeURIComponent(name)}`);
+        return this.request(this.instance.get<Trainer>(path));
     }
 
-    async getPlayer(username: number): Promise<Trainer>{
-        return await this.instance.get<Trainer>(`${username}/player/`)
-            .then(async (res) => {
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            });
+    async getPlayer(username: number): Promise<Trainer> {
+        this.validateUsername(username);
+        const path = this.buildPath(username, 'player');
+        return this.request(this.instance.get<Trainer>(path));
     }
 
-    async createPlayer(name: string): Promise<Trainer>{
-        const body = name;
-        return await this.instance.post<Trainer>(`0/player/`, body)
-            .then(async (res) => {
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            });
+    async createPlayer(name: string): Promise<Trainer> {
+        if (!name || name.trim().length === 0) {
+            throw new Error('Player name cannot be empty');
+        }
+        const body = { name };
+        const path = this.buildPath('0/player');
+        return this.request(this.instance.post<Trainer>(path, body));
     }
 
-    async patchPlayer(username: number, player: Trainer): Promise<Trainer>{
-        const body = player;
-
-        return await this.instance.patch<Trainer>(`${username}/player/`, body)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            });
+    async patchPlayer(username: number, player: Trainer): Promise<Trainer> {
+        this.validateUsername(username);
+        if (!player) {
+            throw new Error('Player object cannot be null');
+        }
+        const path = this.buildPath(username, 'player');
+        return this.request(this.instance.patch<Trainer>(path, player));
     }
 
-    async getTrainerPokemon(username: number): Promise<Array<PokemonTemplate>>{
-        return await this.instance.get<Array<PokemonTemplate>>(`${username}/player/pokemon`)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            });
+    async getTrainerPokemon(username: number): Promise<Array<PokemonTemplate>> {
+        this.validateUsername(username);
+        const path = this.buildPath(username, 'player/pokemon');
+        return this.request(this.instance.get<Array<PokemonTemplate>>(path));
     }
 
-    async getTrainerItems(username: number): Promise<Array<PokeItemsTemplate>>{
-        return await this.instance.get<Array<PokeItemsTemplate>>(`${username}/player/items`)
-            .then(async(res) => {
-                console.log(res.data);
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            });
+    async getTrainerItems(username: number): Promise<Array<PokeItemsTemplate>> {
+        this.validateUsername(username);
+        const path = this.buildPath(username, 'player/items');
+        return this.request(this.instance.get<Array<PokeItemsTemplate>>(path));
     }
 
-    async deleteTrainerItems(username: number, item: PokeItemsTemplate): Promise<void>{
-        return await this.instance.delete<void>(`${username}/player/items?id=${item.id}`)
-            .then(async(res) => {
-                console.log(res.data);
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            });
+    async deleteTrainerItems(username: number, item: PokeItemsTemplate): Promise<void> {
+        this.validateUsername(username);
+        if (!item || !item.id) {
+            throw new Error('Invalid item: missing id');
+        }
+        const path = this.buildPath(username, 'player/items') + `?id=${item.id}`;
+        await this.request(this.instance.delete<void>(path));
     }
 
     ////// Pokemon Functions //////
-    async encounterStarters(username: number): Promise<Array<PokemonTemplate>>{
-        return await this.instance.get<Array<PokemonTemplate>>(`${username}/player/starters`)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            })
+    async encounterStarters(username: number): Promise<Array<PokemonTemplate>> {
+        this.validateUsername(username);
+        const path = this.buildPath(username, 'player/starters');
+        return this.request(this.instance.get<Array<PokemonTemplate>>(path));
     }
 
-    async catchStarters(username: number, pokemon: PokemonTemplate): Promise<PokemonTemplate>{
-        return await this.instance.post<PokemonTemplate>(`${username}/player/starters`, pokemon)
-            .then( (res) => {
-                console.log(res.data);
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            })
+    async catchStarters(username: number, pokemon: PokemonTemplate): Promise<PokemonTemplate> {
+        this.validateUsername(username);
+        if (!pokemon || !pokemon.id) {
+            throw new Error('Invalid pokemon: missing id');
+        }
+        const path = this.buildPath(username, 'player/starters');
+        return this.request(this.instance.post<PokemonTemplate>(path, pokemon));
     }
 
-    async getPokemon(id: number): Promise<PokemonTemplate | null>{
+    async getPokemon(id: number): Promise<PokemonTemplate | null> {
         if (id === -1) {
             return null;
         }
-
-        return await this.instance.get<PokemonTemplate>(`0/pokemon?id=${id}`)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            })
+        if (!Number.isInteger(id) || id < 0) {
+            throw new Error(`Invalid pokemon id: ${id}`);
+        }
+        const path = this.buildPath('0/pokemon') + `?id=${id}`;
+        return this.request(this.instance.get<PokemonTemplate>(path));
     }
 
     async encounterRandomPokemon(
-        username: number, 
-        tier: number, 
+        username: number,
+        tier: number,
         items: Array<PokeItemsTemplate>,
-        type: string | null=null
+        type: string | null = null
     ): Promise<PokemonTemplate> {
-        if(![1, 2, 3, 4].includes(tier)){
-            throw new Error("Invalid Tier");
+        this.validateUsername(username);
+        if (![1, 2, 3, 4].includes(tier)) {
+            throw new Error(`Invalid tier: ${tier}. Must be 1, 2, 3, or 4`);
         }
-
+        if (!Array.isArray(items)) {
+            throw new Error('Items must be an array');
+        }
         const body = {
-            "items": items,
-            "tier": tier,
-            "encounter_type": type
-        }
-        console.log("body", body);
-        return await this.instance.post<PokemonTemplate>(`/${username}/pokemon/encounter`, body)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            });
+            items,
+            tier,
+            encounter_type: type
+        };
+        const path = this.buildPath(username, 'pokemon/encounter');
+        return this.request(this.instance.post<PokemonTemplate>(path, body));
     }
 
     async catchRandomPokemon(
         username: number,
         pokemon_id: number,
         items: Array<PokeItemsTemplate>,
-        escapeChance: number = .15
-    ): Promise<any> {
-        const body = {
-            "pokemon_id": pokemon_id,
-            "items": items,
-            "escape": escapeChance
+        escapeChance: number = 0.15
+    ): Promise<PokemonTemplate> {
+        this.validateUsername(username);
+        if (!Number.isInteger(pokemon_id) || pokemon_id < 0) {
+            throw new Error(`Invalid pokemon_id: ${pokemon_id}`);
         }
-
-        return await this.instance.put<any>(`/${username}/pokemon/encounter`, body)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            });
+        if (!Array.isArray(items)) {
+            throw new Error('Items must be an array');
+        }
+        if (escapeChance < 0 || escapeChance > 1) {
+            throw new Error('escapeChance must be between 0 and 1');
+        }
+        const body = {
+            pokemon_id,
+            items,
+            escape: escapeChance
+        };
+        const path = this.buildPath(username, 'pokemon/encounter');
+        return this.request(this.instance.put<PokemonTemplate>(path, body));
     }
 
     async evolvePokemon(
         username: number,
         ids: Array<number>
     ): Promise<PokemonTemplate> {
-        const body = ids
-
-        return await this.instance.put<PokemonTemplate>(`/${username}/pokemon/evolve`, body)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            });
+        this.validateUsername(username);
+        if (!Array.isArray(ids) || ids.length === 0) {
+            throw new Error('ids must be a non-empty array');
+        }
+        const path = this.buildPath(username, 'pokemon/evolve');
+        return this.request(this.instance.put<PokemonTemplate>(path, ids));
     }
 
     async deletePokemon(
         username: number,
         id: number
-    ): Promise<void>{
-
-        return await this.instance.delete<void>(`${username}/pokemon/flee?id=${id}`)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            });
+    ): Promise<void> {
+        this.validateUsername(username);
+        if (!Number.isInteger(id) || id < 0) {
+            throw new Error(`Invalid pokemon id: ${id}`);
+        }
+        const path = this.buildPath(username, 'pokemon/flee') + `?id=${id}`;
+        await this.request(this.instance.delete<void>(path));
     }
 
     ////// Item Functions //////
-    async getItems(username: number, id: number): Promise<PokeItemsTemplate>{
-        return await this.instance.get<PokeItemsTemplate>(`${username}/items?id=${id}`)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            }).catch( (err) => {
-                console.error(err);
-                throw err;
-            });
-    }
-
-    async starterItems(username: number): Promise<void>{
-        return await this.instance.post<void>(`${username}/items/starter`)
-            .then( () => {
-                console.log("Balls added.")
-            })
-    }
-
-    async deleteItems(username: number, item: PokeItemsTemplate): Promise<void>{
-        return await this.instance.delete<void>(`${username}/items/delete?id=${item.id}`)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            })
-            .catch( (err) => {
-                console.error(err);
-                throw err;
-            });
-    }
-
-    async postItemsRandom(username: number, tier: number=1): Promise<PokeItemsTemplate>{
-        const body = tier;
-
-        return await this.instance.post<PokeItemsTemplate>(`${username}/items/random`, body)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            })
-            .catch( (err) => {
-                console.error(err);
-                throw err;
-            });
-    }
-
-    async getItemsShop(username: number, tier: number=1, shop_size: number=5): Promise<Array<PokeItemsTemplate>>{
-        const url = `${username}/items/shop?tier=${tier}&shop_size=${shop_size}`;
-
-        return await this.instance.get<Array<PokeItemsTemplate>>(url)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            })
-            .catch( (err) => {
-                console.error(err);
-                throw err;
-            });
-    }
-
-    async postItemsShopBuy(username: number, item: PokeItemsTemplate): Promise<PokeItemsTemplate>{
-        const body = item;
-
-        return await this.instance.post<PokeItemsTemplate>(`${username}/items/shop/buy`, body)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            })
-            .catch( (err) => {
-                console.error(err);
-                throw err;
-            }); 
-    }
-
-    async postItemsShopSell(username: number, item: PokeItemsTemplate): Promise<Trainer>{
-        const body = item;
-
-        return await this.instance.post<Trainer>(`${username}/items/shop/sell`, body)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            })
-            .catch( (err) => {
-                console.error(err);
-                throw err;
-            }); 
-    }
-
-    async postItemsUpgrade(username: number, pokemon_id: number, items: Array<PokeItemsTemplate>): Promise<Trainer>{
-        const body = {
-            "pokemon_id": pokemon_id,
-            "items": items
+    async getItems(username: number, id: number): Promise<PokeItemsTemplate> {
+        this.validateUsername(username);
+        if (!Number.isInteger(id) || id < 0) {
+            throw new Error(`Invalid item id: ${id}`);
         }
-
-        return await this.instance.post<Trainer>(`${username}/pokemon/upgrade`, body)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            })
-            .catch( (err) => {
-                console.error(err);
-                throw err;
-            });
+        const path = this.buildPath(username, 'items') + `?id=${id}`;
+        return this.request(this.instance.get<PokeItemsTemplate>(path));
     }
 
-    async getTrades(username: number): Promise<Array<Trades>>{
-        return await this.instance.get<Array<Trades>>(`${username}/trades/all`)
-            .then(async (res) => {
-                console.log(res.data);
-                return res.data;
-            })
-            .catch( (err) => {
-                console.error(err);
-                throw err;
-            });
+    async starterItems(username: number): Promise<void> {
+        this.validateUsername(username);
+        const path = this.buildPath(username, 'items/starter');
+        await this.request(this.instance.post<void>(path, {}));
     }
 
-    async updateTrades(username: number, trade: Trades): Promise<Trades>{
-        const body = trade;
-        return await this.instance.patch<Trades>(`${username}/trades/update`, body)
-        .then(async (res) => {
-            console.log(res.data);
-            return res.data;
-        })
-        .catch( (err) => {
-            console.error(err);
-            throw err;
-        });
+    async deleteItems(username: number, item: PokeItemsTemplate): Promise<void> {
+        this.validateUsername(username);
+        if (!item || !item.id) {
+            throw new Error('Invalid item: missing id');
+        }
+        const path = this.buildPath(username, 'items/delete') + `?id=${item.id}`;
+        await this.request(this.instance.delete<void>(path));
     }
 
-    async startTrade(username: number, pokemon: PokemonTemplate): Promise<Trades>{
+    async postItemsRandom(username: number, tier: number = 1): Promise<PokeItemsTemplate> {
+        this.validateUsername(username);
+        if (![1, 2, 3, 4].includes(tier)) {
+            throw new Error(`Invalid tier: ${tier}. Must be 1, 2, 3, or 4`);
+        }
+        const body = { tier };
+        const path = this.buildPath(username, 'items/random');
+        return this.request(this.instance.post<PokeItemsTemplate>(path, body));
+    }
+
+    async getItemsShop(username: number, tier: number = 1, shop_size: number = 5): Promise<Array<PokeItemsTemplate>> {
+        this.validateUsername(username);
+        if (![1, 2, 3, 4].includes(tier)) {
+            throw new Error(`Invalid tier: ${tier}. Must be 1, 2, 3, or 4`);
+        }
+        if (!Number.isInteger(shop_size) || shop_size <= 0) {
+            throw new Error(`Invalid shop_size: ${shop_size}. Must be a positive integer`);
+        }
+        const path = this.buildPath(username, 'items/shop') + `?tier=${tier}&shop_size=${shop_size}`;
+        return this.request(this.instance.get<Array<PokeItemsTemplate>>(path));
+    }
+
+    async postItemsShopBuy(username: number, item: PokeItemsTemplate): Promise<PokeItemsTemplate> {
+        this.validateUsername(username);
+        if (!item || !item.id) {
+            throw new Error('Invalid item: missing id');
+        }
+        const path = this.buildPath(username, 'items/shop/buy');
+        return this.request(this.instance.post<PokeItemsTemplate>(path, item));
+    }
+
+    async postItemsShopSell(username: number, item: PokeItemsTemplate): Promise<Trainer> {
+        this.validateUsername(username);
+        if (!item || !item.id) {
+            throw new Error('Invalid item: missing id');
+        }
+        const path = this.buildPath(username, 'items/shop/sell');
+        return this.request(this.instance.post<Trainer>(path, item));
+    }
+
+    async postItemsUpgrade(username: number, pokemon_id: number, items: Array<PokeItemsTemplate>): Promise<Trainer> {
+        this.validateUsername(username);
+        if (!Number.isInteger(pokemon_id) || pokemon_id < 0) {
+            throw new Error(`Invalid pokemon_id: ${pokemon_id}`);
+        }
+        if (!Array.isArray(items)) {
+            throw new Error('Items must be an array');
+        }
         const body = {
-            "id_one": pokemon.id,
-            "id_two": -1,
-            "state_one": 1,
-            "state_two": 0,
+            pokemon_id,
+            items
         };
+        const path = this.buildPath(username, 'pokemon/upgrade');
+        return this.request(this.instance.post<Trainer>(path, body));
+    }
 
-        return await this.instance.post<Trades>(`${username}/trades/create`, body)
-        .then(async (res) => {
-            console.log(res.data);
-            return res.data;
-        })
-        .catch( (err) => {
-            console.error(err);
-            throw err;
-        });
+    ////// Trade Functions //////
+    async getTrades(username: number): Promise<Array<Trades>> {
+        this.validateUsername(username);
+        const path = this.buildPath(username, 'trades/all');
+        return this.request(this.instance.get<Array<Trades>>(path));
+    }
+
+    async updateTrades(username: number, trade: Trades): Promise<Trades> {
+        this.validateUsername(username);
+        if (!trade) {
+            throw new Error('Trade object cannot be null');
+        }
+        const path = this.buildPath(username, 'trades/update');
+        return this.request(this.instance.patch<Trades>(path, trade));
+    }
+
+    async updatePokemonOwner(id: number, trainer: number): Promise<void> {
+        if (!Number.isInteger(id) || id < 0) {
+            throw new Error(`Invalid pokemon id: ${id}`);
+        }
+        this.validateUsername(trainer);
+        const body = {
+            owner: trainer,
+            pokemon_id: id
+        };
+        const path = this.buildPath('0/pokemon/trade');
+        await this.request(this.instance.patch<void>(path, body));
+    }
+
+    async startTrade(username: number, pokemon: PokemonTemplate): Promise<Trades> {
+        this.validateUsername(username);
+        if (!pokemon || !pokemon.id) {
+            throw new Error('Invalid pokemon: missing id');
+        }
+        const body = {
+            id_one: pokemon.id,
+            id_two: -1,
+            state_one: 1,
+            state_two: 0
+        };
+        const path = this.buildPath(username, 'trades/create');
+        return this.request(this.instance.post<Trades>(path, body));
     }
 }
 
-export default ServerService
+export default ServerService;

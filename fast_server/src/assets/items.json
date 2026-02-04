@@ -1,6 +1,30 @@
 {
     "items": [
         {
+            "name": "Erik's Gamble",
+            "cost": 400,
+            "text": "Held Item: Your active Pokemon has +3 speed, but -1 HP per attack.",
+            "tier": 1
+        },
+        {
+            "name": "Christopher's Fire",
+            "cost": 400,
+            "text": "Held Item: Your active 'Fire' type pokemon does +1 damage.",
+            "tier": 1
+        },
+        {
+            "name": "Kenneth's Buzz",
+            "cost": 400,
+            "text": "Held Item: Your active 'Water' type pokemon does +3 damage, but is Confused.",
+            "tier": 1
+        },
+        {
+            "name": "Kyle's Leaf Green",
+            "cost": 400,
+            "text": "Held Item: Your active 'Grass' type pokemon does +2 damage, but is Poisoned.",
+            "tier": 1
+        },
+        {
             "name": "Pearl",
             "cost": 100,
             "text": "Sell at the store only.",
@@ -346,6 +370,12 @@
             "name": "HM02: Fly",
             "cost": 2650,
             "text": "Fly to Safron City.",
+            "tier": 3
+        },
+        {
+            "name": "Life Orb",
+            "cost": 4000,
+            "text": "Held Item: Your Pokémon's attacks do +2 damage at the cost of 2 HP each attack.",
             "tier": 3
         }
     ]

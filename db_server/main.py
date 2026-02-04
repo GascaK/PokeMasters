@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_restful import Api
+from asgiref.wsgi import WsgiToAsgi
+import uvicorn
 
 from models.playerManager import TrainerLocator, TrainerPokemonLocator, TrainerItemLocator, TrainerFinderLocator
 from models.moveManager import MoveLocator
@@ -28,8 +30,10 @@ api.add_resource(TrainerLocator,       "/player/<int:id>")
 api.add_resource(TrainerItemLocator,   "/player/<int:id>/items")
 api.add_resource(TrainerPokemonLocator,"/player/<int:id>/pokemon")
 api.add_resource(TrainerFinderLocator, "/player/<string:name>/find")
+api.init_app(app)
+init_db()
+
+flask_asgi_app = WsgiToAsgi(app)
 
 if __name__ == "__main__":
-    init_db()
-    api.init_app(app)
-    app.run(host="0.0.0.0", port=5000)
+    uvicorn.run(flask_asgi_app, host="0.0.0.0", port=5000)

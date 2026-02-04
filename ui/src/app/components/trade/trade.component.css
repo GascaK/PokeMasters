@@ -1,0 +1,672 @@
+/* Trade Container */
+.trade-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.trade-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.trade-header h2 {
+  color: #2c3e50;
+  margin: 0;
+  font-size: 2rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-create-trade {
+  background: #27ae60;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-create-trade:hover:not(:disabled) {
+  background: #219a52;
+  transform: translateY(-1px);
+}
+
+.btn-exit {
+  background: #95a5a6;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-exit:hover:not(:disabled) {
+  background: #7f8c8d;
+  transform: translateY(-1px);
+}
+
+.refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.refresh-btn:hover:not(:disabled) {
+  background: #2980b9;
+  transform: translateY(-1px);
+}
+
+.refresh-btn:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Create Trade Section */
+.create-trade-section {
+  margin-bottom: 30px;
+}
+
+.create-trade-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  border-left: 4px solid #3498db;
+}
+
+.create-trade-card h3 {
+  color: #2c3e50;
+  margin: 0 0 10px 0;
+  font-size: 1.3rem;
+}
+
+.create-trade-card p {
+  color: #6c757d;
+  margin: 0 0 20px 0;
+}
+
+.loading-pokemon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  color: #6c757d;
+}
+
+.small-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.no-pokemon {
+  text-align: center;
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.pokemon-selection {
+  margin-top: 15px;
+}
+
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.pokemon-card.selectable {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  text-align: center;
+}
+
+.pokemon-card.selectable:hover {
+  border-color: #3498db;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.pokemon-card.selected {
+  border-color: #27ae60;
+  background: #f8fff8;
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+}
+
+.pokemon-info-compact h5 {
+  margin: 8px 0 4px 0;
+  color: #2c3e50;
+  font-size: 0.9rem;
+}
+
+.pokemon-info-compact .level {
+  margin: 0;
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+
+.selected-indicator {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #27ae60;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.create-trade-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.btn-confirm-trade {
+  background: #27ae60;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-confirm-trade:hover:not(:disabled) {
+  background: #219a52;
+  transform: translateY(-1px);
+}
+
+.btn-cancel-selection {
+  background: #95a5a6;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel-selection:hover:not(:disabled) {
+  background: #7f8c8d;
+  transform: translateY(-1px);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Loading */
+.loading-container {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+/* Trades Section */
+.trades-section {
+  margin-bottom: 40px;
+}
+
+.trades-section h3 {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  border-left: 4px solid #3498db;
+}
+
+.no-trades {
+  text-align: center;
+  padding: 40px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Trades Grid */
+.trades-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
+}
+
+/* Trade Cards */
+.trade-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.trade-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.your-trade {
+  border-left: 4px solid #27ae60;
+}
+
+.available-trade {
+  border-left: 4px solid #f39c12;
+}
+
+.trade-card.completed {
+  border-color: #27ae60;
+  background: #f8fff8;
+}
+
+.trade-card.cancelled {
+  border-color: #e74c3c;
+  background: #fff8f8;
+  opacity: 0.8;
+}
+
+.trade-card.ready {
+  border-color: #f39c12;
+  background: #fffbf0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+  50% { box-shadow: 0 8px 20px rgba(243, 156, 18, 0.3); }
+  100% { box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+}
+
+/* Trade Header Info */
+.trade-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.trade-id {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.trade-status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.trade-status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.trade-status.accepted,
+.trade-status.partially-accepted {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.trade-status.completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.trade-status.cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.trade-status.ready-to-complete {
+  background: #fff3cd;
+  color: #856404;
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 5px rgba(243, 156, 18, 0.5); }
+  to { box-shadow: 0 0 15px rgba(243, 156, 18, 0.8); }
+}
+
+/* Pokemon Exchange */
+.pokemon-exchange {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.pokemon-side {
+  flex: 1;
+}
+
+.pokemon-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pokemon-image {
+  flex-shrink: 0;
+}
+
+.pokemon-sprite {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  background: white;
+  object-fit: contain;
+}
+
+.pokemon-details h4 {
+  margin: 0 0 4px 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.pokemon-level {
+  margin: 0 0 4px 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.pokemon-owner {
+  margin: 0;
+  color: #27ae60;
+  font-size: 0.8rem;
+}
+
+.exchange-arrow {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #3498db;
+  border-radius: 50%;
+  color: white;
+}
+
+.arrow {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Acceptance Status */
+.acceptance-status {
+  margin-top: 8px;
+}
+
+.status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status.accepted {
+  background: #d4edda;
+  color: #155724;
+}
+
+/* Trade Actions */
+.trade-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-accept {
+  background: #27ae60;
+  color: white;
+}
+
+.btn-accept:hover:not(:disabled) {
+  background: #219a52;
+  transform: translateY(-1px);
+}
+
+.btn-cancel {
+  background: #e74c3c;
+  color: white;
+}
+
+.btn-cancel:hover:not(:disabled) {
+  background: #c0392b;
+  transform: translateY(-1px);
+}
+
+.btn-details {
+  background: #95a5a6;
+  color: white;
+}
+
+.btn-details:hover:not(:disabled) {
+  background: #7f8c8d;
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Status Messages */
+.completed-message,
+.ready-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.completed-message {
+  background: #d4edda;
+  color: #155724;
+}
+
+.ready-message {
+  background: #fff3cd;
+  color: #856404;
+  animation: pulse-message 2s infinite;
+}
+
+@keyframes pulse-message {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.trade-info {
+  flex: 1;
+  text-align: right;
+}
+
+.trade-info small {
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Trade Statistics */
+.trade-stats {
+  margin-top: 40px;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  color: white;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .trade-container {
+    padding: 15px;
+  }
+  
+  .trades-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .trade-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .header-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .pokemon-exchange {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .exchange-arrow {
+    transform: rotate(90deg);
+  }
+  
+  .trade-actions {
+    justify-content: center;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .pokemon-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+  }
+
+  .create-trade-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .pokemon-info {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  
+  .pokemon-sprite {
+    width: 48px;
+    height: 48px;
+  }
+}

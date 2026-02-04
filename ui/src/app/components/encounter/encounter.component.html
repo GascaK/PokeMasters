@@ -13,10 +13,12 @@
                     <i class="fa-solid fa-gift me-2"></i>
                     <span>You found: <strong>{{encounterItem.name}}</strong></span>
                 </div>
+
+                <div *ngIf="xpMessage" class="xp-reward mt-3">
+                    <i class="fa-solid fa-star me-2"></i>
+                    <span>{{xpMessage}}</span>
+                </div>
             </div>
-        </div>
-        <div>
-            <p>{{xpMessage}}</p>
         </div>
         <div class="card-footer text-center">
             <button class="btn btn-primary px-4" (click)="fleePokemon(encounterRetry)">
@@ -40,33 +42,79 @@
     <div class="card shadow-sm mb-3">
         <div class="card-header bg-light">
             <div class="d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0">Catching {{pokemon?.base?.name | uppercase}}...</h5>
+                <h5 class="card-title mb-0">
+                    <span *ngIf="catchAnimationState === 'wobbling'">Catching {{pokemon?.base?.name | uppercase}}...</span>
+                    <span *ngIf="catchAnimationState === 'success'">{{pokemon?.base?.name | uppercase}} Caught!</span>
+                    <span *ngIf="catchAnimationState === 'escaped'">{{pokemon?.base?.name | uppercase}} Escaped!</span>
+                </h5>
                 <div *ngIf="usedItem" class="item-badge">
                     <small class="badge bg-info text-wrap">{{usedItem.name}}</small>
                 </div>
             </div>
         </div>
         <div class="card-body p-0">
-            <!-- Catch animation container with ViewChild reference -->
-            <div class="catch-animation-container" #catchAnimationContainer>
+            <!-- Catch animation container with dynamic state classes -->
+            <div class="catch-animation-container" 
+                 #catchAnimationContainer
+                 [ngClass]="{
+                    'wobbling': catchAnimationState === 'wobbling',
+                    'success': catchAnimationState === 'success',
+                    'escaped': catchAnimationState === 'escaped'
+                 }">
                 <img [src]="getPokemonImageUrl()" 
                      [alt]="pokemon?.base?.name || 'Pokemon'" 
-                     class="pokemon-sprite">
+                     class="pokemon-sprite"
+                     [ngClass]="{
+                        'wobbling-sprite': catchAnimationState === 'wobbling',
+                        'success-sprite': catchAnimationState === 'success',
+                        'escaped-sprite': catchAnimationState === 'escaped'
+                     }">
+                
+                <!-- Animation status indicator -->
+                <div class="catch-status" *ngIf="catchAnimationState">
+                    <div *ngIf="catchAnimationState === 'wobbling'" class="status-wobbling">
+                        <i class="fa-solid fa-circle-notch fa-spin me-2"></i>
+                        Attempting capture...
+                    </div>
+                    <div *ngIf="catchAnimationState === 'success'" class="status-success">
+                        <i class="fa-solid fa-check-circle me-2"></i>
+                        Success!
+                    </div>
+                    <div *ngIf="catchAnimationState === 'escaped'" class="status-escaped">
+                        <i class="fa-solid fa-times-circle me-2"></i>
+                        Escaped!
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card-footer">
             <div class="row g-2 justify-content-center">
-                <div [ngClass]="(!catchResult && encounterRetry) ? 'col-6' : 'col-12'">
-                    <button class="btn btn-primary w-100" (click)="encounterView = true; showCatchAnimation = false;">
-                        <i [ngClass]="catchResult ? 'fa-solid fa-check-circle me-2' : 'fa-solid fa-arrow-right me-2'"></i>
-                        {{catchResult ? 'Add to Collection' : 'Continue'}}
+                <!-- Show result button when animation is complete -->
+                <div [ngClass]="canTryAgain ? 'col-6' : 'col-12'" *ngIf="canShowResult">
+                    <button class="btn btn-primary w-100" (click)="showResult()">
+                        <i [ngClass]="resultButtonIcon"></i>
+                        {{resultButtonText}}
                     </button>
                 </div>
-                <div *ngIf="!catchResult && encounterRetry" class="col-6">
-                    <button class="btn btn-secondary w-100" (click)="fleePokemon(true)">
+                
+                <!-- Try again button (only for failed captures with retry option) -->
+                <div class="col-6" *ngIf="canTryAgain">
+                    <button class="btn btn-secondary w-100" (click)="tryAgain()">
                         <i class="fa-solid fa-rotate me-2"></i>
                         Try Again
                     </button>
+                </div>
+                
+                <!-- Loading state - no buttons during animation -->
+                <div class="col-12 text-center" *ngIf="!canShowResult">
+                    <div class="animation-progress">
+                        <div class="progress mb-2" style="height: 8px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                 role="progressbar" 
+                                 style="width: 100%"></div>
+                        </div>
+                        <small class="text-muted">Processing catch attempt...</small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -169,6 +217,7 @@
                             <button class="btn btn-primary use-btn" 
                                     [disabled]="item.value.count <= 0"
                                     (click)="catchPokemon(item.value.item)">
+                                <i class="fa-solid fa-hand-paper me-1"></i>
                                 Use
                             </button>
                         </div>

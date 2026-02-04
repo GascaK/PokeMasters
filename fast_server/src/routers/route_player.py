@@ -56,7 +56,7 @@ def post_player_starters(username: int, pokemon: PokemonModel, composer: Compose
     except Exception as e:
         raise HTTPException(status_code=500, detail="Unable to save pokemon.")
 
-@router.get("/", tags=["player"])
+@router.get("", tags=["player"])
 def get_player(username: int, composer: Composer = Depends(get_composer)) -> PlayerModel:
     # Get a current player
     try:
@@ -66,7 +66,7 @@ def get_player(username: int, composer: Composer = Depends(get_composer)) -> Pla
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error grabbing player: {e}")
 
-@router.post("/", tags=["player"])
+@router.post("", tags=["player"])
 def post_player(username: int, name: Annotated[str, Body()], composer: Composer = Depends(get_composer)) -> PlayerModel:
     # Create a new player
     try:
@@ -74,14 +74,14 @@ def post_player(username: int, name: Annotated[str, Body()], composer: Composer 
             PlayerModel(
                 name=name,
                 badges=0,
-                dollars=1500
+                dollars=3500
             )
         )
         return player
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error creating player: {e}")
 
-@router.patch("/", tags=["player"])
+@router.patch("", tags=["player"])
 def patch_player(
         username: int,
         player: PlayerModel,
