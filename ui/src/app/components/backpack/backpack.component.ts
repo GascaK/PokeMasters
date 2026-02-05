@@ -20,11 +20,13 @@ export class BackpackComponent implements OnInit {
   public trainer: PokemonMaster;
   public activeTab: 'held' | 'ball' | 'other' = 'held';
   public itemList: Map<string, { id: number, name: string, count: number, text: string, item: PokeItemsTemplate }>;
+  public loading: boolean = true;
 
   async ngOnInit(): Promise<void> {
     if (this.trainerTracker?.isLoggedIn()) {
       this.trainer = await this.trainerTracker.getTrainer();
       this.updateItemList();
+      this.loading = false;
     }
   }
 

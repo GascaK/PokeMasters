@@ -50,6 +50,13 @@ export class ServerService {
         this.instance.interceptors.response.use(
             (response) => {
                 this.logger.debug(`← ${response.status} ${response.config.url}`);
+                
+                // Validate response has data
+                if (response.data === undefined || response.data === null) {
+                    this.logger.error(`Invalid response: missing or null data from ${response.config.url}`, response);
+                    return Promise.reject(new Error(`Invalid response data from ${response.config.url}`));
+                }
+                
                 return response;
             },
             (error: AxiosError) => {
@@ -105,6 +112,9 @@ export class ServerService {
     ): Promise<T> {
         try {
             const response = await promise;
+            if (!response || response.data === undefined || response.data === null) {
+                throw new Error('Invalid response: missing data');
+            }
             return response.data;
         } catch (error) {
             const apiError = this.normalizeError(error as AxiosError | Error);

@@ -18,6 +18,7 @@ export class InfoComponent implements OnInit {
     public trainer: PokemonMaster;
     public statuses: Array<{name: string, text: string}> = statusEffects.status_effects;
     public nameString: string;
+    public loading: boolean = true;
     public randomNames = [
         "Backpacker",
         "Delinquent",
@@ -40,6 +41,7 @@ export class InfoComponent implements OnInit {
             pre_name = "Pokemon Master";
         }
         this.nameString = `${pre_name} ${this.trainer.name}`;
+        this.loading = false;
     }
 
     onSubmit(badges: string, tier: string) {

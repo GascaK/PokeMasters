@@ -1,5 +1,8 @@
 <h2>{{nameString}}</h2>
-<form class="form-floating">
+<div *ngIf="loading">
+  Loading trainer information...
+</div>
+<form *ngIf="!loading" class="form-floating">
   <div>
     <label for="nameID">Name</label>
     <input type="text" class="form-control" id="nameID" placeholder="{{trainer.name}}" value="{{trainer.name}}" disabled>

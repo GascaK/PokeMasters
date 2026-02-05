@@ -22,12 +22,12 @@
 
 
 <div class="row" *ngIf="menuService.views.get('defaultView')">
-  <div>
+  <div *ngIf="trainer?.team">
     <app-active [trainerTracker]="trainerTracker" [team]="trainer.team" [menuService]="menuService"></app-active>
   </div>
   <section class="contains-code">
     <div>
-      <h4 style="text-align:center">{{trainer.name}}'s Info:</h4>
+      <h4 style="text-align:center">{{trainer?.name}}'s Info:</h4>
     </div>
     <ul class="framed buttons">
       <li><button class="pokemon" (click)="setView('dexView')">PokeDEX</button></li>
@@ -44,7 +44,7 @@
       <li><button (click)="setView('encounterView')">Tall Grass</button></li>
       <li><button (click)="setView('shopView')">Poke Center</button></li>
       <li><button (click)="setView('battleView')">Interact</button></li>
-      <li *ngIf="trainer.badges>=8"><button (click)="encounterLegendary()">Legendary</button></li>
+      <li *ngIf="trainer && trainer.badges >= 8"><button (click)="encounterLegendary()">Legendary</button></li>
     </ul>
   </section>
 </div>
